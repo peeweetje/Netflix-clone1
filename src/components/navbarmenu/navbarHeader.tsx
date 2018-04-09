@@ -6,8 +6,19 @@ class NavbarHeader extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">PetFlix</h1>
+          <h1 className="App-title">BingeWatch</h1>
         </header>
+        <div>
+          <nav>
+            <ul className="nav-list">
+              <li>Homepagina</li>
+              <li>Series</li>
+              <li>Films</li>
+              <li>Onlangs toegevoegd</li>
+              <li>Mijn lijst</li>
+            </ul>
+          </nav>
+        </div>
 
       </div>
     );
