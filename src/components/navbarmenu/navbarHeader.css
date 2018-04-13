@@ -1,23 +1,23 @@
 .App {
-    text-align: flex-start;
-  }
-
-  .App-header {
-    height: 150px;
-    padding: 6px;
-    color: rgb(142, 179, 204);
-  }
-
-  .App-title {
-    font-size: 1.5em;
-  }
+  justify-items: inherit;
+}
+h1 {
+  color: rgb(142, 179, 204);
+  padding-left: 15px;
+}
+.navbar-menu {
+  display: flex;
+  justify-content: flex-start;
+}
 
 li {
   list-style: none;
   color: rgb(142, 179, 204);
+  padding-left: 37px;
 }
 
 .nav-list {
   display: flex;
   justify-content: center;
+  padding: 11px;
 }

@@ -6,11 +6,8 @@ class NavbarHeader extends React.Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">BingeWatch</h1>
-
-          <div>
-          <nav>
+      <nav className="navbar-menu">
+          <h1>BingeWatch</h1>
             <ul className="nav-list">
               <li>Homepagina</li>
               <li>Series</li>
@@ -20,8 +17,6 @@ class NavbarHeader extends React.Component {
             </ul>
           </nav>
           </div>
-          </header>
-      </div>
     );
   }
 }
