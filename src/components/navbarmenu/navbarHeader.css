@@ -4,7 +4,7 @@
 
   .App-header {
     height: 150px;
-    padding: 20px;
+    padding: 6px;
     color: rgb(142, 179, 204);
   }
 
@@ -12,4 +12,12 @@
     font-size: 1.5em;
   }
 
+li {
+  list-style: none;
+  color: rgb(142, 179, 204);
+}
 
+.nav-list {
+  display: flex;
+  justify-content: center;
+}
