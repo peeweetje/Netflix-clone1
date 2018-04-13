@@ -8,8 +8,8 @@ class NavbarHeader extends React.Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">BingeWatch</h1>
-        </header>
-        <div>
+
+          <div>
           <nav>
             <ul className="nav-list">
               <li>Homepagina</li>
@@ -19,8 +19,8 @@ class NavbarHeader extends React.Component {
               <li>Mijn lijst</li>
             </ul>
           </nav>
-        </div>
-
+          </div>
+          </header>
       </div>
     );
   }
