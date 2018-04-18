@@ -1,12 +1,15 @@
 import * as React from 'react';
-import NavbarHeader from '../navbarmenu/navbarHeader';
-import '../app/App.css';
+import { Route, Switch } from 'react-router-dom';
+import HomePage from '../home/homePage';
+import '../app/App.css' ;
 
 class App extends React.Component<{}, {}> {
   render() {
     return (
       <div>
-        <NavbarHeader />
+      <Switch>
+        <Route  path="/" component={HomePage} />
+      </Switch>
       </div>
     );
   }
