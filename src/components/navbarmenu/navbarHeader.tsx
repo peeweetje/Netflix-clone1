@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../navbarmenu/navbarHeader.css';
 
 class NavbarHeader extends React.Component {
@@ -9,8 +9,8 @@ class NavbarHeader extends React.Component {
       <nav className="navbar-menu">
           <h1>BingeWatch</h1>
             <ul className="nav-list">
-              <li>Homepagina</li>
-              <li>Series</li>
+             <Link to="/"><li>Homepagina</li></Link>
+             <Link to="/shows"><li>Series</li></Link>
               <li>Films</li>
               <li>Onlangs toegevoegd</li>
               <li>Mijn lijst</li>
