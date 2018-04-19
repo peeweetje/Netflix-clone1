@@ -6,6 +6,7 @@ class HomePage extends React.Component<{}, {}> {
       return (
         <div>
           <NavbarHeader />
+          <h1>Homepage</h1>
         </div>
       );
     }

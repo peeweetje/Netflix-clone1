@@ -7,13 +7,13 @@ class NavbarHeader extends React.Component {
     return (
       <div className="App">
       <nav className="navbar-menu">
-          <h1>BingeWatch</h1>
+      <Link to="/HomePage"><h1>BingeWatch</h1></Link>
             <ul className="nav-list">
-             <Link to="/"><li>Homepagina</li></Link>
+             <Link to="/HomePage"><li>Homepagina</li></Link>
              <Link to="/shows"><li>Series</li></Link>
-              <li>Films</li>
-              <li>Onlangs toegevoegd</li>
-              <li>Mijn lijst</li>
+             <Link to="/Movies"><li>Films</li></Link>
+             <Link to="/RecentlyAdded"><li>Onlangs toegevoegd</li></Link>
+             <Link to="/MyList"><li>Mijn lijst</li></Link>
             </ul>
           </nav>
           </div>
