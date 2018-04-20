@@ -12,11 +12,11 @@ class App extends React.Component<{}, {}> {
     return (
       <div>
       <Switch>
-        <Route  path="/HomePage" component={HomePage} />
-        <Route  path="/Shows" component={Shows} />
-        <Route  path="/Movies" component={Movies} />
-        <Route  path="/RecentlyAdded" component={RecentlyAdded} />
-        <Route  path="/MyList" component={MyList} />
+        <Route exact={true} path="/" component={HomePage} />
+        <Route exact={true} path="/Shows" component={Shows} />
+        <Route exact={true} path="/Movies" component={Movies} />
+        <Route exact={true} path="/RecentlyAdded" component={RecentlyAdded} />
+        <Route exact={true} path="/MyList" component={MyList} />
       </Switch>
       </div>
     );
