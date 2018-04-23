@@ -1,5 +1,6 @@
 import * as React from 'react';
 import NavbarHeader from '../navbarmenu/navbarHeader';
+import '../home/homePage.css';
 
 interface IhomeProps {}
 interface IhomeState {
@@ -29,7 +30,7 @@ class HomePage extends React.Component<IhomeProps, IhomeState> {
         <div>
           <NavbarHeader />
           {hits.map(hit =>
-          <div key={hit.objectID}>
+          <div className="hits" key={hit.objectID}>
             <a href={hit.url}>{hit.title}</a>
           </div>
         )}
