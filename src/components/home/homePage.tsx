@@ -11,7 +11,7 @@ const API = 'https://hn.algolia.com/api/v1/search?query=';
 
 class HomePage extends React.Component<IhomeProps, IhomeState> {
 
-  constructor (props: string) {
+  constructor(props: IhomeProps) {
     super(props);
     this.state = {
       hits: [],
