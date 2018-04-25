@@ -7,7 +7,8 @@ interface IhomeState {
   hits: Array<any>;
 }
 
-const API = 'https://hn.algolia.com/api/v1/search?query=';
+const API_KEY = process.env.REACT_APP_API_KEY;
+console.log(API_KEY);
 
 class HomePage extends React.Component<IhomeProps, IhomeState> {
 
@@ -19,7 +20,7 @@ class HomePage extends React.Component<IhomeProps, IhomeState> {
   }
 
   componentDidMount() {
-    fetch(API)
+    fetch(API_KEY)
       .then(response => response.json())
       .then(data => this.setState({ hits: data.hits }));
   }
