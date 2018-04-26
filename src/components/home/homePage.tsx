@@ -8,7 +8,7 @@ interface IhomeState {
 }
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-console.log(API_KEY);
+// let baseUrl = 'https://api.themoviedb.org/3/movie/{movie_id}?';
 
 class HomePage extends React.Component<IhomeProps, IhomeState> {
 
