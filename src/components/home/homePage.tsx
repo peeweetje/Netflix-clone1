@@ -4,35 +4,36 @@ import '../home/homePage.css';
 
 interface IhomeProps {}
 interface IhomeState {
-  hits: Array<any>;
+  results: Array<any>;
 }
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-// let baseUrl = 'https://api.themoviedb.org/3/movie/{movie_id}?';
+let baseUrl = `https://api.themoviedb.org/3/movie/47933?api_key=${API_KEY}`;
+console.log(baseUrl);
 
 class HomePage extends React.Component<IhomeProps, IhomeState> {
 
   constructor(props: IhomeProps) {
     super(props);
     this.state = {
-      hits: [],
+     results: [],
     };
   }
 
   componentDidMount() {
-    fetch(API_KEY)
+    fetch(baseUrl)
       .then(response => response.json())
-      .then(data => this.setState({ hits: data.hits }));
+      .then(data => this.setState({ results: data.results }));
   }
 
     render() {
-      const { hits } = this.state;
+      const { results } = this.state;
       return (
         <div>
           <NavbarHeader />
-          {hits.map(hit =>
-          <div className="hits" key={hit.objectID}>
-            <a href={hit.url}>{hit.title}</a>
+          {results.map(result =>
+          <div className="results" key={result.objectID}>
+            <a>{result.name}</a>
           </div>
         )}
         </div>
