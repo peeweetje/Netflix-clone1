@@ -32,7 +32,7 @@ class HomePage extends React.Component<IhomeProps, IhomeState> {
         <div>
           <NavbarHeader />
           {results && results.map(result =>
-          <div className="results" key={result.objectID}>
+          <div className="results" key={result.id}>
             <li>{result.title}</li>
           </div>
         )}
