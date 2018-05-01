@@ -8,7 +8,7 @@ interface IhomeState {
 }
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-let baseUrl = `https://api.themoviedb.org/3/movie/47933?api_key=${API_KEY}`;
+let baseUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
 console.log(baseUrl);
 
 class HomePage extends React.Component<IhomeProps, IhomeState> {
@@ -31,9 +31,9 @@ class HomePage extends React.Component<IhomeProps, IhomeState> {
       return (
         <div>
           <NavbarHeader />
-          {results.map(result =>
+          {results && results.map(result =>
           <div className="results" key={result.objectID}>
-            <a>{result.name}</a>
+            <li>{result.title}</li>
           </div>
         )}
         </div>
