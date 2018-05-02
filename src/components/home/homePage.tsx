@@ -9,7 +9,9 @@ interface IhomeState {
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 let baseUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
+let imageUrl = `https://image.tmdb.org/t/p/w200`;
 console.log(baseUrl);
+console.log(imageUrl);
 
 class HomePage extends React.Component<IhomeProps, IhomeState> {
 
@@ -34,8 +36,11 @@ class HomePage extends React.Component<IhomeProps, IhomeState> {
           {results && results.map(result =>
           <div className="results" key={result.id}>
             <li>{result.title}</li>
+            <img src={`${imageUrl}${result.poster_path}`}/>
+
           </div>
         )}
+
         </div>
       );
     }
