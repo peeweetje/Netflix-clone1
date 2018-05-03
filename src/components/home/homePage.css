@@ -1,5 +1,19 @@
+* {
+  box-sizing: border-box;
+}
 
 a {
-    text-decoration: none;
-    color: rgb(142, 179, 204);
+  text-decoration: none;
+  color: rgb(142, 179, 204);
+}
+
+.content img {
+  margin-top: 12px;
+}
+
+.content {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  white-space: nowrap;
 }
