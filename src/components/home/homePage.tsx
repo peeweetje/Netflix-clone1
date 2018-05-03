@@ -39,9 +39,14 @@ class HomePage extends React.Component<IhomeProps, IhomeState> {
         <NavbarHeader />
         {results &&
           results.map(result => (
-            <div className="results" key={result.id}>
-              <li>{result.title}</li>
-              <img src={`${imageUrl}${result.poster_path}`} />
+            <div className="content" key={result.id}>
+              <ul>
+                <li>{result.title}</li>
+                <img
+                  src={`${imageUrl}${result.poster_path}`}
+                  alt="movie-posters"
+                />
+              </ul>
             </div>
           ))}
       </div>
