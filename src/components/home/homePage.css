@@ -9,6 +9,9 @@ a {
 
 .content img {
   margin-top: 12px;
+  vertical-align: middle;
+  width: 100%;
+  height: auto;
 }
 
 .content {
@@ -16,4 +19,5 @@ a {
   width: 20%;
   padding: 10px;
   white-space: nowrap;
+  vertical-align: middle;
 }
