@@ -9,15 +9,19 @@ a {
 
 .content img {
   margin-top: 12px;
-  vertical-align: middle;
+  margin-bottom: -4px;
   width: 100%;
   height: auto;
+  vertical-align: middle;
 }
 
 .content {
-  float: left;
+  display: inline-flex;
   width: 20%;
-  padding: 10px;
   white-space: nowrap;
   vertical-align: middle;
+}
+
+ul {
+  list-style: none;
 }
