@@ -41,7 +41,6 @@ class HomePage extends React.Component<IhomeProps, IhomeState> {
           results.map(result => (
             <div className="content" key={result.id}>
               <ul>
-                <li>{result.title}</li>
                 <img
                   src={`${imageUrl}${result.poster_path}`}
                   alt="movie-posters"
