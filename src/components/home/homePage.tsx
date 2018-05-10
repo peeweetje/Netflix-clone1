@@ -35,13 +35,14 @@ class HomePage extends React.Component<IhomeProps, IhomeState> {
   render() {
     const { results } = this.state;
     return (
-      <div>
+      <div className="container">
         <NavbarHeader />
         {results &&
           results.map(result => (
             <div className="content" key={result.id}>
               <ul>
                 <img
+                  className="card-img"
                   src={`${imageUrl}${result.poster_path}`}
                   alt="movie-posters"
                 />
