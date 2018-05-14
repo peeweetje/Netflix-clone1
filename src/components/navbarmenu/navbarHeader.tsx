@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
+import SearchBar from "./searchBar";
 import "../navbarmenu/navbarHeader.css";
 
 class NavbarHeader extends React.Component {
@@ -27,6 +28,7 @@ class NavbarHeader extends React.Component {
               <li>Mijn lijst</li>
             </Link>
           </ul>
+          <SearchBar />
         </nav>
       </div>
     );
