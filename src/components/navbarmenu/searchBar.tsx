@@ -1,4 +1,5 @@
 import * as React from "react";
+import "../navbarmenu/searchBar.css";
 
 class SearchBar extends React.Component {
   constructor(props: any) {
