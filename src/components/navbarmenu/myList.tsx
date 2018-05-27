@@ -6,7 +6,7 @@ class MyList extends React.Component<{}, {}> {
     return (
       <div>
         <NavbarHeader />
-        <h1>MyLIst</h1>
+        <h1>MyList</h1>
       </div>
     );
   }

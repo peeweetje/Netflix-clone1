@@ -4,6 +4,10 @@ import SearchBar from "./searchBar";
 import "../navbarmenu/navbarHeader.css";
 
 class NavbarHeader extends React.Component {
+  constructor(props: any) {
+    super(props);
+  }
+
   render() {
     return (
       <div className="App">
@@ -28,7 +32,7 @@ class NavbarHeader extends React.Component {
               <li>Mijn lijst</li>
             </Link>
           </ul>
-          <SearchBar />
+          <SearchBar  />
         </nav>
       </div>
     );
