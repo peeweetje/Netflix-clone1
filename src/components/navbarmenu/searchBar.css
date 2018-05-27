@@ -10,4 +10,5 @@ input {
   padding: 5px;
   width: 134%;
   border-radius: 1px solid #000;
+  outline: none;
 }
