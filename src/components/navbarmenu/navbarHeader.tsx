@@ -32,7 +32,7 @@ class NavbarHeader extends React.Component {
               <li>Mijn lijst</li>
             </Link>
           </ul>
-          <SearchBar  />
+          <SearchBar />
         </nav>
       </div>
     );
