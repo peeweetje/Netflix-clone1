@@ -1,6 +1,6 @@
 import * as React from "react";
 import NavbarHeader from "../navbarmenu/navbarHeader";
-import "../home/homePage.css";
+import "../app/App.css";
 
 interface IhomeProps {}
 

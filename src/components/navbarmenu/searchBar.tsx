@@ -8,6 +8,8 @@ interface IsearchState {
   searchUrl: string;
 }
 
+const API_KEY = process.env.REACT_APP_API_KEY;
+
 class SearchBar extends React.Component< IsearchProps, IsearchState> {
   constructor(props: IsearchProps) {
     super(props);
@@ -23,15 +25,20 @@ class SearchBar extends React.Component< IsearchProps, IsearchState> {
         this.setState({searchResults: []});
         return;
   }
+    console.log(query);
 }
 
 handleKeyUp = (query: any) => {
   if (query === "Enter" && this.state.searchResults !== [""]) {
-    let searchUrl = `https://api.themoviedb.org/3/search/multi?query=${this.state.searchResults}&api_key=cf24f6039676d503f5763537eddf2fd3 `;
+    let searchUrl = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${this.state.searchResults} `;
     this.setState({
       searchUrl
     });
+
   }
+  console.log(this.state.searchResults);
+  // console.log(this.state.searchUrl);
+
 }
 
   render() {
