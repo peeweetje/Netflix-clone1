@@ -1,5 +1,5 @@
 import * as React from "react";
-import "../navbarmenu/searchBar.css";
+import "../app/App.css";
 
 interface IsearchProps {}
 
