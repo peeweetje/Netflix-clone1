@@ -44,7 +44,7 @@ handleKeyUp = (query: any) => {
   render() {
     return (
       <form id="Search" className="Search">
-        <input onChange={this.handleChange} onKeyUp={this.handleKeyUp} type="search" placeholder="Search for a title..." />
+        <input onChange={this.handleChange} value={this.state.searchUrl} onKeyUp={this.handleKeyUp} type="search" placeholder="Search for a title..." />
       </form>
     );
   }
