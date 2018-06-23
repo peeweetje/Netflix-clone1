@@ -6,6 +6,7 @@ interface IsearchProps {}
 interface IsearchState {
   searchResults: Array<string>;
   searchUrl: string;
+  query: string;
 }
 
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -15,36 +16,40 @@ class SearchBar extends React.Component< IsearchProps, IsearchState> {
     super(props);
     this.state = {
       searchResults: [],
-      searchUrl: ""
+      searchUrl: "",
+      query: ""
     };
   }
 
   handleChange = (e: any) => {
     const query = e.target.value;
+    this.setState({
+      query
+    });
+
     if (!query) {
         this.setState({searchResults: []});
         return;
   }
-    console.log(query);
 }
 
 handleKeyUp = (query: any) => {
-  if (query === "Enter" && this.state.searchResults !== [""]) {
-    let searchUrl = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${this.state.searchResults} `;
+  // if (query === "Enter" && this.state.searchResults !== [""]) {
+    let searchUrl = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${this.state.query}`;
+    console.log("the searchurl is: ", searchUrl);
     this.setState({
       searchUrl
     });
-
-  }
-  console.log(this.state.searchResults);
-  // console.log(this.state.searchUrl);
-
+    fetch(this.state.searchUrl)
+    .then(response => console.log(response));
+     // .then(data => this.setState({ results: data.results }));
+  // }
 }
 
   render() {
     return (
       <form id="Search" className="Search">
-        <input onChange={this.handleChange} value={this.state.searchUrl} onKeyUp={this.handleKeyUp} type="search" placeholder="Search for a title..." />
+        <input onChange={this.handleChange} value={this.state.query} onKeyUp={this.handleKeyUp} type="search" placeholder="Search for a title..." />
       </form>
     );
   }
