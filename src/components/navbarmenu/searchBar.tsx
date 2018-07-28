@@ -4,52 +4,57 @@ import "../app/App.css";
 interface IsearchProps {}
 
 interface IsearchState {
-  searchResults: Array<string>;
+  searchResults: any;
   searchUrl: string;
-  query: string;
+  searchQuery: string;
 }
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-class SearchBar extends React.Component< IsearchProps, IsearchState> {
+class SearchBar extends React.Component<IsearchProps, IsearchState> {
   constructor(props: IsearchProps) {
     super(props);
     this.state = {
-      searchResults: [],
+      searchResults: "",
       searchUrl: "",
-      query: ""
+      searchQuery: ""
     };
   }
 
   handleSearchChange = (e: any) => {
-    const query = e.target.value;
+    const searchQuery = e.target.value;
     this.setState({
-      query
+      searchQuery
     });
 
-    if (!query) {
-        this.setState({searchResults: []});
-        return;
+    if (!searchQuery) {
+      this.setState({ searchQuery: "" });
+      return;
+    }
   }
-}
 
-handleKeyUp = (query: any) => {
-   if (query === "Enter" && this.state.searchResults !== [""]) {
-    let searchUrl = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${this.state.query}`;
-    console.log("the searchurl is: ", searchUrl);
-    this.setState({
-      searchUrl
-    });
-    fetch(this.state.searchUrl)
-    .then(response => console.log(response));
-    // .then(data => this.setState({ searchResults: data.searchResults }));
-   }
-}
+  handleKeyUp = () => {
+      let searchUrl = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${
+        this.state.searchQuery
+      }`;
+      this.setState({
+        searchUrl
+      });
+      fetch(searchUrl)
+      .then(response => response.json())
+      .then(searchResults => this.setState({ searchResults}));
+  }
 
   render() {
     return (
       <form id="Search" className="Search">
-        <input onChange={this.handleSearchChange} value={this.state.query} onKeyUp={this.handleKeyUp} type="search" placeholder="Search for a title..." />
+        <input
+          onChange={this.handleSearchChange}
+          value={this.state.searchQuery}
+          onKeyUp={this.handleKeyUp}
+          type="search"
+          placeholder="Search for a title..."
+        />
       </form>
     );
   }
