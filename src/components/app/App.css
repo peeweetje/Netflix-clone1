@@ -11,8 +11,7 @@
   }
 
   .content img {
-    margin-top: 75px;
-    margin-bottom: -75px;
+    display: inline-block;
     width: 100%;
     height: auto;
     vertical-align: middle;
