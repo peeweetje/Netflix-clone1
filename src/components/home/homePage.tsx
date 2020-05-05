@@ -1,8 +1,7 @@
 import * as React from "react";
 import NavbarHeader from "../navbarmenu/navbarHeader";
 import "../app/App.css";
-
-interface IhomeProps {}
+import { useEffect, useState } from "react";
 
 interface IhomeState {
   results: Array<{
@@ -16,40 +15,75 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 let baseUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
 let imageUrl = `https://image.tmdb.org/t/p/w200`;
 
-class HomePage extends React.Component<IhomeProps, IhomeState> {
-  constructor(props: IhomeProps) {
-    super(props);
-    this.state = {
-      results: []
-    };
-  }
+const Homepage: React.FC<IhomeState> = () => {
+  const [results, setResults] = useState([]);
 
-  componentDidMount() {
+  useEffect(() => {
     fetch(baseUrl)
-      .then(response => response.json())
-      .then(data => this.setState({ results: data.results }));
-  }
+      .then((response) => response.json())
+      .then((data) => setResults(data.results));
+  }, []);
 
-  render() {
-    const { results } = this.state;
-    return (
-      <div className="container">
-        <NavbarHeader />
-        {results &&
-          results.map(result => (
-            <div className="content" key={result.id}>
-              <ul>
-                <img
-                  className="card-img"
-                  src={`${imageUrl}${result.poster_path}`}
-                  alt="movie-posters"
-                />
-              </ul>
-            </div>
-          ))}
-      </div>
-    );
-  }
-}
+  console.log({ results });
 
-export default HomePage;
+  return (
+    <div className="container">
+      <NavbarHeader />
+      {results &&
+        results.length > 0 &&
+        results.map((result: any) => (
+          <div className="content" key={result.id}>
+            <ul>
+              <img
+                className="card-img"
+                src={`${imageUrl}${result.poster_path}`}
+                alt="movie-posters"
+              />
+            </ul>
+          </div>
+        ))}
+    </div>
+  );
+};
+
+export default Homepage;
+
+// class HomePage extends React.Component<IhomeProps, IhomeState> {
+//   constructor(props: IhomeProps) {
+//     super(props);
+//     this.state = {
+//       results: []
+//     };
+//   }
+
+//   componentDidMount() {
+//     fetch(baseUrl)
+//       .then(response => response.json())
+//       .then(data => this.setState({ results: data.results }));
+// console.log({ results });
+//   }
+
+//   render() {
+//     const { results } = this.state;
+//     console.log(results);
+//     return (
+//       <div className="container">
+//         <NavbarHeader />
+//         {results &&
+//           results.map(result => (
+//             <div className="content" key={result.id}>
+//               <ul>
+//                 <img
+//                   className="card-img"
+//                   src={`${imageUrl}${result.poster_path}`}
+//                   alt="movie-posters"
+//                 />
+//               </ul>
+//             </div>
+//           ))}
+//       </div>
+//     );
+//   }
+// }
+
+// export default HomePage;

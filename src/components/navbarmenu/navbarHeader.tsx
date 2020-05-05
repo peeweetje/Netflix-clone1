@@ -16,35 +16,32 @@ class NavbarHeader extends React.Component<{}, IsearchState> {
     this.state = {
       searchResults: "",
       searchUrl: "",
-      searchQuery: ""
+      searchQuery: "",
     };
   }
 
   handleSearchChange = (e: any) => {
     const searchQuery = e.target.value;
     this.setState({
-      searchQuery
+      searchQuery,
     });
 
     if (!searchQuery) {
       this.setState({ searchQuery: "" });
       return;
-      
     }
-  }
+  };
 
   handleKeyUp = () => {
-    let searchUrl = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${
-      this.state.searchQuery
-    }`;
+    let searchUrl = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${this.state.searchQuery}`;
     this.setState({
-      searchUrl
+      searchUrl,
     });
     fetch(searchUrl)
-      .then(response => response.json())
-      .then(searchResults => this.setState({ searchResults }));
+      .then((response) => response.json())
+      .then((searchResults) => this.setState({ searchResults }));
     console.log(searchUrl);
-  }
+  };
 
   render() {
     return (
@@ -70,7 +67,10 @@ class NavbarHeader extends React.Component<{}, IsearchState> {
               <li>Mijn lijst</li>
             </Link>
           </ul>
-          <SearchBar onChange={this.handleSearchChange} onKeyUp={this.handleKeyUp} />
+          <SearchBar
+            onChange={this.handleSearchChange}
+            onKeyUp={this.handleKeyUp}
+          />
         </nav>
       </div>
     );
