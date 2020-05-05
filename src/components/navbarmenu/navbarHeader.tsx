@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import SearchBar from "./searchBar";
+// import SearchBar from "./searchBar";
 import "../app/App.css";
 
 export interface IsearchState {
@@ -69,7 +69,7 @@ class NavbarHeader extends React.Component<{}, IsearchState> {
               <li>Mijn lijst</li>
             </Link>
           </ul>
-          <SearchBar onChange={this.handleSearchChange} onKeyUp={this.handleKeyUp} />
+          {/* <SearchBar onChange={this.handleSearchChange} onKeyUp={this.handleKeyUp} /> */}
         </nav>
       </div>
     );
