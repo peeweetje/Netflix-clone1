@@ -7,8 +7,7 @@ import RecentlyAdded from "../navbarmenu/recentlyAdded";
 import MyList from "../navbarmenu/myList";
 import "../app/App.css";
 
-class App extends React.Component<{}, {}> {
-  render() {
+const App = () =>  {
     return (
       <div>
         <Switch>
@@ -20,7 +19,6 @@ class App extends React.Component<{}, {}> {
         </Switch>
       </div>
     );
-  }
-}
+};
 
 export default App;
