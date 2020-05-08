@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import SearchBar from "./searchBar";
-import "../app/App.css";
+import SearchBar from "../search-bar/searchBar";
+
 import { useState } from "react";
 
 export interface IsearchState {

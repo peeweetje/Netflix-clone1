@@ -1,5 +1,4 @@
 import * as React from "react";
-import "../app/App.css";
 
 export interface IsearchProps {
   onChange: any;

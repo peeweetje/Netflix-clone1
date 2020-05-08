@@ -1,5 +1,5 @@
 import * as React from "react";
-import NavbarHeader from "../navbarmenu/navbarHeader";
+import NavbarHeader from "../navbarmenu/navbarheader/navbarHeader";
 import "../app/App.css";
 import { useEffect, useState } from "react";
 
