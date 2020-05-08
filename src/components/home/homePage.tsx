@@ -24,8 +24,6 @@ const Homepage: React.FC<IhomeState> = () => {
       .then((data) => setResults(data.results));
   }, []);
 
-  console.log({ results });
-
   return (
     <div className="container">
       <NavbarHeader />
