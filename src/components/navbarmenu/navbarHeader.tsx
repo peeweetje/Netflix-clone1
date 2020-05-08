@@ -2,79 +2,67 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "./searchBar";
 import "../app/App.css";
+import { useState } from "react";
 
 export interface IsearchState {
-  searchResults: any;
-  searchUrl: string;
-  searchQuery: string;
+  searchResults?: any;
+  searchUrl?: string;
+  searchQuery?: string;
 }
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-class NavbarHeader extends React.Component<{}, IsearchState> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      searchResults: "",
-      searchUrl: "",
-      searchQuery: "",
-    };
-  }
+const NavbarHeader: React.FC<IsearchState> = () => {
+  const [, setSearchResults] = useState("");
+  const [, setSearchUrl] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  handleSearchChange = (e: any) => {
+  const handleSearchChange = (e: any) => {
+    // tslint:disable-next-line: no-shadowed-variable
     const searchQuery = e.target.value;
-    this.setState({
-      searchQuery,
-    });
+    setSearchQuery(searchQuery);
 
     if (!searchQuery) {
-      this.setState({ searchQuery: "" });
+      setSearchQuery(searchQuery);
       return;
     }
   };
 
-  handleKeyUp = () => {
-    let searchUrl = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${this.state.searchQuery}`;
-    this.setState({
-      searchUrl,
-    });
+  const handleKeyUp = () => {
+    // tslint:disable-next-line: no-shadowed-variable
+    let searchUrl = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${searchQuery}`;
+    setSearchUrl(searchUrl);
     fetch(searchUrl)
       .then((response) => response.json())
-      .then((searchResults) => this.setState({ searchResults }));
-    console.log(searchUrl);
+      .then((data) => setSearchResults(data.results));
   };
 
-  render() {
-    return (
-      <div className="App">
-        <nav className="navbar-menu">
+  return (
+    <div className="App">
+      <nav className="navbar-menu">
+        <Link to="/">
+          <h1>BingeWatch</h1>
+        </Link>
+        <ul className="nav-list">
           <Link to="/">
-            <h1>BingeWatch</h1>
+            <li>Homepagina</li>
           </Link>
-          <ul className="nav-list">
-            <Link to="/">
-              <li>Homepagina</li>
-            </Link>
-            <Link to="/shows">
-              <li>Series</li>
-            </Link>
-            <Link to="/Movies">
-              <li>Films</li>
-            </Link>
-            <Link to="/RecentlyAdded">
-              <li>Onlangs toegevoegd</li>
-            </Link>
-            <Link to="/MyList">
-              <li>Mijn lijst</li>
-            </Link>
-          </ul>
-          <SearchBar
-            onChange={this.handleSearchChange}
-            onKeyUp={this.handleKeyUp}
-          />
-        </nav>
-      </div>
-    );
-  }
-}
+          <Link to="/shows">
+            <li>Series</li>
+          </Link>
+          <Link to="/Movies">
+            <li>Films</li>
+          </Link>
+          <Link to="/RecentlyAdded">
+            <li>Onlangs toegevoegd</li>
+          </Link>
+          <Link to="/MyList">
+            <li>Mijn lijst</li>
+          </Link>
+        </ul>
+        <SearchBar onChange={handleSearchChange} onKeyUp={handleKeyUp} />
+      </nav>
+    </div>
+  );
+};
 
 export default NavbarHeader;
