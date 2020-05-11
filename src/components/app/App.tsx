@@ -6,7 +6,6 @@ import Movies from "../navbarmenu/movies/movies";
 import RecentlyAdded from "../navbarmenu/recently-added/recentlyAdded";
 import MyList from "../navbarmenu/my-list/myList";
 import { GlobalStyle } from "../../../src/styles/global";
-import "../app/App.css";
 
 const App = () => {
   return (

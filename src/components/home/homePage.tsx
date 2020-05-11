@@ -1,7 +1,7 @@
 import * as React from "react";
 import NavbarHeader from "../navbarmenu/navbarheader/navbarHeader";
-import "../app/App.css";
 import { useEffect, useState } from "react";
+import { ContentContainer } from "./homepage-styles";
 
 interface IhomeState {
   results: Array<{
@@ -25,12 +25,12 @@ const Homepage: React.FC<IhomeState> = () => {
   }, []);
 
   return (
-    <div className="container">
+    <>
       <NavbarHeader />
       {results &&
         results.length > 0 &&
         results.map((result: any) => (
-          <div className="content" key={result.id}>
+          <ContentContainer key={result.id}>
             <ul>
               <img
                 className="card-img"
@@ -38,9 +38,9 @@ const Homepage: React.FC<IhomeState> = () => {
                 alt="movie-posters"
               />
             </ul>
-          </div>
+          </ContentContainer>
         ))}
-    </div>
+    </>
   );
 };
 
