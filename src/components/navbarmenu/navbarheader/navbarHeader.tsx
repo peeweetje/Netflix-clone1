@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
 import SearchBar from "../search-bar/searchBar";
+import NavItems from "./nav-items";
 import { NavbarContainer, NavbarMenu, NavList } from "../navbar-styles";
 
 import { useState } from "react";
@@ -40,25 +40,13 @@ const NavbarHeader: React.FC<IsearchState> = () => {
   return (
     <NavbarContainer>
       <NavbarMenu>
-        <Link to="/">
-          <h1>BingeWatch</h1>
-        </Link>
         <NavList>
-          <Link to="/">
-            <li>Homepagina</li>
-          </Link>
-          <Link to="/shows">
-            <li>Series</li>
-          </Link>
-          <Link to="/Movies">
-            <li>Films</li>
-          </Link>
-          <Link to="/RecentlyAdded">
-            <li>Onlangs toegevoegd</li>
-          </Link>
-          <Link to="/MyList">
-            <li>Mijn lijst</li>
-          </Link>
+          <NavItems to="/">BingeWatch</NavItems>
+          <NavItems to="/">homepagina</NavItems>
+          <NavItems to="shows">Series</NavItems>
+          <NavItems to="/movies">Films</NavItems>
+          <NavItems to="/recentlyAdded">Onlangs toegevoegd</NavItems>
+          <NavItems to="/mylist">Mijn lijst</NavItems>
         </NavList>
         <SearchBar onChange={handleSearchChange} onKeyUp={handleKeyUp} />
       </NavbarMenu>
