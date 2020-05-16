@@ -29,8 +29,9 @@ li: first-of-type {
           SearchBar
 ==================================*/
 export const NavbarSearch = styled.form`
-  margin-top: 26px;
-  margin-left: 30%;
+  display: flex;
+  padding: 24px;
+  margin-left: 20%;
 `;
 
 export const NavbarInput = styled.input`
