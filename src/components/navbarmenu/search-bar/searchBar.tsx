@@ -1,5 +1,5 @@
-import * as React from "react";
-import { NavbarSearch, NavbarInput } from "../navbar-styles";
+import * as React from 'react';
+import { NavbarSearch, NavbarInput } from '../navbar-styles';
 
 export interface IsearchProps {
   onChange: any;
@@ -18,8 +18,8 @@ const SearchBar: React.FC<IsearchProps> = ({
         onChange={onChange}
         value={searchQuery}
         onKeyUp={onKeyUp}
-        type="search"
-        placeholder="Search for a title..."
+        type='search'
+        placeholder='Search for a title...'
       />
     </NavbarSearch>
   );

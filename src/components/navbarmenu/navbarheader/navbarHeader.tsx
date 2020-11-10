@@ -1,9 +1,9 @@
-import * as React from "react";
-import SearchBar from "../search-bar/searchBar";
-import NavItems from "./nav-items";
-import { NavbarContainer, NavbarMenu, NavList } from "../navbar-styles";
+import * as React from 'react';
+import SearchBar from '../search-bar/searchBar';
+import NavItems from './nav-items';
+import { NavbarContainer, NavbarMenu, NavList } from '../navbar-styles';
 
-import { useState } from "react";
+import { useState } from 'react';
 
 export interface IsearchState {
   searchResults?: any;
@@ -13,9 +13,9 @@ export interface IsearchState {
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 const NavbarHeader: React.FC<IsearchState> = () => {
-  const [, setSearchResults] = useState("");
-  const [, setSearchUrl] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [, setSearchResults] = useState('');
+  const [, setSearchUrl] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearchChange = (e: any) => {
     // tslint:disable-next-line: no-shadowed-variable
@@ -41,12 +41,12 @@ const NavbarHeader: React.FC<IsearchState> = () => {
     <NavbarContainer>
       <NavbarMenu>
         <NavList>
-          <NavItems to="/">BingeWatch</NavItems>
-          <NavItems to="/">homepagina</NavItems>
-          <NavItems to="shows">Series</NavItems>
-          <NavItems to="/movies">Films</NavItems>
-          <NavItems to="/recentlyAdded">Onlangs toegevoegd</NavItems>
-          <NavItems to="/mylist">Mijn lijst</NavItems>
+          <NavItems to='/'>BingeWatch</NavItems>
+          <NavItems to='/'>homepagina</NavItems>
+          <NavItems to='shows'>Series</NavItems>
+          <NavItems to='/movies'>Films</NavItems>
+          <NavItems to='/recentlyAdded'>Onlangs toegevoegd</NavItems>
+          <NavItems to='/mylist'>Mijn lijst</NavItems>
         </NavList>
         <SearchBar onChange={handleSearchChange} onKeyUp={handleKeyUp} />
       </NavbarMenu>

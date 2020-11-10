@@ -42,7 +42,7 @@
       "check-open-brace",
       "check-whitespace"
     ],
-    "quotemark": [true, "double", "jsx-double"],
+    "quotemark": [true, "single", "jsx-single"],
     "radix": true,
     "switch-default": true,
 

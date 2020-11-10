@@ -1,7 +1,7 @@
-import * as React from "react";
-import NavbarHeader from "../navbarmenu/navbarheader/navbarHeader";
-import { useEffect, useState } from "react";
-import { ContentContainer, MainContainer } from "./homepage-styles";
+import * as React from 'react';
+import NavbarHeader from '../navbarmenu/navbarheader/navbarHeader';
+import { useEffect, useState } from 'react';
+import { ContentContainer, MainContainer } from './homepage-styles';
 
 interface IhomeState {
   results: Array<{
@@ -14,6 +14,7 @@ interface IhomeState {
 const API_KEY = process.env.REACT_APP_API_KEY;
 let baseUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
 let imageUrl = `https://image.tmdb.org/t/p/w200`;
+console.log(baseUrl);
 
 const Homepage: React.FC<IhomeState> = () => {
   const [results, setResults] = useState([]);
@@ -34,9 +35,9 @@ const Homepage: React.FC<IhomeState> = () => {
             <ContentContainer key={result.id}>
               <ul>
                 <img
-                  className="card-img"
+                  className='card-img'
                   src={`${imageUrl}${result.poster_path}`}
-                  alt="movie-posters"
+                  alt='movie-posters'
                 />
               </ul>
             </ContentContainer>
