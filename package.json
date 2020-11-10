@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "eslint": "^6.8.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts-ts": "3.1.0",
-    "styled-components": "^5.1.0",
+    "react-scripts-ts": "4.0.8",
+    "styled-components": "^5.2.1 ",
     "styled-system": "^5.1.5"
   },
   "scripts": {
@@ -23,8 +22,14 @@
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.7",
     "@types/react-router-dom": "^5.1.5",
-    "@types/styled-components": "4.1.8",
+    "@types/styled-components": "5.1.4",
     "@types/styled-system": "^5.1.9",
     "typescript": "^3.8.3"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
