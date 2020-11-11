@@ -28,6 +28,8 @@ const NavbarHeader: React.FC<IsearchState> = () => {
     }
   };
 
+  console.log(searchQuery);
+
   const handleKeyUp = () => {
     // tslint:disable-next-line: no-shadowed-variable
     let searchUrl = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${searchQuery}`;
@@ -35,6 +37,7 @@ const NavbarHeader: React.FC<IsearchState> = () => {
     fetch(searchUrl)
       .then((response) => response.json())
       .then((data) => setSearchResults(data.results));
+    console.log(searchUrl);
   };
 
   return (

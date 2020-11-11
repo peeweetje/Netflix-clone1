@@ -5,6 +5,8 @@ import styled from 'styled-components';
 ==================================*/
 export const NavbarContainer = styled.div`
   display: flex;
+  justify-content: space-between;
+  flex-direction: column;
   padding: 6px;
 `;
 
@@ -14,7 +16,9 @@ export const NavbarMenu = styled.nav`
 `;
 
 export const NavList = styled.ul`
-display: flex;
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
 li{
   padding 18px;
   white-space: nowrap;
@@ -30,8 +34,9 @@ li: first-of-type {
 ==================================*/
 export const NavbarSearch = styled.form`
   display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   padding: 24px;
-  margin-left: 20%;
 `;
 
 export const NavbarInput = styled.input`
