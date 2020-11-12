@@ -7,7 +7,7 @@ export const NavbarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  padding: 6px;
+  padding: 0.375rem;
 `;
 
 export const NavbarMenu = styled.nav`
@@ -20,12 +20,12 @@ export const NavList = styled.ul`
     flex-direction: row;
     flex-flow: wrap;
 li{
-  padding 18px;
+  padding 1.125rem;
   white-space: nowrap;
 }
 li: first-of-type {
-  font-size: 30px;
-  padding: 8px;
+  font-size: 1.875rem;
+  padding: 0.5rem;
 } 
 `;
 
@@ -36,11 +36,11 @@ export const NavbarSearch = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 24px;
+  padding: 1.5rem;
 `;
 
 export const NavbarInput = styled.input`
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 8px;
+  border: 0.0625rem solid black;
+  border-radius: 0.375rem;
+  padding: 0.5rem;
 `;

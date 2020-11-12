@@ -14,7 +14,6 @@ interface IhomeState {
 const API_KEY = process.env.REACT_APP_API_KEY;
 let baseUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
 let imageUrl = `https://image.tmdb.org/t/p/w200`;
-console.log(baseUrl);
 
 const Homepage: React.FC<IhomeState> = () => {
   const [results, setResults] = useState([]);

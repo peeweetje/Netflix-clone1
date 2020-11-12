@@ -9,6 +9,6 @@ export const ContentContainer = styled.div`
   white-space: nowrap;
   img {
     border-radius: 1rem;
-    box-shadow: 0 25px 50px -12px rgba(169, 154, 154, 0.54);
+    box-shadow: 0 1.5625rem 3.125rem -0.75rem rgba(169, 154, 154, 0.54);
   }
 `;
