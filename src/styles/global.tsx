@@ -4,9 +4,8 @@ export const GlobalStyle = createGlobalStyle`
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     background-color: #333;
-    font-family: 'Roboto'
 }
 a {
     text-decoration: none;
@@ -14,6 +13,7 @@ a {
 }
 ul {
     list-style: none;
+    padding: 1rem;
   }
 * {
     box-sizing: border-box;
