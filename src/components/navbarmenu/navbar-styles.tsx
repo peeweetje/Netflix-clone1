@@ -16,17 +16,17 @@ export const NavbarMenu = styled.nav`
 `;
 
 export const NavList = styled.ul`
-    display: flex;
-    flex-direction: row;
-    flex-flow: wrap;
-li{
-  padding 1.125rem;
-  white-space: nowrap;
-}
-li: first-of-type {
-  font-size: 1.875rem;
-  padding: 0.5rem;
-} 
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  li {
+    padding: 1.125rem;
+    white-space: nowrap;
+  }
+  li: first-of-type {
+    font-size: 1.875rem;
+    padding: 0.5rem;
+  }
 `;
 
 /*==================================
@@ -36,7 +36,7 @@ export const NavbarSearch = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 1.5rem;
+  padding: 2.5rem;
 `;
 
 export const NavbarInput = styled.input`

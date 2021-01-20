@@ -6,11 +6,13 @@ import Movies from '../navbarmenu/movies/movies';
 import RecentlyAdded from '../navbarmenu/recently-added/recentlyAdded';
 import MyList from '../navbarmenu/my-list/myList';
 import { GlobalStyle } from '../../../src/styles/global';
+import NavbarHeader from '../navbarmenu/navbarheader/navbarHeader';
 
 const App = () => {
   return (
-    <div>
+    <>
       <GlobalStyle />
+      <NavbarHeader />
       <Switch>
         <Route exact={true} path='/' component={HomePage} />
         <Route exact={true} path='/Shows' component={Shows} />
@@ -18,7 +20,7 @@ const App = () => {
         <Route exact={true} path='/RecentlyAdded' component={RecentlyAdded} />
         <Route exact={true} path='/MyList' component={MyList} />
       </Switch>
-    </div>
+    </>
   );
 };
 
