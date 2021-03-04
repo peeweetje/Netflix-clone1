@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { ContentContainer, MainContainer } from './homepage-styles';
 
@@ -14,7 +14,7 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 let baseUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
 let imageUrl = `https://image.tmdb.org/t/p/w500`;
 
-const Homepage: React.FC<IhomeState> = () => {
+const Homepage: FC<IhomeState> = () => {
   const [results, setResults] = useState([]);
 
   useEffect(() => {

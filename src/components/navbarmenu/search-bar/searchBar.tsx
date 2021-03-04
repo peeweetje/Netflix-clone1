@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FC } from 'react';
 import { NavbarSearch, NavbarInput } from '../navbar-styles';
 
 export interface IsearchProps {
@@ -7,11 +7,7 @@ export interface IsearchProps {
   onKeyUp?: any;
 }
 
-const SearchBar: React.FC<IsearchProps> = ({
-  searchQuery,
-  onKeyUp,
-  onChange,
-}) => {
+const SearchBar: FC<IsearchProps> = ({ searchQuery, onKeyUp, onChange }) => {
   return (
     <NavbarSearch>
       <NavbarInput

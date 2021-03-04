@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 interface InavItems {
@@ -6,7 +6,7 @@ interface InavItems {
   children: React.ReactNode;
 }
 
-const NavItems: React.FC<InavItems> = ({ children, to }) => {
+const NavItems: FC<InavItems> = ({ children, to }) => {
   return (
     <li>
       <Link to={to}>{children}</Link>
