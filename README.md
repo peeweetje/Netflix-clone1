@@ -1,3 +1,1 @@
-#React and Typescript
-
-test config
+#React and Typescrip
