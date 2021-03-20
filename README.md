@@ -1,3 +1,1 @@
 #React and Typescrip
-
-test
