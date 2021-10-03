@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import App from './components/app/App';
 import registerServiceWorker from './registerServiceWorker';
-import theme from '../src/styles/theme';
+import { theme } from './styles/theme';
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
