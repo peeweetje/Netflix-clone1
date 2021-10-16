@@ -13,7 +13,6 @@ a {
 }
 ul {
     list-style: none;
-    padding: ${(props) => props.theme.space[16]};
   }
 * {
     box-sizing: border-box;

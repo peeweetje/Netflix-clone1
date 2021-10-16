@@ -1,16 +1,19 @@
 import styled from 'styled-components';
 
 export const MainContainer = styled.main`
-  margin-left: 4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
 `;
 
 export const ContentContainer = styled.div`
-  display: inline-flex;
+  padding: ${(props) => props.theme.space[4]};
 
   img {
-    border-radius: 1rem;
-    box-shadow: 0 1.5625rem 3.125rem -0.75rem rgba(169, 154, 154, 0.54);
-    height: 14rem;
-    width: 12rem;
+    border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(169, 154, 154, 0.54);
+    height: 350px;
+    width: 250px;
   }
 `;
