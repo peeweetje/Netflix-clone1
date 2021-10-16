@@ -8,6 +8,6 @@ declare module "styled-components" {
         blue:string;
       }; 
       fontFamily:string[]
-      space:number[]
+      space:string[]
   }
 }
