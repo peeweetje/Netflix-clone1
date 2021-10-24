@@ -9,5 +9,7 @@ declare module "styled-components" {
       }; 
       fontFamily:string[]
       space:string[]
+      fontSize:string[]
+      borderRadius:string[]
   }
 }
