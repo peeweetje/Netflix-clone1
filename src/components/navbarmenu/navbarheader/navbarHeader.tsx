@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import SearchBar from '../search-bar/searchBar';
+import SearchBar from './search-bar/searchBar';
 import NavItems from './nav-items';
-import { NavbarContainer, NavbarMenu, NavList } from '../navbar-styles';
+import { NavbarContainer, NavbarMenu, NavList } from './navbar-styles';
 
 import { useState } from 'react';
 
