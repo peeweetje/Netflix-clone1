@@ -50,8 +50,8 @@ const NavbarHeader: FC<IsearchState> = () => {
           <NavItems to='/movies'>Films</NavItems>
           <NavItems to='/recentlyAdded'>Onlangs toegevoegd</NavItems>
           <NavItems to='/mylist'>Mijn lijst</NavItems>
+          <SearchBar onChange={handleSearchChange} onKeyUp={handleKeyUp} />
         </NavList>
-        <SearchBar onChange={handleSearchChange} onKeyUp={handleKeyUp} />
       </NavbarMenu>
     </NavbarContainer>
   );
