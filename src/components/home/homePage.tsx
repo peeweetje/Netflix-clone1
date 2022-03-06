@@ -2,19 +2,11 @@ import React, { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { ContentContainer, MainContainer } from './homepage-styles';
 
-interface IhomeState {
-  results: Array<{
-    title: string;
-    poster_path: string;
-    id: number;
-  }>;
-}
-
 const API_KEY = process.env.REACT_APP_API_KEY;
 let baseUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
 let imageUrl = `https://image.tmdb.org/t/p/w500`;
 
-const Homepage: FC<IhomeState> = () => {
+const Homepage: FC = () => {
   const [results, setResults] = useState([]);
 
   useEffect(() => {
