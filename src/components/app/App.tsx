@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import HomePage from '../home/homePage';
+import { Route, Routes } from 'react-router-dom';
+import Homepage from '../home/homePage';
 import Shows from '../navbarmenu/shows/shows';
 import Movies from '../navbarmenu/movies/movies';
 import RecentlyAdded from '../navbarmenu/recently-added/recentlyAdded';
@@ -13,13 +13,13 @@ const App = () => {
     <>
       <GlobalStyle />
       <NavbarHeader />
-      <Switch>
-        <Route exact={true} path='/' component={HomePage} />
-        <Route exact={true} path='/Shows' component={Shows} />
-        <Route exact={true} path='/Movies' component={Movies} />
-        <Route exact={true} path='/RecentlyAdded' component={RecentlyAdded} />
-        <Route exact={true} path='/MyList' component={MyList} />
-      </Switch>
+      <Routes>
+        <Route path='/' element={<Homepage />} />
+        <Route path='/Shows' element={<Shows />} />
+        <Route path='/Movies' element={<Movies />} />
+        <Route path='/RecentlyAdded' element={<RecentlyAdded />} />
+        <Route path='/MyList' element={<MyList />} />
+      </Routes>
     </>
   );
 };
