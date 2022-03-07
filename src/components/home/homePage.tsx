@@ -15,6 +15,12 @@ const Homepage: FC = () => {
       .then((data) => setResults(data.results));
   }, [baseUrl]);
 
+  console.log(results);
+
+  const handleImage = () => {
+    console.log('click');
+  };
+
   return (
     <>
       <MainContainer>
@@ -24,6 +30,7 @@ const Homepage: FC = () => {
             <ContentContainer key={result.id}>
               <ul>
                 <img
+                  onClick={handleImage}
                   src={`${imageUrl}${result.poster_path}`}
                   alt='movie-posters'
                 />

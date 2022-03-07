@@ -9,6 +9,7 @@ export const theme: DefaultTheme = {
   fontFamily: ['Montserrat'],
   space: [
     '0px',
+    '2px',
     '4px',
     '6px',
     '8px',
