@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Homepage from '../home/homePage';
-import Shows from '../navbarmenu/shows/shows';
-import Movies from '../navbarmenu/movies/movies';
-import RecentlyAdded from '../navbarmenu/recently-added/recentlyAdded';
-import MyList from '../navbarmenu/my-list/myList';
-import { GlobalStyle } from '../../../src/styles/global';
-import NavbarHeader from '../navbarmenu/navbarheader/navbarHeader';
+import Homepage from '../components/home/homePage';
+import Shows from '../components/shows/shows';
+import Movies from '../components/movies/movies';
+import RecentlyAdded from '../components/recently-added/recentlyAdded';
+import MyList from '../components/my-list/myList';
+import { GlobalStyle } from '../styles/global';
+import NavbarHeader from '../components/navbarmenu/navbarheader/navbarHeader';
 
 const App = () => {
   return (

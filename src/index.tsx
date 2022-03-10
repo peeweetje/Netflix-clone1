@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import App from './components/app/App';
+import App from './app/app';
 import registerServiceWorker from './registerServiceWorker';
 import { theme } from './styles/theme';
 

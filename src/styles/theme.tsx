@@ -27,4 +27,5 @@ export const theme: DefaultTheme = {
   ],
   fontSize: ['0.5rem', '1rem', '1.5rem', '2rem'],
   borderRadius: ['2px', '4px', '6px', '8px'],
+  boderShadow: ['0 25px 50px -12px rgba(169, 154, 154, 0.54)'],
 };

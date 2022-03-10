@@ -12,7 +12,7 @@ export const ContentContainer = styled.div`
 
   img {
     border-radius: ${(props) => props.theme.borderRadius[3]};
-    box-shadow: 0 25px 50px -12px rgba(169, 154, 154, 0.54);
+    box-shadow: ${(props) => props.theme.boderShadow[0]};
     height: 350px;
     width: 250px;
   }

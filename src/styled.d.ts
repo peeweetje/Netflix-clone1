@@ -11,5 +11,6 @@ declare module "styled-components" {
       space:string[]
       fontSize:string[]
       borderRadius:string[]
+      boderShadow:string[]
   }
 }
