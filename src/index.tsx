@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import App from './app/app';
 import registerServiceWorker from './registerServiceWorker';
 import { theme } from './styles/theme';
+import './i18n';
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
