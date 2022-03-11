@@ -4,6 +4,7 @@ import NavItems from './nav-items';
 import { NavbarContainer, NavbarMenu, NavList } from './navbar-styles';
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export interface IsearchState {
   searchResults?: any;
@@ -13,6 +14,7 @@ export interface IsearchState {
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 const NavbarHeader: FC<IsearchState> = () => {
+  const { t } = useTranslation();
   const [, setSearchResults] = useState('');
   const [, setSearchUrl] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
@@ -44,12 +46,12 @@ const NavbarHeader: FC<IsearchState> = () => {
     <NavbarContainer>
       <NavbarMenu>
         <NavList>
-          <NavItems to='/'>BingeWatch</NavItems>
-          <NavItems to='/'>homepagina</NavItems>
-          <NavItems to='shows'>Series</NavItems>
-          <NavItems to='/movies'>Films</NavItems>
-          <NavItems to='/recentlyAdded'>Onlangs toegevoegd</NavItems>
-          <NavItems to='/mylist'>Mijn lijst</NavItems>
+          <NavItems to='/'>{t('binge-watch')}</NavItems>
+          <NavItems to='/'>{t('home-page')}</NavItems>
+          <NavItems to='shows'>{t('show-page')}</NavItems>
+          <NavItems to='/movies'>{t('movie-page')}</NavItems>
+          <NavItems to='/recentlyAdded'>{t('recently-added-page')}</NavItems>
+          <NavItems to='/mylist'>{t('my-list')}</NavItems>
           <SearchBar onChange={handleSearchChange} onKeyUp={handleKeyUp} />
         </NavList>
       </NavbarMenu>

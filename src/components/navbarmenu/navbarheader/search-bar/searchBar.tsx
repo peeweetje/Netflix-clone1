@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { NavbarSearch, NavbarInput } from './searchbar.styles';
+import { useTranslation } from 'react-i18next';
 
 export interface IsearchProps {
   onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
@@ -10,6 +11,7 @@ export interface IsearchProps {
 }
 
 const SearchBar: FC<IsearchProps> = ({ searchQuery, onKeyUp, onChange }) => {
+  const { t } = useTranslation();
   return (
     <NavbarSearch>
       <NavbarInput
@@ -17,7 +19,7 @@ const SearchBar: FC<IsearchProps> = ({ searchQuery, onKeyUp, onChange }) => {
         value={searchQuery}
         onKeyUp={onKeyUp}
         type='search'
-        placeholder='Search for a title...'
+        placeholder={t('search-title')}
       />
     </NavbarSearch>
   );
