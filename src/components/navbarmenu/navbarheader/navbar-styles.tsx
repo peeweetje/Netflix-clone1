@@ -20,12 +20,13 @@ export const NavList = styled.ul`
     white-space: nowrap;
   }
   li:hover {
-    text-decoration: 6px underline;
+    text-decoration: 5px underline;
   }
 `;
 
 export const BrandContainer = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   font-size: 2rem;

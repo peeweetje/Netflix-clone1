@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 import { useEffect, useState } from 'react';
-import { ContentContainer, MainContainer } from './homepage-styles';
+import { MainContainer } from './homepage-styles';
+import Card from 'components/card/card';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 let baseUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
-let imageUrl = `https://image.tmdb.org/t/p/w500`;
+let imageUrl = `https://image.tmdb.org/t/p/w300`;
 
 const Homepage: FC = () => {
   const [results, setResults] = useState([]);
@@ -27,15 +28,12 @@ const Homepage: FC = () => {
         {results &&
           results.length > 0 &&
           results.map((result: any) => (
-            <ContentContainer key={result.id}>
-              <ul>
-                <img
-                  onClick={handleImage}
-                  src={`${imageUrl}${result.poster_path}`}
-                  alt='movie-posters'
-                />
-              </ul>
-            </ContentContainer>
+            <Card
+              key={result.id}
+              onClick={handleImage}
+              src={`${imageUrl}${result.poster_path}`}
+              alt='movie-posters'
+            />
           ))}
       </MainContainer>
     </>
