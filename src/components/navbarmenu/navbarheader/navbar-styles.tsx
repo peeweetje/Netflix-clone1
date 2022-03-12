@@ -19,9 +19,15 @@ export const NavList = styled.ul`
     padding: ${(props) => props.theme.space[6]};
     white-space: nowrap;
   }
-
-  li:first-of-type {
-    font-size: 2rem;
-    padding: ${(props) => props.theme.space[2]};
+  li:hover {
+    text-decoration: 6px underline;
   }
+`;
+
+export const BrandContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  list-style: none;
 `;

@@ -1,7 +1,12 @@
 import React, { FC } from 'react';
 import SearchBar from './search-bar/searchBar';
 import NavItems from './nav-items';
-import { NavbarContainer, NavbarMenu, NavList } from './navbar-styles';
+import {
+  NavbarContainer,
+  NavbarMenu,
+  NavList,
+  BrandContainer,
+} from './navbar-styles';
 
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -45,8 +50,10 @@ const NavbarHeader: FC<IsearchState> = () => {
   return (
     <NavbarContainer>
       <NavbarMenu>
-        <NavList>
+        <BrandContainer>
           <NavItems to='/'>{t('binge-watch')}</NavItems>
+        </BrandContainer>
+        <NavList>
           <NavItems to='/'>{t('home-page')}</NavItems>
           <NavItems to='shows'>{t('show-page')}</NavItems>
           <NavItems to='/movies'>{t('movie-page')}</NavItems>
