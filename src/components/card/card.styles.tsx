@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
 export const CardContainer = styled.div`
+  display: flex;
   padding: ${(props) => props.theme.space[6]};
   height: 400px;
+  cursor: pointer;
 `;
 
 export const StyledImg = styled.img`
