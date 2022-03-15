@@ -2,10 +2,7 @@ import React, { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { MainContainer } from './homepage-styles';
 import Card from 'components/card/card';
-
-const API_KEY = process.env.REACT_APP_API_KEY;
-let baseUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
-let imageUrl = `https://image.tmdb.org/t/p/w300`;
+import { baseUrl, imageUrl } from 'utils/api';
 
 const Homepage: FC = () => {
   const [results, setResults] = useState([]);

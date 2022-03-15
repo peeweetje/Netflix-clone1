@@ -10,8 +10,8 @@ type CardProps = {
 
 const Card: FC<CardProps> = ({ onClick, src, alt }) => {
   return (
-    <CardContainer onClick={onClick}>
-      <StyledImg src={src} alt={alt} />
+    <CardContainer>
+      <StyledImg onClick={onClick} src={src} alt={alt} />
     </CardContainer>
   );
 };
