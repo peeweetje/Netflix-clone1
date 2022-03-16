@@ -1,17 +1,32 @@
 import * as React from 'react';
 import { FC } from 'react';
-import { CardContainer, StyledImg } from './card.styles';
+import {
+  CardContainer,
+  FLipCard,
+  StyledImg,
+  CardFront,
+  CardBack,
+  CardBackContainer,
+} from './card.styles';
 
 type CardProps = {
-  onClick: () => void;
   src: string;
   alt: string;
 };
 
-const Card: FC<CardProps> = ({ onClick, src, alt }) => {
+const Card: FC<CardProps> = ({ src, alt }) => {
   return (
     <CardContainer>
-      <StyledImg onClick={onClick} src={src} alt={alt} />
+      <FLipCard>
+        <CardFront>
+          <StyledImg src={src} alt={alt} />
+        </CardFront>
+        <CardBack>
+          <CardBackContainer>
+            informatie voor de achterkant van de kaart
+          </CardBackContainer>
+        </CardBack>
+      </FLipCard>
     </CardContainer>
   );
 };
