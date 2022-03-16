@@ -15,10 +15,6 @@ const Homepage: FC = () => {
 
   console.log(results);
 
-  const handleImage = () => {
-    console.log('click');
-  };
-
   return (
     <>
       <MainContainer>
@@ -27,7 +23,6 @@ const Homepage: FC = () => {
           results.map((result: any) => (
             <Card
               key={result.id}
-              onClick={handleImage}
               src={`${imageUrl}${result.poster_path}`}
               alt='movie-posters'
             />
