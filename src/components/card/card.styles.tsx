@@ -37,7 +37,6 @@ export const CardBackContainer = styled.div`
 
 export const StyledImg = styled.img`
   border-radius: ${(props) => props.theme.borderRadius[3]};
-  box-shadow: ${(props) => props.theme.boderShadow[0]};
   height: 350px;
   width: 250px;
 `;
