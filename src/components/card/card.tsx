@@ -1,31 +1,27 @@
 import * as React from 'react';
 import { FC } from 'react';
-import {
-  CardContainer,
-  FLipCard,
-  StyledImg,
-  CardFront,
-  CardBack,
-  CardBackContainer,
-} from './card.styles';
+import { CardContainer, FLipCard } from './card.styles';
+import FrontCard from './front-card';
+import BackCard from './back-card';
 
 type CardProps = {
   src: string;
   alt: string;
+  overview: string;
+  title: string;
+  vote_average: number;
 };
 
-const Card: FC<CardProps> = ({ src, alt }) => {
+const Card: FC<CardProps> = ({ src, alt, overview, title, vote_average }) => {
   return (
     <CardContainer>
       <FLipCard>
-        <CardFront>
-          <StyledImg src={src} alt={alt} />
-        </CardFront>
-        <CardBack>
-          <CardBackContainer>
-            informatie voor de achterkant van de kaart
-          </CardBackContainer>
-        </CardBack>
+        <FrontCard src={src} alt={alt} />
+        <BackCard
+          overview={overview}
+          title={title}
+          vote_average={vote_average}
+        />
       </FLipCard>
     </CardContainer>
   );
