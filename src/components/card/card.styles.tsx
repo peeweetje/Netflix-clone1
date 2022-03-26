@@ -24,6 +24,12 @@ export const CardFront = styled.div`
   z-index: 2;
 `;
 
+export const StyledImg = styled.img`
+  border-radius: ${(props) => props.theme.borderRadius[3]};
+  height: 350px;
+  width: 250px;
+`;
+
 export const CardBack = styled.div`
   backface-visibility: hidden;
   transform: rotateY(180deg);
@@ -31,12 +37,31 @@ export const CardBack = styled.div`
 `;
 
 export const CardBackContainer = styled.div`
+  padding: 6px;
+  flex-wrap: nowrap;
   height: 350px;
   width: 250px;
+  transform: translate(12px, -355px);
+  box-shadow: ${(props) => props.theme.boderShadow[0]};
+  white-space: normal;
+  flex-wrap: wrap;
 `;
 
-export const StyledImg = styled.img`
-  border-radius: ${(props) => props.theme.borderRadius[3]};
-  height: 350px;
-  width: 250px;
+export const TitleContainer = styled.h1`
+  display: flex;
+  justify-content: center;
+  margin-top: ${(props) => props.theme.space[0]};
+  font-size: ${(props) => props.theme.fontSize[1]};
+`;
+
+export const OverviewContainer = styled.p`
+  display: flex;
+  justify-content: center;
+  font-size: 0.8rem;
+  line-height: 1.3;
+`;
+
+export const ScoreContainer = styled.span`
+  display: flex;
+  justify-content: center;
 `;
