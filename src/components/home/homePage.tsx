@@ -2,16 +2,16 @@ import React, { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { MainContainer } from './homepage-styles';
 import Card from 'components/card/card';
-import { baseUrl, imageUrl } from 'utils/api';
+import { discoverMovieUrl, imageUrl } from 'utils/api';
 
 const Homepage: FC = () => {
   const [results, setResults] = useState([]);
 
   useEffect(() => {
-    fetch(baseUrl)
+    fetch(discoverMovieUrl)
       .then((response) => response.json())
       .then((data) => setResults(data.results));
-  }, [baseUrl]);
+  }, [discoverMovieUrl]);
 
   console.log(results);
 
@@ -25,6 +25,9 @@ const Homepage: FC = () => {
               key={result.id}
               src={`${imageUrl}${result.poster_path}`}
               alt='movie-posters'
+              overview={result.overview}
+              title={result.title}
+              vote_average={result.vote_average}
             />
           ))}
       </MainContainer>
