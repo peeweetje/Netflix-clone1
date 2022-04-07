@@ -37,7 +37,7 @@ export const CardBack = styled.div`
 `;
 
 export const CardBackContainer = styled.div`
-  padding: 6px;
+  padding: ${(props) => props.theme.space[3]};
   flex-wrap: nowrap;
   height: 350px;
   width: 250px;

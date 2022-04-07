@@ -29,6 +29,6 @@ export const BrandContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: ${(props) => props.theme.fontSize[3]};
   list-style: none;
 `;
