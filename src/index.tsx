@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import App from './app/app';
@@ -7,12 +7,13 @@ import registerServiceWorker from './registerServiceWorker';
 import { theme } from './styles/theme';
 import './i18n';
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container!); // createRoot(container!) if you use TypeScript
+root.render(
   <ThemeProvider theme={theme}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </ThemeProvider>,
-  document.getElementById('root') as HTMLElement
+  </ThemeProvider>
 );
 registerServiceWorker();
