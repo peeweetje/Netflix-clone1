@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import SearchBar from './search-bar/searchBar';
 import NavItems from './nav-items';
 import {
-  NavbarContainer,
+  // NavbarContainer,
   NavbarMenu,
   NavList,
   BrandContainer,
@@ -48,21 +48,21 @@ const NavbarHeader: FC<IsearchState> = () => {
   };
 
   return (
-    <NavbarContainer>
-      <NavbarMenu>
-        <BrandContainer>
-          <NavItems to='/'>{t('binge-watch')}</NavItems>
-        </BrandContainer>
-        <NavList>
-          <NavItems to='/'>{t('home-page')}</NavItems>
-          <NavItems to='shows'>{t('show-page')}</NavItems>
-          <NavItems to='/movies'>{t('movie-page')}</NavItems>
-          <NavItems to='/recentlyAdded'>{t('recently-added-page')}</NavItems>
-          <NavItems to='/mylist'>{t('my-list')}</NavItems>
-          <SearchBar onChange={handleSearchChange} onKeyUp={handleKeyUp} />
-        </NavList>
-      </NavbarMenu>
-    </NavbarContainer>
+    // <NavbarContainer>
+    <NavbarMenu>
+      <BrandContainer>
+        <NavItems to='/'>{t('binge-watch')}</NavItems>
+      </BrandContainer>
+      <NavList>
+        <NavItems to='/'>{t('home-page')}</NavItems>
+        <NavItems to='shows'>{t('show-page')}</NavItems>
+        <NavItems to='/movies'>{t('movie-page')}</NavItems>
+        <NavItems to='/recentlyAdded'>{t('recently-added-page')}</NavItems>
+        <NavItems to='/mylist'>{t('my-list')}</NavItems>
+      </NavList>
+      <SearchBar onChange={handleSearchChange} onKeyUp={handleKeyUp} />
+    </NavbarMenu>
+    // </NavbarContainer>
   );
 };
 

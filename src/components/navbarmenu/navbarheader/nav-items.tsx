@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 
 interface InavItems {
   to: string;
-  children: React.ReactNode;
+  // TODO: temperary solution because of the translations errors in the navbarHeader, types are not correctly updated.
+  children: any; //  React.ReactNode
 }
 
 const NavItems: FC<InavItems> = ({ children, to }) => {
