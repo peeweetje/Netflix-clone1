@@ -48,7 +48,6 @@ const NavbarHeader: FC<IsearchState> = () => {
   };
 
   return (
-    // <NavbarContainer>
     <NavbarMenu>
       <BrandContainer>
         <NavItems to='/'>{t('binge-watch')}</NavItems>
@@ -62,7 +61,6 @@ const NavbarHeader: FC<IsearchState> = () => {
       </NavList>
       <SearchBar onChange={handleSearchChange} onKeyUp={handleKeyUp} />
     </NavbarMenu>
-    // </NavbarContainer>
   );
 };
 

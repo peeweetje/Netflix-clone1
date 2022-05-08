@@ -1,11 +1,5 @@
 import styled from 'styled-components';
 
-export const NavbarContainer = styled.div`
-  display: flex;
-  padding: ${(props) => props.theme.space[4]};
-  width: 100%;
-`;
-
 export const NavbarMenu = styled.nav`
   display: flex;
   width: 100%;
