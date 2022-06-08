@@ -24,7 +24,7 @@ const NavbarHeader: FC<IsearchState> = () => {
   const [, setSearchUrl] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const handleSearchChange = (e: any) => {
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     // tslint:disable-next-line: no-shadowed-variable
     const searchQuery = e.target.value;
     setSearchQuery(searchQuery);
