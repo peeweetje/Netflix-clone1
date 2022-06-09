@@ -20,8 +20,6 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 
 const NavbarHeader: FC<IsearchState> = () => {
   const { t } = useTranslation();
-  const [, setSearchResults] = useState('');
-  const [, setSearchUrl] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -38,12 +36,10 @@ const NavbarHeader: FC<IsearchState> = () => {
   console.log(searchQuery);
 
   const handleKeyUp = () => {
-    // tslint:disable-next-line: no-shadowed-variable
-    let searchUrl = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${searchQuery}`;
-    setSearchUrl(searchUrl);
+    let searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchQuery}`;
     fetch(searchUrl)
       .then((response) => response.json())
-      .then((data) => setSearchResults(data.results));
+      .then((data) => setSearchQuery(data.results));
     console.log(searchUrl);
   };
 

@@ -18,8 +18,7 @@ const Homepage: FC = () => {
   return (
     <>
       <MainContainer>
-        {results &&
-          results.length > 0 &&
+        {results.length > 0 &&
           results.map((result: any) => (
             <Card
               key={result.id}
