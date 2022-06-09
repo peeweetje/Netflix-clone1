@@ -11,7 +11,7 @@ const Homepage: FC = () => {
     fetch(discoverMovieUrl)
       .then((response) => response.json())
       .then((data) => setResults(data.results));
-  }, [discoverMovieUrl]);
+  }, [discoverMovieUrl, setResults]);
 
   console.log(results);
 

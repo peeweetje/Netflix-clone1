@@ -1,12 +1,7 @@
 import React, { FC } from 'react';
 import SearchBar from './search-bar/searchBar';
 import NavItems from './nav-items';
-import {
-  // NavbarContainer,
-  NavbarMenu,
-  NavList,
-  BrandContainer,
-} from './navbar-styles';
+import { NavbarMenu, NavList, BrandContainer } from './navbar-styles';
 
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -28,7 +23,7 @@ const NavbarHeader: FC<IsearchState> = () => {
     setSearchQuery(searchQuery);
 
     if (!searchQuery) {
-      setSearchQuery(searchQuery);
+      setSearchQuery('');
       return;
     }
   };
