@@ -7,7 +7,6 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export interface IsearchState {
-  searchResults?: any;
   searchUrl?: string;
   searchQuery?: string;
 }
@@ -30,7 +29,7 @@ const NavbarHeader: FC<IsearchState> = () => {
 
   console.log(searchQuery);
 
-  const handleKeyUp = () => {
+  const handleSubmithMovie = () => {
     let searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchQuery}`;
     fetch(searchUrl)
       .then((response) => response.json())
@@ -50,7 +49,7 @@ const NavbarHeader: FC<IsearchState> = () => {
         <NavItems to='/recentlyAdded'>{t('recently-added-page')}</NavItems>
         <NavItems to='/mylist'>{t('my-list')}</NavItems>
       </NavList>
-      <SearchBar onChange={handleSearchChange} onKeyUp={handleKeyUp} />
+      <SearchBar onSubmit={handleSubmithMovie} onChange={handleSearchChange} />
     </NavbarMenu>
   );
 };

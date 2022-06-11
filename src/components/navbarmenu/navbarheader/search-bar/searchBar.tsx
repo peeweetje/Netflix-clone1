@@ -5,19 +5,16 @@ import { useTranslation } from 'react-i18next';
 export interface IsearchProps {
   onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
   searchQuery?: string;
-  onKeyUp?:
-    | ((event: React.KeyboardEvent<HTMLInputElement>) => void)
-    | undefined;
+  onSubmit: ((event: React.FormEvent<HTMLFormElement>) => void) | undefined;
 }
 
-const SearchBar: FC<IsearchProps> = ({ searchQuery, onKeyUp, onChange }) => {
+const SearchBar: FC<IsearchProps> = ({ searchQuery, onSubmit, onChange }) => {
   const { t } = useTranslation();
   return (
-    <NavbarSearch>
+    <NavbarSearch onSubmit={onSubmit}>
       <NavbarInput
         onChange={onChange}
         value={searchQuery}
-        onKeyUp={onKeyUp}
         type='search'
         placeholder={t('search-title')}
       />
