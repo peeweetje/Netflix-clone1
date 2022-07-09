@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import SearchBar from './search-bar/searchBar';
 import NavItems from './nav-items';
 import { NavbarMenu, NavList, BrandContainer } from './navbar-styles';
@@ -6,13 +6,9 @@ import { NavbarMenu, NavList, BrandContainer } from './navbar-styles';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export interface IsearchState {
-  searchUrl?: string;
-  searchQuery?: string;
-}
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-const NavbarHeader: FC<IsearchState> = () => {
+const NavbarHeader = () => {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
 
