@@ -7,6 +7,7 @@ import {
   ScoreContainer,
 } from './card.styles';
 import { FC } from 'react';
+import { scoreColor } from 'utils/score-color';
 
 type BackCardProps = {
   overview: string;
@@ -20,7 +21,9 @@ const BackCard: FC<BackCardProps> = ({ overview, title, vote_average }) => {
       <CardBackContainer>
         <TitleContainer>{title}</TitleContainer>
         <OverviewContainer>{overview}</OverviewContainer>
-        <ScoreContainer> Score: {vote_average}</ScoreContainer>
+        <ScoreContainer score={scoreColor(vote_average)}>
+          {vote_average}
+        </ScoreContainer>
       </CardBackContainer>
     </CardBack>
   );

@@ -61,7 +61,8 @@ export const OverviewContainer = styled.p`
   line-height: 1.3;
 `;
 
-export const ScoreContainer = styled.span`
+export const ScoreContainer = styled.span<{ score: string | undefined }>`
   display: flex;
   justify-content: center;
+  color: ${(props) => props.score};
 `;
