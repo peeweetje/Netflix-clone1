@@ -5,6 +5,9 @@ export const theme: DefaultTheme = {
     black: '#333',
     white: '#fff',
     blue: '#8EB3CC',
+    red: '#ff0000',
+    orange: '#FFA500',
+    green: '#00FF00',
   },
   fontFamily: ['Montserrat'],
   space: [

@@ -6,6 +6,9 @@ declare module "styled-components" {
         black: string;
         white: string;
         blue:string;
+        red: string;
+        orange: string;
+        green:string;
       }; 
       fontFamily:string[]
       space:string[]
