@@ -5,13 +5,12 @@ import { useTranslation } from 'react-i18next';
 export type searchProps = {
   onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
   searchQuery?: string;
-  onSubmit: ((event: React.FormEvent<HTMLFormElement>) => void) | undefined;
 };
 
-const SearchBar: FC<searchProps> = ({ searchQuery, onSubmit, onChange }) => {
+const SearchBar: FC<searchProps> = ({ searchQuery, onChange }) => {
   const { t } = useTranslation();
   return (
-    <NavbarSearch onSubmit={onSubmit}>
+    <NavbarSearch>
       <NavbarInput
         onChange={onChange}
         value={searchQuery}
