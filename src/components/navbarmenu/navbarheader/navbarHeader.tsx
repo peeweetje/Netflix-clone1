@@ -6,13 +6,12 @@ import { NavbarMenu, NavList, BrandContainer } from './navbar-styles';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const API_KEY = process.env.REACT_APP_API_KEY;
-
 const NavbarHeader = () => {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    e.preventDefault();
     // tslint:disable-next-line: no-shadowed-variable
     const searchQuery = e.target.value;
     setSearchQuery(searchQuery);
@@ -24,14 +23,6 @@ const NavbarHeader = () => {
   };
 
   console.log(searchQuery);
-
-  const handleSubmithMovie = () => {
-    let searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchQuery}`;
-    fetch(searchUrl)
-      .then((response) => response.json())
-      .then((data) => setSearchQuery(data.results));
-    console.log(searchUrl);
-  };
 
   return (
     <NavbarMenu>
@@ -45,7 +36,7 @@ const NavbarHeader = () => {
         <NavItems to='/recentlyAdded'>{t('recently-added-page')}</NavItems>
         <NavItems to='/mylist'>{t('my-list')}</NavItems>
       </NavList>
-      <SearchBar onSubmit={handleSubmithMovie} onChange={handleSearchChange} />
+      <SearchBar onChange={handleSearchChange} />
     </NavbarMenu>
   );
 };
