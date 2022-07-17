@@ -4,16 +4,16 @@ import { useTranslation } from 'react-i18next';
 
 export type searchProps = {
   onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
-  searchQuery?: string;
+  value: string;
 };
 
-const SearchBar: FC<searchProps> = ({ searchQuery, onChange }) => {
+const SearchBar: FC<searchProps> = ({ value, onChange }) => {
   const { t } = useTranslation();
   return (
     <NavbarSearch>
       <NavbarInput
         onChange={onChange}
-        value={searchQuery}
+        value={value}
         type='search'
         placeholder={t('search-title')}
       />

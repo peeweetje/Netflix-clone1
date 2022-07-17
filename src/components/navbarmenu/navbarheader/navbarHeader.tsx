@@ -1,28 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
 import SearchBar from './search-bar/searchBar';
 import NavItems from './nav-items';
 import { NavbarMenu, NavList, BrandContainer } from './navbar-styles';
-
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const NavbarHeader = () => {
+export type navbarHeaderProps = {
+  onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
+  value: string;
+};
+
+const NavbarHeader: FC<navbarHeaderProps> = ({ onChange, value }) => {
   const { t } = useTranslation();
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    e.preventDefault();
-    // tslint:disable-next-line: no-shadowed-variable
-    const searchQuery = e.target.value;
-    setSearchQuery(searchQuery);
-
-    if (!searchQuery) {
-      setSearchQuery('');
-      return;
-    }
-  };
-
-  console.log(searchQuery);
 
   return (
     <NavbarMenu>
@@ -36,7 +24,7 @@ const NavbarHeader = () => {
         <NavItems to='/recentlyAdded'>{t('recently-added-page')}</NavItems>
         <NavItems to='/mylist'>{t('my-list')}</NavItems>
       </NavList>
-      <SearchBar onChange={handleSearchChange} />
+      <SearchBar value={value} onChange={onChange} />
     </NavbarMenu>
   );
 };

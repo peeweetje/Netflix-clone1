@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const NavbarSearch = styled.form`
+export const NavbarSearch = styled.div`
   padding: ${(props) => props.theme.space[8]};
   margin-left: auto;
 `;
