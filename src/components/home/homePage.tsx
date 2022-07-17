@@ -15,8 +15,6 @@ const Homepage = () => {
   let searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchQuery}`;
 
   useEffect(() => {
-    console.log(searchUrl);
-    console.log(searchQuery);
     fetch(searchUrl)
       .then((response) => response.json())
       .then((data) => setSearchMovies(data.results));
