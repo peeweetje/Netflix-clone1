@@ -1,23 +1,24 @@
 
 
+export type Colours = '#00FF00' | '#FF0000' | '#FFA500';
+const GREEN: Colours = '#00FF00';
+const RED: Colours = '#FF0000';
+const ORANGE: Colours = '#FFA500';
 
-enum Colours {
-  RED = '#ff0000',
-  ORANGE = '#FFA500',
-  GREEN = '#00FF00'
-}
 
  export const scoreColor = (score: number = 0) => {
-  let colors = undefined;
+  let color = undefined;
     if (score <= 5.9) {
-     colors = Colours.RED
+     color = RED
     } else if (score >= 6.0 && score <= 7.4) {
-      colors = Colours.ORANGE
+      color = ORANGE
     } else if (score >= 7.5 && score <= 10) {
-      colors = Colours.GREEN
+      color = GREEN
     }
-    return colors;
+    return color;
 } 
+
+ 
  
 
 
