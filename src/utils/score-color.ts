@@ -1,19 +1,24 @@
 
 
-export type Colours = '#00FF00' | '#FF0000' | '#FFA500';
-const GREEN: Colours = '#00FF00';
-const RED: Colours = '#FF0000';
-const ORANGE: Colours = '#FFA500';
 
+ export const colours = {
+  Green: '#00FF00',
+  Red: '#FF0000',
+  Orange: '#FFA500'
+}as const
+
+ export type Values<T> = T[keyof T];
+
+ type Colors =  Values<typeof colours>;
 
  export const scoreColor = (score: number = 0) => {
-  let color = undefined;
+  let color: Colors | undefined = undefined
     if (score <= 5.9) {
-     color = RED
+    color = colours.Red
     } else if (score >= 6.0 && score <= 7.4) {
-      color = ORANGE
+      color = colours.Orange
     } else if (score >= 7.5 && score <= 10) {
-      color = GREEN
+      color = colours.Green
     }
     return color;
 } 
