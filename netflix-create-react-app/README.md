@@ -1,5 +1,0 @@
-- React
-- Typescript
-- Styled-components
-- Framer-motion
-- movie-database-api
