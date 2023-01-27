@@ -20,8 +20,6 @@ const Homepage = () => {
       .then((data) => setSearchMovies(data.results));
   }, [searchUrl, setSearchMovies]);
 
-  console.log({ searchUrl });
-
   useEffect(() => {
     fetch(discoverMovieUrl)
       .then((response) => response.json())
