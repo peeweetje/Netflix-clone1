@@ -4,4 +4,4 @@
 - Framer-motion
 - movie-database-api
 
-![My Image](afbeelding-netflix-clone.png)
+<img src="/path/to/afbeelding-netflix-clone.png" alt="netflix-clone" title="netflix-clone">
