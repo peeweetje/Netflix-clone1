@@ -1,17 +1,21 @@
 import { css } from '../../styled-system/css';
+import { Poppins } from 'next/font/google';
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400'],
+});
 
 export default function Home() {
   return (
-    <main>
-      <div
+    <main className={`${poppins.className}`}>
+      <h1
         className={css({
-          fontSize: '2xl',
-          fontWeight: 'bold',
           color: 'amber.500',
         })}
       >
         Hello 🐼!
-      </div>
+      </h1>
     </main>
   );
 }
