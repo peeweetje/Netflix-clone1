@@ -1,6 +1,6 @@
 import { css } from '../../styled-system/css';
 
-export default function Home() {
+const Home = () => {
   return (
     <main>
       <h1
@@ -12,4 +12,6 @@ export default function Home() {
       </h1>
     </main>
   );
-}
+};
+
+export default Home;
