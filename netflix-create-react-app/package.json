@@ -7,16 +7,16 @@
     "i18next": "^23.2.3",
     "i18next-browser-languagedetector": "^7.0.2",
     "i18next-http-backend": "^2.2.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-i18next": "^13.0.1",
     "react-router-dom": "^6.14.0",
     "react-scripts-ts": "4.0.8",
     "styled-components": "^5.3.5"
   },
   "scripts": {
-    "start": "react-scripts-ts start",
-    "build": "react-scripts-ts build",
+    "start": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts-ts start",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject"
   },
