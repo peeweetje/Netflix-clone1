@@ -36,7 +36,6 @@
       "check-open-brace",
       "check-whitespace"
     ],
-    "quotemark": [true, "single", "jsx-single"],
     "radix": true,
     "switch-default": true,
 
