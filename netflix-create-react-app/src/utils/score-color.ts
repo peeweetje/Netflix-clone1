@@ -18,7 +18,6 @@ export const scoreColor = (score: number) => {
   } else if (roundedScore >= 7.5 && roundedScore <= 10) {
     color = colours.Green;
   }
-  console.log(roundedScore, color);
 
   return color;
 };
