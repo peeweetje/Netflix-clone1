@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { MainContainer } from "./homepage-styles";
 import Card from "components/card/card";
 import { discoverMovieUrl, imageUrl } from "utils/api";
@@ -17,6 +18,7 @@ const Homepage = () => {
   const [results, setResults] = useState([]);
   const [searchMovies, setSearchMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const { t } = useTranslation();
 
   const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -50,7 +52,7 @@ const Homepage = () => {
   return (
     <>
       <NavbarHeader value={searchQuery} onChange={handleSearchChange} />
-      <MainContainer>
+      <MainContainer aria-label={t("movie-listings")}>
         {searchMovies && searchMovies.length > 0 ? (
           searchMovies.map((result: MovieResult) => (
             <Card
