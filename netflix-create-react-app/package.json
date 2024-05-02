@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "framer-motion": "10.12.17",
-    "i18next": "^23.2.3",
-    "i18next-browser-languagedetector": "^7.0.2",
-    "i18next-http-backend": "^2.2.1",
+    "framer-motion": "11.1.7",
+    "i18next": "^23.11.3",
+    "i18next-browser-languagedetector": "^7.2.1",
+    "i18next-http-backend": "^2.5.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-i18next": "^13.0.1",
-    "react-router-dom": "^6.14.0",
+    "react-i18next": "^14.1.1",
+    "react-router-dom": "^6.23.0",
     "react-scripts-ts": "4.0.8",
     "styled-components": "^5.3.5"
   },
@@ -21,13 +21,13 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
-    "@types/jest": "^27.4.1",
-    "@types/node": "20.3.1",
-    "@types/react": "^18.2.14",
-    "@types/react-dom": "^18.2.6",
+    "@types/jest": "^29.5.12",
+    "@types/node": "20.12.8",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
     "@types/react-router-dom": "^5.3.3",
-    "@types/styled-components": "5.1.25",
-    "typescript": "5.1.3"
+    "@types/styled-components": "5.1.34",
+    "typescript": "5.4.5"
   },
   "browserslist": [
     ">0.2%",
