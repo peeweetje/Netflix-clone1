@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const NavbarMenu = styled.nav`
   display: flex;
@@ -33,7 +33,7 @@ export const BrandContainer = styled.div`
   display: flex;
   align-items: center;
   margin-right: auto;
-  font-size: ${(props) => props.theme.fontSize[2]};
+  font-size: ${(props) => props.theme.fontSize[3]};
   padding-left: ${(props) => props.theme.space[8]};
   list-style: none;
 
