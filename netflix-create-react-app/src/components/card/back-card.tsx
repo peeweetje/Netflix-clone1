@@ -5,6 +5,7 @@ import {
   OverviewContainer,
   TitleContainer,
   ScoreContainer,
+  StyledScoreContainer,
 } from './card.styles';
 import { FC } from 'react';
 import { scoreColor } from 'utils/score-color';
@@ -27,9 +28,11 @@ const BackCard: FC<BackCardProps> = ({ overview, title, vote_average }) => {
       <CardBackContainer>
         <TitleContainer>{title}</TitleContainer>
         <OverviewContainer>{overview}</OverviewContainer>
-        <ScoreContainer score={scoreColor(vote_average)}>
-          {getRoundedScore(vote_average)}
-        </ScoreContainer>
+        <StyledScoreContainer>
+          <ScoreContainer score={scoreColor(vote_average)}>
+            {getRoundedScore(vote_average)}
+          </ScoreContainer>
+        </StyledScoreContainer>
       </CardBackContainer>
     </CardBack>
   );
