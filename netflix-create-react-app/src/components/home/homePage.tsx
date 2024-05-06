@@ -1,10 +1,10 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { MainContainer } from "./homepage-styles";
-import Card from "components/card/card";
-import { discoverMovieUrl, imageUrl } from "utils/api";
-import NavbarHeader from "components/navbarmenu/navbarheader/navbarHeader";
+import React from 'react';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { MainContainer } from './homepage-styles';
+import Card from 'components/card/card';
+import { discoverMovieUrl, imageUrl } from 'utils/api';
+import NavbarHeader from 'components/navbarmenu/navbarheader/navbarHeader';
 
 type MovieResult = {
   id: number;
@@ -17,7 +17,7 @@ type MovieResult = {
 const Homepage = () => {
   const [results, setResults] = useState([]);
   const [searchMovies, setSearchMovies] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const { t } = useTranslation();
 
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -28,14 +28,14 @@ const Homepage = () => {
     fetch(searchUrl)
       .then((response) => response.json())
       .then((data) => setSearchMovies(data.results))
-      .catch((error) => console.error("Error:", error));
+      .catch((error) => console.error('Error:', error));
   }, [searchUrl, setSearchMovies]);
 
   useEffect(() => {
     fetch(discoverMovieUrl)
       .then((response) => response.json())
       .then((data) => setResults(data.results))
-      .catch((error) => console.error("Error:", error));
+      .catch((error) => console.error('Error:', error));
   }, [discoverMovieUrl, setResults]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -44,7 +44,7 @@ const Homepage = () => {
     setSearchQuery(newSearchQuery);
 
     if (!newSearchQuery) {
-      setSearchQuery("");
+      setSearchQuery('');
       return;
     }
   };
@@ -52,13 +52,13 @@ const Homepage = () => {
   return (
     <>
       <NavbarHeader value={searchQuery} onChange={handleSearchChange} />
-      <MainContainer aria-label={t("movie-listings")}>
+      <MainContainer aria-label={t('movie-listings')}>
         {searchMovies && searchMovies.length > 0 ? (
           searchMovies.map((result: MovieResult) => (
             <Card
               key={result.id}
               src={`${imageUrl}${result.poster_path}`}
-              alt="movie-posters"
+              alt={t('movie-poster')}
               overview={result.overview}
               title={result.title}
               vote_average={result.vote_average}
@@ -71,7 +71,7 @@ const Homepage = () => {
                 <Card
                   key={result.id}
                   src={`${imageUrl}${result.poster_path}`}
-                  alt="movie-posters"
+                  alt={t('movie-poster')}
                   overview={result.overview}
                   title={result.title}
                   vote_average={result.vote_average}

@@ -18,6 +18,7 @@ export const NavList = styled.ul`
   li {
     padding: ${(props) => props.theme.space[8]};
     white-space: nowrap;
+    font-size: ${(props) => props.theme.fontSize[4]};
   }
   li:hover {
     text-decoration: 5px underline;
@@ -33,7 +34,7 @@ export const BrandContainer = styled.div`
   display: flex;
   align-items: center;
   margin-right: auto;
-  font-size: ${(props) => props.theme.fontSize[4]};
+  font-size: ${(props) => props.theme.fontSize[5]};
   padding-left: ${(props) => props.theme.space[8]};
   list-style: none;
 
