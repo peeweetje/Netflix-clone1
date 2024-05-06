@@ -7,5 +7,7 @@
   "my-list": "mijn lijst",
   "search-title": "zoek een titel...",
   "site-navagation": "site navigatie",
-  "movie-listings": "filmlijst"
+  "movie-listings": "filmlijst",
+  "navigate-to": "navigeer naar {{ to }}",
+  "movie-poster": "film-poster"
 }

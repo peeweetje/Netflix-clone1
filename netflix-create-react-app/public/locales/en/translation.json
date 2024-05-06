@@ -7,5 +7,7 @@
   "my-list": "my list",
   "search-title": "search for a title...",
   "site-navagation": "site navigation",
-  "movie-listings": "movie listings"
+  "movie-listings": "movie listings",
+  "navigate-to": "navigate to {{ to }}",
+  "movie-poster": "movie-poster"
 }
