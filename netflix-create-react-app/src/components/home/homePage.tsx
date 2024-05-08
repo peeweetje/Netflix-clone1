@@ -68,27 +68,33 @@ const Homepage = () => {
         ) : error ? (
           <p>Error: {error}</p> // Display error message
         ) : searchMovies.length > 0 ? (
-          searchMovies.map((result: MovieResult) => (
-            <Card
-              key={result.id}
-              src={`${imageUrl}${result.poster_path}`}
-              alt={t('movie-poster')}
-              overview={result.overview}
-              title={result.title}
-              vote_average={result.vote_average}
-            />
-          ))
+          searchMovies.map(
+            (result: MovieResult) =>
+              result.poster_path && (
+                <Card
+                  key={result.id}
+                  src={`${imageUrl}${result.poster_path}`}
+                  alt={t('movie-poster')}
+                  overview={result.overview}
+                  title={result.title}
+                  vote_average={result.vote_average}
+                />
+              )
+          )
         ) : (
-          results.map((result: MovieResult) => (
-            <Card
-              key={result.id}
-              src={`${imageUrl}${result.poster_path}`}
-              alt={t('movie-poster')}
-              overview={result.overview}
-              title={result.title}
-              vote_average={result.vote_average}
-            />
-          ))
+          results.map(
+            (result: MovieResult) =>
+              result.poster_path && (
+                <Card
+                  key={result.id}
+                  src={`${imageUrl}${result.poster_path}`}
+                  alt={t('movie-poster')}
+                  overview={result.overview}
+                  title={result.title}
+                  vote_average={result.vote_average}
+                />
+              )
+          )
         )}
       </MainContainer>
     </>
