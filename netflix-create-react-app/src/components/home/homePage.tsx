@@ -4,6 +4,7 @@ import { MainContainer } from './homepage-styles';
 import Card from 'components/card/card';
 import NavbarHeader from 'components/navbarmenu/navbarheader/navbarHeader';
 import { discoverMovieUrl, imageUrl } from 'utils/api';
+import Spinner from 'components/spinner/spinner';
 
 type MovieResult = {
   id: number;
@@ -55,7 +56,7 @@ const Homepage = () => {
 
     if (!newSearchQuery) {
       setSearchQuery('');
-      setSearchMovies([]); // Clear search results when query is empty
+      setSearchMovies([]);
     }
   };
 
@@ -64,9 +65,11 @@ const Homepage = () => {
       <NavbarHeader value={searchQuery} onChange={handleSearchChange} />
       <MainContainer aria-label={t('movie-listings')}>
         {loading ? (
-          <p>Loading...</p> // Display loading spinner => work in progress
+          <div>
+            <Spinner />
+          </div>
         ) : error ? (
-          <p>Error: {error}</p> // Display error message
+          <p>Error: {error}</p>
         ) : searchMovies.length > 0 ? (
           searchMovies.map(
             (result: MovieResult) =>
