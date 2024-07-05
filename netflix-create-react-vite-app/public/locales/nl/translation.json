@@ -1,0 +1,13 @@
+{
+  "binge-watch": "BingeWatch",
+  "home-page": "homepagina",
+  "show-page": "series",
+  "movie-page": "films",
+  "recently-added-page": "onlangs toegevoegd",
+  "my-list": "mijn lijst",
+  "search-title": "zoek een titel...",
+  "site-navagation": "site navigatie",
+  "movie-listings": "filmlijst",
+  "navigate-to": "navigeer naar {{ to }}",
+  "movie-poster": "film-poster"
+}
