@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Homepage from './components/home/homePage';
-import Shows from './components/shows/shows';
-import Movies from './components/movies/movies';
-import RecentlyAdded from './components/recently-added/recentlyAdded';
-import MyList from './components/my-list/myList';
-import { GlobalStyle } from './styles/global';
+import Homepage from '../components/home/homePage';
+import Shows from '../components/shows/shows';
+import Movies from '../components/movies/movies';
+import RecentlyAdded from '../components/recently-added/recentlyAdded';
+import MyList from '../components/my-list/myList';
+import { GlobalStyle } from '../styles/global';
 
 const App = () => {
   return (
