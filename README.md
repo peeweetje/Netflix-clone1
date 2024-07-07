@@ -1,5 +1,7 @@
 > - `React`
+> - `Vite`
 > - `Typescript`
+> - `Vitest`
 > - `Styled-components`
 > - `Framer-motion`
 > - `movie-database-api`
