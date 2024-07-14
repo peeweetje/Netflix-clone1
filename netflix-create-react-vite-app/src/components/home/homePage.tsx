@@ -27,26 +27,35 @@ const Homepage = () => {
   let searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${VITE_API_KEY}&query=${searchQuery}`;
 
   useEffect(() => {
-    setLoading(true); // Set loading to true when fetching data
-    setError(null); // Clear any previous errors
-
-    fetch(searchUrl)
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchMovies = async () => {
+      try {
+        const response = await fetch(searchUrl);
+        const data = await response.json();
         setSearchMovies(data.results);
-        setLoading(false); // Set loading to false when data is received
-      })
-      .catch((error) => {
-        setError('Error fetching data. Please try again later.'); // Set error message
-        setLoading(false); // Set loading to false on error
-      });
+      } catch (error) {
+        setError('Failed to fetch movies. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMovies();
   }, [searchUrl, setSearchMovies]);
 
   useEffect(() => {
-    fetch(discoverMovieUrl)
-      .then((response) => response.json())
-      .then((data) => setResults(data.results))
-      .catch((error) => console.error('Error:', error));
+    const fetchDiscoverMovies = async () => {
+      try {
+        const response = await fetch(discoverMovieUrl);
+        const { results } = await response.json();
+        setResults(results);
+      } catch (error) {
+        setError('Failed to fetch movies. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDiscoverMovies();
   }, [discoverMovieUrl, setResults]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -67,9 +76,13 @@ const Homepage = () => {
         {loading ? (
           <div>
             <Spinner />
+            <p>Loading...</p>
           </div>
         ) : error ? (
-          <div>Error: {error}</div>
+          <div>
+            <p>Error: {error}</p>
+            <button onClick={() => fetchData()}>Retry</button>
+          </div>
         ) : searchMovies.length > 0 ? (
           searchMovies.map(
             (result: MovieResult) =>
