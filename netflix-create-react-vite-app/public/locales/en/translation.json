@@ -9,5 +9,6 @@
   "site-navagation": "site navigation",
   "movie-listings": "movie listings",
   "navigate-to": "navigate to {{ to }}",
-  "movie-poster": "movie-poster"
+  "movie-poster": "movie-poster",
+  "loading": "Loading..."
 }

@@ -76,12 +76,11 @@ const Homepage = () => {
         {loading ? (
           <div>
             <Spinner />
-            <p>Loading...</p>
+            <p>{t('loading')}</p>
           </div>
         ) : error ? (
           <div>
             <p>Error: {error}</p>
-            <button onClick={() => fetchData()}>Retry</button>
           </div>
         ) : searchMovies.length > 0 ? (
           searchMovies.map(
