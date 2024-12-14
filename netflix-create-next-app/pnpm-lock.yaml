@@ -3,24 +3,24 @@ lockfileVersion: 5.4
 specifiers:
   '@pandacss/dev': ^0.42.0
   '@types/node': 20.14.10
-  '@types/react': 18.3.3
-  '@types/react-dom': 18.3.0
+  '@types/react': 19.0.1
+  '@types/react-dom': 19.0.2
   eslint: 9.7.0
   eslint-config-next: 14.2.5
   next: 14.2.5
-  react: 18.3.1
-  react-dom: 18.3.1
+  react: 19.0.0
+  react-dom: 19.0.0
   typescript: 5.5.3
 
 dependencies:
   '@types/node': 20.14.10
-  '@types/react': 18.3.3
-  '@types/react-dom': 18.3.0
+  '@types/react': 19.0.1
+  '@types/react-dom': 19.0.2_@types+react@19.0.1
   eslint: 9.7.0
   eslint-config-next: 14.2.5_kqqajdnz4s6cmhwewkb5kbnj3m
-  next: 14.2.5_nnrd3gsncyragczmpvfhocinkq
-  react: 18.3.1
-  react-dom: 18.3.1_react@18.3.1
+  next: 14.2.5_upmzqgzhjrquwzo2dphtigtdgi
+  react: 19.0.0
+  react-dom: 19.0.0_react@19.0.0
   typescript: 5.5.3
 
 devDependencies:
@@ -747,20 +747,17 @@ packages:
       undici-types: 5.26.5
     dev: false
 
-  /@types/prop-types/15.7.5:
-    resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
+  /@types/react-dom/19.0.2_@types+react@19.0.1:
+    resolution: {integrity: sha512-c1s+7TKFaDRRxr1TxccIX2u7sfCnc3RxkVyBIUA2lCpyqCF+QoAwQ/CBg7bsMdVwP120HEH143VQezKtef5nCg==}
+    peerDependencies:
+      '@types/react': ^19.0.0
+    dependencies:
+      '@types/react': 19.0.1
     dev: false
 
-  /@types/react-dom/18.3.0:
-    resolution: {integrity: sha512-EhwApuTmMBmXuFOikhQLIBUn6uFg81SwLMOAUgodJF14SOBOCMdU04gDoYi0WOJJHD144TL32z4yDqCW3dnkQg==}
+  /@types/react/19.0.1:
+    resolution: {integrity: sha512-YW6614BDhqbpR5KtUYzTA+zlA7nayzJRA9ljz9CQoxthR0sDisYZLuvSMsil36t4EH/uAt8T52Xb4sVw17G+SQ==}
     dependencies:
-      '@types/react': 18.3.3
-    dev: false
-
-  /@types/react/18.3.3:
-    resolution: {integrity: sha512-hti/R0pS0q1/xx+TsI73XIqk26eBsISZ2R0wUijXIngRK9R/e7Xw/cXVxQK7R5JjW+SV4zGcn5hXjudkN/pLIw==}
-    dependencies:
-      '@types/prop-types': 15.7.5
       csstype: 3.1.2
     dev: false
 
@@ -2787,7 +2784,7 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: false
 
-  /next/14.2.5_nnrd3gsncyragczmpvfhocinkq:
+  /next/14.2.5_upmzqgzhjrquwzo2dphtigtdgi:
     resolution: {integrity: sha512-0f8aRfBVL+mpzfBjYfQuLWh2WyAwtJXCRfkPF4UJ5qd2YwrHczsrSzXU4tRMV0OAxR8ZJZWPFn6uhSC56UTsLA==}
     engines: {node: '>=18.17.0'}
     hasBin: true
@@ -2811,9 +2808,9 @@ packages:
       caniuse-lite: 1.0.30001612
       graceful-fs: 4.2.11
       postcss: 8.4.31
-      react: 18.3.1
-      react-dom: 18.3.1_react@18.3.1
-      styled-jsx: 5.1.1_react@18.3.1
+      react: 19.0.0
+      react-dom: 19.0.0_react@19.0.0
+      styled-jsx: 5.1.1_react@19.0.0
     optionalDependencies:
       '@next/swc-darwin-arm64': 14.2.5
       '@next/swc-darwin-x64': 14.2.5
@@ -3238,25 +3235,22 @@ packages:
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
-  /react-dom/18.3.1_react@18.3.1:
-    resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
+  /react-dom/19.0.0_react@19.0.0:
+    resolution: {integrity: sha512-4GV5sHFG0e/0AD4X+ySy6UJd3jVl1iNsNHdpad0qhABJ11twS3TTBnseqsKurKcsNqCEFeGL3uLpVChpIO3QfQ==}
     peerDependencies:
-      react: ^18.3.1
+      react: ^19.0.0
     dependencies:
-      loose-envify: 1.4.0
-      react: 18.3.1
-      scheduler: 0.23.2
+      react: 19.0.0
+      scheduler: 0.25.0
     dev: false
 
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: false
 
-  /react/18.3.1:
-    resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
+  /react/19.0.0:
+    resolution: {integrity: sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ==}
     engines: {node: '>=0.10.0'}
-    dependencies:
-      loose-envify: 1.4.0
     dev: false
 
   /readdirp/3.6.0:
@@ -3355,10 +3349,8 @@ packages:
       is-regex: 1.1.4
     dev: false
 
-  /scheduler/0.23.2:
-    resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
-    dependencies:
-      loose-envify: 1.4.0
+  /scheduler/0.25.0:
+    resolution: {integrity: sha512-xFVuu11jh+xcO7JOAGJNOXld8/TcEHK/4CituBUeUb5hqxJLj9YuemAEuvm9gQ/+pgXYfbQuqAkiYu+u7YEsNA==}
     dev: false
 
   /semver/6.3.1:
@@ -3556,7 +3548,7 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
-  /styled-jsx/5.1.1_react@18.3.1:
+  /styled-jsx/5.1.1_react@19.0.0:
     resolution: {integrity: sha512-pW7uC1l4mBZ8ugbiZrcIsiIvVx1UmTfw7UkC3Um2tmfUq9Bhk8IiyEIPl6F8agHgjzku6j0xQEZbfA5uSgSaCw==}
     engines: {node: '>= 12.0.0'}
     peerDependencies:
@@ -3570,7 +3562,7 @@ packages:
         optional: true
     dependencies:
       client-only: 0.0.1
-      react: 18.3.1
+      react: 19.0.0
     dev: false
 
   /supports-color/7.2.0:
