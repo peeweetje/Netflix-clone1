@@ -12,7 +12,7 @@ type CardProps = {
   vote_average: number;
 };
 
-const Card: FC<CardProps> = ({ src, alt, overview, title, vote_average }) => {
+const Card = ({ src, alt, overview, title, vote_average }: CardProps) => {
   return (
     <CardContainer>
       <FLipCard>

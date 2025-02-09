@@ -7,7 +7,7 @@ type FrontCardProps = {
   alt: string;
 };
 
-const FrontCard: FC<FrontCardProps> = ({ src, alt }) => {
+const FrontCard = ({ src, alt }: FrontCardProps) => {
   return (
     <CardFront>
       <StyledImg src={src} alt={alt} />

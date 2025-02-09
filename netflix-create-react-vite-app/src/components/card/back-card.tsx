@@ -16,13 +16,9 @@ type BackCardProps = {
   vote_average: number;
 };
 
-const getRoundedScore = (score: number) => {
-  let roundedScore = Math.floor(score * 10) / 10;
+const getRoundedScore = (score: number): number => Math.floor(score * 10) / 10;
 
-  return roundedScore;
-};
-
-const BackCard: FC<BackCardProps> = ({ overview, title, vote_average }) => {
+const BackCard = ({ overview, title, vote_average }: BackCardProps) => {
   return (
     <CardBack>
       <CardBackContainer>
