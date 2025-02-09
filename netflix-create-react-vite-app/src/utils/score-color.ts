@@ -8,14 +8,13 @@ export type Values<T> = T[keyof T];
 
 type Colors = Values<typeof colours>;
 
-export const scoreColor = (score: number = 0) => {
-  let color: Colors | undefined = undefined;
+export const scoreColor = (score: number = 0): Colors | undefined => {
   if (score <= 5.9) {
-    color = colours.Red;
-  } else if (score >= 6.0 && score <= 7.4) {
-    color = colours.Orange;
-  } else if (score >= 7.5 && score <= 10) {
-    color = colours.Green;
+    return colours.Red;
+  } else if (score <= 7.4) {
+    return colours.Orange;
+  } else if (score <= 10) {
+    return colours.Green;
   }
-  return color;
+  return undefined;
 };
