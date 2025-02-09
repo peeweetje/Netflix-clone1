@@ -7,7 +7,7 @@ export type searchProps = {
   value: string;
 };
 
-const SearchBar: FC<searchProps> = ({ value, onChange }) => {
+const SearchBar = ({ value, onChange }: searchProps) => {
   const { t } = useTranslation();
   return (
     <NavbarSearch>

@@ -7,7 +7,7 @@ type navItemsProps = {
   children: React.ReactNode;
 };
 
-const NavItems: FC<navItemsProps> = ({ children, to }) => {
+const NavItems = ({ children, to }: navItemsProps) => {
   const { t } = useTranslation();
 
   return (
