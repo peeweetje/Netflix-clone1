@@ -2,7 +2,7 @@ export const colours = {
   Green: '#00FF00',
   Red: '#FF0000',
   Orange: '#FFA500',
-} as const;
+};
 
 export type Values<T> = T[keyof T];
 
