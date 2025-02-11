@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MainContainer } from './homepage-styles';
-import Card from '../card/card';
-import NavbarHeader from '../navbarmenu/navbarheader/navbarHeader';
+import Card from '../../components/card/card';
+import NavbarHeader from '../../components/navbarmenu/navbarheader/navbarHeader';
 import { discoverMovieUrl, imageUrl } from '../../utils/api';
-import Spinner from '../spinner/spinner';
-import { useFetchMovies } from '../hooks/useFetchMovies';
-import { MovieList } from '../movie-list/movieList';
+import Spinner from '../../components/spinner/spinner';
+import { useFetchMovies } from '../../components/hooks/useFetchMovies';
+import { MovieList } from '../../components/movie-list/movieList';
 import { MovieResult } from '../../utils/types/types';
 
 const Homepage = () => {
