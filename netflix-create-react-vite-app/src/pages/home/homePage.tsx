@@ -5,7 +5,7 @@ import Card from '../../components/card/card';
 import NavbarHeader from '../../components/navbarmenu/navbarheader/navbarHeader';
 import { discoverMovieUrl, imageUrl } from '../../utils/api';
 import Spinner from '../../components/spinner/spinner';
-import { useFetchMovies } from '../../components/hooks/useFetchMovies';
+import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { MovieList } from '../../components/movie-list/movieList';
 import { MovieResult } from '../../utils/types/types';
 
