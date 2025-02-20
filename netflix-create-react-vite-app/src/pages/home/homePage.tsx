@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MainContainer } from './homepage-styles';
-import Card from '../../components/card/card';
 import NavbarHeader from '../../components/navbarmenu/navbarheader/navbarHeader';
-import { discoverMovieUrl, imageUrl } from '../../utils/api';
+import { discoverMovieUrl } from '../../utils/api';
 import Spinner from '../../components/spinner/spinner';
 import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { MovieList } from '../../components/movie-list/movieList';
@@ -31,7 +30,6 @@ const Homepage = () => {
       setSearchQuery(newSearchQuery);
 
       if (!newSearchQuery) {
-        setSearchQuery('');
         setSearchMovies([]);
       }
     },
@@ -42,18 +40,16 @@ const Homepage = () => {
     <>
       <NavbarHeader value={searchQuery} onChange={handleSearch} />
       <MainContainer aria-label={t('movie-listings')}>
-        {loading && (
+        {loading ? (
           <div>
             <Spinner />
             <p>{t('loading')}</p>
           </div>
-        )}
-        {error && (
+        ) : error ? (
           <div>
             <p>Error: {error}</p>
           </div>
-        )}
-        {!loading && !error && (
+        ) : (
           <MovieList
             movies={searchMovies.length > 0 ? searchMovies : results}
           />
