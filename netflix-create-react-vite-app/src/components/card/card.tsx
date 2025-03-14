@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { FC } from 'react';
 import { CardContainer, FLipCard } from './card.styles';
-import FrontCard from './front-card';
-import BackCard from './back-card';
+import { BackCard } from './back-card';
+import { FrontCard } from './front-card';
 
 type CardProps = {
   src: string;
@@ -12,7 +12,13 @@ type CardProps = {
   vote_average: number;
 };
 
-const Card = ({ src, alt, overview, title, vote_average }: CardProps) => {
+export const Card = ({
+  src,
+  alt,
+  overview,
+  title,
+  vote_average,
+}: CardProps) => {
   return (
     <CardContainer>
       <FLipCard>
@@ -26,5 +32,3 @@ const Card = ({ src, alt, overview, title, vote_average }: CardProps) => {
     </CardContainer>
   );
 };
-
-export default Card;

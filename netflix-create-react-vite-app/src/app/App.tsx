@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Homepage from '../pages/home/homePage';
-import Shows from '../pages/shows/shows';
-import Movies from '../pages/movies/movies';
-import RecentlyAdded from '../pages/recently-added/recentlyAdded';
-import MyList from '../pages/my-list/myList';
+import { Homepage } from '../pages/home/homePage';
+import { Shows } from '../pages/shows/shows';
+import { Movies } from '../pages/movies/movies';
+import { RecentlyAdded } from '../pages/recently-added/recentlyAdded';
+import { MyList } from '../pages/my-list/myList';
 import { GlobalStyle } from '../styles/global';
 
-const App = () => {
+export const App = () => {
   return (
     <>
       <GlobalStyle />
@@ -21,5 +21,3 @@ const App = () => {
     </>
   );
 };
-
-export default App;

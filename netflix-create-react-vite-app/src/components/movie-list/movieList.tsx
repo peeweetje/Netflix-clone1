@@ -1,5 +1,5 @@
 import { imageUrl } from '../../utils/api';
-import Card from '../card/card';
+import { Card } from '../card/card';
 import { useTranslation } from 'react-i18next';
 import { MovieResult } from '../../utils/types/types';
 

@@ -7,7 +7,7 @@ export type searchProps = {
   value: string;
 };
 
-const SearchBar = ({ value, onChange }: searchProps) => {
+export const SearchBar = ({ value, onChange }: searchProps) => {
   const { t } = useTranslation();
   return (
     <NavbarSearch>
@@ -20,5 +20,3 @@ const SearchBar = ({ value, onChange }: searchProps) => {
     </NavbarSearch>
   );
 };
-
-export default SearchBar;

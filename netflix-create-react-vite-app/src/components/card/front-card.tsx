@@ -7,12 +7,10 @@ type FrontCardProps = {
   alt: string;
 };
 
-const FrontCard = ({ src, alt }: FrontCardProps) => {
+export const FrontCard = ({ src, alt }: FrontCardProps) => {
   return (
     <CardFront>
       <StyledImg src={src} alt={alt} />
     </CardFront>
   );
 };
-
-export default FrontCard;

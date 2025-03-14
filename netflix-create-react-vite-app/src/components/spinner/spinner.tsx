@@ -1,8 +1,6 @@
 import { SpinnerWrapper } from './spinner.styles';
 import React from 'react';
 
-const Spinner = () => {
+export const Spinner = () => {
   return <SpinnerWrapper />;
 };
-
-export default Spinner;

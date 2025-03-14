@@ -18,7 +18,7 @@ type BackCardProps = {
 
 const getRoundedScore = (score: number): number => Math.floor(score * 10) / 10;
 
-const BackCard = ({ overview, title, vote_average }: BackCardProps) => {
+export const BackCard = ({ overview, title, vote_average }: BackCardProps) => {
   return (
     <CardBack>
       <CardBackContainer>
@@ -33,5 +33,3 @@ const BackCard = ({ overview, title, vote_average }: BackCardProps) => {
     </CardBack>
   );
 };
-
-export default BackCard;

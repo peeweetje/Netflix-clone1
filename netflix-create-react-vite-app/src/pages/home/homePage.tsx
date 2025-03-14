@@ -1,14 +1,15 @@
+import { Spinner } from './../../components/spinner/spinner';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MainContainer } from './homepage-styles';
-import NavbarHeader from '../../components/navbarmenu/navbarheader/navbarHeader';
+import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbarHeader';
 import { discoverMovieUrl } from '../../utils/api';
-import Spinner from '../../components/spinner/spinner';
+
 import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { MovieList } from '../../components/movie-list/movieList';
 import { MovieResult } from '../../utils/types/types';
 
-const Homepage = () => {
+export const Homepage = () => {
   const [results, setResults] = useState<MovieResult[]>([]);
   const [searchMovies, setSearchMovies] = useState<MovieResult[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -58,5 +59,3 @@ const Homepage = () => {
     </>
   );
 };
-
-export default Homepage;

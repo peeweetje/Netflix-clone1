@@ -7,7 +7,7 @@ type navItemsProps = {
   children: React.ReactNode;
 };
 
-const NavItems = ({ children, to }: navItemsProps) => {
+export const NavItems = ({ children, to }: navItemsProps) => {
   const { t } = useTranslation();
 
   return (
@@ -16,5 +16,3 @@ const NavItems = ({ children, to }: navItemsProps) => {
     </li>
   );
 };
-
-export default NavItems;

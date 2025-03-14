@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import SearchBar from './search-bar/searchBar';
-import NavItems from './nav-items';
+import { SearchBar } from './search-bar/searchBar';
+import { NavItems } from './nav-items';
 import { NavbarMenu, NavList, BrandContainer } from './navbar-styles';
 import { useTranslation } from 'react-i18next';
 
@@ -9,7 +9,7 @@ export type navbarHeaderProps = {
   value: string;
 };
 
-const NavbarHeader = ({ onChange, value }: navbarHeaderProps) => {
+export const NavbarHeader = ({ onChange, value }: navbarHeaderProps) => {
   const { t } = useTranslation();
 
   return (
@@ -40,5 +40,3 @@ const NavbarHeader = ({ onChange, value }: navbarHeaderProps) => {
     </NavbarMenu>
   );
 };
-
-export default NavbarHeader;
