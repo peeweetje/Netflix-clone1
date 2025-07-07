@@ -20,16 +20,14 @@ const getRoundedScore = (score: number): number => Math.floor(score * 10) / 10;
 
 export const BackCard = ({ overview, title, vote_average }: BackCardProps) => {
   return (
-    <CardBack>
-      <CardBackContainer>
-        <TitleContainer>{title}</TitleContainer>
-        <OverviewContainer>{overview}</OverviewContainer>
-        <StyledScoreContainer>
-          <ScoreContainer score={scoreColor(vote_average)}>
-            {getRoundedScore(vote_average)}
-          </ScoreContainer>
-        </StyledScoreContainer>
-      </CardBackContainer>
-    </CardBack>
+    <CardBackContainer>
+      <TitleContainer>{title}</TitleContainer>
+      <OverviewContainer>{overview}</OverviewContainer>
+      <StyledScoreContainer>
+        <ScoreContainer score={scoreColor(vote_average)}>
+          {getRoundedScore(vote_average)}
+        </ScoreContainer>
+      </StyledScoreContainer>
+    </CardBackContainer>
   );
 };

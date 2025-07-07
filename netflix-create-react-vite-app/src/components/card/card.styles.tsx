@@ -1,10 +1,12 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 export const CardContainer = styled.div`
   display: flex;
   padding: ${(props) => props.theme.space[6]};
   height: 380px;
   cursor: pointer;
+  perspective: 1000px;
 `;
 
 export const FLipCard = styled.div`
@@ -12,9 +14,6 @@ export const FLipCard = styled.div`
   transition: 0.6s 0.1s;
   perspective: 1000px;
   z-index: 0;
-  &:hover {
-    transform: rotateY(180deg);
-  }
 `;
 
 export const CardFront = styled.div`
@@ -38,12 +37,16 @@ export const CardBack = styled.div`
 export const CardBackContainer = styled.div`
   position: relative;
   padding: ${(props) => props.theme.space[3]};
-  flex-wrap: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   height: 350px;
   width: 250px;
-  transform: translate(12px, -355px);
   box-shadow: ${(props) => props.theme.boderShadow[0]};
-  overflow: hidden;
+  overflow: visible;
+  background: #181818;
+  border-radius: ${(props) => props.theme.borderRadius[3]};
 `;
 
 export const TitleContainer = styled.h1`
@@ -74,4 +77,30 @@ export const StyledScoreContainer = styled.div`
   margin-left: auto;
   margin-right: auto;
   transform: translateY(-50%);
+`;
+
+export const MotionFlipCard = styled(motion.div)`
+  position: relative;
+  width: 250px;
+  height: 350px;
+  transform-style: preserve-3d;
+`;
+
+export const MotionCardFront = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  z-index: 2;
+`;
+
+export const MotionCardBack = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  z-index: 1;
+  background: #181818;
+  border-radius: ${(props) => props.theme.borderRadius[3]};
 `;
