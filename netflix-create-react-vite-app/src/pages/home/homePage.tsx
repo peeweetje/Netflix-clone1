@@ -1,13 +1,13 @@
-import { Spinner } from './../../components/spinner/spinner';
-import React, { useState, useEffect, useCallback } from 'react';
+import type React from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MainContainer } from './homepage-styles';
-import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbarHeader';
-import { discoverMovieUrl } from '../../utils/api';
-
-import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { MovieList } from '../../components/movie-list/movieList';
-import { MovieResult } from '../../utils/types/types';
+import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbarHeader';
+import { Spinner } from './../../components/spinner/spinner';
+import { useFetchMovies } from '../../hooks/useFetchMovies';
+import { discoverMovieUrl } from '../../utils/api';
+import type { MovieResult } from '../../utils/types/types';
+import { MainContainer } from './homepage-styles';
 
 export const Homepage = () => {
   const [results, setResults] = useState<MovieResult[]>([]);
@@ -39,7 +39,7 @@ export const Homepage = () => {
 
   return (
     <>
-      <NavbarHeader value={searchQuery} onChange={handleSearch} />
+      <NavbarHeader onChange={handleSearch} value={searchQuery} />
       <MainContainer aria-label={t('movie-listings')}>
         {loading ? (
           <div>

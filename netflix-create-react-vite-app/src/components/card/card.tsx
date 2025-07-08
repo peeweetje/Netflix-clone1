@@ -1,15 +1,14 @@
+import { motion } from 'framer-motion';
 import * as React from 'react';
-import { FC } from 'react';
+import { FC, useState } from 'react';
+import { BackCard } from './back-card';
 import {
   CardContainer,
-  MotionFlipCard,
-  MotionCardFront,
   MotionCardBack,
+  MotionCardFront,
+  MotionFlipCard,
 } from './card.styles';
-import { BackCard } from './back-card';
 import { FrontCard } from './front-card';
-import { motion } from 'framer-motion';
-import { useState } from 'react';
 
 type CardProps = {
   src: string;
@@ -38,7 +37,7 @@ export const Card = ({
         transition={{ duration: 0.6 }}
       >
         <MotionCardFront>
-          <FrontCard src={src} alt={alt} />
+          <FrontCard alt={alt} src={src} />
         </MotionCardFront>
         <MotionCardBack>
           <BackCard

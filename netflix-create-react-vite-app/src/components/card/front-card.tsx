@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FC } from 'react';
-import { StyledImg, CardFront } from './card.styles';
+import { CardFront, StyledImg } from './card.styles';
 
 type FrontCardProps = {
   src: string;
@@ -10,7 +10,7 @@ type FrontCardProps = {
 export const FrontCard = ({ src, alt }: FrontCardProps) => {
   return (
     <CardFront>
-      <StyledImg src={src} alt={alt} />
+      <StyledImg alt={alt} src={src} />
     </CardFront>
   );
 };

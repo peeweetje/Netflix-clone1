@@ -1,7 +1,7 @@
-import { imageUrl } from '../../utils/api';
-import { Card } from '../card/card';
 import { useTranslation } from 'react-i18next';
-import { MovieResult } from '../../utils/types/types';
+import { imageUrl } from '../../utils/api';
+import type { MovieResult } from '../../utils/types/types';
+import { Card } from '../card/card';
 
 export const MovieList = ({ movies }: { movies: MovieResult[] }) => {
   const { t } = useTranslation();
@@ -12,10 +12,10 @@ export const MovieList = ({ movies }: { movies: MovieResult[] }) => {
         (result: MovieResult) =>
           result.poster_path && (
             <Card
-              key={result.id}
-              src={`${imageUrl}${result.poster_path}`}
               alt={t('movie-poster')}
+              key={result.id}
               overview={result.overview}
+              src={`${imageUrl}${result.poster_path}`}
               title={result.title}
               vote_average={result.vote_average}
             />

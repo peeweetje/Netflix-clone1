@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
-import { SearchBar } from './search-bar/searchBar';
-import { NavItems } from './nav-items';
-import { NavbarMenu, NavList, BrandContainer } from './navbar-styles';
+import type React from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { NavItems } from './nav-items';
+import { BrandContainer, NavbarMenu, NavList } from './navbar-styles';
+import { SearchBar } from './search-bar/searchBar';
 
 export type navbarHeaderProps = {
   onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
@@ -13,30 +14,30 @@ export const NavbarHeader = ({ onChange, value }: navbarHeaderProps) => {
   const { t } = useTranslation();
 
   return (
-    <NavbarMenu role='navigation' aria-label={t('site-navigation')}>
+    <NavbarMenu aria-label={t('site-navigation')} role="navigation">
       <BrandContainer>
-        <NavItems aria-label={t('binge-watch')} to='/'>
+        <NavItems aria-label={t('binge-watch')} to="/">
           {t('binge-watch')}
         </NavItems>
       </BrandContainer>
       <NavList>
-        <NavItems aria-label={t('home-page')} to='/'>
+        <NavItems aria-label={t('home-page')} to="/">
           {t('home-page')}
         </NavItems>
-        <NavItems aria-label={t('show-page')} to='shows'>
+        <NavItems aria-label={t('show-page')} to="shows">
           {t('show-page')}
         </NavItems>
-        <NavItems aria-label={t('movie-page')} to='/movies'>
+        <NavItems aria-label={t('movie-page')} to="/movies">
           {t('movie-page')}
         </NavItems>
-        <NavItems aria-label={t('recently-added-page')} to='/recentlyAdded'>
+        <NavItems aria-label={t('recently-added-page')} to="/recentlyAdded">
           {t('recently-added-page')}
         </NavItems>
-        <NavItems aria-label={t('my-list')} to='/mylist'>
+        <NavItems aria-label={t('my-list')} to="/mylist">
           {t('my-list')}
         </NavItems>
       </NavList>
-      <SearchBar value={value} onChange={onChange} />
+      <SearchBar onChange={onChange} value={value} />
     </NavbarMenu>
   );
 };

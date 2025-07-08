@@ -1,14 +1,14 @@
 import * as React from 'react';
-import {
-  CardBackContainer,
-  CardBack,
-  OverviewContainer,
-  TitleContainer,
-  ScoreContainer,
-  StyledScoreContainer,
-} from './card.styles';
 import { FC } from 'react';
 import { scoreColor } from '../../utils/score-color';
+import {
+  CardBack,
+  CardBackContainer,
+  OverviewContainer,
+  ScoreContainer,
+  StyledScoreContainer,
+  TitleContainer,
+} from './card.styles';
 
 type BackCardProps = {
   overview: string;

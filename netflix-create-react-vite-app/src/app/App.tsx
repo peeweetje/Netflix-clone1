@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Homepage } from '../pages/home/homePage';
-import { Shows } from '../pages/shows/shows';
 import { Movies } from '../pages/movies/movies';
-import { RecentlyAdded } from '../pages/recently-added/recentlyAdded';
 import { MyList } from '../pages/my-list/myList';
+import { RecentlyAdded } from '../pages/recently-added/recentlyAdded';
+import { Shows } from '../pages/shows/shows';
 import { GlobalStyle } from '../styles/global';
 
 export const App = () => {
@@ -12,11 +12,11 @@ export const App = () => {
     <>
       <GlobalStyle />
       <Routes>
-        <Route path='/' element={<Homepage />} />
-        <Route path='/Shows' element={<Shows />} />
-        <Route path='/Movies' element={<Movies />} />
-        <Route path='/RecentlyAdded' element={<RecentlyAdded />} />
-        <Route path='/MyList' element={<MyList />} />
+        <Route element={<Homepage />} path="/" />
+        <Route element={<Shows />} path="/Shows" />
+        <Route element={<Movies />} path="/Movies" />
+        <Route element={<RecentlyAdded />} path="/RecentlyAdded" />
+        <Route element={<MyList />} path="/MyList" />
       </Routes>
     </>
   );
