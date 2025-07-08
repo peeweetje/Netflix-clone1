@@ -1,5 +1,3 @@
-import * as React from 'react';
-import { FC } from 'react';
 import { CardFront, StyledImg } from './card.styles';
 
 type FrontCardProps = {

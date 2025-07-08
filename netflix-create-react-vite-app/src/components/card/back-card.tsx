@@ -1,8 +1,5 @@
-import * as React from 'react';
-import { FC } from 'react';
 import { scoreColor } from '../../utils/score-color';
 import {
-  CardBack,
   CardBackContainer,
   OverviewContainer,
   ScoreContainer,

@@ -1,5 +1,4 @@
 import type React from 'react';
-import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavItems } from './nav-items';
 import { BrandContainer, NavbarMenu, NavList } from './navbar-styles';

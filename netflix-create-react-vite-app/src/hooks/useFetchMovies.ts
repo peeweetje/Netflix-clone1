@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 export const useFetchMovies = (
   url: string,
   setMovies: Dispatch<SetStateAction<MovieResult[]>>,
@@ -14,7 +14,7 @@ export const useFetchMovies = (
         }
         const { results } = await response.json();
         setMovies(results);
-      } catch (error) {
+      } catch (_error) {
         setError('Failed to fetch movies. Please try again later.');
       } finally {
         setLoading(false);

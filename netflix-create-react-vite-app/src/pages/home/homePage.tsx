@@ -1,5 +1,5 @@
 import type React from 'react';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MovieList } from '../../components/movie-list/movieList';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbarHeader';

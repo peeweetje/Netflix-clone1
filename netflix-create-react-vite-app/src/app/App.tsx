@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Homepage } from '../pages/home/homePage';
 import { Movies } from '../pages/movies/movies';

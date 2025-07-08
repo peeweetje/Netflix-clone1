@@ -1,6 +1,4 @@
-import { motion } from 'framer-motion';
-import * as React from 'react';
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { BackCard } from './back-card';
 import {
   CardContainer,

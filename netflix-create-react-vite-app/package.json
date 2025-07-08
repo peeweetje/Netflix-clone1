@@ -8,6 +8,7 @@
     "test": "vitest",
     "build": "tsc -b && vite build",
     "format": "ultracite format",
+    "biome:fix": "biome check --write --unsafe",
     "prepare": "husky",
     "preview": "vite preview"
   },
