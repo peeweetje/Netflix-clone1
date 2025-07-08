@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 type navItemsProps = {
   to: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 export const NavItems = ({ children, to }: navItemsProps) => {

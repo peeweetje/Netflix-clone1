@@ -1,4 +1,6 @@
-import { useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
+import { MovieResult } from '../utils/types/types';
+
 export const useFetchMovies = (
   url: string,
   setMovies: Dispatch<SetStateAction<MovieResult[]>>,

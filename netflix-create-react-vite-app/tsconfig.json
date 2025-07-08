@@ -9,6 +9,8 @@
     }
   ],
   "compilerOptions": {
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
   }
 }

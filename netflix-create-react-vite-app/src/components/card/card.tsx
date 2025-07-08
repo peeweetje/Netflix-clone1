@@ -14,6 +14,7 @@ type CardProps = {
   overview: string;
   title: string;
   vote_average: number;
+  key: number;
 };
 
 export const Card = ({
