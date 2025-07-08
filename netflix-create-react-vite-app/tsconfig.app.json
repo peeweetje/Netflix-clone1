@@ -15,7 +15,7 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": false,
+    "outDir": "dist",
     "jsx": "react",
 
     /* Linting */
