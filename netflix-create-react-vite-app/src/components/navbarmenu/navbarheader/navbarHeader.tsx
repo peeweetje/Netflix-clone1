@@ -1,4 +1,4 @@
-import type React from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavItems } from './nav-items';
 import { BrandContainer, NavbarMenu, NavList } from './navbar-styles';
@@ -13,26 +13,26 @@ export const NavbarHeader = ({ onChange, value }: navbarHeaderProps) => {
   const { t } = useTranslation();
 
   return (
-    <NavbarMenu aria-label={t('site-navigation')} role="navigation">
+    <NavbarMenu aria-label={t('site-navigation')} role='navigation'>
       <BrandContainer>
-        <NavItems aria-label={t('binge-watch')} to="/">
+        <NavItems aria-label={t('binge-watch')} to='/'>
           {t('binge-watch')}
         </NavItems>
       </BrandContainer>
       <NavList>
-        <NavItems aria-label={t('home-page')} to="/">
+        <NavItems aria-label={t('home-page')} to='/'>
           {t('home-page')}
         </NavItems>
-        <NavItems aria-label={t('show-page')} to="shows">
+        <NavItems aria-label={t('show-page')} to='shows'>
           {t('show-page')}
         </NavItems>
-        <NavItems aria-label={t('movie-page')} to="/movies">
+        <NavItems aria-label={t('movie-page')} to='/movies'>
           {t('movie-page')}
         </NavItems>
-        <NavItems aria-label={t('recently-added-page')} to="/recentlyAdded">
+        <NavItems aria-label={t('recently-added-page')} to='/recentlyAdded'>
           {t('recently-added-page')}
         </NavItems>
-        <NavItems aria-label={t('my-list')} to="/mylist">
+        <NavItems aria-label={t('my-list')} to='/mylist'>
           {t('my-list')}
         </NavItems>
       </NavList>

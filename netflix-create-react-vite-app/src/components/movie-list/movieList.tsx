@@ -1,3 +1,4 @@
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { imageUrl } from '../../utils/api';
 import type { MovieResult } from '../../utils/types/types';

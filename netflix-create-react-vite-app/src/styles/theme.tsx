@@ -9,7 +9,7 @@ export const theme: DefaultTheme = {
     orange: '#FFA500',
     green: '#00FF00',
   },
-  fontFamily: ['Montserrat'],
+  fontFamily: 'Montserrat, sans-serif',
   space: [
     '0px',
     '2px',

@@ -1,3 +1,4 @@
+import React from 'react';
 import { CardFront, StyledImg } from './card.styles';
 
 type FrontCardProps = {

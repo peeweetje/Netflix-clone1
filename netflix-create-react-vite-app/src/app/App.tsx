@@ -1,3 +1,4 @@
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Homepage } from '../pages/home/homePage';
 import { Movies } from '../pages/movies/movies';
@@ -11,11 +12,11 @@ export const App = () => {
     <>
       <GlobalStyle />
       <Routes>
-        <Route element={<Homepage />} path="/" />
-        <Route element={<Shows />} path="/Shows" />
-        <Route element={<Movies />} path="/Movies" />
-        <Route element={<RecentlyAdded />} path="/RecentlyAdded" />
-        <Route element={<MyList />} path="/MyList" />
+        <Route element={<Homepage />} path='/' />
+        <Route element={<Shows />} path='/Shows' />
+        <Route element={<Movies />} path='/Movies' />
+        <Route element={<RecentlyAdded />} path='/RecentlyAdded' />
+        <Route element={<MyList />} path='/MyList' />
       </Routes>
     </>
   );

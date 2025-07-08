@@ -1,3 +1,4 @@
+import React from 'react';
 import { scoreColor } from '../../utils/score-color';
 import {
   CardBackContainer,

@@ -1,12 +1,11 @@
-import type React from 'react';
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MovieList } from '../../components/movie-list/movieList';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbarHeader';
-import { Spinner } from './../../components/spinner/spinner';
 import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { discoverMovieUrl } from '../../utils/api';
 import type { MovieResult } from '../../utils/types/types';
+import { Spinner } from './../../components/spinner/spinner';
 import { MainContainer } from './homepage-styles';
 
 export const Homepage = () => {
