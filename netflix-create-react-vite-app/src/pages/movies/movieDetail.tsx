@@ -20,6 +20,7 @@ export const MovieDetail = () => {
   const [movie, setMovie] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [cast, setCast] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -37,6 +38,23 @@ export const MovieDetail = () => {
       }
     };
     fetchMovie();
+  }, [id]);
+
+  useEffect(() => {
+    const fetchCast = async () => {
+      if (!id) return;
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${VITE_API_KEY}`
+        );
+        if (!response.ok) throw new Error('Failed to fetch cast');
+        const data = await response.json();
+        setCast(data.cast || []);
+      } catch (err) {
+        // Optionally set error for cast
+      }
+    };
+    fetchCast();
   }, [id]);
 
   if (loading)
@@ -108,6 +126,48 @@ export const MovieDetail = () => {
           </a>
         )}
       </p>
+      {/* Cast Section */}
+      {cast.length > 0 && (
+        <div style={{ marginTop: '2rem' }}>
+          <h2>Top Cast</h2>
+          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            {cast.slice(0, 5).map((actor) => (
+              <div
+                key={actor.cast_id || actor.credit_id}
+                style={{ textAlign: 'center', width: 120 }}
+              >
+                {actor.profile_path ? (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
+                    alt={actor.name}
+                    style={{ width: 80, borderRadius: 8 }}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      width: 80,
+                      height: 120,
+                      background: '#eee',
+                      borderRadius: 8,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    N/A
+                  </div>
+                )}
+                <div style={{ fontWeight: 'bold', marginTop: 4 }}>
+                  {actor.name}
+                </div>
+                <div style={{ fontSize: 12, color: '#555' }}>
+                  {actor.character}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </StyledContainer>
   );
 };
