@@ -3,17 +3,25 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { Spinner } from '../../components/spinner/spinner';
 import { imageUrl, VITE_API_KEY } from '../../utils/api';
-
-const StyledContainer = styled.div`
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 1rem;
-`;
-
-const PosterImage = styled.img`
-  width: 300px;
-  border-radius: 8px;
-`;
+import {
+  StyledContainer,
+  PosterImage,
+  InfoColumnsWrapper,
+  InfoColumn,
+  CastSection,
+  CastList,
+  ImageColumn,
+  InfoText,
+  InfoLabel,
+  TagLine,
+  MainColumns,
+  LeftColumn,
+  RightColumn,
+  CastCard,
+  CastImage,
+  CastName,
+  CastCharacter,
+} from './movieDetails-styles';
 
 export const MovieDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -74,100 +82,97 @@ export const MovieDetail = () => {
 
   return (
     <StyledContainer>
-      <h1>{movie.title}</h1>
-      <PosterImage alt={movie.title} src={`${imageUrl}${movie.poster_path}`} />
-      <p>
-        <strong>Tagline:</strong> {movie.tagline}
-      </p>
-      <p>
-        <strong>Status:</strong> {movie.status}
-      </p>
-      <p>
-        <strong>Original Language:</strong> {movie.original_language}
-      </p>
-      <p>
-        <strong>Release Date:</strong> {movie.release_date}
-      </p>
-      <p>
-        <strong>Runtime:</strong> {movie.runtime} min
-      </p>
-      <p>
-        <strong>Genres:</strong>{' '}
-        {movie.genres?.map((g: any) => g.name).join(', ')}
-      </p>
-      <p>
-        <strong>Rating:</strong> {movie.vote_average}
-      </p>
-      <p>
-        <strong>Vote Count:</strong> {movie.vote_count}
-      </p>
-      <p>
-        <strong>Overview:</strong> {movie.overview}
-      </p>
-      <p>
-        <strong>Budget:</strong> ${movie.budget?.toLocaleString()}
-      </p>
-      <p>
-        <strong>Revenue:</strong> ${movie.revenue?.toLocaleString()}
-      </p>
-      <p>
-        <strong>Production Companies:</strong>{' '}
-        {movie.production_companies?.map((c: any) => c.name).join(', ')}
-      </p>
-      <p>
-        <strong>Production Countries:</strong>{' '}
-        {movie.production_countries?.map((c: any) => c.name).join(', ')}
-      </p>
-      <p>
-        <strong>Homepage:</strong>{' '}
-        {movie.homepage && (
-          <a href={movie.homepage} target='_blank' rel='noopener noreferrer'>
-            {movie.homepage}
-          </a>
-        )}
-      </p>
-      {/* Cast Section */}
-      {cast.length > 0 && (
-        <div style={{ marginTop: '2rem' }}>
-          <h2>Top Cast</h2>
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            {cast.slice(0, 5).map((actor) => (
-              <div
-                key={actor.cast_id || actor.credit_id}
-                style={{ textAlign: 'center', width: 120 }}
-              >
-                {actor.profile_path ? (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
-                    alt={actor.name}
-                    style={{ width: 80, borderRadius: 8 }}
-                  />
-                ) : (
-                  <div
-                    style={{
-                      width: 80,
-                      height: 120,
-                      background: '#eee',
-                      borderRadius: 8,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
+      <MainColumns>
+        <LeftColumn>
+          <h1>{movie.title}</h1>
+          <PosterImage
+            alt={movie.title}
+            src={`${imageUrl}${movie.poster_path}`}
+          />
+          <TagLine>
+            <InfoLabel>Tagline:</InfoLabel> {movie.tagline}
+          </TagLine>
+        </LeftColumn>
+        <RightColumn>
+          {cast.length > 0 && (
+            <CastSection>
+              <h2>Top Cast</h2>
+              <CastList>
+                {cast.slice(0, 5).map((actor) => (
+                  <CastCard key={actor.cast_id || actor.credit_id}>
+                    {actor.profile_path ? (
+                      <CastImage
+                        src={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
+                        alt={actor.name}
+                      />
+                    ) : (
+                      <CastImage as='div'>N/A</CastImage>
+                    )}
+                    <CastName>{actor.name}</CastName>
+                    <CastCharacter>{actor.character}</CastCharacter>
+                  </CastCard>
+                ))}
+              </CastList>
+            </CastSection>
+          )}
+          <InfoColumnsWrapper>
+            <InfoColumn>
+              <InfoText>
+                <InfoLabel>Status:</InfoLabel> {movie.status}
+              </InfoText>
+              <InfoText>
+                <InfoLabel>Original Language:</InfoLabel>{' '}
+                {movie.original_language}
+              </InfoText>
+              <InfoText>
+                <InfoLabel>Release Date:</InfoLabel> {movie.release_date}
+              </InfoText>
+              <InfoText>
+                <InfoLabel>Runtime:</InfoLabel> {movie.runtime} min
+              </InfoText>
+              <InfoText>
+                <InfoLabel>Genres:</InfoLabel>{' '}
+                {movie.genres?.map((g: any) => g.name).join(', ')}
+              </InfoText>
+              <InfoText>
+                <InfoLabel>Rating:</InfoLabel> {movie.vote_average}
+              </InfoText>
+              <InfoText>
+                <InfoLabel>Vote Count:</InfoLabel> {movie.vote_count}
+              </InfoText>
+            </InfoColumn>
+            <InfoColumn>
+              <InfoText>
+                <InfoLabel>Budget:</InfoLabel> ${movie.budget?.toLocaleString()}
+              </InfoText>
+              <InfoText>
+                <InfoLabel>Revenue:</InfoLabel> $
+                {movie.revenue?.toLocaleString()}
+              </InfoText>
+              <InfoText>
+                <InfoLabel>Production Companies:</InfoLabel>
+                {movie.production_companies?.map((c: any) => c.name).join(', ')}
+              </InfoText>
+              <InfoText>
+                <InfoLabel>Production Countries:</InfoLabel>
+                {movie.production_countries?.map((c: any) => c.name).join(', ')}
+              </InfoText>
+              <InfoText>
+                <InfoLabel>Homepage:</InfoLabel>
+                {movie.homepage && (
+                  <a
+                    href={movie.homepage}
+                    target='_blank'
+                    rel='noopener noreferrer'
                   >
-                    N/A
-                  </div>
+                    {movie.homepage}
+                  </a>
                 )}
-                <div style={{ fontWeight: 'bold', marginTop: 4 }}>
-                  {actor.name}
-                </div>
-                <div style={{ fontSize: 12, color: '#555' }}>
-                  {actor.character}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+              </InfoText>
+            </InfoColumn>
+          </InfoColumnsWrapper>
+        </RightColumn>
+      </MainColumns>
     </StyledContainer>
   );
 };
