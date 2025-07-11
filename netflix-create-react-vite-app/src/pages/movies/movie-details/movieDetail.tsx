@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
-import { Spinner } from '../../components/spinner/spinner';
-import { imageUrl, VITE_API_KEY } from '../../utils/api';
+import { Spinner } from '../../../components/spinner/spinner';
+import { imageUrl, VITE_API_KEY } from '../../../utils/api';
 import {
   StyledContainer,
   PosterImage,

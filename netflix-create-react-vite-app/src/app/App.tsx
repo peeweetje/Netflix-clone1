@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Homepage } from '../pages/home/homePage';
-import { MovieDetail } from '../pages/movies/movieDetail';
+import { MovieDetail } from '../pages/movies/movie-details/movieDetail';
 import { Movies } from '../pages/movies/movies';
 import { MyList } from '../pages/my-list/myList';
 import { RecentlyAdded } from '../pages/recently-added/recentlyAdded';
