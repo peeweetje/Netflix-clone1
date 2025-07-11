@@ -1,6 +1,8 @@
 import React from 'react';
-import { SpinnerWrapper } from './spinner.styles';
+import { SpinnerWrapper, SpinnerContainer } from './spinner.styles';
 
-export const Spinner = () => {
-  return <SpinnerWrapper />;
-};
+export const Spinner = () => (
+  <SpinnerContainer>
+    <SpinnerWrapper />
+  </SpinnerContainer>
+);

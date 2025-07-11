@@ -5,6 +5,15 @@ export const SpinAnimation = keyframes`
     100% { transform: rotate(360deg); }
 `;
 
+export const SpinnerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+`;
+
 export const SpinnerWrapper = styled.div`
   width: 50px;
   height: 50px;
