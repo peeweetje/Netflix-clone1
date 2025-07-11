@@ -41,14 +41,14 @@ export const Homepage = () => {
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
       <MainContainer aria-label={t('movie-listings')}>
         {loading ? (
-          <div>
+          <>
             <Spinner />
             <p>{t('loading')}</p>
-          </div>
+          </>
         ) : error ? (
-          <div>
+          <>
             <p>Error: {error}</p>
-          </div>
+          </>
         ) : (
           <MovieList
             movies={searchMovies.length > 0 ? searchMovies : results}

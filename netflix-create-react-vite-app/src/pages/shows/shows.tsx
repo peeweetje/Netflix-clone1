@@ -23,6 +23,7 @@ export const Shows = () => {
 
   const VITE_API_KEY = import.meta.env.VITE_API_KEY;
   const searchUrl = `https://api.themoviedb.org/3/search/tv?api_key=${VITE_API_KEY}&query=${searchQuery}`;
+  
 
   React.useEffect(() => {
     const fetchShows = async () => {
@@ -76,27 +77,26 @@ export const Shows = () => {
 
   if (loading) {
     return (
-      <div>
+      <>
         <NavbarHeader onChange={handleSearch} value={searchQuery} />
         <Spinner />
-        <p>{t ? t('loading') : 'Loading...'}</p>
-      </div>
+        <p>{t('loading')}</p>
+      </>
     );
   }
 
   if (error) {
     return (
-      <div>
+      <>
         <NavbarHeader onChange={handleSearch} value={searchQuery} />
         <p>{error}</p>
-      </div>
+      </>
     );
   }
 
   return (
-    <div>
+    <>
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
-      <h1>Best Shows</h1>
       <StyledContainer>
         {(searchShows.length > 0 ? searchShows : shows).map(
           (show) =>
@@ -112,6 +112,6 @@ export const Shows = () => {
             )
         )}
       </StyledContainer>
-    </div>
+    </>
   );
 };
