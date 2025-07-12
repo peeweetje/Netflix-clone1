@@ -1,3 +1,4 @@
+import { AlignItems } from './../../../../../netflix-create-next-app/styled-system/types/csstype.d';
 import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
@@ -51,7 +52,6 @@ export const InfoLabel = styled.span`
 `;
 
 export const CastSection = styled.div`
-  margin-top: ${({ theme }) => theme.space[6]};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -72,9 +72,13 @@ export const ImageColumn = styled.div`
 `;
 
 export const TagLine = styled.p`
+  width: 300px; 
   flex-wrap: wrap;
   margin-top: ${({ theme }) => theme.space[3]};
   text-align: center;
+  word-break: break-word;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 export const MainColumns = styled.div`
@@ -91,6 +95,7 @@ export const LeftColumn = styled.div`
 `;
 
 export const RightColumn = styled.div`
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -126,8 +131,17 @@ export const CastCharacter = styled.div`
   color: ${({ theme }) => theme.colors.white};
 `;
 
+export const MovieTitle = styled.h2`
+  width: 300px;
+  flex-wrap: wrap;
+  align-items: center;
+  word-break: break-word;
+  text-align: center;
+  margin: 8px auto;
+`;
+
 export const CastImageFallback = styled.div`
-  width: 80px;
+  max-width: 80px;
   height: 120px;
   border-radius: ${({ theme }) => theme.borderRadius[2]};
   background: ${({ theme }) => theme.colors.white};

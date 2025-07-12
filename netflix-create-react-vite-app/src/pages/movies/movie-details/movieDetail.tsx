@@ -17,12 +17,9 @@ import {
   MainColumns,
   LeftColumn,
   RightColumn,
-  CastCard,
-  CastImage,
-  CastName,
-  CastCharacter,
 } from './movieDetails-styles';
 import { CastMember } from './castMember';
+import { MoviePoster } from './MoviePoster';
 
 export const MovieDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -85,14 +82,12 @@ export const MovieDetail = () => {
     <StyledContainer>
       <MainColumns>
         <LeftColumn>
-          <h1>{movie.title}</h1>
-          <PosterImage
-            alt={movie.title}
-            src={`${imageUrl}${movie.poster_path}`}
+        <MoviePoster 
+          title={movie.title}
+          posterPath={movie.poster_path}
+          tagline={movie.tagline}
+          imageUrl={imageUrl}
           />
-          <TagLine>
-            <InfoLabel>Tagline:</InfoLabel> {movie.tagline}
-          </TagLine>
         </LeftColumn>
         <RightColumn>
           {cast.length > 0 && (
