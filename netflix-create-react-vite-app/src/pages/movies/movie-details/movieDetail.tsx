@@ -22,6 +22,7 @@ import {
   CastName,
   CastCharacter,
 } from './movieDetails-styles';
+import { CastMember } from './castMember';
 
 export const MovieDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -96,25 +97,24 @@ export const MovieDetail = () => {
         <RightColumn>
           {cast.length > 0 && (
             <CastSection>
-              <h2>Top Cast</h2>
+              <h2>Cast Members</h2>
               <CastList>
                 {cast.slice(0, 5).map((actor) => (
-                  <CastCard key={actor.cast_id || actor.credit_id}>
-                    {actor.profile_path ? (
-                      <CastImage
-                        src={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
-                        alt={actor.name}
-                      />
-                    ) : (
-                      <CastImage as='div'>N/A</CastImage>
-                    )}
-                    <CastName>{actor.name}</CastName>
-                    <CastCharacter>{actor.character}</CastCharacter>
-                  </CastCard>
+                  <CastMember
+                    key={actor.cast_id || actor.credit_id}
+                    actor={actor}
+                    src={
+                      actor.profile_path
+                        ? `https://image.tmdb.org/t/p/w185${actor.profile_path}`
+                        : ""
+                    }
+                    alt={actor.name}
+                  />
                 ))}
               </CastList>
             </CastSection>
           )}
+
           <InfoColumnsWrapper>
             <InfoColumn>
               <InfoText>
