@@ -123,5 +123,17 @@ export const CastName = styled.div`
 
 export const CastCharacter = styled.div`
   font-size: 12px;
-  color:${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
+`;
+
+export const CastImageFallback = styled.div`
+  width: 80px;
+  height: 120px;
+  border-radius: ${({ theme }) => theme.borderRadius[2]};
+  background: ${({ theme }) => theme.colors.white};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${({ theme }) => theme.colors.blue};
+  font-size: 14px;
 `;
