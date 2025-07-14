@@ -23,13 +23,13 @@ export const NavbarHeader = ({ onChange, value }: navbarHeaderProps) => {
         <NavItems aria-label={t('home-page')} to='/'>
           {t('home-page')}
         </NavItems>
-        <NavItems aria-label={t('show-page')} to='shows'>
+        <NavItems aria-label={t('show-page')} to='/shows'>
           {t('show-page')}
         </NavItems>
         <NavItems aria-label={t('movie-page')} to='/movies'>
           {t('movie-page')}
         </NavItems>
-        <NavItems aria-label={t('recently-added-page')} to='/recentlyAdded'>
+        <NavItems aria-label={t('recently-added-page')} to='/recentlyadded'>
           {t('recently-added-page')}
         </NavItems>
         <NavItems aria-label={t('my-list')} to='/mylist'>

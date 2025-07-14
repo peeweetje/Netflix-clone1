@@ -13,12 +13,12 @@ export const App = () => {
     <>
       <GlobalStyle />
       <Routes>
-        <Route element={<Homepage />} path="/" />
-        <Route element={<Shows />} path="/Shows" />
-        <Route element={<Movies />} path="/Movies" />
-        <Route element={<RecentlyAdded />} path="/RecentlyAdded" />
-        <Route element={<MyList />} path="/MyList" />
-        <Route element={<MovieDetail />} path="/Movies/:id" />
+        <Route element={<Homepage />} path='/' />
+        <Route element={<Shows />} path='/shows' />
+        <Route element={<Movies />} path='/movies' />
+        <Route element={<RecentlyAdded />} path='/recentlyadded' />
+        <Route element={<MyList />} path='/mylist' />
+        <Route element={<MovieDetail />} path='/movies/:id' />
       </Routes>
     </>
   );
