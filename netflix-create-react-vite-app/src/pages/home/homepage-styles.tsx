@@ -5,5 +5,4 @@ export const MainContainer = styled.main`
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: ${(props) => props.theme.space[11]};
 `;

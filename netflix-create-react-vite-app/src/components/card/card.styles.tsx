@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const CardContainer = styled.div`
   display: flex;
-  padding: ${(props) => props.theme.space[6]};
+  padding: 0; /* Remove extra padding */
   height: 380px;
   cursor: pointer;
   perspective: 1000px;

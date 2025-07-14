@@ -10,7 +10,8 @@ import { useTranslation } from 'react-i18next';
 const StyledContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.5rem;
+  justify-content: center;
 `;
 
 export const Shows = () => {
@@ -23,7 +24,6 @@ export const Shows = () => {
 
   const VITE_API_KEY = import.meta.env.VITE_API_KEY;
   const searchUrl = `https://api.themoviedb.org/3/search/tv?api_key=${VITE_API_KEY}&query=${searchQuery}`;
-  
 
   React.useEffect(() => {
     const fetchShows = async () => {
