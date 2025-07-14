@@ -1,4 +1,3 @@
-import { AlignItems } from './../../../../../netflix-create-next-app/styled-system/types/csstype.d';
 import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
@@ -43,7 +42,7 @@ export const InfoColumn = styled.div`
 export const InfoText = styled.p`
   margin: 0.5rem 0;
   font-size: ${({ theme }) => theme.fontSize[3]};
-  line-height: ${({ theme }) => theme.lineHeight[3]};
+  
 `;
 
 export const InfoLabel = styled.span`
@@ -95,7 +94,6 @@ export const LeftColumn = styled.div`
 `;
 
 export const RightColumn = styled.div`
-
   display: flex;
   flex-direction: column;
   align-items: flex-start;
