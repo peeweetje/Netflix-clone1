@@ -5,6 +5,14 @@ import { imageUrl } from '../../utils/api';
 import type { MovieResult } from '../../utils/types/types';
 import { Card } from '../Card/Card';
 
+const FlexWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: flex-start;
+`;
+
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: inherit;
@@ -14,7 +22,7 @@ export const MovieList = ({ movies }: { movies: MovieResult[] }) => {
   const { t } = useTranslation();
 
   return (
-    <>
+    <FlexWrapper>
       {movies.map(
         (result: MovieResult) =>
           result.poster_path && (
@@ -29,6 +37,6 @@ export const MovieList = ({ movies }: { movies: MovieResult[] }) => {
             </StyledLink>
           )
       )}
-    </>
+    </FlexWrapper>
   );
 };
