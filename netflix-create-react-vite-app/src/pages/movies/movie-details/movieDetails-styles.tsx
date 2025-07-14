@@ -100,6 +100,15 @@ export const RightColumn = styled.div`
   flex: 1;
 `;
 
+export const MovieTitle = styled.h2`
+  width: 300px;
+  flex-wrap: wrap;
+  align-items: center;
+  word-break: break-word;
+  text-align: center;
+  margin: 8px auto;
+`;
+
 export const CastCard = styled.div`
   text-align: center;
   width: 120px;
@@ -129,17 +138,9 @@ export const CastCharacter = styled.div`
   color: ${({ theme }) => theme.colors.white};
 `;
 
-export const MovieTitle = styled.h2`
-  width: 300px;
-  flex-wrap: wrap;
-  align-items: center;
-  word-break: break-word;
-  text-align: center;
-  margin: 8px auto;
-`;
 
 export const CastImageFallback = styled.div`
-  max-width: 80px;
+  width: 80px;
   height: 120px;
   border-radius: ${({ theme }) => theme.borderRadius[2]};
   background: ${({ theme }) => theme.colors.white};
