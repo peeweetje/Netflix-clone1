@@ -1,10 +1,16 @@
 
 import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
+
 import type { MovieResult } from '../../utils/types/types';
 import { Card } from '../card/card';
 import { imageUrl } from '../../utils/api';
+import {
+  RowContainer,
+  RowTitle,
+  CardsViewport,
+  CardsWrapper,
+  ArrowButton,
+} from './movie.styles';
 
 interface MovieRowProps {
   title: string;
@@ -13,67 +19,8 @@ interface MovieRowProps {
 
 const VISIBLE_COUNT = 5;
 
-const RowContainer = styled.section`
-  position: relative;
-  &:hover .arrow {
-    opacity:2;
-    pointer-events: auto;
-  }
-`;
 
-const RowTitle = styled.h2`
-  color: ${(props) => props.theme.colors.blue};
-  font-size: 1.5rem;
-  margin-left: 2rem;
-  margin-bottom: 0.5rem;
-`;
-
-const CardsViewport = styled.div<{ width: number }>`
-  overflow: hidden;
-  width: ${({ width }) => width}px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: flex-start;
-`;
-
-const CardsWrapper = styled(motion.div)`
-  display: flex;
-  gap: 1rem;
-`;
-
-const ArrowButton = styled.button`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-  background: rgba(0, 0, 0, 0.6);
-  border: none;
-  color: #fff;
-  font-size: 2rem;
-  width: 48px;
-  height: 64px;
-  cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s;
-  border-radius: 4px;
-  &.left {
-    left: -2rem;
-  }
-  &.right {
-    right: -1.5rem;
-  }
-  &:hover {
-   BackgroundColor: ${(props) => props.theme.colors.blue};
-    color: #fff;
-  }
-  &.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
-`;
-
-export const MovieRow: React.FC<MovieRowProps> = ({ title, movies }) => {
+export const MovieRow = ({ title, movies }: MovieRowProps) => {
   const [startIdx, setStartIdx] = useState(0);
   const [cardWidth, setCardWidth] = useState(266); // fallback default (250px + 16px gap)
   const cardRef = useRef<HTMLDivElement>(null);

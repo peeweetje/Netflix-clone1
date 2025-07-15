@@ -1,22 +1,10 @@
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { FlexWrapper, StyledLink } from './movie.styles';
 import { imageUrl } from '../../utils/api';
 import type { MovieResult } from '../../utils/types/types';
 import { Card } from '../Card/Card';
 
-const FlexWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
-  align-items: flex-start;
-`;
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: inherit;
-`;
 
 export const MovieList = ({ movies }: { movies: MovieResult[] }) => {
   const { t } = useTranslation();
