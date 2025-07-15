@@ -9,7 +9,7 @@ import { CastMemberProps } from '../../utils/types/types';
 
 
 
-export function CastMember({ actor, src, alt }: CastMemberProps) {
+export const CastMember=({ actor, src, alt }: CastMemberProps)=> {
   return (
     <CastCard>
       {src && src !== '' ? (

@@ -12,7 +12,7 @@ import {
 import type { MovieResult } from '../../utils/types/types';
 import { Spinner } from './../../components/spinner/spinner';
 import { MainContainer } from './homepage-styles';
-import { HeroBanner } from '../../components/HeroBanner';
+import { HeroBanner } from '../../components/hero-banner/hero-banner';
 import { MovieRow } from '../../components/movie-list/MovieRow';
 
 export const Homepage = () => {
