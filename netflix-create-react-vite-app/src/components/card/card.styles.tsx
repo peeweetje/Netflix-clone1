@@ -43,16 +43,15 @@ export const CardBackContainer = styled.div`
   justify-content: flex-start;
   height: 350px;
   width: 250px;
-  box-shadow: ${(props) => props.theme.boderShadow[0]};
   overflow: visible;
-  background: #181818;
+  background:${(props) => props.theme.colors.grey};
   border-radius: ${(props) => props.theme.borderRadius[3]};
 `;
 
 export const TitleContainer = styled.h1`
   display: flex;
   justify-content: center;
-  margin-top: ${(props) => props.theme.space[0]};
+  margin-top: ${(props) => props.theme.space[1]};
   font-size: ${(props) => props.theme.fontSize[2]};
 `;
 

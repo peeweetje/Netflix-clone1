@@ -46,7 +46,7 @@ export const Homepage = () => {
   );
 
   // Use the first popular movie as the hero banner
-  const heroMovie = popular[0];
+  const heroMovie = popular[0] || null;
 
   return (
     <>

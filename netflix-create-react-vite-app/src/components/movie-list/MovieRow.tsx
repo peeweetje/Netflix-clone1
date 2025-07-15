@@ -1,4 +1,4 @@
-import { BackgroundColor } from './../../../../netflix-create-next-app/styled-system/types/csstype.d';
+
 import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -16,13 +16,13 @@ const VISIBLE_COUNT = 5;
 const RowContainer = styled.section`
   position: relative;
   &:hover .arrow {
-    opacity: 1;
+    opacity:2;
     pointer-events: auto;
   }
 `;
 
 const RowTitle = styled.h2`
-  color: #fff;
+  color: ${(props) => props.theme.colors.blue};
   font-size: 1.5rem;
   margin-left: 2rem;
   margin-bottom: 0.5rem;
@@ -58,10 +58,10 @@ const ArrowButton = styled.button`
   transition: opacity 0.2s;
   border-radius: 4px;
   &.left {
-    left: 0.5rem;
+    left: -2rem;
   }
   &.right {
-    right: 0.5rem;
+    right: -1.5rem;
   }
   &:hover {
    BackgroundColor: ${(props) => props.theme.colors.blue};
