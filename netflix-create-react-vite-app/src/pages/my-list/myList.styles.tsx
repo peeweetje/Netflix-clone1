@@ -52,6 +52,7 @@ export const RemoveButton = styled.button`
   cursor: pointer;
   transition: background 0.2s;
   &:hover {
-    background: ${(props) => props.theme.colors.gray};
+    background: ${(props) => props.theme.colors.white};
+    color: ${(props) => props.theme.colors.black};
   }
 `;
