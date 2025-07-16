@@ -7,15 +7,15 @@ import {
 } from './movie.styles';
 import { imageUrl } from '../../utils/api';
 import type { MovieResult } from '../../utils/types/types';
-import { Card } from '../Card/Card';
-import styled from 'styled-components';
+import { Card } from '../card/card';
+
 
 export const MovieList = ({
   movies,
   removeFromList,
 }: {
   movies: MovieResult[];
-  removeFromList?: (item: any) => void;
+  removeFromList?: (item: MovieResult) => void;
 }) => {
   const { t } = useTranslation();
 

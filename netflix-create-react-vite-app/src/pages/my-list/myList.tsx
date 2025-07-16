@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { MyListContainer, MoviesGrid, MovieCard, MoviePoster, MovieTitle, CardWrapper, RemoveButton } from './myList.styles';
+import {
+  MyListContainer,
+  MoviesGrid,
+  MovieCard,
+  MoviePoster,
+  MovieTitle,
+  CardWrapper,
+  RemoveButton,
+} from './myList.styles';
 import { MovieResult } from '../../utils/types/types';
 import { useMyList } from '../../context/myListContext';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbarHeader';
@@ -12,7 +20,6 @@ export const MyList = () => {
   const [localMovies, setLocalMovies] = useState<MovieResult[]>([]);
   const [localLoading, setLocalLoading] = useState<boolean>(false);
   const [localError, setLocalError] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState('');
 
   // Fetch details for local My List
   useEffect(() => {
@@ -50,17 +57,6 @@ export const MyList = () => {
     };
     fetchLocalMovies();
   }, [myList]);
-
-  // Filter movies by search query
-  const filtered = searchQuery.trim()
-    ? myList.filter((item) => {
-        const movie = localMovies.find((m) => m.id === item.id);
-        if (!movie) return false;
-        return movie.title
-          ?.toLowerCase()
-          .includes(searchQuery.trim().toLowerCase());
-      })
-    : myList;
 
   return (
     <>
