@@ -63,39 +63,41 @@ export const MyList = () => {
     : myList;
 
   return (
-    <MyListContainer>
+    <>
       <NavbarHeader />
-      <h1>My List</h1>
-      {localLoading ? (
-        <p>Loading...</p>
-      ) : localError ? (
-        <p>{localError}</p>
-      ) : myList.length === 0 ? (
-        <p>Your list is empty.</p>
-      ) : (
-        <MoviesGrid>
-          {myList.map((item) => {
-            const movie = localMovies.find((m) => m.id === item.id);
-            if (!movie) return null;
-            return (
-              <CardWrapper key={movie.id + '-' + item.media_type}>
-                <Card
-                  id={movie.id}
-                  media_type={item.media_type}
-                  src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                  alt={movie.title}
-                  overview={movie.overview}
-                  title={movie.title}
-                  vote_average={movie.vote_average}
-                />
-                <RemoveButton onClick={() => removeFromList(item)}>
-                  Remove
-                </RemoveButton>
-              </CardWrapper>
-            );
-          })}
-        </MoviesGrid>
-      )}
-    </MyListContainer>
+      <MyListContainer>
+        <h1>My List</h1>
+        {localLoading ? (
+          <p>Loading...</p>
+        ) : localError ? (
+          <p>{localError}</p>
+        ) : myList.length === 0 ? (
+          <p>Your list is empty.</p>
+        ) : (
+          <MoviesGrid>
+            {myList.map((item) => {
+              const movie = localMovies.find((m) => m.id === item.id);
+              if (!movie) return null;
+              return (
+                <CardWrapper key={movie.id + '-' + item.media_type}>
+                  <Card
+                    id={movie.id}
+                    media_type={item.media_type}
+                    src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                    alt={movie.title}
+                    overview={movie.overview}
+                    title={movie.title}
+                    vote_average={movie.vote_average}
+                  />
+                  <RemoveButton onClick={() => removeFromList(item)}>
+                    Remove
+                  </RemoveButton>
+                </CardWrapper>
+              );
+            })}
+          </MoviesGrid>
+        )}
+      </MyListContainer>
+    </>
   );
 };

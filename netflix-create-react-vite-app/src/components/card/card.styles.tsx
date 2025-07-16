@@ -70,13 +70,12 @@ export const ScoreContainer = styled.span<{ score: string | undefined }>`
 `;
 
 export const StyledScoreContainer = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  margin-bottom: 0;
 `;
 
 export const MotionFlipCard = styled(motion.div)`
@@ -101,12 +100,16 @@ export const MotionCardBack = styled.div`
   backface-visibility: hidden;
   transform: rotateY(180deg);
   z-index: 1;
-  background:${({ theme }) => theme.colors.black};
+  background: ${({ theme }) => theme.colors.black};
   border-radius: ${(props) => props.theme.borderRadius[3]};
 `;
 
 export const BackCardButton = styled.button<{ isAdded: boolean }>`
-  margin-top: 12px;
+  width: 160px;
+  height: 32px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 4px;
   background: ${({ isAdded, theme }) =>
     isAdded ? theme.colors.black : theme.colors.blue};
   color: ${(props) => props.theme.colors.white};
@@ -116,4 +119,3 @@ export const BackCardButton = styled.button<{ isAdded: boolean }>`
   font-size: 0.95rem;
   cursor: ${({ isAdded }) => (isAdded ? 'not-allowed' : 'pointer')};
 `;
- 

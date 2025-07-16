@@ -48,22 +48,23 @@ export const BackCard = ({
     <CardBackContainer>
       <TitleContainer>{title}</TitleContainer>
       <OverviewContainer>{overview}</OverviewContainer>
+
       <StyledScoreContainer>
+        <BackCardButton
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            addToList({ id, media_type });
+          }}
+          disabled={isAdded}
+          isAdded={isAdded}
+        >
+          {isAdded ? 'Added' : 'Add to List'}
+        </BackCardButton>
         <ScoreContainer score={scoreColor(vote_average)}>
           {getRoundedScore(vote_average)}
         </ScoreContainer>
       </StyledScoreContainer>
-      <BackCardButton
-        onClick={(e) => {
-          e.stopPropagation();
-          e.preventDefault();
-          addToList({ id, media_type });
-        }}
-        disabled={isAdded}
-        isAdded={isAdded}
-      >
-        {isAdded ? 'Added' : 'Add to My List'}
-      </BackCardButton>
     </CardBackContainer>
   );
 };

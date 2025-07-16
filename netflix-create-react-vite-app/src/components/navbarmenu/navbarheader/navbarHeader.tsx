@@ -16,12 +16,12 @@ export const NavbarHeader = ({ onChange, value }: navbarHeaderProps) => {
 
   return (
     <NavbarMenu aria-label={t('site-navigation')} role='navigation'>
-      <BrandContainer>
+      <BrandContainer $centered={location.pathname === '/my-list'}>
         <NavItems aria-label={t('binge-watch')} to='/'>
           {t('binge-watch')}
         </NavItems>
       </BrandContainer>
-      <NavList $centered={location.pathname === '/mylist'}>
+      <NavList $centered={location.pathname === '/my-list'}>
         <NavItems aria-label={t('home-page')} to='/'>
           {t('home-page')}
         </NavItems>
@@ -34,11 +34,11 @@ export const NavbarHeader = ({ onChange, value }: navbarHeaderProps) => {
         <NavItems aria-label={t('recently-added-page')} to='/recentlyadded'>
           {t('recently-added-page')}
         </NavItems>
-        <NavItems aria-label={t('my-list')} to='/mylist'>
+        <NavItems aria-label={t('my-list')} to='/my-list'>
           {t('my-list')}
         </NavItems>
       </NavList>
-      {location.pathname !== '/mylist' && (
+      {location.pathname !== '/my-list' && (
         <SearchBar onChange={onChange} value={value} />
       )}
     </NavbarMenu>

@@ -36,10 +36,10 @@ export const NavList = styled.ul<{ $centered?: boolean }>`
   }
 `;
 
-export const BrandContainer = styled.div`
+export const BrandContainer = styled.div<{ $centered?: boolean }>`
   display: flex;
   align-items: center;
-  margin-right: auto;
+  ${(props) => !props.$centered && `margin-right: auto;`}
   font-size: ${(props) => props.theme.fontSize[5]};
   padding-left: ${(props) => props.theme.space[8]};
   list-style: none;
