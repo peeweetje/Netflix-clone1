@@ -23,6 +23,7 @@ export const MyList = () => {
 
   // Fetch details for local My List
   useEffect(() => {
+    const abortController = new AbortController();
     const fetchLocalMovies = async () => {
       setLocalLoading(true);
       setLocalError(null);
@@ -37,7 +38,7 @@ export const MyList = () => {
             continue;
           }
           const url = `https://api.themoviedb.org/3/${item.media_type}/${item.id}?api_key=${VITE_API_KEY}`;
-          const res = await fetch(url);
+          const res = await fetch(url, { signal: abortController.signal });
           if (!res.ok) {
             console.warn('Failed to fetch:', url, res.status);
             continue;
@@ -50,12 +51,19 @@ export const MyList = () => {
         }
         setLocalMovies(movies);
       } catch (err) {
+         if (!abortController.signal.aborted) {
         setLocalError('Failed to fetch your list. Please try again later.');
+         }
       } finally {
+        if (!abortController.signal.aborted) {
         setLocalLoading(false);
+       }
       }
     };
     fetchLocalMovies();
+    return () => {
+    abortController.abort();
+  };
   }, [myList]);
 
   return (
