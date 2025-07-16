@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { NavItems } from './nav-items';
 import { BrandContainer, NavbarMenu, NavList } from './navbar-styles';
 import { SearchBar } from './search-bar/searchBar';
+import { useLocation } from 'react-router-dom';
 
 export type navbarHeaderProps = {
   onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
@@ -11,6 +12,7 @@ export type navbarHeaderProps = {
 
 export const NavbarHeader = ({ onChange, value }: navbarHeaderProps) => {
   const { t } = useTranslation();
+  const location = useLocation();
 
   return (
     <NavbarMenu aria-label={t('site-navigation')} role='navigation'>
@@ -19,7 +21,7 @@ export const NavbarHeader = ({ onChange, value }: navbarHeaderProps) => {
           {t('binge-watch')}
         </NavItems>
       </BrandContainer>
-      <NavList>
+      <NavList $centered={location.pathname === '/mylist'}>
         <NavItems aria-label={t('home-page')} to='/'>
           {t('home-page')}
         </NavItems>
@@ -36,7 +38,9 @@ export const NavbarHeader = ({ onChange, value }: navbarHeaderProps) => {
           {t('my-list')}
         </NavItems>
       </NavList>
-      <SearchBar onChange={onChange} value={value} />
+      {location.pathname !== '/mylist' && (
+        <SearchBar onChange={onChange} value={value} />
+      )}
     </NavbarMenu>
   );
 };
