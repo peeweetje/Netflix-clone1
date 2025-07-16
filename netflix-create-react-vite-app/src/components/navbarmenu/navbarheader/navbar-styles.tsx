@@ -10,10 +10,16 @@ export const NavbarMenu = styled.nav`
   }
 `;
 
-export const NavList = styled.ul`
+export const NavList = styled.ul<{ $centered?: boolean }>`
   display: flex;
   justify-content: center;
   flex-flow: wrap;
+  ${(props) =>
+    props.$centered &&
+    `
+      margin-left: auto;
+      margin-right: auto;
+    `}
 
   li {
     padding: ${(props) => props.theme.space[8]};
@@ -30,10 +36,10 @@ export const NavList = styled.ul`
   }
 `;
 
-export const BrandContainer = styled.div`
+export const BrandContainer = styled.div<{ $centered?: boolean }>`
   display: flex;
   align-items: center;
-  margin-right: auto;
+  ${(props) => !props.$centered && `margin-right: auto;`}
   font-size: ${(props) => props.theme.fontSize[5]};
   padding-left: ${(props) => props.theme.space[8]};
   list-style: none;

@@ -100,7 +100,8 @@ export const Shows = () => {
       <StyledContainer>
         {(searchShows.length > 0 ? searchShows : shows).map(
           (show) =>
-            show.poster_path && (
+            show.poster_path &&
+            show.id && (
               <Card
                 alt={show.name}
                 key={show.id}
@@ -108,6 +109,8 @@ export const Shows = () => {
                 src={`${imageUrl}${show.poster_path}`}
                 title={show.name}
                 vote_average={show.vote_average}
+                id={show.id}
+                media_type='tv'
               />
             )
         )}

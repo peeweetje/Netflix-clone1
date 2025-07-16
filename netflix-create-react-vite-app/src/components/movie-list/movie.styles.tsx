@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-
 export const FlexWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -15,7 +14,6 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
   color: inherit;
 `;
-
 
 export const RowContainer = styled.section`
   position: relative;
@@ -75,4 +73,20 @@ export const ArrowButton = styled.button`
     opacity: 1;
     pointer-events: auto;
   }
+`;
+
+export const CardWrapper = styled.div`
+  position: relative;
+`;
+
+export const RemoveButton = styled.button`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: ${(props) => props.theme.colors.blue};
+  border: none;
+  border-radius: 4px;
+  padding: 4px 10px;
+  cursor: pointer;
+  z-index: 2;
 `;

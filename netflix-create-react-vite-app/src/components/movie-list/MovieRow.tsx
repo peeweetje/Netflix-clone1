@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 
 import type { MovieResult } from '../../utils/types/types';
@@ -18,7 +17,6 @@ interface MovieRowProps {
 }
 
 const VISIBLE_COUNT = 5;
-
 
 export const MovieRow = ({ title, movies }: MovieRowProps) => {
   const [startIdx, setStartIdx] = useState(0);
@@ -85,6 +83,8 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
                   src={`${imageUrl}${movie.poster_path}`}
                   title={movie.title}
                   vote_average={movie.vote_average}
+                  id={movie.id}
+                  media_type='movie'
                 />
               </div>
             ) : null
