@@ -15,6 +15,8 @@ type CardProps = {
   title: string;
   vote_average: number;
   key: number;
+  id: number;
+  media_type: 'movie' | 'tv';
 };
 
 export const Card = ({
@@ -23,6 +25,8 @@ export const Card = ({
   overview,
   title,
   vote_average,
+  id,
+  media_type,
 }: CardProps) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -40,6 +44,8 @@ export const Card = ({
         </MotionCardFront>
         <MotionCardBack>
           <BackCard
+            id={id}
+            media_type={media_type}
             overview={overview}
             title={title}
             vote_average={vote_average}

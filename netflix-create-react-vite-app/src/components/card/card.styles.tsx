@@ -1,3 +1,4 @@
+import { BackCard } from './back-card';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
@@ -44,7 +45,7 @@ export const CardBackContainer = styled.div`
   height: 350px;
   width: 250px;
   overflow: visible;
-  background:${(props) => props.theme.colors.grey};
+  background: ${(props) => props.theme.colors.grey};
   border-radius: ${(props) => props.theme.borderRadius[3]};
 `;
 
@@ -100,6 +101,19 @@ export const MotionCardBack = styled.div`
   backface-visibility: hidden;
   transform: rotateY(180deg);
   z-index: 1;
-  background: #181818;
+  background:${({ theme }) => theme.colors.black};
   border-radius: ${(props) => props.theme.borderRadius[3]};
 `;
+
+export const BackCardButton = styled.button<{ isAdded: boolean }>`
+  margin-top: 12px;
+  background: ${({ isAdded, theme }) =>
+    isAdded ? theme.colors.black : theme.colors.blue};
+  color: ${(props) => props.theme.colors.white};
+  border: none;
+  border-radius: 4px;
+  padding: 6px 16px;
+  font-size: 0.95rem;
+  cursor: ${({ isAdded }) => (isAdded ? 'not-allowed' : 'pointer')};
+`;
+ 
