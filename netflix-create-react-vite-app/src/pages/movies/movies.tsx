@@ -7,32 +7,28 @@ import { discoverMovieUrl } from '../../utils/api';
 import type { MovieResult } from '../../utils/types/types';
 import { Spinner } from '../../components/spinner/spinner';
 import { MainContainer } from '../home/homepage-styles';
+import { useGlobalSearch } from '../../hooks/useGlobalSearch';
 
 export const Movies = () => {
   const [results, setResults] = useState<MovieResult[]>([]);
-  const [searchMovies, setSearchMovies] = useState<MovieResult[]>([]);
-  const [searchQuery, setSearchQuery] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { t } = useTranslation();
 
-  const VITE_API_KEY = import.meta.env.VITE_API_KEY;
-  const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${VITE_API_KEY}&query=${searchQuery}`;
+  const {
+    searchQuery,
+    setSearchQuery,
+    searchResultsMovies,
+    searchLoading,
+    searchError,
+  } = useGlobalSearch();
 
-  useFetchMovies(searchUrl, setSearchMovies, setLoading, setError);
+  const VITE_API_KEY = import.meta.env.VITE_API_KEY;
   useFetchMovies(discoverMovieUrl, setResults, setLoading, setError);
 
-  const handleSearch = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>): void => {
-      e.preventDefault();
-      const newSearchQuery = e.target.value;
-      setSearchQuery(newSearchQuery);
-      if (!newSearchQuery) {
-        setSearchMovies([]);
-      }
-    },
-    []
-  );
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setSearchQuery(e.target.value);
+  };
 
   return (
     <>
@@ -45,12 +41,18 @@ export const Movies = () => {
           </>
         ) : error ? (
           <>
-            <p>Error: {error}</p>
+            <p>{error}</p>
           </>
+        ) : searchQuery ? (
+          searchLoading ? (
+            <Spinner />
+          ) : searchError ? (
+            <p>{searchError}</p>
+          ) : (
+            <MovieList movies={searchResultsMovies} />
+          )
         ) : (
-          <MovieList
-            movies={searchMovies.length > 0 ? searchMovies : results}
-          />
+          <MovieList movies={results} />
         )}
       </MainContainer>
     </>

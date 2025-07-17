@@ -31,8 +31,8 @@ export const NavbarHeader = ({ onChange, value }: navbarHeaderProps) => {
         <NavItems aria-label={t('movie-page')} to='/movies'>
           {t('movie-page')}
         </NavItems>
-        <NavItems aria-label={t('recently-added-page')} to='/recentlyadded'>
-          {t('recently-added-page')}
+        <NavItems aria-label={t('popular-trending')} to='/popular-trending'>
+          {t('popular-trending')}
         </NavItems>
         <NavItems aria-label={t('my-list')} to='/my-list'>
           {t('my-list')}
