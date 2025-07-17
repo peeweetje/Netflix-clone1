@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useFetchMovies } from '../../hooks/useFetchMovies';
+import { useGlobalSearch } from '../../hooks/useGlobalSearch';
 import {
   discoverShowUrl,
   trendingMovieUrl,
@@ -13,7 +14,7 @@ import { MovieRow } from '../../components/movie-list/MovieRow';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbarHeader';
 
 const Container = styled.div`
- display: flex;
+  display: flex;
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
@@ -29,6 +30,15 @@ export const PopularAndTrending = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const {
+    searchQuery,
+    setSearchQuery,
+    searchResultsMovies,
+    searchResultsShows,
+    searchLoading,
+    searchError,
+  } = useGlobalSearch();
+
   // Fetch trending movies and shows
   useFetchMovies(trendingMovieUrl, setTrendingMovies, setLoading, setError);
   useFetchMovies(trendingShowUrl, setTrendingShows, setLoading, setError);
@@ -36,14 +46,38 @@ export const PopularAndTrending = () => {
   useFetchMovies(popularMoviesUrl, setPopularMovies, setLoading, setError);
   useFetchMovies(mostPopularShowsUrl, setPopularShows, setLoading, setError);
 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
   return (
     <>
-      <NavbarHeader />
+      <NavbarHeader onChange={handleSearch} value={searchQuery} />
       <Container>
         {loading ? (
           <Spinner />
         ) : error ? (
           <p>{error}</p>
+        ) : searchQuery ? (
+          searchLoading ? (
+            <Spinner />
+          ) : searchError ? (
+            <p>{searchError}</p>
+          ) : (
+            <>
+              <MovieRow title='Movies' movies={searchResultsMovies} />
+              <MovieRow
+                title='Shows'
+                movies={searchResultsShows.map((show) => ({
+                  id: show.id,
+                  poster_path: show.poster_path,
+                  overview: show.overview,
+                  title: show.name,
+                  vote_average: show.vote_average,
+                }))}
+              />
+            </>
+          )
         ) : (
           <>
             <MovieRow title='Trending Movies' movies={trendingMovies} />
@@ -53,7 +87,7 @@ export const PopularAndTrending = () => {
                 id: show.id,
                 poster_path: show.poster_path,
                 overview: show.overview,
-                title: show.name, // Map 'name' to 'title' for MovieRow
+                title: show.name,
                 vote_average: show.vote_average,
               }))}
             />
@@ -64,7 +98,7 @@ export const PopularAndTrending = () => {
                 id: show.id,
                 poster_path: show.poster_path,
                 overview: show.overview,
-                title: show.name, // Map 'name' to 'title' for MovieRow
+                title: show.name,
                 vote_average: show.vote_average,
               }))}
             />

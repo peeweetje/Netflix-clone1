@@ -6,6 +6,7 @@ import { imageUrl, trendingShowUrl } from '../../utils/api';
 import type { ShowResult } from '../../utils/types/types';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbarHeader';
 import { useTranslation } from 'react-i18next';
+import { useGlobalSearch } from '../../hooks/useGlobalSearch';
 
 const StyledContainer = styled.div`
   display: flex;
@@ -16,14 +17,17 @@ const StyledContainer = styled.div`
 
 export const Shows = () => {
   const [shows, setShows] = useState<ShowResult[]>([]);
-  const [searchShows, setSearchShows] = useState<ShowResult[]>([]);
-  const [searchQuery, setSearchQuery] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { t } = useTranslation();
 
-  const VITE_API_KEY = import.meta.env.VITE_API_KEY;
-  const searchUrl = `https://api.themoviedb.org/3/search/tv?api_key=${VITE_API_KEY}&query=${searchQuery}`;
+  const {
+    searchQuery,
+    setSearchQuery,
+    searchResultsShows,
+    searchLoading,
+    searchError,
+  } = useGlobalSearch();
 
   React.useEffect(() => {
     const fetchShows = async () => {
@@ -43,36 +47,8 @@ export const Shows = () => {
     fetchShows();
   }, []);
 
-  React.useEffect(() => {
-    if (!searchQuery) {
-      setSearchShows([]);
-      return;
-    }
-    const fetchSearchShows = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(searchUrl);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const { results } = await response.json();
-        setSearchShows(results);
-      } catch (err) {
-        setError('Failed to fetch shows. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchSearchShows();
-  }, [searchQuery, searchUrl]);
-
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    e.preventDefault();
-    const newSearchQuery = e.target.value;
-    setSearchQuery(newSearchQuery);
-    if (!newSearchQuery) {
-      setSearchShows([]);
-    }
+    setSearchQuery(e.target.value);
   };
 
   if (loading) {
@@ -98,21 +74,46 @@ export const Shows = () => {
     <>
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
       <StyledContainer>
-        {(searchShows.length > 0 ? searchShows : shows).map(
-          (show) =>
-            show.poster_path &&
-            show.id && (
-              <Card
-                alt={show.name}
-                key={show.id}
-                overview={show.overview}
-                src={`${imageUrl}${show.poster_path}`}
-                title={show.name}
-                vote_average={show.vote_average}
-                id={show.id}
-                media_type='tv'
-              />
+        {searchQuery ? (
+          searchLoading ? (
+            <Spinner />
+          ) : searchError ? (
+            <p>{searchError}</p>
+          ) : (
+            searchResultsShows.map(
+              (show) =>
+                show.poster_path &&
+                show.id && (
+                  <Card
+                    alt={show.name}
+                    key={show.id}
+                    overview={show.overview}
+                    src={`${imageUrl}${show.poster_path}`}
+                    title={show.name}
+                    vote_average={show.vote_average}
+                    id={show.id}
+                    media_type='tv'
+                  />
+                )
             )
+          )
+        ) : (
+          shows.map(
+            (show) =>
+              show.poster_path &&
+              show.id && (
+                <Card
+                  alt={show.name}
+                  key={show.id}
+                  overview={show.overview}
+                  src={`${imageUrl}${show.poster_path}`}
+                  title={show.name}
+                  vote_average={show.vote_average}
+                  id={show.id}
+                  media_type='tv'
+                />
+              )
+          )
         )}
       </StyledContainer>
     </>
