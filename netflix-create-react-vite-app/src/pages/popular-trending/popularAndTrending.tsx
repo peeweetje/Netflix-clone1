@@ -21,7 +21,7 @@ const Container = styled.div`
 
 const mostPopularShowsUrl = `${discoverShowUrl}&sort_by=popularity.desc`;
 
-export const RecentlyAdded = () => {
+export const PopularAndTrending = () => {
   const [trendingMovies, setTrendingMovies] = useState<MovieResult[]>([]);
   const [trendingShows, setTrendingShows] = useState<ShowResult[]>([]);
   const [popularMovies, setPopularMovies] = useState<MovieResult[]>([]);
