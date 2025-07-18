@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import {VITE_API_KEY} from '../../utils/api';
 import { useTranslation } from 'react-i18next';
 import { MovieList } from '../../components/movie-list/movieList';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbarHeader';
@@ -23,7 +24,7 @@ export const Movies = () => {
     searchError,
   } = useGlobalSearch();
 
-  const VITE_API_KEY = import.meta.env.VITE_API_KEY;
+  
   useFetchMovies(discoverMovieUrl, setResults, setLoading, setError);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import {VITE_API_KEY} from '../utils/api'; 
 import type { MovieResult, ShowResult } from '../utils/types/types';
 
 export function useGlobalSearch() {
@@ -22,7 +23,7 @@ export function useGlobalSearch() {
     }
     setSearchLoading(true);
     setSearchError(null);
-    const VITE_API_KEY = import.meta.env.VITE_API_KEY;
+   
     const movieUrl = `https://api.themoviedb.org/3/search/movie?api_key=${VITE_API_KEY}&query=${encodeURIComponent(
       searchQuery
     )}`;

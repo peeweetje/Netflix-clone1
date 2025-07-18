@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {VITE_API_KEY} from '../../utils/api';
 import {
   MyListContainer,
   MoviesGrid,
@@ -13,7 +14,7 @@ import { useMyList } from '../../context/myListContext';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbarHeader';
 import { Card } from '../../components/card/card';
 
-const VITE_API_KEY = import.meta.env.VITE_API_KEY;
+
 
 export const MyList = () => {
   const { myList, removeFromList } = useMyList();

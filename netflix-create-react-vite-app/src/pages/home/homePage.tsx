@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import {VITE_API_KEY} from '../../utils/api';
 import { useTranslation } from 'react-i18next';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbarHeader';
 import { useFetchMovies } from '../../hooks/useFetchMovies';
@@ -32,7 +33,7 @@ export const Homepage = () => {
     searchError,
   } = useGlobalSearch();
 
-  const VITE_API_KEY = import.meta.env.VITE_API_KEY;
+ 
   useFetchMovies(popularMoviesUrl, setPopular, setLoading, setError);
   useFetchMovies(topRatedMoviesUrl, setTopRated, setLoading, setError);
   useFetchMovies(actionMoviesUrl, setAction, setLoading, setError);
