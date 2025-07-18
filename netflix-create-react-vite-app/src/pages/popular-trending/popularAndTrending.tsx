@@ -50,6 +50,15 @@ export const PopularAndTrending = () => {
     setSearchQuery(e.target.value);
   };
 
+  const mapShowToMovie = (show: ShowResult): MovieResult => ({
+   id: show.id,
+   poster_path: show.poster_path,
+   overview: show.overview,  
+   title: show.name,
+   vote_average: show.vote_average,
+ });
+
+
   return (
     <>
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
@@ -68,13 +77,7 @@ export const PopularAndTrending = () => {
               <MovieRow title='Movies' movies={searchResultsMovies} />
               <MovieRow
                 title='Shows'
-                movies={searchResultsShows.map((show) => ({
-                  id: show.id,
-                  poster_path: show.poster_path,
-                  overview: show.overview,
-                  title: show.name,
-                  vote_average: show.vote_average,
-                }))}
+                movies={searchResultsShows.map(mapShowToMovie)}
               />
             </>
           )
@@ -83,24 +86,12 @@ export const PopularAndTrending = () => {
             <MovieRow title='Trending Movies' movies={trendingMovies} />
             <MovieRow
               title='Trending Shows'
-              movies={trendingShows.map((show) => ({
-                id: show.id,
-                poster_path: show.poster_path,
-                overview: show.overview,
-                title: show.name,
-                vote_average: show.vote_average,
-              }))}
+              movies={trendingShows.map(mapShowToMovie)}
             />
             <MovieRow title='Most Popular Movies' movies={popularMovies} />
             <MovieRow
               title='Most Popular Shows'
-              movies={popularShows.map((show) => ({
-                id: show.id,
-                poster_path: show.poster_path,
-                overview: show.overview,
-                title: show.name,
-                vote_average: show.vote_average,
-              }))}
+              movies={popularShows.map(mapShowToMovie)}
             />
           </>
         )}
