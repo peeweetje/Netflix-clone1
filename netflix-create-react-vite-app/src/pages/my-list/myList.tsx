@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import {VITE_API_KEY} from '../../utils/api';
+import React from 'react';
 import {
   MyListContainer,
   MoviesGrid,
@@ -8,70 +7,41 @@ import {
   MovieTitle,
   CardWrapper,
   RemoveButton,
+  RemovalNotice,
 } from './myList.styles';
-import { MovieResult } from '../../utils/types/types';
 import { useMyList } from '../../context/myListContext';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbarHeader';
 import { Card } from '../../components/card/card';
-
-
+import { useLocalListDetails } from '../../hooks/useLocalListDetails';
 
 export const MyList = () => {
   const { myList, removeFromList } = useMyList();
-  const [localMovies, setLocalMovies] = useState<MovieResult[]>([]);
-  const [localLoading, setLocalLoading] = useState<boolean>(false);
-  const [localError, setLocalError] = useState<string | null>(null);
-
-  // Fetch details for local My List
-  useEffect(() => {
-    const abortController = new AbortController();
-    const fetchLocalMovies = async () => {
-      setLocalLoading(true);
-      setLocalError(null);
-      try {
-        const movies: MovieResult[] = [];
-        for (const item of myList) {
-          if (
-            !['movie', 'tv'].includes(item.media_type) ||
-            typeof item.id !== 'number'
-          ) {
-            console.warn('Skipping invalid item:', item);
-            continue;
-          }
-          const url = `https://api.themoviedb.org/3/${item.media_type}/${item.id}?api_key=${VITE_API_KEY}`;
-          const res = await fetch(url, { signal: abortController.signal });
-          if (!res.ok) {
-            console.warn('Failed to fetch:', url, res.status);
-            continue;
-          }
-          const data = await res.json();
-          if (item.media_type === 'tv') {
-            data.title = data.name;
-          }
-          movies.push(data);
-        }
-        setLocalMovies(movies);
-      } catch (err) {
-         if (!abortController.signal.aborted) {
-        setLocalError('Failed to fetch your list. Please try again later.');
-         }
-      } finally {
-        if (!abortController.signal.aborted) {
-        setLocalLoading(false);
-       }
-      }
-    };
-    fetchLocalMovies();
-    return () => {
-    abortController.abort();
-  };
-  }, [myList]);
+  const { localMovies, localLoading, localError, failedItems, removalNotice } =
+    useLocalListDetails();
 
   return (
     <>
       <NavbarHeader />
       <MyListContainer>
         <h1>My List</h1>
+        {removalNotice && (
+          <RemovalNotice >
+            {removalNotice}
+          </RemovalNotice>
+        )}
+        {failedItems.length > 0 && (
+          <div style={{ color: 'red' }}>
+            <p>Some items could not be loaded:</p>
+            <ul>
+              {failedItems.map((item, idx) => (
+                <li key={idx}>
+                  {item.title || item.name || 'Unknown Title'} (ID: {item.id},
+                  Type: {item.media_type})
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
         {localLoading ? (
           <p>Loading...</p>
         ) : localError ? (

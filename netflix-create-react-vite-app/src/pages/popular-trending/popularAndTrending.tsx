@@ -50,14 +50,16 @@ export const PopularAndTrending = () => {
     setSearchQuery(e.target.value);
   };
 
-  const mapShowToMovie = (show: ShowResult): MovieResult => ({
-   id: show.id,
-   poster_path: show.poster_path,
-   overview: show.overview,  
-   title: show.name,
-   vote_average: show.vote_average,
- });
-
+  const mapShowToMovie = (
+    show: ShowResult
+  ): MovieResult & { media_type: 'tv' } => ({
+    id: show.id,
+    poster_path: show.poster_path,
+    overview: show.overview,
+    title: show.name,
+    vote_average: show.vote_average,
+    media_type: 'tv', // Add this line
+  });
 
   return (
     <>
