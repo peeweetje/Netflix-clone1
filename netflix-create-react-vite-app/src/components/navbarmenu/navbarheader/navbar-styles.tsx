@@ -26,7 +26,12 @@ export const NavList = styled.ul<{ $centered?: boolean }>`
     white-space: nowrap;
     font-size: ${(props) => props.theme.fontSize[4]};
   }
+
   li:hover {
+    text-decoration: 5px underline;
+  }
+ 
+  li.active {
     text-decoration: 5px underline;
   }
 
@@ -46,6 +51,6 @@ export const BrandContainer = styled.div<{ $centered?: boolean }>`
 
   @media (max-width: 768px) {
     justify-content: center;
-    margin-right: 0;
+    margin-right: ${(props) => props.theme.space[0]};
   }
 `;

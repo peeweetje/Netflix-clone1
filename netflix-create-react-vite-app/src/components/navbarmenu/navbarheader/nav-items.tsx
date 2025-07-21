@@ -32,7 +32,15 @@ export const NavItems = ({ children, to }: navItemsProps) => {
   };
 
   return (
-    <li aria-label={t('navigate-to', { to })}>
+    <li
+      aria-label={t('navigate-to', { to })}
+      className={
+        location.pathname === to ||
+        location.pathname === `/${to.replace(/^\//, '')}`
+          ? 'active'
+          : ''
+      }
+    >
       <StyledNavLink href={to} onClick={handleClick}>
         {children}
       </StyledNavLink>
