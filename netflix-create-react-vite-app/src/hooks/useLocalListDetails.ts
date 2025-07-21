@@ -7,7 +7,7 @@ interface UseLocalListDetailsReturn {
   localMovies: MovieResult[];
   localLoading: boolean;
   localError: string | null;
-  failedItems: any[];
+  failedItems: MyListItem[];
   removalNotice: string | null;
 }
 
@@ -16,7 +16,7 @@ export const useLocalListDetails = (): UseLocalListDetailsReturn => {
   const [localMovies, setLocalMovies] = useState<MovieResult[]>([]);
   const [localLoading, setLocalLoading] = useState<boolean>(false);
   const [localError, setLocalError] = useState<string | null>(null);
-  const [failedItems, setFailedItems] = useState<any[]>([]);
+  const [failedItems, setFailedItems] = useState<MyListItem[]>([]);
   const [removalNotice, setRemovalNotice] = useState<string | null>(null);
 
   useEffect(() => {
@@ -50,6 +50,7 @@ export const useLocalListDetails = (): UseLocalListDetailsReturn => {
         const failed: any[] = [];
 
         for (const item of validList) {
+          if (abortController.signal.aborted) break;
           const url = `https://api.themoviedb.org/3/${item.media_type}/${item.id}?api_key=${VITE_API_KEY}`;
           const res = await fetch(url, { signal: abortController.signal });
 
@@ -63,21 +64,26 @@ export const useLocalListDetails = (): UseLocalListDetailsReturn => {
               item
             );
             failed.push(item);
-            removeFromList(item);
+             // Batch remove failed items and show notice
+            if (failed.length > 0) {
+             failed.forEach(item => removeFromList(item));
+             const failedTitles = failed.map(item => item.title || item.name || 'Unknown Title').join(', ');
+             const sanitizedTitle = (
+               item.title ||
+               item.name ||
+               'Unknown Title'
+             ).replace(/[<>]/g, '');
             setRemovalNotice(
-              `"${
-                item.title || item.name || 'Unknown Title'
-              }" was removed from your list because it could not be loaded.`
+              `"${sanitizedTitle}" was removed from your list because it could not be loaded.`
             );
-            setTimeout(() => setRemovalNotice(null), 4000);
+          setTimeout(() => setRemovalNotice(null), 4000);
+        }
             continue;
           }
-
           const data = await res.json();
-          if (item.media_type === 'tv') {
-            data.title = data.name;
-          }
-          movies.push(data);
+          const movieData =
+            item.media_type === 'tv' ? { ...data, title: data.name } : data;
+          movies.push(movieData);
         }
 
         setLocalMovies(movies);
