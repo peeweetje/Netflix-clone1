@@ -1,22 +1,10 @@
 import { useTranslation } from 'react-i18next';
-import {
-  FlexWrapper,
-  CardWrapper,
-  RemoveButton,
-  StyledLink,
-} from './movie.styles';
+import { FlexWrapper, CardWrapper, StyledLink } from './movie.styles';
 import { imageUrl } from '../../utils/api';
 import type { MovieResult } from '../../utils/types/types';
 import { Card } from '../card/card';
 
-
-export const MovieList = ({
-  movies,
-  removeFromList,
-}: {
-  movies: MovieResult[];
-  removeFromList?: (item: MovieResult) => void;
-}) => {
+export const MovieList = ({ movies }: { movies: MovieResult[] }) => {
   const { t } = useTranslation();
 
   return (
@@ -37,11 +25,6 @@ export const MovieList = ({
                   media_type='movie'
                 />
               </StyledLink>
-              {removeFromList && (
-                <RemoveButton onClick={() => removeFromList(result)}>
-                  Remove
-                </RemoveButton>
-              )}
             </CardWrapper>
           )
       )}
