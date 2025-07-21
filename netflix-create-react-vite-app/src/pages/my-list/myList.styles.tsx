@@ -33,6 +33,11 @@ export const MovieTitle = styled.h3`
   font-weight: 500;
 `;
 
+export const RemovalNotice = styled.div`
+  color: ${({ theme }) => theme.colors.orange};
+  margin-bottom: ${({ theme }) => theme.space[6]};
+`;
+
 export const RemoveButton = styled.button`
   background: ${(props) => props.theme.colors.blue};
   color: ${(props) => props.theme.colors.white};

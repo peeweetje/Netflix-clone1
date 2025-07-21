@@ -7,6 +7,7 @@ import {
   MovieTitle,
   CardWrapper,
   RemoveButton,
+  RemovalNotice,
 } from './myList.styles';
 import { useMyList } from '../../context/myListContext';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbarHeader';
@@ -24,9 +25,9 @@ export const MyList = () => {
       <MyListContainer>
         <h1>My List</h1>
         {removalNotice && (
-          <div style={{ color: 'orange', marginBottom: '1em' }}>
+          <RemovalNotice >
             {removalNotice}
-          </div>
+          </RemovalNotice>
         )}
         {failedItems.length > 0 && (
           <div style={{ color: 'red' }}>
