@@ -6,7 +6,7 @@ export const CardWrapper = styled.div`
 `;
 
 export const MyListContainer = styled.div`
-  padding: 32px;
+  padding:${({ theme }) => theme.space[10]};
   min-height: 100vh;
   background:${({ theme }) => theme.colors.black};
  
@@ -14,41 +14,32 @@ export const MyListContainer = styled.div`
 
 export const MoviesGrid = styled.div`
   display: flex;
-  gap: 24px;
+  gap: ${({ theme }) => theme.space[9]};
   flex-wrap: wrap;
 `;
 
 export const MovieCard = styled.div`
-  width: 200px;
-  text-align: center;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  padding: 16px 8px 20px 8px;
-  transition: transform 0.2s;
-  &:hover {
-    transform: scale(1.04);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-  }
+  border-radius: ${({ theme }) => theme.borderRadius[2]};
 `;
 
 export const MoviePoster = styled.img`
   width: 100%;
   border-radius: 8px;
-  margin-bottom: 12px;
 `;
 
 export const MovieTitle = styled.h3`
-  font-size: 1.1rem;
+  font-size: ${({ theme }) => theme.fontSize[4]};
   margin: 0 0 10px 0;
   font-weight: 500;
 `;
 
 export const RemoveButton = styled.button`
   background: ${(props) => props.theme.colors.blue};
+  color: ${(props) => props.theme.colors.white};
   border: none;
-  border-radius: 4px;
-  padding: 4px 16px;
-  font-size: 0.95rem;
+  border-radius: ${(props) => props.theme.borderRadius[1]};
+  padding: 8px 16px;
+  font-size: ${(props) => props.theme.fontSize[3]};
   cursor: pointer;
   transition: background 0.2s;
   &:hover {

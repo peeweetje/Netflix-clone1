@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export const FlexWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: ${(props) => props.theme.space[8]};
   justify-content: center;
   align-items: flex-start;
 `;
@@ -25,9 +25,9 @@ export const RowContainer = styled.section`
 
 export const RowTitle = styled.h2`
   color: ${(props) => props.theme.colors.blue};
-  font-size: 1.5rem;
-  margin-left: 2rem;
-  margin-bottom: 0.5rem;
+  font-size: ${(props) => props.theme.fontSize[5]};
+  margin-left: ${(props) => props.theme.space[4]};
+  margin-bottom: ${(props) => props.theme.space[4]};
 `;
 
 export const CardsViewport = styled.div<{ width: number }>`
@@ -40,7 +40,7 @@ export const CardsViewport = styled.div<{ width: number }>`
 
 export const CardsWrapper = styled(motion.div)`
   display: flex;
-  gap: 1rem;
+  gap: ${(props) => props.theme.space[7]};
 `;
 
 export const ArrowButton = styled.button`
@@ -50,15 +50,15 @@ export const ArrowButton = styled.button`
   z-index: 2;
   background: rgba(0, 0, 0, 0.6);
   border: none;
-  color: #fff;
-  font-size: 2rem;
+  color: ${(props) => props.theme.colors.white};
+  font-size: ${(props) => props.theme.fontSize[6]};
   width: 48px;
   height: 64px;
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s;
-  border-radius: 4px;
+  border-radius: ${(props) => props.theme.borderRadius[1]};
   &.left {
     left: -2rem;
   }
@@ -67,7 +67,7 @@ export const ArrowButton = styled.button`
   }
   &:hover {
     backgroundcolor: ${(props) => props.theme.colors.blue};
-    color: #fff;
+    color:;
   }
   &.active {
     opacity: 1;
@@ -79,14 +79,3 @@ export const CardWrapper = styled.div`
   position: relative;
 `;
 
-export const RemoveButton = styled.button`
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: ${(props) => props.theme.colors.blue};
-  border: none;
-  border-radius: 4px;
-  padding: 4px 10px;
-  cursor: pointer;
-  z-index: 2;
-`;
