@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export const CardContainer = styled.div`
   display: flex;
-  padding: 0; /* Remove extra padding */
+  padding: ${(props) => props.theme.space[0]}; /* Remove extra padding */
   height: 380px;
   cursor: pointer;
   perspective: 1000px;
@@ -75,7 +75,7 @@ export const StyledScoreContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: auto;
-  margin-bottom: 0;
+  margin-bottom: ${(props) => props.theme.space[0]};
 `;
 
 export const MotionFlipCard = styled(motion.div)`
@@ -109,7 +109,7 @@ export const BackCardButton = styled.button<{ isAdded: boolean }>`
   height: 32px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 4px;
+  margin-bottom: ${(props) => props.theme.space[2]};
   background: ${({ isAdded, theme }) =>
     isAdded ? theme.colors.black : theme.colors.blue};
   color: ${(props) => props.theme.colors.white};

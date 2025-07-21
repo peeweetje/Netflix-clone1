@@ -17,8 +17,8 @@ export const BannerContainer = styled.section<{ backgroundImage: string }>`
 
 export const BannerOverlay = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: ${(props) => props.theme.space[0]};
+  left: ${(props) => props.theme.space[0]};
   width: 100%;
   height: 100%;
   display: flex;
@@ -30,31 +30,32 @@ export const BannerOverlay = styled.div`
 `;
 
 export const BannerTitle = styled.h1`
-  font-size: 2.5rem;
+  font-size: ${(props) => props.theme.fontSize[7]};
   font-weight: bold;
-  color: #fff;
+  color: ${(props) => props.theme.colors.white};
   max-width: 30vw;
   text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.7);
 `;
 
 export const BannerOverview = styled.p`
-  font-size: 1.1rem;
-  color: #fff;
+  font-size: ${(props) => props.theme.fontSize[3]};
+  color: ${(props) => props.theme.colors.white};
   max-width: 32vw;
-  margin-left: 2vw;
+  margin-left: ${(props) => props.theme.space[2]};
   text-align: right;
-  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.6);
+  text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.7);
+  line-height: ${(props) => props.theme.lineHeight[3]};
 `;
 
 export const BannerButtons = styled.div`
   display: flex;
-  gap: 1.2rem;
-  margin-top: 1.5rem;
+  gap: ${(props) => props.theme.space[7]};
+  margin-top: ${(props) => props.theme.space[7]};
 `;
 
 export const BannerButton = styled.button`
-  background: rgba(51, 51, 51, 0.7);
-  color: #fff;
+  background: ${(props) => props.theme.colors.black};
+  color: ${(props) => props.theme.colors.white};
   border: none;
   padding: 0.7rem 2rem;
   font-size: 1.1rem;
@@ -64,6 +65,6 @@ export const BannerButton = styled.button`
   transition: background 0.2s;
   &:hover {
     background: ${(props) => props.theme.colors.blue};
-    color: #fff;
+    color: ${(props) => props.theme.colors.white};
   }
 `;
