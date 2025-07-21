@@ -84,7 +84,7 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
                   title={movie.title}
                   vote_average={movie.vote_average}
                   id={movie.id}
-                  media_type='movie'
+                  media_type={movie.media_type ? movie.media_type : 'movie'}
                 />
               </div>
             ) : null
