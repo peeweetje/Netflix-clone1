@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { VITE_API_KEY } from '../../utils/api';
+import React from 'react';
 import {
   MyListContainer,
   MoviesGrid,
@@ -9,90 +8,15 @@ import {
   CardWrapper,
   RemoveButton,
 } from './myList.styles';
-import { MovieResult } from '../../utils/types/types';
 import { useMyList } from '../../context/myListContext';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbarHeader';
 import { Card } from '../../components/card/card';
+import { useLocalListDetails } from '../../hooks/useLocalListDetails';
 
 export const MyList = () => {
   const { myList, removeFromList } = useMyList();
-  const [localMovies, setLocalMovies] = useState<MovieResult[]>([]);
-  const [localLoading, setLocalLoading] = useState<boolean>(false);
-  const [localError, setLocalError] = useState<string | null>(null);
-  const [failedItems, setFailedItems] = useState<any[]>([]); // Track items that failed to fetch
-  const [removalNotice, setRemovalNotice] = useState<string | null>(null); // Notify user on removal
-
-  // Fetch details for local My List
-  useEffect(() => {
-    if (!myList || myList.length === 0) {
-      setLocalMovies([]);
-      setFailedItems([]);
-      return;
-    }
-    // Filter for valid items only
-    const validList = myList.filter(
-      (item) =>
-        ['movie', 'tv'].includes(item.media_type) && typeof item.id === 'number'
-    );
-    if (validList.length === 0) {
-      setLocalMovies([]);
-      setFailedItems(myList); // All items are invalid
-      return;
-    }
-    const abortController = new AbortController();
-    const fetchLocalMovies = async () => {
-      setLocalLoading(true);
-      setLocalError(null);
-      setFailedItems([]); // Reset failed items on each fetch
-      try {
-        const movies: MovieResult[] = [];
-        const failed: any[] = [];
-        for (const item of validList) {
-          const url = `https://api.themoviedb.org/3/${item.media_type}/${item.id}?api_key=${VITE_API_KEY}`;
-          //console.log('Attempting to fetch:', url, 'for item:', item);
-          const res = await fetch(url, { signal: abortController.signal });
-          if (!res.ok) {
-            console.warn(
-              'Failed to fetch:',
-              url,
-              'Status:',
-              res.status,
-              'Item:',
-              item
-            );
-            failed.push(item);
-            removeFromList(item); // Automatically remove from list on fetch failure
-            setRemovalNotice(
-              `"${
-                item.title || item.name || 'Unknown Title'
-              }" was removed from your list because it could not be loaded.`
-            );
-            setTimeout(() => setRemovalNotice(null), 4000); // Hide after 4 seconds
-            continue;
-          }
-          const data = await res.json();
-          if (item.media_type === 'tv') {
-            data.title = data.name;
-          }
-          movies.push(data);
-        }
-        setLocalMovies(movies);
-        setFailedItems(failed);
-      } catch (err) {
-        if (!abortController.signal.aborted) {
-          setLocalError('Failed to fetch your list. Please try again later.');
-        }
-      } finally {
-        if (!abortController.signal.aborted) {
-          setLocalLoading(false);
-        }
-      }
-    };
-    fetchLocalMovies();
-    return () => {
-      abortController.abort();
-    };
-  }, [myList]);
+  const { localMovies, localLoading, localError, failedItems, removalNotice } =
+    useLocalListDetails();
 
   return (
     <>
