@@ -24,7 +24,7 @@ export const MovieCard = styled.div`
 
 export const MoviePoster = styled.img`
   width: 100%;
-  border-radius: 8px;
+  border-radius: ${({ theme }) => theme.borderRadius[3]};
 `;
 
 export const MovieTitle = styled.h3`

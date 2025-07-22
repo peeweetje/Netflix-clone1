@@ -7,11 +7,12 @@ import type { ShowResult } from '../../utils/types/types';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbarHeader';
 import { useTranslation } from 'react-i18next';
 import { useGlobalSearch } from '../../hooks/useGlobalSearch';
+import { StyledLink } from '../../components/movie-list/movie.styles';
 
 const StyledContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap:${({ theme }) => theme.space[9]};
   justify-content: center;
 `;
 
@@ -84,6 +85,27 @@ export const Shows = () => {
               (show) =>
                 show.poster_path &&
                 show.id && (
+                  <StyledLink to={`/shows/${show.id}`}>
+                    <Card
+                      alt={show.name}
+                      key={show.id}
+                      overview={show.overview}
+                      src={`${imageUrl}${show.poster_path}`}
+                      title={show.name}
+                      vote_average={show.vote_average}
+                      id={show.id}
+                      media_type='tv'
+                    />
+                  </StyledLink>
+                )
+            )
+          )
+        ) : (
+          shows.map(
+            (show) =>
+              show.poster_path &&
+              show.id && (
+                <StyledLink key={show.id}  to={`/shows/${show.id}`}>
                   <Card
                     alt={show.name}
                     key={show.id}
@@ -94,24 +116,7 @@ export const Shows = () => {
                     id={show.id}
                     media_type='tv'
                   />
-                )
-            )
-          )
-        ) : (
-          shows.map(
-            (show) =>
-              show.poster_path &&
-              show.id && (
-                <Card
-                  alt={show.name}
-                  key={show.id}
-                  overview={show.overview}
-                  src={`${imageUrl}${show.poster_path}`}
-                  title={show.name}
-                  vote_average={show.vote_average}
-                  id={show.id}
-                  media_type='tv'
-                />
+                </StyledLink>
               )
           )
         )}

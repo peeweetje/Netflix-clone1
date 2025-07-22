@@ -17,6 +17,7 @@ type CardProps = {
   key: number;
   id: number;
   media_type: 'movie' | 'tv';
+  onClick?: () => void;
 };
 
 export const Card = ({
@@ -27,11 +28,13 @@ export const Card = ({
   vote_average,
   id,
   media_type,
+  onClick,
 }: CardProps) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   return (
     <CardContainer
+      onClick={onClick}
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
     >

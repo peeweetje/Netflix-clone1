@@ -4,7 +4,7 @@ import {
   CastName,
   CastCharacter,
   CastImageFallback,
-} from './movieDetails-styles';
+} from './details-styles';
 import { CastMemberProps } from '../../utils/types/types';
 
 

@@ -11,6 +11,7 @@ export const StyledContainer = styled.div`
 `;
 
 export const PosterImage = styled.img`
+ margin-top: ${({ theme }) => theme.space[4]};
   width: 300px;
   border-radius: ${({ theme }) => theme.borderRadius[2]};
 `;
@@ -19,30 +20,31 @@ export const DetailFlex = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: ${({ theme }) => theme.space[4]};
   margin-bottom: ${({ theme }) => theme.space[4]};
 `;
 
 export const InfoColumnsWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  gap: ${({ theme }) => theme.space[4]};
+  flex-direction: column;
   height: 100%;
-  align-items: stretch;
+ 
 `;
 
 export const InfoColumn = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex: 1;
   min-width: 0;
+  line-height:${({ theme }) => theme.lineHeight[3]};
+  padding: ${({ theme }) => theme.space[3]};
+  border: 1px solid ${({ theme }) => theme.colors.grey[2]};
+ 
 `;
 
 export const InfoText = styled.p`
-  margin: 0.5rem 0;
+  margin:${({ theme }) => theme.space[1]} ;
   font-size: ${({ theme }) => theme.fontSize[3]};
-  
 `;
 
 export const InfoLabel = styled.span`
@@ -54,6 +56,7 @@ export const CastSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: ${({ theme }) => theme.space[6]};
 `;
 
 export const CastList = styled.div`
@@ -70,7 +73,7 @@ export const ImageColumn = styled.div`
   align-items: center;
 `;
 
-export const TagLine = styled.p`
+export const Tagline = styled.p`
   width: 300px; 
   flex-wrap: wrap;
   margin-top: ${({ theme }) => theme.space[3]};
@@ -83,7 +86,7 @@ export const TagLine = styled.p`
 export const MainColumns = styled.div`
   display: flex;
   flex-direction: row;
-  gap: ${({ theme }) => theme.space[11]};
+  gap: ${({ theme }) => theme.space[4]};
   align-items: flex-start;
 `;
 
@@ -100,7 +103,7 @@ export const RightColumn = styled.div`
   flex: 1;
 `;
 
-export const MovieTitle = styled.h2`
+export const Title = styled.h2`
   width: 300px;
   flex-wrap: wrap;
   align-items: center;
@@ -149,4 +152,11 @@ export const CastImageFallback = styled.div`
   justify-content: center;
   color: ${({ theme }) => theme.colors.blue};
   font-size: 14px;
+`;
+
+export const PosterContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
 `;

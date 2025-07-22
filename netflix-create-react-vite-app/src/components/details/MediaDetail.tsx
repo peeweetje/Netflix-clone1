@@ -1,8 +1,8 @@
+
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
-import { Spinner } from '../../../components/spinner/spinner';
-import { imageUrl, VITE_API_KEY } from '../../../utils/api';
+import { Spinner } from '../spinner/spinner';
+import { imageUrl, VITE_API_KEY } from '../../utils/api';
 import {
   StyledContainer,
   CastSection,
@@ -10,42 +10,46 @@ import {
   MainColumns,
   LeftColumn,
   RightColumn,
-} from './movieDetails-styles';
+} from './details-styles';
 import { CastMember } from './castMember';
-import { MoviePoster } from './MoviePoster';
-import { MovieInfo } from './movieInfo';
+import { MediaPoster } from './MediaPoster';
+import { MediaInfo } from './MediaInfo';
 
-export const MovieDetail = () => {
+interface MediaDetailProps {
+  type: 'movie' | 'tv';
+}
+
+export const MediaDetail: React.FC<MediaDetailProps> = ({ type }) => {
   const { id } = useParams<{ id: string }>();
-  const [movie, setMovie] = useState<any>(null);
+  const [media, setMedia] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [cast, setCast] = useState<any[]>([]);
 
   useEffect(() => {
-    const fetchMovie = async () => {
+    const fetchMedia = async () => {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${id}?api_key=${VITE_API_KEY}`
+          `https://api.themoviedb.org/3/${type}/${id}?api_key=${VITE_API_KEY}`
         );
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
-        setMovie(data);
+        setMedia(data);
       } catch (err) {
-        setError('Failed to fetch movie details. Please try again later.');
+        setError(`Failed to fetch ${type} details. Please try again later.`);
       } finally {
         setLoading(false);
       }
     };
-    fetchMovie();
-  }, [id]);
+    fetchMedia();
+  }, [id, type]);
 
   useEffect(() => {
     const fetchCast = async () => {
       if (!id) return;
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${VITE_API_KEY}`
+          `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${VITE_API_KEY}`
         );
         if (!response.ok) throw new Error('Failed to fetch cast');
         const data = await response.json();
@@ -55,7 +59,7 @@ export const MovieDetail = () => {
       }
     };
     fetchCast();
-  }, [id]);
+  }, [id, type]);
 
   if (loading)
     return (
@@ -70,16 +74,16 @@ export const MovieDetail = () => {
         <p>{error}</p>
       </div>
     );
-  if (!movie) return null;
+  if (!media) return null;
 
   return (
     <StyledContainer>
       <MainColumns>
         <LeftColumn>
-        <MoviePoster 
-          title={movie.title}
-          posterPath={movie.poster_path}
-          tagline={movie.tagline}
+        <MediaPoster
+          title={media.title || media.name}
+          posterPath={media.poster_path}
+          tagline={media.tagline}
           imageUrl={imageUrl}
           />
         </LeftColumn>
@@ -103,7 +107,7 @@ export const MovieDetail = () => {
               </CastList>
             </CastSection>
           )}
-          <MovieInfo movie={movie} />
+          <MediaInfo media={media} type={type} />
         </RightColumn>
       </MainColumns>
     </StyledContainer>
