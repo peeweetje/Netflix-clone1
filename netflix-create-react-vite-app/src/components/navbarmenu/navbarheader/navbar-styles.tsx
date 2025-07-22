@@ -33,6 +33,8 @@ export const NavList = styled.ul<{ $centered?: boolean }>`
  
   li.active {
     text-decoration: 5px underline;
+    BackgroundColor: ${(props) => props.theme.colors.white};
+    color: ${(props) => props.theme.colors.white};
   }
 
   @media (max-width: 768px) {
