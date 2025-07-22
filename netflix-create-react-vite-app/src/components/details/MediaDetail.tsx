@@ -19,12 +19,30 @@ interface MediaDetailProps {
   type: 'movie' | 'tv';
 }
 
-export const MediaDetail: React.FC<MediaDetailProps> = ({ type }) => {
+interface MediaData {
+  id: number;
+  title?: string;
+  name?: string;
+  poster_path?: string;
+  tagline?: string;
+ 
+}
+
+interface CastMember {
+  cast_id?: number;
+  credit_id: string;
+  name: string;
+  profile_path?: string;
+  character?: string;
+}
+
+
+export const MediaDetail = ({ type }: MediaDetailProps) => {
   const { id } = useParams<{ id: string }>();
-  const [media, setMedia] = useState<any>(null);
+  const [media, setMedia] = useState<MediaData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [cast, setCast] = useState<any[]>([]);
+  const [cast, setCast] = useState<CastMember[]>([]);
 
   useEffect(() => {
     const fetchMedia = async () => {
@@ -55,7 +73,9 @@ export const MediaDetail: React.FC<MediaDetailProps> = ({ type }) => {
         const data = await response.json();
         setCast(data.cast || []);
       } catch (err) {
-        // Optionally set error for cast
+         console.error('Failed to fetch cast data:', err);
+        setError('Failed to fetch cast data');
+        setLoading(false);
       }
     };
     fetchCast();

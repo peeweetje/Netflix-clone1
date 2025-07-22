@@ -75,7 +75,6 @@ export const ImageColumn = styled.div`
 
 export const Tagline = styled.p`
   width: 300px; 
-  flex-wrap: wrap;
   margin-top: ${({ theme }) => theme.space[3]};
   text-align: center;
   word-break: break-word;
@@ -105,7 +104,6 @@ export const RightColumn = styled.div`
 
 export const Title = styled.h2`
   width: 300px;
-  flex-wrap: wrap;
   align-items: center;
   word-break: break-word;
   text-align: center;
