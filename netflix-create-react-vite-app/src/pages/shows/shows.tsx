@@ -85,10 +85,9 @@ export const Shows = () => {
               (show) =>
                 show.poster_path &&
                 show.id && (
-                  <StyledLink to={`/shows/${show.id}`}>
+                  <StyledLink key={show.id} to={`/shows/${show.id}`}>
                     <Card
                       alt={show.name}
-                      key={show.id}
                       overview={show.overview}
                       src={`${imageUrl}${show.poster_path}`}
                       title={show.name}
@@ -105,7 +104,7 @@ export const Shows = () => {
             (show) =>
               show.poster_path &&
               show.id && (
-                <StyledLink key={show.id}  to={`/shows/${show.id}`}>
+                <StyledLink key={show.id} to={`/shows/${show.id}`}>
                   <Card
                     alt={show.name}
                     key={show.id}

@@ -8,12 +8,12 @@ interface MediaPosterProps {
   imageUrl: string;
 }
 
-export const MediaPoster: React.FC<MediaPosterProps> = ({
+export const MediaPoster = ({
   title,
   posterPath,
   tagline,
   imageUrl,
-}) => (
+}: MediaPosterProps) => (
   <PosterContainer>
     <Title>{title}</Title>
     <PosterImage src={`${imageUrl}${posterPath}`} alt={title} />
