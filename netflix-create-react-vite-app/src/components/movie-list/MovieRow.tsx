@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import type { MovieResult } from '../../utils/types/types';
 import { Card } from '../card/card';
@@ -77,15 +78,17 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
           {movies.map((movie, idx) =>
             movie.poster_path ? (
               <div ref={idx === 0 ? cardRef : undefined} key={movie.id}>
-                <Card
-                  alt={movie.title}
-                  overview={movie.overview}
-                  src={`${imageUrl}${movie.poster_path}`}
-                  title={movie.title}
-                  vote_average={movie.vote_average}
-                  id={movie.id}
-                  media_type={movie.media_type ? movie.media_type : 'movie'}
-                />
+                <Link to={`/${movie.media_type === 'tv' ? 'shows' : 'movies'}/${movie.id}`}>
+                  <Card
+                    alt={movie.title}
+                    overview={movie.overview}
+                    src={`${imageUrl}${movie.poster_path}`}
+                    title={movie.title}
+                    vote_average={movie.vote_average}
+                    id={movie.id}
+                    media_type={movie.media_type ? movie.media_type : 'movie'}
+                  />
+                </Link>
               </div>
             ) : null
           )}
