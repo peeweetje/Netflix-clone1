@@ -44,10 +44,18 @@ export const BackCard = ({
       item.id === id &&
       item.media_type === media_type
   );
+
+  // Truncate overview if too long
+  const MAX_OVERVIEW_LENGTH = 500;
+  const truncatedOverview =
+    overview && overview.length > MAX_OVERVIEW_LENGTH
+      ? overview.slice(0, MAX_OVERVIEW_LENGTH) + '...'
+      : overview;
+
   return (
     <CardBackContainer>
       <TitleContainer>{title}</TitleContainer>
-      <OverviewContainer>{overview}</OverviewContainer>
+      <OverviewContainer>{truncatedOverview}</OverviewContainer>
 
       <StyledScoreContainer>
         <BackCardButton
