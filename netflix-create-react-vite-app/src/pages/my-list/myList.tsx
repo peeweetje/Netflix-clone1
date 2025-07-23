@@ -93,7 +93,7 @@ export const MyList = () => {
                   const item = myList.find((m) => m.id === movie.id);
                   if (!item) return null;
                   return (
-                    <CardWrapper key={movie.id + '-' + item.media_type}>
+                    <CardWrapper key={`${movie.id}-${item.media_type}`}>
                       <Link
                         to={`/${item.media_type === 'tv' ? 'shows' : 'movies'}/${movie.id}`}>
                         <Card
