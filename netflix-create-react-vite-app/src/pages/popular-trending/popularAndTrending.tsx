@@ -58,7 +58,7 @@ export const PopularAndTrending = () => {
     overview: show.overview,
     title: show.name,
     vote_average: show.vote_average,
-    media_type: 'tv', // Add this line
+    media_type: 'tv', 
   });
 
   return (

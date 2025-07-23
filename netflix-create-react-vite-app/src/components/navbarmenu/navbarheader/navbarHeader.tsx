@@ -38,9 +38,7 @@ export const NavbarHeader = ({ onChange, value }: navbarHeaderProps) => {
           {t('my-list')}
         </NavItems>
       </NavList>
-      {location.pathname !== '/my-list' && (
-        <SearchBar onChange={onChange} value={value} />
-      )}
+      <SearchBar onChange={onChange} value={value} />
     </NavbarMenu>
   );
 };
