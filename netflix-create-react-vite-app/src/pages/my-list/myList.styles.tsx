@@ -6,10 +6,11 @@ export const CardWrapper = styled.div`
 `;
 
 export const MyListContainer = styled.div`
-  padding:${({ theme }) => theme.space[10]};
-  min-height: 100vh;
-  background:${({ theme }) => theme.colors.black};
- 
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${(props) => props.theme.space[8]};
+  justify-content: center;
+  align-items: flex-start;
 `;
 
 export const MoviesGrid = styled.div`
@@ -39,6 +40,7 @@ export const RemovalNotice = styled.div`
 `;
 
 export const RemoveButton = styled.button`
+  width: 100%;
   background: ${(props) => props.theme.colors.blue};
   color: ${(props) => props.theme.colors.white};
   border: none;
