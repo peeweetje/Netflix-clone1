@@ -1,6 +1,5 @@
-
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Spinner } from '../spinner/spinner';
 import { imageUrl, VITE_API_KEY } from '../../utils/api';
 import {
@@ -10,6 +9,7 @@ import {
   MainColumns,
   LeftColumn,
   RightColumn,
+  GoBackButton,
 } from './details-styles';
 import { CastMember } from './castMember';
 import { MediaPoster } from './MediaPoster';
@@ -39,6 +39,7 @@ interface CastMember {
 
 export const MediaDetail = ({ type }: MediaDetailProps) => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [media, setMedia] = useState<MediaData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -98,6 +99,7 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
 
   return (
     <StyledContainer>
+      <GoBackButton onClick={() => navigate(-1)}>Go Back</GoBackButton>
       <MainColumns>
         <LeftColumn>
         <MediaPoster

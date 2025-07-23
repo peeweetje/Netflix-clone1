@@ -1,5 +1,21 @@
 import styled from 'styled-components';
 
+export const GoBackButton = styled.button`
+  background: ${(props) => props.theme.colors.blue};
+  color: ${(props) => props.theme.colors.white};
+  border: none;
+  border-radius: ${(props) => props.theme.borderRadius[1]};
+  padding: 8px 16px;
+  font-size: ${(props) => props.theme.fontSize[3]};
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-bottom: ${(props) => props.theme.space[4]};
+  &:hover {
+    background: ${(props) => props.theme.colors.white};
+    color: ${(props) => props.theme.colors.black};
+  }
+`;
+
 export const StyledContainer = styled.div`
   min-height: 100vh;
   display: flex;
