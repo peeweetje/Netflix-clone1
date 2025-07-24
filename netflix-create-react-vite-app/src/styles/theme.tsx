@@ -51,6 +51,6 @@ export const theme: DefaultTheme = {
   ],
   fontSize: ['0.5rem', '0.7rem', '0.8rem', '1rem', '1.25rem', '1.5rem', '2rem', '2.5rem'],
   borderRadius: ['2px', '4px', '6px', '8px'],
-  boderShadow: ['0 25px 50px -12px rgba(169, 154, 154, 0.54)'],
+  borderShadow: ['0 25px 50px -12px rgba(169, 154, 154, 0.54)'],
   lineHeight: ['1.2', '1.3', '1.4', '1.5', '1.8', '2'],
 };

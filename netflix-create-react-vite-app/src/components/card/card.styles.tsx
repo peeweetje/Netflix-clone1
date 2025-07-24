@@ -25,6 +25,7 @@ export const CardFront = styled.div`
 
 export const StyledImg = styled.img`
   border-radius: ${(props) => props.theme.borderRadius[3]};
+  box-shadow: ${(props) => props.theme.borderShadow[0]};
   height: 350px;
   width: 250px;
 `;
