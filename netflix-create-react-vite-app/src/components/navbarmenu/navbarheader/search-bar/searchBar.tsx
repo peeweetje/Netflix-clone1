@@ -1,6 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavbarInput, NavbarSearch } from './searchbar.styles';
+import { SearchIcon } from './search-icon';
+import {
+  NavbarInput,
+  NavbarSearch,
+  SearchContainer,
+  SearchIconWrapper,
+} from './searchbar.styles';
 
 export type searchProps = {
   onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
@@ -11,12 +17,17 @@ export const SearchBar = ({ value, onChange }: searchProps) => {
   const { t } = useTranslation();
   return (
     <NavbarSearch>
-      <NavbarInput
-        onChange={onChange}
-        placeholder={t('search-title')}
-        type="search"
-        value={value}
-      />
+      <SearchContainer>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
+        <NavbarInput
+          onChange={onChange}
+          placeholder={t('search-title')}
+          type="search"
+          value={value}
+        />
+      </SearchContainer>
     </NavbarSearch>
   );
 };
