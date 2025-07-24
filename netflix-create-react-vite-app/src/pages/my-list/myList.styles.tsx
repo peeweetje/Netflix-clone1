@@ -1,3 +1,4 @@
+
 import styled from 'styled-components';
 
 
@@ -11,12 +12,15 @@ export const MyListContainer = styled.div`
   gap: ${(props) => props.theme.space[8]};
   justify-content: center;
   align-items: flex-start;
+
 `;
 
 export const MoviesGrid = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.space[9]};
   flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: ${({ theme }) => theme.space[10]};
 `;
 
 export const MovieCard = styled.div`
