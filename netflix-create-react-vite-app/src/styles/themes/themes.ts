@@ -46,7 +46,7 @@ export const yellowTheme: DefaultTheme = {
     white: '#fff',
     blue: '#8EB3CC',
     primary:"#ffff00", 
-    lightPurple:"#FFFF99", 
+    primaryLight:"#FFFF99", 
     yellow:"#ffff00",
     red: '#ff0000',
     orange: '#FFA500',
