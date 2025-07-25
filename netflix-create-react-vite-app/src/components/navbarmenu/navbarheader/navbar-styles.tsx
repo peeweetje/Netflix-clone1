@@ -65,7 +65,7 @@ export const BrandContainer = styled.div<{ $centered?: boolean }>`
  export const ToggleButton = styled.button`
   margin-left: auto;
   padding: 8px 16px;
-  background-color: ${(props) => props.theme.colors.purple};
+  background-color: ${(props) => props.theme.colors.primary};
   color: ${(props) => props.theme.colors.buttonText};
   border: none;
   border-radius: 4px;

@@ -21,7 +21,7 @@ export const SearchContainer = styled.div`
 
 export const NavbarInput = styled.input`
   background-color: transparent;
-  border: 1px solid ${(props) => props.theme.colors.purple};
+  border: 1px solid ${(props) => props.theme.colors.primary};
   border-radius: ${(props) => props.theme.borderRadius[2]};
   color: ${(props) => props.theme.colors.white};
   padding: ${(props) => props.theme.space[4]} ${(props) => props.theme.space[4]} ${(props) => props.theme.space[4]} 40px;
@@ -50,6 +50,6 @@ export const NavbarInput = styled.input`
 export const SearchIconWrapper = styled.div`
   position: absolute;
   left: 10px;
-  color: ${(props) => props.theme.colors.purple};
+  color: ${(props) => props.theme.colors.primary};
   pointer-events: none;
 `;

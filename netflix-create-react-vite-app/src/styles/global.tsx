@@ -11,7 +11,7 @@ body {
 }
 a {
     text-decoration: none;
-    color: ${(props) => props.theme.colors.purple};
+    color: ${(props) => props.theme.colors.primary};
 }
 ul {
     list-style: none;
