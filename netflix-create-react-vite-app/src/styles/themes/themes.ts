@@ -7,7 +7,7 @@ export const purpleTheme: DefaultTheme = {
     white: '#fff',
     blue: '#8EB3CC',
     primary:"#5928ed",
-    lightPurple:"#9b8bf4",
+    primaryLight:"#9b8bf4",
     yellow:"#ffff00",
     red: '#ff0000',
     orange: '#FFA500',

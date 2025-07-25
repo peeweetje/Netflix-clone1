@@ -11,7 +11,7 @@ declare module 'styled-components' {
       orange: string;
       green: string;
       primary: string;
-      lightPurple: string;
+      primaryLight: string;
       yellow: string;
       buttonText: string;
     };

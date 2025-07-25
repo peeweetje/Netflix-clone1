@@ -64,7 +64,7 @@ export const BannerButton = styled.button`
   font-weight: 600;
   transition: background 0.2s;
   &:hover {
-    background: ${(props) => props.theme.colors.lightPurple};
+    background: ${(props) => props.theme.colors.primaryLight};
     color: ${(props) => props.theme.colors.black};
   }
 `;

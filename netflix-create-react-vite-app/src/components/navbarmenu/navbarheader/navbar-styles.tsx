@@ -27,7 +27,7 @@ export const NavList = styled.ul<{ $centered?: boolean }>`
     padding: ${(props) => props.theme.space[8]};
     white-space: nowrap;
     font-size: ${(props) => props.theme.fontSize[4]};
-    color: ${(props) => props.theme.colors.lightPurple};
+    color: ${(props) => props.theme.colors.primaryLight};
   }
 
   li:hover {
@@ -53,7 +53,7 @@ export const BrandContainer = styled.div<{ $centered?: boolean }>`
   font-size: ${(props) => props.theme.fontSize[5]};
   padding-left: ${(props) => props.theme.space[8]};
   list-style: none;
-  color: ${(props) => props.theme.colors.lightPurple};
+  color: ${(props) => props.theme.colors.primaryLight};
 
 
   @media (max-width: 768px) {
@@ -71,6 +71,6 @@ export const BrandContainer = styled.div<{ $centered?: boolean }>`
   border-radius: 4px;
   cursor: pointer;
   &:hover {
-    background-color: ${(props) => props.theme.colors.lightPurple};
+    background-color: ${(props) => props.theme.colors.primaryLight};
   }
 `;

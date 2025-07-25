@@ -24,7 +24,7 @@ export const RowContainer = styled.section`
 `;
 
 export const RowTitle = styled.h2`
-  color: ${(props) => props.theme.colors.lightPurple};
+  color: ${(props) => props.theme.colors.primaryLight};
   font-size: ${(props) => props.theme.fontSize[5]};
   margin-left: ${(props) => props.theme.space[4]};
   margin-bottom: ${(props) => props.theme.space[4]};
@@ -66,7 +66,7 @@ export const ArrowButton = styled.button`
     right: -1.5rem;
   }
   &:hover {
-    backgroundcolor: ${(props) => props.theme.colors.lightPurple};
+    backgroundcolor: ${(props) => props.theme.colors.primaryLight};
    
   }
   &.active {

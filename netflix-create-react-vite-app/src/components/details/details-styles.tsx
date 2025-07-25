@@ -125,7 +125,7 @@ export const Title = styled.h2`
   word-break: break-word;
   text-align: center;
   margin: 8px auto;
-  color: ${({ theme }) => theme.colors.lightPurple};
+  color: ${({ theme }) => theme.colors.primaryLight};
 `;
 
 export const CastCard = styled.div`

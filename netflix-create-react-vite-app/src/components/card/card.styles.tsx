@@ -46,7 +46,7 @@ export const CardBackContainer = styled.div`
   height: 350px;
   width: 250px;
   overflow: visible;
-  background: ${(props) => props.theme.colors.lightPurple};
+  background: ${(props) => props.theme.colors.primaryLight};
   color: ${(props) => props.theme.colors.buttonText};
   border-radius: ${(props) => props.theme.borderRadius[3]};
 `;
