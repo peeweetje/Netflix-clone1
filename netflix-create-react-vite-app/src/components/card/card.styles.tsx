@@ -47,7 +47,7 @@ export const CardBackContainer = styled.div`
   width: 250px;
   overflow: visible;
   background: ${(props) => props.theme.colors.lightPurple};
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.buttonText};
   border-radius: ${(props) => props.theme.borderRadius[3]};
 `;
 
@@ -112,8 +112,9 @@ export const BackCardButton = styled.button<{ isAdded: boolean }>`
   margin-right: auto;
   margin-bottom: ${(props) => props.theme.space[2]};
   background: ${({ isAdded, theme }) =>
-    isAdded ? theme.colors.black : theme.colors.purple};
-  color: ${(props) => props.theme.colors.white};
+    isAdded ? theme.colors.black : theme.colors.yellowButton};
+  color: ${({ isAdded, theme }) =>
+    isAdded ? theme.colors.white : theme.colors.yellowButtonText};
   border: none;
   border-radius: 4px;
   padding: 6px 16px;

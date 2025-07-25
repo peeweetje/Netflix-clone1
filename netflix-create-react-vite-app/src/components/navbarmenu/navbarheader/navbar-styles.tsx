@@ -1,4 +1,3 @@
-import { BackgroundColor } from './../../../../../netflix-create-next-app/styled-system/types/csstype.d';
 import styled from 'styled-components';
 
 export const NavbarMenu = styled.nav`
@@ -60,5 +59,18 @@ export const BrandContainer = styled.div<{ $centered?: boolean }>`
   @media (max-width: 768px) {
     justify-content: center;
     margin-right: ${(props) => props.theme.space[0]};
+  }
+`;
+
+ export const ToggleButton = styled.button`
+  margin-left: auto;
+  padding: 8px 16px;
+  background-color: ${(props) => props.theme.colors.purple};
+  color: ${(props) => props.theme.colors.buttonText};
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  &:hover {
+    background-color: ${(props) => props.theme.colors.lightPurple};
   }
 `;

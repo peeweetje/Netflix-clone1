@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const GoBackButton = styled.button`
-  background: ${(props) => props.theme.colors.purple};
-  color: ${(props) => props.theme.colors.white};
+  background: ${(props) => props.theme.colors.yellowButton};
+  color: ${(props) => props.theme.colors.yellowButtonText};
   border: none;
   border-radius: ${(props) => props.theme.borderRadius[1]};
   padding: 8px 16px;
@@ -11,7 +11,7 @@ export const GoBackButton = styled.button`
   transition: background 0.2s;
   margin-bottom: ${(props) => props.theme.space[4]};
   &:hover {
-    background: ${(props) => props.theme.colors.lightPurple};
+    background: ${(props) => props.theme.colors.yellow};
     color: ${(props) => props.theme.colors.black};
   }
 `;
@@ -125,7 +125,7 @@ export const Title = styled.h2`
   word-break: break-word;
   text-align: center;
   margin: 8px auto;
-  
+  color: ${({ theme }) => theme.colors.lightPurple};
 `;
 
 export const CastCard = styled.div`
@@ -168,7 +168,7 @@ export const CastImageFallback = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${({ theme }) => theme.colors.purple};
+  color: ${({ theme }) => theme.colors.yellow};
   font-size: 14px;
 `;
 

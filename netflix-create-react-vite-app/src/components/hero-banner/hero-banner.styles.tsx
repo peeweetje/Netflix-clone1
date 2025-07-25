@@ -55,7 +55,7 @@ export const BannerButtons = styled.div`
 
 export const BannerButton = styled.button`
   background: ${(props) => props.theme.colors.purple};
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.buttonText};
   border: none;
   padding: 0.7rem 2rem;
   font-size: 1.1rem;

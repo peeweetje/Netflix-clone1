@@ -1,9 +1,18 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavItems } from './nav-items';
-import { BrandContainer, NavbarMenu, NavList } from './navbar-styles';
+import {
+  BrandContainer,
+  NavbarMenu,
+  NavList,
+  ToggleButton,
+} from './navbar-styles';
 import { SearchBar } from './search-bar/searchBar';
 import { useLocation } from 'react-router-dom';
+import { useTheme } from '../../../context/themeContext';
+import styled from 'styled-components';
+
+
 
 export type navbarHeaderProps = {
   onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
@@ -13,6 +22,7 @@ export type navbarHeaderProps = {
 export const NavbarHeader = ({ onChange, value }: navbarHeaderProps) => {
   const { t } = useTranslation();
   const location = useLocation();
+  const { toggleTheme } = useTheme();
 
   return (
     <NavbarMenu aria-label={t('site-navigation')} role='navigation'>
@@ -38,6 +48,9 @@ export const NavbarHeader = ({ onChange, value }: navbarHeaderProps) => {
           {t('my-list')}
         </NavItems>
       </NavList>
+      <ToggleButton onClick={toggleTheme}>
+        Toggle Theme
+      </ToggleButton>
       <SearchBar onChange={onChange} value={value} />
     </NavbarMenu>
   );

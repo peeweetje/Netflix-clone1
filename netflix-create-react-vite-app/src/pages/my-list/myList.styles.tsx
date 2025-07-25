@@ -46,7 +46,7 @@ export const RemovalNotice = styled.div`
 export const RemoveButton = styled.button`
   width: 100%;
   background: ${(props) => props.theme.colors.purple};
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.buttonText};
   border: none;
   border-radius: ${(props) => props.theme.borderRadius[1]};
   padding: 8px 16px;

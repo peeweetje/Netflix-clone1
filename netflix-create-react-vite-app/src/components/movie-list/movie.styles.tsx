@@ -50,7 +50,7 @@ export const ArrowButton = styled.button`
   z-index: 2;
   background: rgba(0, 0, 0, 0.6);
   border: none;
-  color: ${(props) => props.theme.colors.lightPurple};
+  color: ${(props) => props.theme.colors.purple};
   font-size: ${(props) => props.theme.fontSize[6]};
   width: 48px;
   height: 64px;
@@ -66,7 +66,7 @@ export const ArrowButton = styled.button`
     right: -1.5rem;
   }
   &:hover {
-    backgroundcolor: ${(props) => props.theme.colors.purple};
+    backgroundcolor: ${(props) => props.theme.colors.lightPurple};
    
   }
   &.active {

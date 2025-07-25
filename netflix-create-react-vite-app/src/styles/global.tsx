@@ -7,7 +7,7 @@ body {
     padding: ${(props) => props.theme.space[0]};
     font-family:${(props) => props.theme.fontFamily};
     background-color:${(props) => props.theme.colors.black};
-    color:${(props) => props.theme.colors.purple}
+    color:${(props) => props.theme.colors.white}
 }
 a {
     text-decoration: none;
