@@ -16,12 +16,12 @@ export const NavbarHeader = ({ onChange, value }: navbarHeaderProps) => {
 
   return (
     <NavbarMenu aria-label={t('site-navigation')} role='navigation'>
-      <BrandContainer $centered={location.pathname === '/my-list'}>
+      <BrandContainer>
         <NavItems aria-label={t('binge-watch')} to='/'>
           {t('binge-watch')}
         </NavItems>
       </BrandContainer>
-      <NavList $centered={location.pathname === '/my-list'}>
+      <NavList>
         <NavItems aria-label={t('home-page')} to='/'>
           {t('home-page')}
         </NavItems>

@@ -42,11 +42,12 @@ export const CardBackContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   height: 350px;
   width: 250px;
   overflow: visible;
-  background: ${(props) => props.theme.colors.grey};
+  background: ${(props) => props.theme.colors.lightPurple};
+  color: ${(props) => props.theme.colors.white};
   border-radius: ${(props) => props.theme.borderRadius[3]};
 `;
 
@@ -101,7 +102,6 @@ export const MotionCardBack = styled.div`
   backface-visibility: hidden;
   transform: rotateY(180deg);
   z-index: 1;
-  background: ${({ theme }) => theme.colors.black};
   border-radius: ${(props) => props.theme.borderRadius[3]};
 `;
 
@@ -112,7 +112,7 @@ export const BackCardButton = styled.button<{ isAdded: boolean }>`
   margin-right: auto;
   margin-bottom: ${(props) => props.theme.space[2]};
   background: ${({ isAdded, theme }) =>
-    isAdded ? theme.colors.black : theme.colors.blue};
+    isAdded ? theme.colors.black : theme.colors.purple};
   color: ${(props) => props.theme.colors.white};
   border: none;
   border-radius: 4px;

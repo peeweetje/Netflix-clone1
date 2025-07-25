@@ -24,7 +24,7 @@ export const RowContainer = styled.section`
 `;
 
 export const RowTitle = styled.h2`
-  color: ${(props) => props.theme.colors.blue};
+  color: ${(props) => props.theme.colors.lightPurple};
   font-size: ${(props) => props.theme.fontSize[5]};
   margin-left: ${(props) => props.theme.space[4]};
   margin-bottom: ${(props) => props.theme.space[4]};
@@ -50,7 +50,7 @@ export const ArrowButton = styled.button`
   z-index: 2;
   background: rgba(0, 0, 0, 0.6);
   border: none;
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.lightPurple};
   font-size: ${(props) => props.theme.fontSize[6]};
   width: 48px;
   height: 64px;
@@ -66,8 +66,8 @@ export const ArrowButton = styled.button`
     right: -1.5rem;
   }
   &:hover {
-    backgroundcolor: ${(props) => props.theme.colors.blue};
-    color:;
+    backgroundcolor: ${(props) => props.theme.colors.purple};
+   
   }
   &.active {
     opacity: 1;

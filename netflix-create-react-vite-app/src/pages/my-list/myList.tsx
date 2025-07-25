@@ -66,7 +66,7 @@ export const MyList = () => {
           )
         ) : (
           <>
-            <h1>My List</h1>
+          
             {removalNotice && <RemovalNotice>{removalNotice}</RemovalNotice>}
             {failedItems.length > 0 && (
               <div style={{ color: 'red' }}>

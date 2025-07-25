@@ -54,7 +54,7 @@ export const BannerButtons = styled.div`
 `;
 
 export const BannerButton = styled.button`
-  background: ${(props) => props.theme.colors.black};
+  background: ${(props) => props.theme.colors.purple};
   color: ${(props) => props.theme.colors.white};
   border: none;
   padding: 0.7rem 2rem;
@@ -64,7 +64,7 @@ export const BannerButton = styled.button`
   font-weight: 600;
   transition: background 0.2s;
   &:hover {
-    background: ${(props) => props.theme.colors.blue};
-    color: ${(props) => props.theme.colors.white};
+    background: ${(props) => props.theme.colors.lightPurple};
+    color: ${(props) => props.theme.colors.black};
   }
 `;

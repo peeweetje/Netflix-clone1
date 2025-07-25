@@ -10,6 +10,9 @@ declare module 'styled-components' {
       red: string;
       orange: string;
       green: string;
+      purple: string;
+      lightPurple: string;
+      yellow: string;
     };
     fontFamily: string;
     space: string[];
@@ -26,6 +29,9 @@ export const theme: DefaultTheme = {
     black: '#000',
     white: '#fff',
     blue: '#8EB3CC',
+    purple:"#5928ed",
+    lightPurple:"#9b8bf4",
+    yellow:"#ffff00",
     red: '#ff0000',
     orange: '#FFA500',
     green: '#00FF00',
@@ -51,6 +57,6 @@ export const theme: DefaultTheme = {
   ],
   fontSize: ['0.5rem', '0.7rem', '0.8rem', '1rem', '1.25rem', '1.5rem', '2rem', '2.5rem'],
   borderRadius: ['2px', '4px', '6px', '8px'],
-  borderShadow: ['0 25px 50px -12px rgba(169, 154, 154, 0.54)'],
+  borderShadow: ['0 25px 100px -10px rgba(169, 154, 154, 0.54)'],
   lineHeight: ['1.2', '1.3', '1.4', '1.5', '1.8', '2'],
 };

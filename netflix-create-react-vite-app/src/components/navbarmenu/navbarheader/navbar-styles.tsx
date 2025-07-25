@@ -1,3 +1,4 @@
+import { BackgroundColor } from './../../../../../netflix-create-next-app/styled-system/types/csstype.d';
 import styled from 'styled-components';
 
 export const NavbarMenu = styled.nav`
@@ -12,6 +13,7 @@ export const NavbarMenu = styled.nav`
 `;
 
 export const NavList = styled.ul<{ $centered?: boolean }>`
+  
   display: flex;
   justify-content: center;
   flex-flow: wrap;
@@ -26,6 +28,7 @@ export const NavList = styled.ul<{ $centered?: boolean }>`
     padding: ${(props) => props.theme.space[8]};
     white-space: nowrap;
     font-size: ${(props) => props.theme.fontSize[4]};
+    color: ${(props) => props.theme.colors.lightPurple};
   }
 
   li:hover {
@@ -51,6 +54,8 @@ export const BrandContainer = styled.div<{ $centered?: boolean }>`
   font-size: ${(props) => props.theme.fontSize[5]};
   padding-left: ${(props) => props.theme.space[8]};
   list-style: none;
+  color: ${(props) => props.theme.colors.lightPurple};
+
 
   @media (max-width: 768px) {
     justify-content: center;

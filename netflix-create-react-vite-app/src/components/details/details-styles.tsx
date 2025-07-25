@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const GoBackButton = styled.button`
-  background: ${(props) => props.theme.colors.blue};
+  background: ${(props) => props.theme.colors.purple};
   color: ${(props) => props.theme.colors.white};
   border: none;
   border-radius: ${(props) => props.theme.borderRadius[1]};
@@ -11,7 +11,7 @@ export const GoBackButton = styled.button`
   transition: background 0.2s;
   margin-bottom: ${(props) => props.theme.space[4]};
   &:hover {
-    background: ${(props) => props.theme.colors.white};
+    background: ${(props) => props.theme.colors.lightPurple};
     color: ${(props) => props.theme.colors.black};
   }
 `;
@@ -54,13 +54,14 @@ export const InfoColumn = styled.div`
   min-width: 0;
   line-height:${({ theme }) => theme.lineHeight[3]};
   padding: ${({ theme }) => theme.space[3]};
-  border: 1px solid ${({ theme }) => theme.colors.grey[2]};
+  
  
 `;
 
 export const InfoText = styled.p`
   margin:${({ theme }) => theme.space[1]} ;
   font-size: ${({ theme }) => theme.fontSize[3]};
+  
 `;
 
 export const InfoLabel = styled.span`
@@ -124,6 +125,7 @@ export const Title = styled.h2`
   word-break: break-word;
   text-align: center;
   margin: 8px auto;
+  
 `;
 
 export const CastCard = styled.div`
@@ -132,6 +134,7 @@ export const CastCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 `;
 
 export const CastImage = styled.img`
@@ -148,10 +151,11 @@ export const CastImage = styled.img`
 export const CastName = styled.div`
   font-weight: bold;
   margin-top: ${({ theme }) => theme.space[2]};
+  
 `;
 
 export const CastCharacter = styled.div`
-  font-size: 12px;
+  font-size: ${({ theme }) => theme.fontSize[2]};
   color: ${({ theme }) => theme.colors.white};
 `;
 
@@ -164,7 +168,7 @@ export const CastImageFallback = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${({ theme }) => theme.colors.blue};
+  color: ${({ theme }) => theme.colors.purple};
   font-size: 14px;
 `;
 

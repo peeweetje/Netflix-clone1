@@ -45,7 +45,7 @@ export const RemovalNotice = styled.div`
 
 export const RemoveButton = styled.button`
   width: 100%;
-  background: ${(props) => props.theme.colors.blue};
+  background: ${(props) => props.theme.colors.purple};
   color: ${(props) => props.theme.colors.white};
   border: none;
   border-radius: ${(props) => props.theme.borderRadius[1]};
@@ -54,7 +54,7 @@ export const RemoveButton = styled.button`
   cursor: pointer;
   transition: background 0.2s;
   &:hover {
-    background: ${(props) => props.theme.colors.white};
+    background: ${(props) => props.theme.colors.lightPurple};
     color: ${(props) => props.theme.colors.black};
   }
 `;

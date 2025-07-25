@@ -7,11 +7,11 @@ body {
     padding: ${(props) => props.theme.space[0]};
     font-family:${(props) => props.theme.fontFamily};
     background-color:${(props) => props.theme.colors.black};
-    color:${(props) => props.theme.colors.blue}
+    color:${(props) => props.theme.colors.purple}
 }
 a {
     text-decoration: none;
-    color: ${(props) => props.theme.colors.blue};
+    color: ${(props) => props.theme.colors.purple};
 }
 ul {
     list-style: none;
