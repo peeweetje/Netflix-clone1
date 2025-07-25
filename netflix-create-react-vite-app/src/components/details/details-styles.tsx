@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const GoBackButton = styled.button`
-  background: ${(props) => props.theme.colors.yellowButton};
-  color: ${(props) => props.theme.colors.yellowButtonText};
+  background: ${(props) => props.theme.colors.primaryLight};
+  color: ${(props) => props.theme.colors.buttonText};
   border: none;
   border-radius: ${(props) => props.theme.borderRadius[1]};
   padding: 8px 16px;
@@ -11,8 +11,8 @@ export const GoBackButton = styled.button`
   transition: background 0.2s;
   margin-bottom: ${(props) => props.theme.space[4]};
   &:hover {
-    background: ${(props) => props.theme.colors.yellow};
-    color: ${(props) => props.theme.colors.black};
+    background: ${(props) => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.buttonText};
   }
 `;
 
@@ -97,6 +97,7 @@ export const Tagline = styled.p`
   word-break: break-word;
   margin-left: auto;
   margin-right: auto;
+  color: ${({ theme }) => theme.colors.primaryLight};
 `;
 
 export const MainColumns = styled.div`
@@ -142,7 +143,7 @@ export const CastImage = styled.img`
   height: 120px;
   border-radius: ${({ theme }) => theme.borderRadius[2]};
   object-fit: cover;
-  background: ${({ theme }) => theme.colors.black};
+  background: ${({ theme }) => theme.colors.buttonText};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -151,12 +152,12 @@ export const CastImage = styled.img`
 export const CastName = styled.div`
   font-weight: bold;
   margin-top: ${({ theme }) => theme.space[2]};
-  
+  color: ${({ theme }) => theme.colors.primaryLight};
 `;
 
 export const CastCharacter = styled.div`
   font-size: ${({ theme }) => theme.fontSize[2]};
-  color: ${({ theme }) => theme.colors.white};
+  
 `;
 
 
@@ -168,8 +169,8 @@ export const CastImageFallback = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${({ theme }) => theme.colors.yellow};
-  font-size: 14px;
+  color: ${({ theme }) => theme.colors.primary};
+  font-size: ${({ theme }) => theme.fontSize[2]};
 `;
 
 export const PosterContainer = styled.div`
