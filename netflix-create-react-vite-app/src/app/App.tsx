@@ -8,10 +8,22 @@ import { PopularAndTrending } from '../pages/popular-trending/popularAndTrending
 import { Shows } from '../pages/shows/shows';
 
 import { GlobalStyle } from '../styles/global';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
+import { ThemeProvider, useTheme } from '../context/themeContext';
 
 export const App = () => {
   return (
-    <>
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
+  );
+};
+
+const AppContent = () => {
+  const { theme } = useTheme();
+
+  return (
+    <StyledThemeProvider theme={theme}>
       <GlobalStyle />
       <Routes>
         <Route element={<Homepage />} path='/' />
@@ -22,6 +34,6 @@ export const App = () => {
         <Route element={<MediaDetail type="movie" />} path='/movies/:id' />
         <Route element={<MediaDetail type="tv" />} path='/shows/:id' />
       </Routes>
-    </>
+    </StyledThemeProvider>
   );
 };
