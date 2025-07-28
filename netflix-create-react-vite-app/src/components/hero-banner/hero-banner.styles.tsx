@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 
 
@@ -67,4 +67,42 @@ export const BannerButton = styled.button`
     background: ${(props) => props.theme.colors.primaryLight};
     color: ${(props) => props.theme.colors.black};
   }
+`;
+
+const fall = keyframes`
+  0% { transform: translateY(-100vh) rotate(0deg); }
+  100% { transform: translateY(100vh) rotate(360deg); }
+`;
+
+export const SnowContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+`;
+
+export const Snow = styled.div`
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: #fff;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: ${fall} linear infinite;
+  top: -10px;
+
+  &:nth-child(1) { left: 10%; animation-duration: 10s; animation-delay: 0s; }
+  &:nth-child(2) { left: 20%; animation-duration: 12s; animation-delay: -2s; }
+  &:nth-child(3) { left: 30%; animation-duration: 8s; animation-delay: -4s; }
+  &:nth-child(4) { left: 40%; animation-duration: 15s; animation-delay: -1s; }
+  &:nth-child(5) { left: 50%; animation-duration: 9s; animation-delay: -3s; }
+  &:nth-child(6) { left: 60%; animation-duration: 11s; animation-delay: -5s; }
+  &:nth-child(7) { left: 70%; animation-duration: 13s; animation-delay: -1.5s; }
+  &:nth-child(8) { left: 80%; animation-duration: 7s; animation-delay: -3.5s; }
+  &:nth-child(9) { left: 90%; animation-duration: 14s; animation-delay: -0.5s; }
+  &:nth-child(10) { left: 100%; animation-duration: 10s; animation-delay: -2.5s; }
 `;

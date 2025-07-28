@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { BannerContainer, BannerOverlay, BannerTitle, BannerOverview, BannerButtons, BannerButton } from './hero-banner.styles';
+import { BannerContainer, BannerOverlay, BannerTitle, BannerOverview, BannerButtons, BannerButton, SnowContainer, Snow } from './hero-banner.styles';
+import { useTheme } from '../../context/themeContext';
+import { winterTheme } from '../../styles/themes/themes';
 
 interface HeroBannerProps {
   backgroundImage: string;
@@ -16,9 +18,19 @@ export const HeroBanner = ({
   onPlay,
 }: HeroBannerProps) => {
   const [showInfo, setShowInfo] = useState(false);
+  const { theme } = useTheme();
+
+  const renderSnow = () => (
+    <SnowContainer>
+      {Array.from({ length: 50 }).map((_, i) => (
+        <Snow key={i} />
+      ))}
+    </SnowContainer>
+  );
 
   return (
     <BannerContainer backgroundImage={backgroundImage}>
+      {theme.name === winterTheme.name && renderSnow()}
       <BannerOverlay>
         <div>
           <BannerTitle>{title}</BannerTitle>
