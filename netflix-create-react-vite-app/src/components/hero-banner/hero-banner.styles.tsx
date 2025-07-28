@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 
 
@@ -67,4 +67,65 @@ export const BannerButton = styled.button`
     background: ${(props) => props.theme.colors.primaryLight};
     color: ${(props) => props.theme.colors.black};
   }
+`;
+
+const fall = keyframes`
+  0% { transform: translateY(-100vh) rotate(0deg); }
+  100% { transform: translateY(100vh) rotate(360deg); }
+`;
+
+const leafFall = keyframes`
+  0% {
+    transform: translateY(-10vh) translateX(0) rotateZ(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(50px) rotateZ(720deg);
+    opacity: 0;
+  }
+`;
+
+export const SnowContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+`;
+
+export const LeafContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+`;
+
+export const Leaf = styled.div`
+  position: absolute;
+  opacity: 0;
+  animation: ${leafFall} linear infinite;
+  top: -10px;
+  width: 20px;
+  height: 20px;
+`;
+
+export const Snow = styled.div`
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: #fff;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: ${fall} linear infinite;
+  top: -10px;
 `;

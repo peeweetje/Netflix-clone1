@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import type { MovieResult } from '../../utils/types/types';
-import { Card } from '../card/card';
+import { SeasonalCard } from '../card/seasonal-card';
 import { imageUrl } from '../../utils/api';
 import {
   RowContainer,
@@ -79,7 +79,7 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
             movie.poster_path ? (
               <div ref={idx === 0 ? cardRef : undefined} key={movie.id}>
                 <Link to={`/${movie.media_type === 'tv' ? 'shows' : 'movies'}/${movie.id}`}>
-                  <Card
+                  <SeasonalCard
                     alt={movie.title}
                     overview={movie.overview}
                     src={`${imageUrl}${movie.poster_path}`}
