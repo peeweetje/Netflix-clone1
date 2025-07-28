@@ -74,6 +74,20 @@ const fall = keyframes`
   100% { transform: translateY(100vh) rotate(360deg); }
 `;
 
+const leafFall = keyframes`
+  0% {
+    transform: translateY(-10vh) translateX(0) rotateZ(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(50px) rotateZ(720deg);
+    opacity: 0;
+  }
+`;
+
 export const SnowContainer = styled.div`
   position: absolute;
   top: 0;
@@ -85,6 +99,26 @@ export const SnowContainer = styled.div`
   pointer-events: none;
 `;
 
+export const LeafContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+`;
+
+export const Leaf = styled.div`
+  position: absolute;
+  opacity: 0;
+  animation: ${leafFall} linear infinite;
+  top: -10px;
+  width: 20px;
+  height: 20px;
+`;
+
 export const Snow = styled.div`
   position: absolute;
   width: 5px;
@@ -94,15 +128,4 @@ export const Snow = styled.div`
   opacity: 0.7;
   animation: ${fall} linear infinite;
   top: -10px;
-
-  &:nth-child(1) { left: 10%; animation-duration: 10s; animation-delay: 0s; }
-  &:nth-child(2) { left: 20%; animation-duration: 12s; animation-delay: -2s; }
-  &:nth-child(3) { left: 30%; animation-duration: 8s; animation-delay: -4s; }
-  &:nth-child(4) { left: 40%; animation-duration: 15s; animation-delay: -1s; }
-  &:nth-child(5) { left: 50%; animation-duration: 9s; animation-delay: -3s; }
-  &:nth-child(6) { left: 60%; animation-duration: 11s; animation-delay: -5s; }
-  &:nth-child(7) { left: 70%; animation-duration: 13s; animation-delay: -1.5s; }
-  &:nth-child(8) { left: 80%; animation-duration: 7s; animation-delay: -3.5s; }
-  &:nth-child(9) { left: 90%; animation-duration: 14s; animation-delay: -0.5s; }
-  &:nth-child(10) { left: 100%; animation-duration: 10s; animation-delay: -2.5s; }
 `;

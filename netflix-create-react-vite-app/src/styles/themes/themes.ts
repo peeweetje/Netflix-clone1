@@ -18,6 +18,7 @@ export const springTheme: DefaultTheme = {
   name: 'spring',
   ...baseTheme,
   colors: {
+    leafIcon: true,
     primary: '#4CAF50', // Green
     primaryLight: '#81C784',
     black: '#000',
