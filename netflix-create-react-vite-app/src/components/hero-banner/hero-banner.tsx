@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BannerContainer, BannerOverlay, BannerTitle, BannerOverview, BannerButtons, BannerButton, SnowContainer, Snow, LeafContainer, Leaf } from './hero-banner.styles';
 import { useTheme } from '../../context/themeContext';
-import { springTheme, winterTheme } from '../../styles/themes/themes';
+import { winterTheme, autumnTheme } from '../../styles/themes/themes';
 import { LeafIcon } from '../svg/leafs';
 
 interface HeroBannerProps {
@@ -38,16 +38,24 @@ export const HeroBanner = ({
 
   const renderLeaves = () => (
     <LeafContainer>
-      {Array.from({ length: 50 }).map((_, i) => (
+      {Array.from({ length: 20 }).map((_, i) => (
         <Leaf
           key={i}
           style={{
             left: `${Math.random() * 100}%`,
             animationDuration: `${Math.random() * 10 + 5}s`, // 5 to 15 seconds
             animationDelay: `${Math.random() * 10}s`,
+            '--x-start': `${Math.random() * 200 - 100}`,
+            '--x-end': `${Math.random() * 200 - 100}`,
           }}
         >
-          <LeafIcon color={theme.colors.primary} />
+          <LeafIcon
+            color={
+              [theme.colors.primary, '#C91E0A', '#e8b83d ', '#8B9216'][i % 3]
+            }
+            width='20'
+            height='20'
+          />
         </Leaf>
       ))}
     </LeafContainer>
@@ -56,7 +64,7 @@ export const HeroBanner = ({
   return (
     <BannerContainer backgroundImage={backgroundImage}>
       {theme.name === winterTheme.name && renderSnow()}
-      {theme.name === springTheme.name && theme.colors.leafIcon && renderLeaves()}
+      {theme.name === autumnTheme.name && theme.colors.leafIcon && renderLeaves()}
       <BannerOverlay>
         <div>
           <BannerTitle>{title}</BannerTitle>

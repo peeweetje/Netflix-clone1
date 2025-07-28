@@ -76,14 +76,14 @@ const fall = keyframes`
 
 const leafFall = keyframes`
   0% {
-    transform: translateY(-10vh) translateX(0) rotateZ(0deg);
+    transform: translateY(-10vh) translateX(calc(var(--x-start) * 1px)) rotateZ(0deg);
     opacity: 0;
   }
   10% {
     opacity: 1;
   }
   100% {
-    transform: translateY(100vh) translateX(50px) rotateZ(720deg);
+    transform: translateY(100vh) translateX(calc(var(--x-end) * 1px)) rotateZ(720deg);
     opacity: 0;
   }
 `;

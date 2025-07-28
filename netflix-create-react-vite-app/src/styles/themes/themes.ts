@@ -18,7 +18,7 @@ export const springTheme: DefaultTheme = {
   name: 'spring',
   ...baseTheme,
   colors: {
-    leafIcon: true,
+    leafIcon: false,
     primary: '#4CAF50', // Green
     primaryLight: '#81C784',
     black: '#000',
@@ -57,7 +57,7 @@ export const autumnTheme: DefaultTheme = {
   name: 'autumn',
   ...baseTheme,
   colors: {
-    leafIcon: false,
+    leafIcon: true,
     primary: '#FF5722', // Deep Orange
     primaryLight: '#FF8A65',
     black: '#000',
