@@ -17,7 +17,7 @@ export const SpinnerContainer = styled.div`
 export const SpinnerWrapper = styled.div`
   width: 50px;
   height: 50px;
-  border: 4px solid ${(props) => props.theme.colors.blue};
+  border: 4px solid ${(props) => props.theme.colors.primary};
   border-top: 4px solid transparent;
   border-radius: 50%;
   animation: ${SpinAnimation} 1s linear infinite;
