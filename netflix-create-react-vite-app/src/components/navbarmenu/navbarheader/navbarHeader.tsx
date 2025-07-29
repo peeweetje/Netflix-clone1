@@ -15,7 +15,7 @@ interface NavbarHeaderProps  {
   value: string;
 }
 
-export const NavbarHeader = ({ onChange, value }: navbarHeaderProps) => {
+export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
   const { t } = useTranslation();
   const { toggleTheme } = useTheme();
 
