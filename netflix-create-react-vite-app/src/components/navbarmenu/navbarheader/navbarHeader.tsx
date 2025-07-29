@@ -8,20 +8,15 @@ import {
   ToggleButton,
 } from './navbar-styles';
 import { SearchBar } from './search-bar/searchBar';
-import { useLocation } from 'react-router-dom';
 import { useTheme } from '../../../context/themeContext';
-import styled from 'styled-components';
 
-
-
-export type navbarHeaderProps = {
-  onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
+interface NavbarHeaderProps  {
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
-};
+}
 
 export const NavbarHeader = ({ onChange, value }: navbarHeaderProps) => {
   const { t } = useTranslation();
-  const location = useLocation();
   const { toggleTheme } = useTheme();
 
   return (
@@ -48,10 +43,10 @@ export const NavbarHeader = ({ onChange, value }: navbarHeaderProps) => {
           {t('my-list')}
         </NavItems>
       </NavList>
-      <ToggleButton onClick={toggleTheme}>
-        Toggle Theme
-      </ToggleButton>
+      <ToggleButton onClick={toggleTheme}>Switch Theme</ToggleButton>
       <SearchBar onChange={onChange} value={value} />
     </NavbarMenu>
   );
 };
+
+
