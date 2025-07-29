@@ -7,12 +7,12 @@ export const CardWrapper = styled.div`
 `;
 
 export const MyListContainer = styled.div`
+  margin-top: ${(props) => props.theme.space[10]};
   display: flex;
   flex-wrap: wrap;
   gap: ${(props) => props.theme.space[8]};
   justify-content: center;
   align-items: flex-start;
-
 `;
 
 export const MoviesGrid = styled.div`
@@ -45,7 +45,7 @@ export const RemovalNotice = styled.div`
 
 export const RemoveButton = styled.button`
   width: 100%;
-  background: ${(props) => props.theme.colors.primaryLight};
+  background: ${(props) => props.theme.colors.primary};
   color: ${(props) => props.theme.colors.buttonText};
   border: none;
   border-radius: ${(props) => props.theme.borderRadius[1]};
@@ -54,7 +54,7 @@ export const RemoveButton = styled.button`
   cursor: pointer;
   transition: background 0.2s;
   &:hover {
-    background: ${(props) => props.theme.colors.primary};
-    color: ${(props) => props.theme.colors.buttonText};
+    background: ${(props) => props.theme.colors.primaryLight};
+   
   }
 `;

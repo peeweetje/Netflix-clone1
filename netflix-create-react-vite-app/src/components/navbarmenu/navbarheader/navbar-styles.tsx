@@ -5,6 +5,12 @@ export const NavbarMenu = styled.nav`
   width: 100%;
   justify-content: center;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: ${(props) => props.theme.colors.black};
+  padding-top: ${(props) => props.theme.space[2]};
+  padding-bottom: ${(props) => props.theme.space[2]};
 
   @media (max-width: 768px) {
     flex-direction: column;

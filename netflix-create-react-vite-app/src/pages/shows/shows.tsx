@@ -10,6 +10,7 @@ import { useGlobalSearch } from '../../hooks/useGlobalSearch';
 import { StyledLink } from '../../components/movie-list/movie.styles';
 
 const StyledContainer = styled.div`
+  margin-top: ${(props) => props.theme.space[10]};
   display: flex;
   flex-wrap: wrap;
   gap:${({ theme }) => theme.space[9]};

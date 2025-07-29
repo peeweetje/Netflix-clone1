@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 export const FlexWrapper = styled.div`
+  margin-top: ${(props) => props.theme.space[10]};
   display: flex;
   flex-wrap: wrap;
   gap: ${(props) => props.theme.space[8]};
