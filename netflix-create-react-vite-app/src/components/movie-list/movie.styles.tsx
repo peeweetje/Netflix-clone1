@@ -17,10 +17,6 @@ export const StyledLink = styled(Link)`
 
 export const RowContainer = styled.section`
   position: relative;
-  &:hover .arrow {
-    opacity: 2;
-    pointer-events: auto;
-  }
 `;
 
 export const RowTitle = styled.h2`
@@ -40,7 +36,7 @@ export const CardsViewport = styled.div<{ width: number }>`
 
 export const CardsWrapper = styled(motion.div)`
   display: flex;
-  gap: ${(props) => props.theme.space[7]};
+  gap: ${(props) => props.theme.space[6]};
 `;
 
 export const ArrowButton = styled.button`
@@ -55,9 +51,9 @@ export const ArrowButton = styled.button`
   width: 48px;
   height: 64px;
   cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s;
+  opacity: 0; /* Default: hidden */
+  pointer-events: none; /* Default: not clickable */
+  transition: opacity 0.2s, background-color 0.2s; /* Add background-color to transition */
   border-radius: ${(props) => props.theme.borderRadius[1]};
   &.left {
     left: -2rem;
@@ -66,12 +62,19 @@ export const ArrowButton = styled.button`
     right: -1.5rem;
   }
   &:hover {
-    backgroundcolor: ${(props) => props.theme.colors.primaryLight};
-   
+    background-color: ${(props) => props.theme.colors.primaryLight};
+    color: ${(props) => props.theme.colors.buttonText};
   }
   &.active {
-    opacity: 1;
-    pointer-events: auto;
+    opacity: 0.3; /* Subtly visible when active */
+    pointer-events: auto; /* Clickable when active */
+    &:hover {
+      opacity: 1; /* Fully visible on hover when active */
+    }
+  }
+  &:disabled {
+    opacity: 0; /* Completely hidden when disabled */
+    pointer-events: none; /* Not clickable when disabled */
   }
 `;
 
