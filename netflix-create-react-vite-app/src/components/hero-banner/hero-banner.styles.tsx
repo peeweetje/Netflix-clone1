@@ -88,6 +88,16 @@ const leafFall = keyframes`
   }
 `;
 
+const fly = keyframes`
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(50px, -20px) rotate(5deg); }
+  50% { transform: translate(100px, 0) rotate(0deg); }
+  75% { transform: translate(50px, 20px) rotate(-5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+`;
+
+
+
 export const SnowContainer = styled.div`
   position: absolute;
   top: 0;
@@ -128,4 +138,30 @@ export const Snow = styled.div`
   opacity: 0.7;
   animation: ${fall} linear infinite;
   top: -10px;
+`;
+
+export const FlowersThemeContainer = styled.div`
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  z-index: 3;
+  pointer-events: none;
+  width: 100%;
+  height: 250px;
+`;
+
+export const ButterflyContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 3;
+  pointer-events: none;
+`;
+
+export const AnimatedButterfly = styled.div`
+  position: absolute;
+  animation: ${fly} linear infinite;
 `;

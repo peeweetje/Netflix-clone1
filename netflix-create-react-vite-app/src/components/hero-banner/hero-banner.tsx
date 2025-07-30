@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { BannerContainer, BannerOverlay, BannerTitle, BannerOverview, BannerButtons, BannerButton, SnowContainer, Snow, LeafContainer, Leaf } from './hero-banner.styles';
+import { BannerContainer, BannerOverlay, BannerTitle, BannerOverview, BannerButtons, BannerButton, SnowContainer, Snow, LeafContainer, Leaf, FlowersThemeContainer, ButterflyContainer, AnimatedButterfly } from './hero-banner.styles';
 import { useTheme } from '../../context/themeContext';
-import { winterTheme, autumnTheme } from '../../styles/themes/themes';
+import { winterTheme, autumnTheme, springTheme } from '../../styles/themes/themes';
 import { LeafIcon } from '../svg/leafs';
+import FlowersTheme from '../svg/flowers-theme';
+import Butterfly from '../svg/butterfly';
 
 interface HeroBannerProps {
   backgroundImage: string;
@@ -61,10 +63,36 @@ export const HeroBanner = ({
     </LeafContainer>
   );
 
+  const renderFlowers = () => (
+    <FlowersThemeContainer>
+      <FlowersTheme />
+    </FlowersThemeContainer>
+  );
+
+  const renderButterflies = () => (
+    <ButterflyContainer>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <AnimatedButterfly
+          key={i}
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            animationDuration: `${Math.random() * 5 + 5}s`,
+            animationDelay: `${Math.random() * 5}s`,
+          }}
+        >
+          <Butterfly />
+        </AnimatedButterfly>
+      ))}
+    </ButterflyContainer>
+  );
+
   return (
     <BannerContainer backgroundImage={backgroundImage}>
       {theme.name === winterTheme.name && renderSnow()}
       {theme.name === autumnTheme.name && theme.colors.leafIcon && renderLeaves()}
+      {theme.name === springTheme.name && theme.colors.flowerIcon && renderFlowers()}
+      {theme.name === springTheme.name && theme.colors.butterflyIcon && renderButterflies()}
       <BannerOverlay>
         <div>
           <BannerTitle>{title}</BannerTitle>

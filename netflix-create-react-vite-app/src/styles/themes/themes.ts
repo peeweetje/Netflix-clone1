@@ -19,6 +19,8 @@ export const springTheme: DefaultTheme = {
   ...baseTheme,
   colors: {
     leafIcon: false,
+    flowerIcon: true,
+    butterflyIcon: true,
     primary: '#4CAF50', // Green
     primaryLight: '#81C784',
     black: '#000',
