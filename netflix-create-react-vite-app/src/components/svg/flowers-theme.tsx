@@ -17,12 +17,12 @@ const FlowersTheme = ({ width = 300, height = 250 }) => {
       </g>
 
       {/* Flower 2 */}
-      <g transform="translate(100, 180)">
+      <g transform="translate(40, 180)">
         <Flower2 width="70" height="70" />
       </g>
 
       {/* Flower 3 */}
-      <g transform="translate(200, 200)">
+      <g transform="translate(75, 200)">
         <Flower3 width="50" height="50" />
       </g>
     </svg>
