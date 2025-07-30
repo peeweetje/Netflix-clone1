@@ -1,6 +1,11 @@
 import React from 'react';
+import styled, { keyframes } from 'styled-components';
+import { wingFlap, AnimatedWings } from './butterfly.styles';
 
-const Butterfly = ({ width = 50, height = 50 }) => {
+
+
+
+ export const Butterfly = ({ width = 50, height = 50, primaryColor = '#FFD700', secondaryColor = '#FFA500' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -19,31 +24,18 @@ const Butterfly = ({ width = 50, height = 50 }) => {
       <line x1="55" y1="25" x2="65" y2="10" stroke="#654321" strokeWidth="2" />
 
       {/* Wings */}
-      <g className="butterfly-wings">
-        <style>
-          {`
-            @keyframes wingFlap {
-              0% { transform: rotateX(0deg); }
-              50% { transform: rotateX(45deg); }
-              100% { transform: rotateX(0deg); }
-            }
-            .butterfly-wings {
-              transform-origin: center;
-              animation: wingFlap 0.5s infinite alternate;
-            }
-          `}
-        </style>
+      <AnimatedWings>
         {/* Top Left */}
-        <path d="M50 40 Q20 20 10 40 Q20 60 50 50 Z" fill="#FFD700" />
+        <path d="M50 40 Q20 20 10 40 Q20 60 50 50 Z" fill={primaryColor} />
         {/* Top Right */}
-        <path d="M50 40 Q80 20 90 40 Q80 60 50 50 Z" fill="#FFD700" />
+        <path d="M50 40 Q80 20 90 40 Q80 60 50 50 Z" fill={primaryColor} />
         {/* Bottom Left */}
-        <path d="M50 50 Q20 80 10 60 Q20 40 50 50 Z" fill="#FFA500" />
+        <path d="M50 50 Q20 80 10 60 Q20 40 50 50 Z" fill={secondaryColor} />
         {/* Bottom Right */}
-        <path d="M50 50 Q80 80 90 60 Q80 40 50 50 Z" fill="#FFA500" />
-      </g>
+        <path d="M50 50 Q80 80 90 60 Q80 40 50 50 Z" fill={secondaryColor} />
+      </AnimatedWings>
     </svg>
   );
 };
 
-export default Butterfly;
+

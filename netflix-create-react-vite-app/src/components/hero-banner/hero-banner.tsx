@@ -3,8 +3,8 @@ import { BannerContainer, BannerOverlay, BannerTitle, BannerOverview, BannerButt
 import { useTheme } from '../../context/themeContext';
 import { winterTheme, autumnTheme, springTheme } from '../../styles/themes/themes';
 import { LeafIcon } from '../svg/leafs';
-import FlowersTheme from '../svg/flowers-theme';
-import Butterfly from '../svg/butterfly';
+import {FlowersTheme} from '../svg/flowers-theme';
+import {Butterfly} from '../svg/butterfly';
 
 interface HeroBannerProps {
   backgroundImage: string;
@@ -71,7 +71,7 @@ export const HeroBanner = ({
 
   const renderButterflies = () => (
     <ButterflyContainer>
-      {Array.from({ length: 5 }).map((_, i) => (
+      {Array.from({ length: 3 }).map((_, i) => (
         <AnimatedButterfly
           key={i}
           style={{
@@ -81,7 +81,10 @@ export const HeroBanner = ({
             animationDelay: `${Math.random() * 5}s`,
           }}
         >
-          <Butterfly />
+          <Butterfly
+            primaryColor={[  '#9370DB', '#3CB371', '#FFD700'][i]}
+            secondaryColor={[  '#8A2BE2', '#2E8B57', '#FFA500'][i]}
+          />
         </AnimatedButterfly>
       ))}
     </ButterflyContainer>

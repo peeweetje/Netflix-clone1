@@ -3,7 +3,7 @@ import Flower1 from './flower1';
 import Flower2 from './flower2';
 import Flower3 from './flower3';
 
-const FlowersTheme = ({ width = 300, height = 250 }) => {
+export const FlowersTheme = ({ width = 300, height = 250 }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -29,4 +29,3 @@ const FlowersTheme = ({ width = 300, height = 250 }) => {
   );
 };
 
-export default FlowersTheme;
