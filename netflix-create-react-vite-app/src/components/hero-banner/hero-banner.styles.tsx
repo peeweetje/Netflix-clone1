@@ -120,16 +120,38 @@ export const LeafContainer = styled.div`
   pointer-events: none;
 `;
 
-export const Leaf = styled.div`
+interface LeafProps {
+  left: string;
+  animationDuration: string;
+  animationDelay: string;
+  xStart: number;
+  xEnd: number;
+}
+
+export const Leaf = styled.div.attrs<LeafProps>(props => ({
+    style: {
+        '--x-start': props.xStart,
+        '--x-end': props.xEnd,
+    }
+}))<LeafProps>`
   position: absolute;
   opacity: 0;
   animation: ${leafFall} linear infinite;
   top: -10px;
   width: 20px;
   height: 20px;
+  left: ${(props) => props.left};
+  animation-duration: ${(props) => props.animationDuration};
+  animation-delay: ${(props) => props.animationDelay};
 `;
 
-export const Snow = styled.div`
+interface SnowProps {
+  left: string;
+  animationDuration: string;
+  animationDelay: string;
+}
+
+export const Snow = styled.div<SnowProps>`
   position: absolute;
   width: 5px;
   height: 5px;
@@ -138,6 +160,9 @@ export const Snow = styled.div`
   opacity: 0.7;
   animation: ${fall} linear infinite;
   top: -10px;
+  left: ${(props) => props.left};
+  animation-duration: ${(props) => props.animationDuration};
+  animation-delay: ${(props) => props.animationDelay};
 `;
 
 export const FlowersThemeContainer = styled.div`
@@ -161,7 +186,18 @@ export const ButterflyContainer = styled.div`
   pointer-events: none;
 `;
 
-export const AnimatedButterfly = styled.div`
+interface AnimatedButterflyProps {
+  left: string;
+  top: string;
+  animationDuration: string;
+  animationDelay: string;
+}
+
+export const AnimatedButterfly = styled.div<AnimatedButterflyProps>`
   position: absolute;
   animation: ${fly} linear infinite;
+  left: ${(props) => props.left};
+  top: ${(props) => props.top};
+  animation-duration: ${(props) => props.animationDuration};
+  animation-delay: ${(props) => props.animationDelay};
 `;

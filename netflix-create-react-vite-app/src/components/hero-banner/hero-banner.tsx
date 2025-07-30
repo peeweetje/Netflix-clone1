@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { BannerContainer, BannerOverlay, BannerTitle, BannerOverview, BannerButtons, BannerButton, SnowContainer, Snow, LeafContainer, Leaf, FlowersThemeContainer, ButterflyContainer, AnimatedButterfly } from './hero-banner.styles';
+import { BannerContainer, BannerOverlay, BannerTitle, BannerOverview, BannerButtons, BannerButton } from './hero-banner.styles';
 import { useTheme } from '../../context/themeContext';
 import { winterTheme, autumnTheme, springTheme } from '../../styles/themes/themes';
-import { LeafIcon } from '../svg/leafs';
-import {FlowersTheme} from '../svg/flowers-theme';
-import {Butterfly} from '../svg/butterfly';
+import { renderSnow, renderLeaves, renderFlowers, renderButterflies } from '../../utils/seasonal-effects';
 
 interface HeroBannerProps {
   backgroundImage: string;
@@ -22,73 +20,6 @@ export const HeroBanner = ({
 }: HeroBannerProps) => {
   const [showInfo, setShowInfo] = useState(false);
   const { theme } = useTheme();
-
-  const renderSnow = () => (
-    <SnowContainer>
-      {Array.from({ length: 50 }).map((_, i) => (
-        <Snow
-          key={i}
-          style={{
-            left: `${Math.random() * 100}%`,
-            animationDuration: `${Math.random() * 10 + 5}s`, // 5 to 15 seconds
-            animationDelay: `${Math.random() * 10}s`,
-          }}
-        />
-      ))}
-    </SnowContainer>
-  );
-
-  const renderLeaves = () => (
-    <LeafContainer>
-      {Array.from({ length: 20 }).map((_, i) => (
-        <Leaf
-          key={i}
-          style={{
-            left: `${Math.random() * 100}%`,
-            animationDuration: `${Math.random() * 10 + 5}s`, // 5 to 15 seconds
-            animationDelay: `${Math.random() * 10}s`,
-            '--x-start': `${Math.random() * 200 - 100}`,
-            '--x-end': `${Math.random() * 200 - 100}`,
-          }}
-        >
-          <LeafIcon
-            color={
-              [theme.colors.primary, '#C91E0A', '#e8b83d ', '#8B9216'][i % 3]
-            }
-            width='20'
-            height='20'
-          />
-        </Leaf>
-      ))}
-    </LeafContainer>
-  );
-
-  const renderFlowers = () => (
-    <FlowersThemeContainer>
-      <FlowersTheme />
-    </FlowersThemeContainer>
-  );
-
-  const renderButterflies = () => (
-    <ButterflyContainer>
-      {Array.from({ length: 3 }).map((_, i) => (
-        <AnimatedButterfly
-          key={i}
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            animationDuration: `${Math.random() * 3 + 4}s`,
-            animationDelay: `${Math.random() * 5}s`,
-          }}
-        >
-          <Butterfly
-            primaryColor={[  '#9370DB', '#3CB371', '#FFD700'][i]}
-            secondaryColor={[  '#8A2BE2', '#2E8B57', '#FFA500'][i]}
-          />
-        </AnimatedButterfly>
-      ))}
-    </ButterflyContainer>
-  );
 
   return (
     <BannerContainer backgroundImage={backgroundImage}>
