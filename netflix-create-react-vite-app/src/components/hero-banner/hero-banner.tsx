@@ -77,7 +77,7 @@ export const HeroBanner = ({
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
-            animationDuration: `${Math.random() * 5 + 5}s`,
+            animationDuration: `${Math.random() * 3 + 4}s`,
             animationDelay: `${Math.random() * 5}s`,
           }}
         >

@@ -90,9 +90,9 @@ const leafFall = keyframes`
 
 const fly = keyframes`
   0% { transform: translate(0, 0) rotate(0deg); }
-  25% { transform: translate(50px, -20px) rotate(5deg); }
-  50% { transform: translate(100px, 0) rotate(0deg); }
-  75% { transform: translate(50px, 20px) rotate(-5deg); }
+  25% { transform: translate(5vw, -2vh) rotate(15deg); }
+  50% { transform: translate(10vw, 0) rotate(0deg); }
+  75% { transform: translate(5vw, 2vh) rotate(-15deg); }
   100% { transform: translate(0, 0) rotate(0deg); }
 `;
 
