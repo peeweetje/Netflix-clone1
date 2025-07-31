@@ -93,7 +93,7 @@ export const renderButterflies = () => {
             key={i}
             initial={{ x: pos.x, y: pos.y }}
             animate={{ 
-              x: [`${parseFloat(pos.x)}%`, `${parseFloat(pos.x) + 50}%`, `${parseFloat(pos.x) + 25}%`],
+              x: [`${parseFloat(pos.x)}%`, `${parseFloat(pos.x) + 50}%`, `${parseFloat(pos.x)}%`],
               y: [`${parseFloat(pos.y)}%`, `${parseFloat(pos.y) - 5}%`, `${parseFloat(pos.y)}%`],
               rotate: [0, 15, 0, -15, 0] 
             }}
