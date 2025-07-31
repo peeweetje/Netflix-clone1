@@ -18,9 +18,14 @@ export const renderSnow = () => (
     {Array.from({ length: 50 }).map((_, i) => (
       <Snow
         key={i}
-        left={`${Math.random() * 100}%`}
-        animationDuration={`${Math.random() * 10 + 5}s`}
-        animationDelay={`${Math.random() * 10}s`}
+        initial={{ y: '-100vh', x: `${Math.random() * 100}vw`, opacity: 1 }}
+        animate={{ y: '100vh', rotate: 360 }}
+        transition={{
+          duration: Math.random() * 10 + 5,
+          delay: Math.random() * 10,
+          repeat: Infinity,
+          ease: 'linear',
+        }}
       />
     ))}
   </SnowContainer>
@@ -33,11 +38,23 @@ export const renderLeaves = () => {
         {Array.from({ length: 20 }).map((_, i) => (
             <Leaf
                 key={i}
-                left={`${Math.random() * 100}%`}
-                animationDuration={`${Math.random() * 10 + 5}s`}
-                animationDelay={`${Math.random() * 10}s`}
-                xStart={Math.random() * 200 - 100}
-                xEnd={Math.random() * 200 - 100}
+                initial={{ 
+                    y: '-10vh', 
+                    x: `${Math.random() * 100}vw`, 
+                    opacity: 0 
+                }}
+                animate={{
+                    y: '100vh',
+                    x: `${Math.random() * 200 - 100}vw`,
+                    rotate: 720,
+                    opacity: [0, 1, 0],
+                }}
+                transition={{
+                    duration: Math.random() * 10 + 5,
+                    delay: Math.random() * 10,
+                    repeat: Infinity,
+                    ease: 'linear',
+                }}
             >
             <LeafIcon
                 color={
@@ -58,21 +75,42 @@ export const renderFlowers = () => (
   </FlowersThemeContainer>
 );
 
-export const renderButterflies = () => (
-  <ButterflyContainer>
-    {Array.from({ length: 3 }).map((_, i) => (
-      <AnimatedButterfly
-        key={i}
-        left={`${Math.random() * 100}%`}
-        top={`${Math.random() * 100}%`}
-        animationDuration={`${Math.random() * 3 + 4}s`}
-        animationDelay={`${Math.random() * 5}s`}
-      >
-        <Butterfly
-          primaryColor={['#9370DB', '#3CB371', '#FFD700'][i]}
-          secondaryColor={['#8A2BE2', '#2E8B57', '#FFA500'][i]}
-        />
-      </AnimatedButterfly>
-    ))}
-  </ButterflyContainer>
-);
+export const renderButterflies = () => {
+  const butterflyPositions = [
+    { x: '0%', y: '20%' },
+    { x: '10%', y: '30%' },
+    { x: '20%', y: '40%' },
+  ];
+
+  return (
+    <ButterflyContainer>
+      {butterflyPositions.map((pos, i) => {
+        const delay = Math.random() * 5;
+        const duration = Math.random() * 10 + 10;
+
+        return (
+          <AnimatedButterfly
+            key={i}
+            initial={{ x: pos.x, y: pos.y }}
+            animate={{ 
+              x: [`${parseFloat(pos.x)}%`, `${parseFloat(pos.x) + 5}%`, `${parseFloat(pos.x)}%`],
+              y: [`${parseFloat(pos.y)}%`, `${parseFloat(pos.y) - 5}%`, `${parseFloat(pos.y)}%`],
+              rotate: [0, 15, 0, -15, 0] 
+            }}
+            transition={{
+              duration: duration,
+              delay: delay,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          >
+            <Butterfly
+              primaryColor={['#9370DB', '#3CB371', '#FFD700', '#FF69B4', '#1E90FF'][i]}
+              secondaryColor={['#8A2BE2', '#2E8B57', '#FFA500', '#FF1493', '#4169E1'][i]}
+            />
+          </AnimatedButterfly>
+        );
+      })}
+    </ButterflyContainer>
+  );
+};

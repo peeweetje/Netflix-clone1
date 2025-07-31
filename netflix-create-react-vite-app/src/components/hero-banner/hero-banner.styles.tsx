@@ -1,4 +1,40 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+
+
+
+export const LeafContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+`;
+
+export const ButterflyContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 3;
+  pointer-events: none;
+`;
+
+export const SnowContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+`;
 
 
 
@@ -69,100 +105,22 @@ export const BannerButton = styled.button`
   }
 `;
 
-const fall = keyframes`
-  0% { transform: translateY(-100vh) rotate(0deg); }
-  100% { transform: translateY(100vh) rotate(360deg); }
-`;
 
-const leafFall = keyframes`
-  0% {
-    transform: translateY(-10vh) translateX(calc(var(--x-start) * 1px)) rotateZ(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) translateX(calc(var(--x-end) * 1px)) rotateZ(720deg);
-    opacity: 0;
-  }
-`;
-
-const fly = keyframes`
-  0% { transform: translate(0, 0) rotate(0deg); }
-  25% { transform: translate(40%, -20%) rotate(15deg); }
-  50% { transform: translate(80%, 0) rotate(0deg); }
-  75% { transform: translate(40%, 20%) rotate(-15deg); }
-  100% { transform: translate(0, 0) rotate(0deg); }
-`;
-
-
-
-export const SnowContainer = styled.div`
+export const Leaf = styled(motion.div)`
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 1;
-  pointer-events: none;
-`;
-
-export const LeafContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 1;
-  pointer-events: none;
-`;
-
-interface LeafProps {
-  left: string;
-  animationDuration: string;
-  animationDelay: string;
-  xStart: number;
-  xEnd: number;
-}
-
-export const Leaf = styled.div.attrs<LeafProps>(props => ({
-    style: {
-        '--x-start': props.xStart,
-        '--x-end': props.xEnd,
-    }
-}))<LeafProps>`
-  position: absolute;
-  opacity: 0;
-  animation: ${leafFall} linear infinite;
   top: -10px;
   width: 20px;
   height: 20px;
-  left: ${(props) => props.left};
-  animation-duration: ${(props) => props.animationDuration};
-  animation-delay: ${(props) => props.animationDelay};
 `;
 
-interface SnowProps {
-  left: string;
-  animationDuration: string;
-  animationDelay: string;
-}
-
-export const Snow = styled.div<SnowProps>`
+export const Snow = styled(motion.div)`
   position: absolute;
   width: 5px;
   height: 5px;
   background-color: #fff;
   border-radius: 50%;
   opacity: 0.7;
-  animation: ${fall} linear infinite;
   top: -10px;
-  left: ${(props) => props.left};
-  animation-duration: ${(props) => props.animationDuration};
-  animation-delay: ${(props) => props.animationDelay};
 `;
 
 export const FlowersThemeContainer = styled.div`
@@ -175,29 +133,6 @@ export const FlowersThemeContainer = styled.div`
   height: 250px;
 `;
 
-export const ButterflyContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 3;
-  pointer-events: none;
-`;
 
-interface AnimatedButterflyProps {
-  left: string;
-  top: string;
-  animationDuration: string;
-  animationDelay: string;
-}
 
-export const AnimatedButterfly = styled.div<AnimatedButterflyProps>`
-  position: absolute;
-  animation: ${fly} linear infinite;
-  left: ${(props) => props.left};
-  top: ${(props) => props.top};
-  animation-duration: ${(props) => props.animationDuration};
-  animation-delay: ${(props) => props.animationDelay};
-`;
+export const AnimatedButterfly = styled(motion.div)``;
