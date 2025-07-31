@@ -84,7 +84,7 @@ export const renderButterflies = () => {
 
   return (
     <ButterflyContainer>
-      {butterflyPositions.map((pos, i) => {
+      {butterflyPositions.slice(0, 3).map((pos, i) => {
         const delay = Math.random() * 5;
         const duration = Math.random() * 10 + 10;
 
@@ -93,20 +93,20 @@ export const renderButterflies = () => {
             key={i}
             initial={{ x: pos.x, y: pos.y }}
             animate={{ 
-              x: [`${parseFloat(pos.x)}%`, `${parseFloat(pos.x) + 5}%`, `${parseFloat(pos.x)}%`],
+              x: [`${parseFloat(pos.x)}%`, `${parseFloat(pos.x) + 50}%`, `${parseFloat(pos.x) + 25}%`],
               y: [`${parseFloat(pos.y)}%`, `${parseFloat(pos.y) - 5}%`, `${parseFloat(pos.y)}%`],
               rotate: [0, 15, 0, -15, 0] 
             }}
             transition={{
-              duration: duration,
+              duration: duration * 2,
               delay: delay,
               repeat: Infinity,
               ease: 'easeInOut',
             }}
           >
             <Butterfly
-              primaryColor={['#9370DB', '#3CB371', '#FFD700', '#FF69B4', '#1E90FF'][i]}
-              secondaryColor={['#8A2BE2', '#2E8B57', '#FFA500', '#FF1493', '#4169E1'][i]}
+              primaryColor={['#9370DB', '#3CB371', '#FFD700'][i]}
+              secondaryColor={['#8A2BE2', '#2E8B57', '#FFA500'][i]}
             />
           </AnimatedButterfly>
         );
