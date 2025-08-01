@@ -12,9 +12,9 @@ import {
   GoBackButton,
   ButtonContainer,
 } from './details-styles';
-import { CastMember } from './castMember';
-import { MediaPoster } from './MediaPoster';
-import { MediaInfo } from './MediaInfo';
+import { CastMember } from './cast-member';
+import { MediaPoster } from './media-poster';
+import { MediaInfo } from './media-info';
 
 interface MediaDetailProps {
   type: 'movie' | 'tv';

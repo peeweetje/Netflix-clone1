@@ -6,7 +6,7 @@ import {
   NavbarSearch,
   SearchContainer,
   SearchIconWrapper,
-} from './searchbar.styles';
+} from './search-bar.styles';
 
 export type searchProps = {
   onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;

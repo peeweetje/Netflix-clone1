@@ -10,8 +10,8 @@ import {
 } from '../../utils/api';
 import type { MovieResult, ShowResult } from '../../utils/types/types';
 import { Spinner } from '../../components/spinner/spinner';
-import { MovieRow } from '../../components/movie-list/MovieRow';
-import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbarHeader';
+import { MovieRow } from '../../components/movie-list/movie-row';
+import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
 
 const Container = styled.div`
   display: flex;

@@ -4,7 +4,7 @@ import { Card } from '../../components/card/card';
 import { Spinner } from '../../components/spinner/spinner';
 import { imageUrl, trendingShowUrl } from '../../utils/api';
 import type { ShowResult } from '../../utils/types/types';
-import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbarHeader';
+import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
 import { useTranslation } from 'react-i18next';
 import { useGlobalSearch } from '../../hooks/useGlobalSearch';
 import { StyledLink } from '../../components/movie-list/movie.styles';

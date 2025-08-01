@@ -1,13 +1,13 @@
 import React, { useState, useCallback } from 'react';
 import {VITE_API_KEY} from '../../utils/api';
 import { useTranslation } from 'react-i18next';
-import { MovieList } from '../../components/movie-list/movieList';
-import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbarHeader';
+import { MovieList } from '../../components/movie-list/movie-list';
+import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
 import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { discoverMovieUrl } from '../../utils/api';
 import type { MovieResult } from '../../utils/types/types';
 import { Spinner } from '../../components/spinner/spinner';
-import { MainContainer } from '../home/homepage-styles';
+import { MainContainer } from '../home/home-page-styles';
 import { useGlobalSearch } from '../../hooks/useGlobalSearch';
 
 export const Movies = () => {

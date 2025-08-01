@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useGlobalSearch } from '../../hooks/useGlobalSearch';
-import { MovieRow } from '../../components/movie-list/MovieRow';
+import { MovieRow } from '../../components/movie-list/movie-row';
 import type { ShowResult, MovieResult } from '../../utils/types/types';
 import {
   MyListContainer,
@@ -12,9 +12,9 @@ import {
   CardWrapper,
   RemoveButton,
   RemovalNotice,
-} from './myList.styles';
+} from './my-list.styles';
 import { useMyList } from '../../context/myListContext';
-import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbarHeader';
+import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
 import { Card } from '../../components/card/card';
 import { useLocalListDetails } from '../../hooks/useLocalListDetails';
 
