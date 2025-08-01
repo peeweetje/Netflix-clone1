@@ -76,8 +76,7 @@ export const Homepage = () => {
                 backgroundImage={imageUrl + heroMovie.backdrop_path}
                 title={heroMovie.title}
                 overview={heroMovie.overview}
-                onPlay={() => {}}
-                onMoreInfo={() => {}}
+                movieId={heroMovie.id}
               />
             )}
             <MovieRow title={t('popular') || 'Popular'} movies={popular} />
