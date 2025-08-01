@@ -9,7 +9,6 @@ interface HeroBannerProps {
   backgroundImage: string;
   title: string;
   overview: string;
-  onPlay?: () => void;
   movieId: number;
 }
 
