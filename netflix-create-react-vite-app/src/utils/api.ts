@@ -8,9 +8,4 @@ export const trendingMovieUrl = `https://api.themoviedb.org/3/trending/movie/wee
 export const popularMoviesUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${VITE_API_KEY}`;
 export const topRatedMoviesUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${VITE_API_KEY}`;
 export const actionMoviesUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${VITE_API_KEY}&with_genres=28`;
-
-export const fetchMovieVideos = async (movieId: number) => {
-  const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${VITE_API_KEY}`);
-  const data = await response.json();
-  return data.results;
-};
+export const movieVideosUrl = (movieId: number) => `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${VITE_API_KEY}`;

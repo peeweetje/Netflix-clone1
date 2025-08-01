@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Spinner } from '../spinner/spinner';
-import { imageUrl, VITE_API_KEY } from '../../utils/api';
+import { movieVideosUrl, VITE_API_KEY, imageUrl } from '../../utils/api';
 import {
   StyledContainer,
   CastSection,
@@ -45,6 +45,7 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [cast, setCast] = useState<CastMember[]>([]);
+  const [hasTrailer, setHasTrailer] = useState(false);
 
   useEffect(() => {
     const fetchMedia = async () => {
@@ -59,17 +60,6 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
         setError(`Failed to fetch ${type} details. Please try again later.`);
       } finally {
         setLoading(false);
-      }
-    };
-    const fetchVideo = async () => {
-      try {
-        const videos = await fetchMovieVideos(Number(id));
-        const trailer = videos.find((vid: any) => vid.type === 'Trailer' && vid.site === 'YouTube');
-        if (trailer) {
-          setVideoKey(trailer.key);
-        }
-      } catch (err) {
-        console.error('Failed to fetch video data:', err);
       }
     };
     fetchMedia();
@@ -94,6 +84,22 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
     fetchCast();
   }, [id, type]);
 
+  useEffect(() => {
+    if (type === 'movie' && id) {
+      const checkTrailer = async () => {
+        try {
+          const response = await fetch(movieVideosUrl(Number(id)));
+          const data = await response.json();
+          const trailer = data.results.find((vid: any) => vid.type === 'Trailer' && vid.site === 'YouTube');
+          setHasTrailer(!!trailer);
+        } catch (error) {
+          console.error('Failed to fetch movie videos:', error);
+        }
+      };
+      checkTrailer();
+    }
+  }, [id, type]);
+
   if (loading)
     return (
       <div>
@@ -113,7 +119,7 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
     <StyledContainer>
       <ButtonContainer>
         <GoBackButton onClick={() => navigate(-1)}>Go Back</GoBackButton>
-        {type === 'movie' && media && (
+        {type === 'movie' && hasTrailer && (
           <GoBackButton onClick={() => navigate(`/trailer/${media.id}`)}>
             Play Trailer
           </GoBackButton>

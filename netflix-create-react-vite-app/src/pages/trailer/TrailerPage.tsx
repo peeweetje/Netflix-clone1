@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchMovieVideos } from '../../utils/api';
+import { movieVideosUrl } from '../../utils/api';
 import { Spinner } from '../../components/spinner/spinner';
 import styled from 'styled-components';
 import { useTheme } from '../../context/themeContext';
@@ -66,7 +66,9 @@ export const TrailerPage = () => {
       }
 
       try {
-        const videos = await fetchMovieVideos(Number(id));
+        const response = await fetch(movieVideosUrl(Number(id)));
+        const data = await response.json();
+        const videos = data.results;
 
         if (!videos || videos.length === 0) {
           setError('No videos found for this movie.');
