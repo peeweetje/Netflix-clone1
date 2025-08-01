@@ -6,6 +6,7 @@ import { Movies } from '../pages/movies/movies';
 import { MyList } from '../pages/my-list/myList';
 import { PopularAndTrending } from '../pages/popular-trending/popularAndTrending';
 import { Shows } from '../pages/shows/shows';
+import { TrailerPage } from '../pages/trailer/TrailerPage';
 
 import { GlobalStyle } from '../styles/global';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
@@ -33,6 +34,7 @@ const AppContent = () => {
         <Route element={<MyList />} path='/my-list' />
         <Route element={<MediaDetail type="movie" />} path='/movies/:id' />
         <Route element={<MediaDetail type="tv" />} path='/shows/:id' />
+        <Route element={<TrailerPage />} path='/trailer/:id' />
       </Routes>
     </StyledThemeProvider>
   );
