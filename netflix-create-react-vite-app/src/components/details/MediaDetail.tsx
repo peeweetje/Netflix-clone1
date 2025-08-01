@@ -10,6 +10,7 @@ import {
   LeftColumn,
   RightColumn,
   GoBackButton,
+  ButtonContainer,
 } from './details-styles';
 import { CastMember } from './castMember';
 import { MediaPoster } from './MediaPoster';
@@ -60,6 +61,17 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
         setLoading(false);
       }
     };
+    const fetchVideo = async () => {
+      try {
+        const videos = await fetchMovieVideos(Number(id));
+        const trailer = videos.find((vid: any) => vid.type === 'Trailer' && vid.site === 'YouTube');
+        if (trailer) {
+          setVideoKey(trailer.key);
+        }
+      } catch (err) {
+        console.error('Failed to fetch video data:', err);
+      }
+    };
     fetchMedia();
   }, [id, type]);
 
@@ -99,7 +111,14 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
 
   return (
     <StyledContainer>
-      <GoBackButton onClick={() => navigate(-1)}>Go Back</GoBackButton>
+      <ButtonContainer>
+        <GoBackButton onClick={() => navigate(-1)}>Go Back</GoBackButton>
+        {type === 'movie' && media && (
+          <GoBackButton onClick={() => navigate(`/trailer/${media.id}`)}>
+            Play Trailer
+          </GoBackButton>
+        )}
+      </ButtonContainer>
       <MainColumns>
         <LeftColumn>
         <MediaPoster

@@ -179,3 +179,11 @@ export const PosterContainer = styled.div`
   align-items: center;
   justify-content:center;
 `;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.space[4]}; /* Spacing between buttons */
+  margin-bottom: ${({ theme }) => theme.space[4]};
+`;
+
+
