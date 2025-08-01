@@ -7,7 +7,7 @@ import {
   NavList,
   ToggleButton,
 } from './navbar-styles';
-import { SearchBar } from './search-bar/searchBar';
+import { SearchBar } from './search-bar/search-bar';
 import { useTheme } from '../../../context/themeContext';
 
 interface NavbarHeaderProps  {

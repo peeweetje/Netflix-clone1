@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BannerContainer, BannerOverlay, BannerTitle, BannerOverview, BannerButtons, BannerButton } from './hero-banner.styles';
 import { useTheme } from '../../context/themeContext';
 import { winterTheme, autumnTheme, springTheme } from '../../styles/themes/themes';
@@ -8,7 +9,7 @@ interface HeroBannerProps {
   backgroundImage: string;
   title: string;
   overview: string;
-  onPlay?: () => void;
+  movieId: number;
 }
 
 
@@ -16,10 +17,15 @@ export const HeroBanner = ({
   backgroundImage,
   title,
   overview,
-  onPlay,
+  movieId,
 }: HeroBannerProps) => {
   const [showInfo, setShowInfo] = useState(false);
   const { theme } = useTheme();
+  const navigate = useNavigate();
+
+  const handlePlayClick = () => {
+    navigate(`/trailer/${movieId}`);
+  };
 
   return (
     <BannerContainer backgroundImage={backgroundImage}>
@@ -31,7 +37,7 @@ export const HeroBanner = ({
         <div>
           <BannerTitle>{title}</BannerTitle>
           <BannerButtons>
-            <BannerButton onClick={onPlay}>Play</BannerButton>
+            <BannerButton onClick={handlePlayClick}>Play</BannerButton>
             <BannerButton onClick={() => setShowInfo((v) => !v)}>
               {showInfo ? 'Less Info' : 'More Info'}
             </BannerButton>

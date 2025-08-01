@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import {VITE_API_KEY} from '../../utils/api';
 import { useTranslation } from 'react-i18next';
-import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbarHeader';
+import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
 import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { useGlobalSearch } from '../../hooks/useGlobalSearch';
 import {
@@ -12,10 +12,10 @@ import {
   imageUrl,
 } from '../../utils/api';
 import type { MovieResult } from '../../utils/types/types';
-import { Spinner } from './../../components/spinner/spinner';
-import { MainContainer } from './homepage-styles';
+import { Spinner } from '../../components/spinner/spinner';
+import { MainContainer } from './home-page-styles';
 import { HeroBanner } from '../../components/hero-banner/hero-banner';
-import { MovieRow } from '../../components/movie-list/MovieRow';
+import { MovieRow } from '../../components/movie-list/movie-row';
 
 export const Homepage = () => {
   const [popular, setPopular] = useState<MovieResult[]>([]);
@@ -76,8 +76,7 @@ export const Homepage = () => {
                 backgroundImage={imageUrl + heroMovie.backdrop_path}
                 title={heroMovie.title}
                 overview={heroMovie.overview}
-                onPlay={() => {}}
-                onMoreInfo={() => {}}
+                movieId={heroMovie.id}
               />
             )}
             <MovieRow title={t('popular') || 'Popular'} movies={popular} />
