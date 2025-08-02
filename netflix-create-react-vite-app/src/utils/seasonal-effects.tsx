@@ -18,7 +18,7 @@ import { Beehive } from '../components/svg/beehive';
 import { useTheme } from '../context/themeContext';
 import { Bee } from '../components/svg/bee';
 import { AnimatedBee } from '../components/svg/bee.styles';
-import { Beachball } from '../components/svg/beachball';
+
 
 export const renderSnow = () => (
   <SnowContainer>
