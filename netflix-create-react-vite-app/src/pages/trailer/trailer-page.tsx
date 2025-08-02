@@ -1,14 +1,14 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { movieVideosUrl } from '../../utils/api';
+import { movieVideosUrl, showVideosUrl } from '../../utils/api';
 import { Spinner } from '../../components/spinner/spinner';
 import { useTheme } from '../../context/themeContext';
 import {TrailerContainer, VideoWrapper, GoBackButton} from './trailer-page-styles';
 
 
 export const TrailerPage = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id, media_type } = useParams<{ id: string; media_type: string }>();
   const navigate = useNavigate();
   const [videoKey, setVideoKey] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -17,14 +17,15 @@ export const TrailerPage = () => {
 
   useEffect(() => {
     const getTrailer = async () => {
-      if (!id) {
-        setError('Movie ID not provided.');
+      if (!id || !media_type) {
+        setError('ID or media type not provided.');
         setLoading(false);
         return;
       }
 
       try {
-        const response = await fetch(movieVideosUrl(Number(id)));
+        const url = media_type === 'movie' ? movieVideosUrl(Number(id)) : showVideosUrl(Number(id));
+        const response = await fetch(url);
         const data = await response.json();
         const videos = data.results;
 

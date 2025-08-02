@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Spinner } from '../spinner/spinner';
-import { movieVideosUrl, VITE_API_KEY, imageUrl } from '../../utils/api';
+import { movieVideosUrl, showVideosUrl, VITE_API_KEY, imageUrl } from '../../utils/api';
 import {
   StyledContainer,
   CastSection,
@@ -85,15 +85,16 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
   }, [id, type]);
 
   useEffect(() => {
-    if (type === 'movie' && id) {
+    if (id) {
       const checkTrailer = async () => {
         try {
-          const response = await fetch(movieVideosUrl(Number(id)));
+          const url = type === 'movie' ? movieVideosUrl(Number(id)) : showVideosUrl(Number(id));
+          const response = await fetch(url);
           const data = await response.json();
           const trailer = data.results.find((vid: any) => vid.type === 'Trailer' && vid.site === 'YouTube');
           setHasTrailer(!!trailer);
         } catch (error) {
-          console.error('Failed to fetch movie videos:', error);
+          console.error(`Failed to fetch ${type} videos:`, error);
         }
       };
       checkTrailer();
@@ -119,19 +120,21 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
     <StyledContainer>
       <ButtonContainer>
         <GoBackButton onClick={() => navigate(-1)}>Go Back</GoBackButton>
-        {type === 'movie' && hasTrailer && (
-          <GoBackButton onClick={() => navigate(`/trailer/${media.id}`)}>
-            Play Trailer
+        {hasTrailer && (
+          <GoBackButton
+            onClick={() => navigate(`/trailer/${type}/${media.id}`)}
+          >
+           Watch Trailer
           </GoBackButton>
         )}
       </ButtonContainer>
       <MainColumns>
         <LeftColumn>
-        <MediaPoster
-          title={media.title || media.name}
-          posterPath={media.poster_path}
-          tagline={media.tagline}
-          imageUrl={imageUrl}
+          <MediaPoster
+            title={media.title || media.name}
+            posterPath={media.poster_path}
+            tagline={media.tagline}
+            imageUrl={imageUrl}
           />
         </LeftColumn>
         <RightColumn>
@@ -146,7 +149,7 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
                     src={
                       actor.profile_path
                         ? `https://image.tmdb.org/t/p/w185${actor.profile_path}`
-                        : ""
+                        : ''
                     }
                     alt={actor.name}
                   />

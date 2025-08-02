@@ -34,7 +34,7 @@ const AppContent = () => {
         <Route element={<MyList />} path='/my-list' />
         <Route element={<MediaDetail type="movie" />} path='/movies/:id' />
         <Route element={<MediaDetail type="tv" />} path='/shows/:id' />
-        <Route element={<TrailerPage />} path='/trailer/:id' />
+        <Route element={<TrailerPage />} path='/trailer/:media_type/:id' />
       </Routes>
     </StyledThemeProvider>
   );
