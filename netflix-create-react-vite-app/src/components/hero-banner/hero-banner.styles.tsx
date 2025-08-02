@@ -136,3 +136,23 @@ export const FlowersThemeContainer = styled.div`
 
 
 export const AnimatedButterfly = styled(motion.div)``;
+
+export const BeesThemeContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 4;
+  pointer-events: none;
+`;
+
+export const BeehiveContainer = styled.div`
+  position: absolute;
+  right: 5%;
+  top: 0;
+  width: 100px;
+  height: 100px;
+  z-index: 5;
+`;

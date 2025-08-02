@@ -11,5 +11,6 @@
 ![alt text](image.png)
 ![alt text](image-1.png)
 
+> - `cd netflix-create-react-vite-app`
 > - `pnpm install`
 > - `pnpm start`

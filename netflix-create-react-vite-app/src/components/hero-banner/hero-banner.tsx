@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BannerContainer, BannerOverlay, BannerTitle, BannerOverview, BannerButtons, BannerButton } from './hero-banner.styles';
+import { BannerContainer, BannerOverlay, BannerTitle, BannerOverview, BannerButtons, BannerButton, BeehiveContainer } from './hero-banner.styles';
 import { useTheme } from '../../context/themeContext';
-import { winterTheme, autumnTheme, springTheme } from '../../styles/themes/themes';
-import { renderSnow, renderLeaves, renderFlowers, renderButterflies } from '../../utils/seasonal-effects';
+import { winterTheme, autumnTheme, springTheme, summerTheme } from '../../styles/themes/themes';
+import { renderSnow, renderLeaves, renderFlowers, renderButterflies,renderBees, renderBeachball } from '../../utils/seasonal-effects';
+import { Beehive } from '../svg/beehive';
 
 interface HeroBannerProps {
   backgroundImage: string;
@@ -33,6 +34,12 @@ export const HeroBanner = ({
       {theme.name === autumnTheme.name && theme.colors.leafIcon && renderLeaves()}
       {theme.name === springTheme.name && theme.colors.flowerIcon && renderFlowers()}
       {theme.name === springTheme.name && theme.colors.butterflyIcon && renderButterflies()}
+      {theme.name === summerTheme.name && renderBees()}
+      {theme.name === summerTheme.name && (
+        <BeehiveContainer>
+          <Beehive />
+        </BeehiveContainer>
+      )}
       <BannerOverlay>
         <div>
           <BannerTitle>{title}</BannerTitle>

@@ -7,11 +7,18 @@ import {
   FlowersThemeContainer,
   ButterflyContainer,
   AnimatedButterfly,
+  BeesThemeContainer,
+  BeehiveContainer,
+  BeachballContainer,
 } from '../components/hero-banner/hero-banner.styles';
 import { LeafIcon } from '../components/svg/leafs';
 import { FlowersTheme } from '../components/svg/flowers-theme';
 import { Butterfly } from '../components/svg/butterfly';
+import { Beehive } from '../components/svg/beehive';
 import { useTheme } from '../context/themeContext';
+import { Bee } from '../components/svg/bee';
+import { AnimatedBee } from '../components/svg/bee.styles';
+import { Beachball } from '../components/svg/beachball';
 
 export const renderSnow = () => (
   <SnowContainer>
@@ -112,5 +119,59 @@ export const renderButterflies = () => {
         );
       })}
     </ButterflyContainer>
+  );
+};
+
+export const renderBees = () => {
+  const beePositions = [
+    { x: '85%', y: '20%' },
+    { x: '80%', y: '30%' },
+    { x: '75%', y: '40%' },
+    { x: '82%', y: '50%' },
+    { x: '78%', y: '25%' },
+    { x: '72%', y: '35%' },
+  ];
+
+  const beehiveEntranceX = '92%'; // Adjusted X for beehive entrance
+  const beehiveEntranceY = '12%'; // Adjusted Y for beehive entrance
+
+  return (
+  
+    <BeesThemeContainer>
+      {beePositions.map((pos, i) => {
+        const delay = Math.random() * 5;
+        const duration = Math.random() * 18 + 12;
+
+        return (
+          <AnimatedBee
+            key={i}
+            initial={{ x: beehiveEntranceX, y: beehiveEntranceY, opacity: 0, scale: 0.1 }}
+            animate={{
+              x: [
+                beehiveEntranceX,
+                `${parseFloat(beehiveEntranceX) + (Math.random() * 10 - 5)}%`,
+                beehiveEntranceX,
+              ],
+              y: [
+                beehiveEntranceY,
+                `${parseFloat(beehiveEntranceY) + (Math.random() * 10 - 5)}%`,
+                beehiveEntranceY,
+              ],
+              opacity: [0, 1, 1, 0],
+              scale: [0.1, 1, 1, 0.1],
+              rotate: [0, -10, 10, 0],
+            }}
+            transition={{
+              duration: duration,
+              delay: delay * i, // Staggered delay
+              repeat: Infinity,
+              ease: 'linear',
+            }}
+          >
+            <Bee />
+          </AnimatedBee>
+        );
+      })}
+    </BeesThemeContainer>
   );
 };
