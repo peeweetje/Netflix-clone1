@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 
 export const FlexWrapper = styled.div`
   margin-top: ${(props) => props.theme.space[10]};
@@ -11,10 +10,6 @@ export const FlexWrapper = styled.div`
   align-items: flex-start;
 `;
 
-export const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: inherit;
-`;
 
 export const RowContainer = styled.section`
   position: relative;

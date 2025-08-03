@@ -8,6 +8,7 @@ export const CardContainer = styled.div`
   height: 380px;
   cursor: pointer;
   perspective: 1000px;
+
 `;
 
 export const FLipCard = styled.div`
@@ -106,18 +107,18 @@ export const MotionCardBack = styled.div`
 `;
 
 export const BackCardButton = styled.button<{ isAdded: boolean }>`
-  width: 160px;
-  height: 32px;
+  width: 140px;
+  height: 40px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: ${(props) => props.theme.space[2]};
   background: ${({ isAdded, theme }) =>
-    isAdded ? theme.colors.black : theme.colors.yellowButton};
+    isAdded ? theme.colors.black : theme.colors.white};
   color: ${({ isAdded, theme }) =>
-    isAdded ? theme.colors.white : theme.colors.yellowButtonText};
+    isAdded ? theme.colors.white : theme.colors.black};
   border: none;
-  border-radius: 4px;
+  border-radius:${(props) => props.theme.borderRadius[1]};
   padding: 6px 16px;
-  font-size: 0.95rem;
+  font-size:${(props) => props.theme.fontSize[3]};
   cursor: ${({ isAdded }) => (isAdded ? 'not-allowed' : 'pointer')};
 `;
