@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import { FlexWrapper, CardWrapper, StyledLink } from './movie.styles';
+import { FlexWrapper, CardWrapper as StyledCardWrapper } from './movie.styles';
 import { imageUrl } from '../../utils/api';
 import type { MovieResult } from '../../utils/types/types';
 import { SeasonalCard } from '../card/seasonal-card';
+import { CardWrapper } from '../card-wrapper/card-wrapper';
 
 export const MovieList = ({ movies }: { movies: MovieResult[] }) => {
   const { t } = useTranslation();
@@ -13,8 +14,8 @@ export const MovieList = ({ movies }: { movies: MovieResult[] }) => {
         (result: MovieResult) =>
           result.poster_path &&
           result.id && (
-            <CardWrapper key={result.id}>
-              <StyledLink to={`/movies/${result.id}`}>
+            <StyledCardWrapper key={result.id}>
+              <CardWrapper to={`/movies/${result.id}`}>
                 <SeasonalCard
                   alt={t('movie-poster')}
                   overview={result.overview}
@@ -24,8 +25,8 @@ export const MovieList = ({ movies }: { movies: MovieResult[] }) => {
                   id={result.id}
                   media_type='movie'
                 />
-              </StyledLink>
-            </CardWrapper>
+              </CardWrapper>
+            </StyledCardWrapper>
           )
       )}
     </FlexWrapper>

@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import React, {
+  useState,
+  useImperativeHandle,
+  forwardRef,
+} from 'react';
 import { BackCard } from './back-card';
 import {
   CardContainer,
@@ -8,33 +12,42 @@ import {
 } from './card.styles';
 import { FrontCard } from './front-card';
 
+export interface CardRef {
+  flip: () => void;
+}
+
 type CardProps = {
   src: string;
   alt: string;
   overview: string;
   title: string;
   vote_average: number;
-  key: number;
   id: number;
   media_type: 'movie' | 'tv';
-  onClick?: () => void;
 };
 
-export const Card = ({
-  src,
-  alt,
-  overview,
-  title,
-  vote_average,
-  id,
-  media_type,
-  onClick,
-}: CardProps) => {
+export const Card = forwardRef<CardRef, CardProps>((
+  {
+    src,
+    alt,
+    overview,
+    title,
+    vote_average,
+    id,
+    media_type,
+  },
+  ref
+) => {
   const [isFlipped, setIsFlipped] = useState(false);
+
+  useImperativeHandle(ref, () => ({
+    flip: () => {
+      setIsFlipped((prev) => !prev);
+    },
+  }));
 
   return (
     <CardContainer
-      onClick={onClick}
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
     >
@@ -57,4 +70,4 @@ export const Card = ({
       </MotionFlipCard>
     </CardContainer>
   );
-};
+});

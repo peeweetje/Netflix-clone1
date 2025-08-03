@@ -1,15 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useGlobalSearch } from '../../hooks/useGlobalSearch';
 import { MovieRow } from '../../components/movie-list/movie-row';
 import type { ShowResult, MovieResult } from '../../utils/types/types';
 import {
   MyListContainer,
   MoviesGrid,
-  MovieCard,
-  MoviePoster,
-  MovieTitle,
-  CardWrapper,
+  CardWrapper as StyledCardWrapper,
   RemoveButton,
   RemovalNotice,
 } from './my-list.styles';
@@ -17,6 +13,7 @@ import { useMyList } from '../../context/myListContext';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
 import { Card } from '../../components/card/card';
 import { useLocalListDetails } from '../../hooks/useLocalListDetails';
+import { CardWrapper } from '../../components/card-wrapper/card-wrapper';
 
 export const MyList = () => {
   const { myList, removeFromList } = useMyList();
@@ -93,8 +90,8 @@ export const MyList = () => {
                   const item = myList.find((m) => m.id === movie.id);
                   if (!item) return null;
                   return (
-                    <CardWrapper key={`${movie.id}-${item.media_type}`}>
-                      <Link
+                    <StyledCardWrapper key={`${movie.id}-${item.media_type}`}>
+                      <CardWrapper
                         to={`/${item.media_type === 'tv' ? 'shows' : 'movies'}/${movie.id}`}>
                         <Card
                           id={movie.id}
@@ -105,11 +102,11 @@ export const MyList = () => {
                           title={movie.title || movie.name}
                           vote_average={movie.vote_average}
                         />
-                      </Link>
+                      </CardWrapper>
                       <RemoveButton onClick={() => removeFromList(item)}>
                         Remove
                       </RemoveButton>
-                    </CardWrapper>
+                    </StyledCardWrapper>
                   );
                 })}
               </MoviesGrid>

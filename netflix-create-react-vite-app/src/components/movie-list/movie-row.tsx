@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 import type { MovieResult } from '../../utils/types/types';
 import { SeasonalCard } from '../card/seasonal-card';
@@ -11,6 +10,7 @@ import {
   CardsWrapper,
   ArrowButton,
 } from './movie.styles';
+import { CardWrapper } from '../card-wrapper/card-wrapper';
 
 interface MovieRowProps {
   title: string;
@@ -78,7 +78,7 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
           {movies.map((movie, idx) =>
             movie.poster_path ? (
               <div ref={idx === 0 ? cardRef : undefined} key={movie.id}>
-                <Link to={`/${movie.media_type === 'tv' ? 'shows' : 'movies'}/${movie.id}`}>
+                <CardWrapper to={`/${movie.media_type === 'tv' ? 'shows' : 'movies'}/${movie.id}`}>
                   <SeasonalCard
                     alt={movie.title}
                     overview={movie.overview}
@@ -88,7 +88,7 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
                     id={movie.id}
                     media_type={movie.media_type ? movie.media_type : 'movie'}
                   />
-                </Link>
+                </CardWrapper>
               </div>
             ) : null
           )}

@@ -7,7 +7,7 @@ import type { ShowResult } from '../../utils/types/types';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
 import { useTranslation } from 'react-i18next';
 import { useGlobalSearch } from '../../hooks/useGlobalSearch';
-import { StyledLink } from '../../components/movie-list/movie.styles';
+import { CardWrapper } from '../../components/card-wrapper/card-wrapper';
 
 const StyledContainer = styled.div`
   margin-top: ${(props) => props.theme.space[10]};
@@ -86,7 +86,7 @@ export const Shows = () => {
               (show) =>
                 show.poster_path &&
                 show.id && (
-                  <StyledLink key={show.id} to={`/shows/${show.id}`}>
+                  <CardWrapper key={show.id} to={`/shows/${show.id}`}>
                     <Card
                       alt={show.name}
                       overview={show.overview}
@@ -96,7 +96,7 @@ export const Shows = () => {
                       id={show.id}
                       media_type='tv'
                     />
-                  </StyledLink>
+                  </CardWrapper>
                 )
             )
           )
@@ -105,7 +105,7 @@ export const Shows = () => {
             (show) =>
               show.poster_path &&
               show.id && (
-                <StyledLink key={show.id} to={`/shows/${show.id}`}>
+                <CardWrapper key={show.id} to={`/shows/${show.id}`}>
                   <Card
                     alt={show.name}
                     key={show.id}
@@ -116,7 +116,7 @@ export const Shows = () => {
                     id={show.id}
                     media_type='tv'
                   />
-                </StyledLink>
+                </CardWrapper>
               )
           )
         )}
