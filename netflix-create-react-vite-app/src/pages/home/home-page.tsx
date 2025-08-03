@@ -77,6 +77,7 @@ export const Homepage = () => {
                 title={heroMovie.title}
                 overview={heroMovie.overview}
                 movieId={heroMovie.id}
+                mediaType={heroMovie.media_type ? heroMovie.media_type : 'movie'}
               />
             )}
             <MovieRow title={t('popular') || 'Popular'} movies={popular} />

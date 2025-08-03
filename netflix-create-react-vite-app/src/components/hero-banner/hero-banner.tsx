@@ -11,6 +11,7 @@ interface HeroBannerProps {
   title: string;
   overview: string;
   movieId: number;
+  mediaType: 'movie' | 'tv';
 }
 
 
@@ -19,13 +20,14 @@ export const HeroBanner = ({
   title,
   overview,
   movieId,
+  mediaType,
 }: HeroBannerProps) => {
   const [showInfo, setShowInfo] = useState(false);
   const { theme } = useTheme();
   const navigate = useNavigate();
 
   const handlePlayClick = () => {
-    navigate(`/trailer/${movieId}`);
+    navigate(`/trailer/${mediaType}/${movieId}`);
   };
 
   return (
