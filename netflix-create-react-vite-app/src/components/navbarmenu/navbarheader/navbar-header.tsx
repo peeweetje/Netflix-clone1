@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavItems } from './nav-items';
 import {
@@ -6,6 +6,7 @@ import {
   NavbarMenu,
   NavList,
   ToggleButton,
+  HamburgerButton,
 } from './navbar-styles';
 import { SearchBar } from './search-bar/search-bar';
 import { useTheme } from '../../../context/themeContext';
@@ -18,6 +19,11 @@ interface NavbarHeaderProps  {
 export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
   const { t } = useTranslation();
   const { toggleTheme } = useTheme();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleHamburgerClick = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <NavbarMenu aria-label={t('site-navigation')} role='navigation'>
@@ -26,7 +32,10 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
           {t('binge-watch')}
         </NavItems>
       </BrandContainer>
-      <NavList>
+      <HamburgerButton onClick={handleHamburgerClick}>
+        &#9776;
+      </HamburgerButton>
+      <NavList $isOpen={isMenuOpen}>
         <NavItems aria-label={t('home-page')} to='/'>
           {t('home-page')}
         </NavItems>
