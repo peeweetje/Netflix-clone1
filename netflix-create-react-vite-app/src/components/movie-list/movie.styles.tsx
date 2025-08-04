@@ -13,6 +13,10 @@ export const FlexWrapper = styled.div`
 
 export const RowContainer = styled.section`
   position: relative;
+
+  @media (max-width: 768px) {
+    width: 100vw;
+  }
 `;
 
 export const RowTitle = styled.h2`
@@ -20,6 +24,10 @@ export const RowTitle = styled.h2`
   font-size: ${(props) => props.theme.fontSize[5]};
   margin-left: ${(props) => props.theme.space[4]};
   margin-bottom: ${(props) => props.theme.space[4]};
+
+  @media (max-width: 768px) {
+    font-size: ${(props) => props.theme.fontSize[4]};
+  }
 `;
 
 export const CardsViewport = styled.div<{ width: number }>`
@@ -72,9 +80,17 @@ export const ArrowButton = styled.button`
     opacity: 0; /* Completely hidden when disabled */
     pointer-events: none; /* Not clickable when disabled */
   }
+
+  @media (max-width: 768px) {
+    &.left {
+      left: 0rem;
+    }
+    &.right {
+      right: 0rem;
+    }
+  }
 `;
 
 export const CardWrapper = styled.div`
   position: relative;
 `;
-
