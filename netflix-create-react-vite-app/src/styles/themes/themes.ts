@@ -41,6 +41,8 @@ export const summerTheme: DefaultTheme = {
   ...baseTheme,
   colors: {
     leafIcon: false,
+    flowerIcon: false,
+    butterflyIcon: false,
     primary: '#FFC107', // Amber
     primaryLight: '#FFD54F',
     black: '#000',
@@ -60,6 +62,8 @@ export const autumnTheme: DefaultTheme = {
   ...baseTheme,
   colors: {
     leafIcon: true,
+    flowerIcon: false,
+    butterflyIcon: false,
     primary: '#FF5722', // Deep Orange
     primaryLight: '#FF8A65',
     black: '#000',
@@ -79,6 +83,8 @@ export const winterTheme: DefaultTheme = {
   ...baseTheme,
   colors: {
     leafIcon: false,
+    flowerIcon: false,
+    butterflyIcon: false,
     primary: '#2196F3', // Blue
     primaryLight: '#64B5F6',
     black: '#000',
