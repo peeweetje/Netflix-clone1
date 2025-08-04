@@ -31,7 +31,6 @@ export const NavbarMenu = styled.nav`
 export const NavList = styled.ul<{ $centered?: boolean; $isOpen?: boolean }>`
   display: flex;
   justify-content: center;
-  flex-flow: wrap;
   ${(props) =>
     props.$centered &&
     `
@@ -51,13 +50,13 @@ export const NavList = styled.ul<{ $centered?: boolean; $isOpen?: boolean }>`
     }
 
     @media (max-width: 1024px) {
-      font-size: ${(props) => props.theme.fontSize[2]};
+      font-size: ${(props) => props.theme.fontSize[3]};
       padding: ${(props) => props.theme.space[6]};
     }
 
     @media (max-width: 992px) {
-      font-size: ${(props) => props.theme.fontSize[1]};
-      padding: ${(props) => props.theme.space[2]};
+      font-size: ${(props) => props.theme.fontSize[2]};
+      padding: ${(props) => props.theme.space[1]};
     }
 
     @media (max-width: 768px) {
@@ -80,12 +79,9 @@ export const NavList = styled.ul<{ $centered?: boolean; $isOpen?: boolean }>`
     display: ${(props) => (props.$isOpen ? 'flex' : 'none')};
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
     position: absolute;
     top: 100%;
-    left: 32px;
-    right: auto;
-    background-color: transparent;
+    background-color:rgba(0, 0, 0, 0.5);
     padding-bottom: ${(props) => props.theme.space[4]};
     z-index: 100;
   }
