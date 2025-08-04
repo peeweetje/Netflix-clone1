@@ -49,6 +49,11 @@ export const BannerContainer = styled.section<{ backgroundImage: string }>`
   display: flex;
   align-items: stretch;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    height: 50vh;
+    min-height: 300px;
+  }
 `;
 
 export const BannerOverlay = styled.div`
@@ -63,6 +68,12 @@ export const BannerOverlay = styled.div`
   justify-content: space-between;
   padding: 0 2vw;
   z-index: 2;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
 `;
 
 export const BannerTitle = styled.h1`
@@ -71,6 +82,11 @@ export const BannerTitle = styled.h1`
   color: ${(props) => props.theme.colors.white};
   max-width: 30vw;
   text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.7);
+
+  @media (max-width: 768px) {
+    font-size: ${(props) => props.theme.fontSize[5]};
+    max-width: 80vw;
+  }
 `;
 
 export const BannerOverview = styled.p`
@@ -81,12 +97,23 @@ export const BannerOverview = styled.p`
   text-align: right;
   text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.7);
   line-height: ${(props) => props.theme.lineHeight[3]};
+
+  @media (max-width: 768px) {
+    font-size: ${(props) => props.theme.fontSize[2]};
+    max-width: 80vw;
+    margin-left: 0;
+    text-align: center;
+  }
 `;
 
 export const BannerButtons = styled.div`
   display: flex;
   gap: ${(props) => props.theme.space[7]};
   margin-top: ${(props) => props.theme.space[7]};
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 
 export const BannerButton = styled.button`
@@ -102,6 +129,11 @@ export const BannerButton = styled.button`
   &:hover {
     background: ${(props) => props.theme.colors.primaryLight};
     color: ${(props) => props.theme.colors.black};
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
   }
 `;
 
