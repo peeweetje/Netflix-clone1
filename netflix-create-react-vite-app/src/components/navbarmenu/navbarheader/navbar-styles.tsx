@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+export const BrandWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export const NavbarMenu = styled.nav`
   display: flex;
   width: 100%;
@@ -16,6 +21,10 @@ export const NavbarMenu = styled.nav`
     position: relative;
     justify-content: space-between;
     padding: ${(props) => props.theme.space[2]} ${(props) => props.theme.space[4]};
+  }
+
+  @media (max-width: 768px) {
+    justify-content: center;
   }
 `;
 
@@ -70,12 +79,13 @@ export const NavList = styled.ul<{ $centered?: boolean; $isOpen?: boolean }>`
   @media (max-width: 992px) {
     display: ${(props) => (props.$isOpen ? 'flex' : 'none')};
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
     position: absolute;
-    top: 20px;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.9);
+    top: 100%;
+    left: 32px;
+    right: auto;
+    background-color: transparent;
     padding-bottom: ${(props) => props.theme.space[4]};
     z-index: 100;
   }

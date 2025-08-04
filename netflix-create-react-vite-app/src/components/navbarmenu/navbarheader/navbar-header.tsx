@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { NavItems } from './nav-items';
 import {
   BrandContainer,
+  BrandWrapper,
   NavbarMenu,
   NavList,
   ToggleButton,
@@ -27,14 +28,16 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
 
   return (
     <NavbarMenu aria-label={t('site-navigation')} role='navigation'>
-      <BrandContainer>
-        <NavItems aria-label={t('binge-watch')} to='/'>
-          {t('binge-watch')}
-        </NavItems>
-      </BrandContainer>
-      <HamburgerButton onClick={handleHamburgerClick}>
-        &#9776;
-      </HamburgerButton>
+      <BrandWrapper>
+        <BrandContainer>
+          <NavItems aria-label={t('binge-watch')} to='/'>
+            {t('binge-watch')}
+          </NavItems>
+        </BrandContainer>
+        <HamburgerButton onClick={handleHamburgerClick}>
+          &#9776;
+        </HamburgerButton>
+      </BrandWrapper>
       <NavList $isOpen={isMenuOpen}>
         <NavItems aria-label={t('home-page')} to='/'>
           {t('home-page')}
