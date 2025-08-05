@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavItems } from './nav-items';
 import {
   BrandContainer,
+  BrandWrapper,
   NavbarMenu,
   NavList,
-  ToggleButton,
+  SwitchThemeButton,
+  HamburgerButton,
 } from './navbar-styles';
 import { SearchBar } from './search-bar/search-bar';
 import { useTheme } from '../../../context/themeContext';
@@ -18,15 +20,25 @@ interface NavbarHeaderProps  {
 export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
   const { t } = useTranslation();
   const { toggleTheme } = useTheme();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleHamburgerClick = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <NavbarMenu aria-label={t('site-navigation')} role='navigation'>
-      <BrandContainer>
-        <NavItems aria-label={t('binge-watch')} to='/'>
-          {t('binge-watch')}
-        </NavItems>
-      </BrandContainer>
-      <NavList>
+      <BrandWrapper>
+        <BrandContainer>
+          <NavItems aria-label={t('binge-watch')} to='/'>
+            {t('binge-watch')}
+          </NavItems>
+        </BrandContainer>
+        <HamburgerButton onClick={handleHamburgerClick}>
+          &#9776;
+        </HamburgerButton>
+      </BrandWrapper>
+      <NavList $isOpen={isMenuOpen}>
         <NavItems aria-label={t('home-page')} to='/'>
           {t('home-page')}
         </NavItems>
@@ -43,7 +55,7 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
           {t('my-list')}
         </NavItems>
       </NavList>
-      <ToggleButton onClick={toggleTheme}>Switch Theme</ToggleButton>
+      <SwitchThemeButton onClick={toggleTheme}>Switch Theme</SwitchThemeButton>
       <SearchBar onChange={onChange} value={value} />
     </NavbarMenu>
   );

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { BannerContainer, BannerOverlay, BannerTitle, BannerOverview, BannerButtons, BannerButton, BeehiveContainer } from './hero-banner.styles';
 import { useTheme } from '../../context/themeContext';
 import { winterTheme, autumnTheme, springTheme, summerTheme } from '../../styles/themes/themes';
-import { renderSnow, renderLeaves, renderFlowers, renderButterflies,renderBees, renderBeachball } from '../../utils/seasonal-effects';
+import { renderSnow, renderLeaves, renderFlowers, renderButterflies, renderBees } from '../../utils/seasonal-effects';
 import { Beehive } from '../svg/beehive';
 
 interface HeroBannerProps {
@@ -13,6 +13,36 @@ interface HeroBannerProps {
   movieId: number;
   mediaType: 'movie' | 'tv';
 }
+
+
+export const renderSeasonalEffects = (theme: any) => {
+  if (!theme) return null;
+
+  switch (theme.name) {
+    case winterTheme.name:
+      return renderSnow();
+    case autumnTheme.name:
+      return theme.icons?.leafIcon ? renderLeaves() : null;
+    case springTheme.name:
+    return (
+      <>
+        {theme.icons?.flowerIcon && renderFlowers()}
+        {theme.icons?.butterflyIcon && renderButterflies()}
+      </>
+    );
+    case summerTheme.name:
+      return (
+        <>
+          {renderBees()}
+          <BeehiveContainer>
+            <Beehive />
+          </BeehiveContainer>
+        </>
+      );
+    default:
+      return null;
+  }
+};
 
 
 export const HeroBanner = ({
@@ -30,18 +60,11 @@ export const HeroBanner = ({
     navigate(`/trailer/${mediaType}/${movieId}`);
   };
 
+  
+
   return (
     <BannerContainer backgroundImage={backgroundImage}>
-      {theme.name === winterTheme.name && renderSnow()}
-      {theme.name === autumnTheme.name && theme.colors.leafIcon && renderLeaves()}
-      {theme.name === springTheme.name && theme.colors.flowerIcon && renderFlowers()}
-      {theme.name === springTheme.name && theme.colors.butterflyIcon && renderButterflies()}
-      {theme.name === summerTheme.name && renderBees()}
-      {theme.name === summerTheme.name && (
-        <BeehiveContainer>
-          <Beehive />
-        </BeehiveContainer>
-      )}
+      {theme &&renderSeasonalEffects(theme)}
       <BannerOverlay>
         <div>
           <BannerTitle>{title}</BannerTitle>

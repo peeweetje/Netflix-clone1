@@ -9,6 +9,9 @@ export const CardContainer = styled.div`
   cursor: pointer;
   perspective: 1000px;
 
+  @media (max-width: 768px) {
+    height: 280px;
+  }
 `;
 
 export const FLipCard = styled.div`
@@ -29,6 +32,11 @@ export const StyledImg = styled.img`
   box-shadow: ${(props) => props.theme.borderShadow[0]};
   height: 350px;
   width: 250px;
+
+  @media (max-width: 768px) {
+    height: 250px;
+    width: 150px;
+  }
 `;
 
 export const CardBack = styled.div`
@@ -50,6 +58,11 @@ export const CardBackContainer = styled.div`
   background: ${(props) => props.theme.colors.primaryLight};
   color: ${(props) => props.theme.colors.buttonText};
   border-radius: ${(props) => props.theme.borderRadius[3]};
+
+  @media (max-width: 768px) {
+    height: 250px;
+    width: 150px;
+  }
 `;
 
 export const TitleContainer = styled.h1`
@@ -57,6 +70,10 @@ export const TitleContainer = styled.h1`
   justify-content: center;
   margin-top: ${(props) => props.theme.space[1]};
   font-size: ${(props) => props.theme.fontSize[2]};
+
+  @media (max-width: 768px) {
+    font-size: ${(props) => props.theme.fontSize[1]};
+  }
 `;
 
 export const OverviewContainer = styled.p`
@@ -64,6 +81,15 @@ export const OverviewContainer = styled.p`
   justify-content: center;
   font-size: ${(props) => props.theme.fontSize[1]};
   line-height: ${(props) => props.theme.lineHeight[3]};
+
+  @media (max-width: 768px) {
+    font-size: ${(props) => props.theme.fontSize[0]};
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 
 export const ScoreContainer = styled.span<{ score: string | undefined }>`
@@ -86,6 +112,11 @@ export const MotionFlipCard = styled(motion.div)`
   width: 250px;
   height: 350px;
   transform-style: preserve-3d;
+
+  @media (max-width: 768px) {
+    width: 150px;
+    height: 250px;
+  }
 `;
 
 export const MotionCardFront = styled.div`
@@ -121,4 +152,10 @@ export const BackCardButton = styled.button<{ isAdded: boolean }>`
   padding: 6px 16px;
   font-size:${(props) => props.theme.fontSize[3]};
   cursor: ${({ isAdded }) => (isAdded ? 'not-allowed' : 'pointer')};
+
+  @media (max-width: 768px) {
+    width: 100px;
+    height: 30px;
+    font-size: ${(props) => props.theme.fontSize[1]};
+  }
 `;

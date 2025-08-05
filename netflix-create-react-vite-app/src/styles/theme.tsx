@@ -21,7 +21,12 @@ declare module 'styled-components' {
     borderRadius: string[];
     boderShadow: string[];
     lineHeight: string[];
-  }
+  };
+  icons: {
+   leafIcon: boolean;
+   flowerIcon: boolean;
+   butterflyIcon: boolean;
+ };
 }
 
 

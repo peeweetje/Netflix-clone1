@@ -7,7 +7,8 @@ body {
     padding: ${(props) => props.theme.space[0]};
     font-family:${(props) => props.theme.fontFamily};
     background-color:${(props) => props.theme.colors.black};
-    color:${(props) => props.theme.colors.white}
+    color:${(props) => props.theme.colors.white};
+    overflow-x: hidden;
 }
 a {
     text-decoration: none;

@@ -5,4 +5,6 @@ export const MainContainer = styled.main`
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
+  max-width: 100%;
+  overflow-x: hidden;
 `;

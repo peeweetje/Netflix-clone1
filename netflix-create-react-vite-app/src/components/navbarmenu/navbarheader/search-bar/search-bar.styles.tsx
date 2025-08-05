@@ -13,11 +13,19 @@ export const NavbarSearch = styled.div`
   }
 `;
 
+
+
 export const SearchContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+
+  @media (max-width: 768px) {
+    margin-top: 1rem;
+  }
 `;
+
+
 
 export const NavbarInput = styled.input`
   background-color: transparent;
@@ -26,6 +34,10 @@ export const NavbarInput = styled.input`
   color: ${(props) => props.theme.colors.white};
   padding: ${(props) => props.theme.space[4]} ${(props) => props.theme.space[4]} ${(props) => props.theme.space[4]} 40px;
   transition: border-color 0.3s ease;
+
+  @media (max-width: 768px) {
+    padding: ${(props) => props.theme.space[2]} ${(props) => props.theme.space[2]} ${(props) => props.theme.space[2]} 30px;
+  }
 
   &::placeholder {
     color: ${(props) => props.theme.colors.white};
@@ -42,8 +54,28 @@ export const NavbarInput = styled.input`
     cursor: pointer;
   }
 
+  @media (max-width: 1200px) {
+    width: 95%;
+    padding: ${(props) => props.theme.space[4]} ${(props) => props.theme.space[4]} ${(props) => props.theme.space[4]} 15px;
+    font-size: ${(props) => props.theme.fontSize[2]};
+  }
+
+  @media (max-width: 1024px) {
+    width: 95%;
+    padding: ${(props) => props.theme.space[3]} ${(props) => props.theme.space[3]} ${(props) => props.theme.space[3]} 15px;
+    font-size: ${(props) => props.theme.fontSize[1]};
+  }
+
+  @media (max-width: 992px) {
+    width: 95%;
+    padding: ${(props) => props.theme.space[2]} ${(props) => props.theme.space[2]} ${(props) => props.theme.space[2]} 10px;
+    font-size: ${(props) => props.theme.fontSize[1]};
+  }
+
   @media (max-width: 768px) {
-    width: 75%;
+    width: 100%;
+    padding: ${(props) => props.theme.space[2]} ${(props) => props.theme.space[2]} ${(props) => props.theme.space[2]} 10px;
+    font-size: ${(props) => props.theme.fontSize[1]};
   }
 `;
 
@@ -52,4 +84,8 @@ export const SearchIconWrapper = styled.div`
   left: 10px;
   color: ${(props) => props.theme.colors.primary};
   pointer-events: none;
+
+  @media (max-width: 1200px) {
+    display: none;
+  }
 `;

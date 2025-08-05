@@ -17,15 +17,36 @@ interface MovieRowProps {
   movies: MovieResult[];
 }
 
-const VISIBLE_COUNT = 5;
+const getVisibleCount = () => {
+  if (typeof window === 'undefined') return 5;
+  if (window.innerWidth < 768) {
+    return 2;
+  } else if (window.innerWidth < 1024) {
+    return 3;
+  } else {
+    return 5;
+  }
+};
 
 export const MovieRow = ({ title, movies }: MovieRowProps) => {
   const [startIdx, setStartIdx] = useState(0);
   const [cardWidth, setCardWidth] = useState(266); // fallback default (250px + 16px gap)
+  const [visibleCount, setVisibleCount] = useState(() => 
+    typeof window !== 'undefined' ? getVisibleCount() : 5
+  );
   const cardRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setVisibleCount(getVisibleCount());
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const total = movies.length;
-  const lastPageStart = Math.max(0, total - VISIBLE_COUNT);
+  const lastPageStart = Math.max(0, total - visibleCount);
   const canScrollLeft = startIdx > 0;
   const canScrollRight = startIdx < lastPageStart;
 
@@ -42,21 +63,19 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
   }, [movies, startIdx, lastPageStart]);
 
   const handleLeft = () => {
-    if (canScrollLeft) setStartIdx(Math.max(0, startIdx - VISIBLE_COUNT));
+    if (canScrollLeft) setStartIdx(Math.max(0, startIdx - visibleCount));
   };
   const handleRight = () => {
     if (canScrollRight)
-      setStartIdx(Math.min(lastPageStart, startIdx + VISIBLE_COUNT));
+      setStartIdx(Math.min(lastPageStart, startIdx + visibleCount));
   };
 
   // Calculate x for Framer Motion
   let x = -startIdx * cardWidth;
-  if (startIdx === lastPageStart && total > VISIBLE_COUNT) {
-    x = -(total - VISIBLE_COUNT) * cardWidth;
+  if (startIdx === lastPageStart && total > visibleCount) {
+    x = -(total - visibleCount) * cardWidth;
   }
 
-  // Calculate viewport width (show fewer if not enough movies)
-  const visibleCount = Math.min(VISIBLE_COUNT, total);
   const viewportWidth = visibleCount * cardWidth;
 
   return (
