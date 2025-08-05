@@ -18,9 +18,6 @@ export const springTheme: DefaultTheme = {
   name: 'spring',
   ...baseTheme,
   colors: {
-    leafIcon: false,
-    flowerIcon: true,
-    butterflyIcon: true,
     primary: '#4CAF50', // Green
     primaryLight: '#81C784',
     black: '#000',
@@ -33,6 +30,11 @@ export const springTheme: DefaultTheme = {
     green: '#00FF00',
     buttonText: '#fff',
   },
+  icons: {
+    leafIcon: false,
+    flowerIcon: true,
+    butterflyIcon: true,
+  },
  
 };
 
@@ -40,9 +42,6 @@ export const summerTheme: DefaultTheme = {
   name: 'summer',
   ...baseTheme,
   colors: {
-    leafIcon: false,
-    flowerIcon: false,
-    butterflyIcon: false,
     primary: '#FFC107', // Amber
     primaryLight: '#FFD54F',
     black: '#000',
@@ -55,15 +54,17 @@ export const summerTheme: DefaultTheme = {
     green: '#00FF00',
     buttonText: '#000',
   },
+  icons: {
+    leafIcon: false,
+    flowerIcon: false,
+    butterflyIcon: false,
+  },
 };
 
 export const autumnTheme: DefaultTheme = {
   name: 'autumn',
   ...baseTheme,
   colors: {
-    leafIcon: true,
-    flowerIcon: false,
-    butterflyIcon: false,
     primary: '#FF5722', // Deep Orange
     primaryLight: '#FF8A65',
     black: '#000',
@@ -76,15 +77,17 @@ export const autumnTheme: DefaultTheme = {
     green: '#00FF00',
     buttonText: '#fff',
   },
+  icons: {
+    leafIcon: true,
+    flowerIcon: true,
+    butterflyIcon: false,
+  },
 };
 
 export const winterTheme: DefaultTheme = {
   name: 'winter',
   ...baseTheme,
   colors: {
-    leafIcon: false,
-    flowerIcon: false,
-    butterflyIcon: false,
     primary: '#2196F3', // Blue
     primaryLight: '#64B5F6',
     black: '#000',
@@ -96,5 +99,10 @@ export const winterTheme: DefaultTheme = {
     orange: '#FFA500',
     green: '#00FF00',
     buttonText: '#fff',
+  },
+  icons: {
+    leafIcon: false,
+    flowerIcon: false,
+    butterflyIcon: false,
   },
 };
