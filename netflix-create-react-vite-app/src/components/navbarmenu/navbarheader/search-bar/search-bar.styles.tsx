@@ -25,18 +25,7 @@ export const SearchContainer = styled.div`
   }
 `;
 
-export const SearchInput = styled.input`
-  width: 0;
-  padding: 0.5rem;
-  border: 1px solid ${({ theme }) => theme.colors.primary};
-  border-radius: 4px;
-  background-color: transparent;
-  color: ${({ theme }) => theme.colors.text};
-  transition: width 0.3s ease-in-out;
-  opacity: 0;
 
-  
-`;
 
 export const NavbarInput = styled.input`
   background-color: transparent;
