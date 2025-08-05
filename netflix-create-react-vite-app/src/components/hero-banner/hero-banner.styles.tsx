@@ -1,7 +1,5 @@
-import styled from 'styled-components';
 import { motion } from 'framer-motion';
-
-
+import styled from 'styled-components';
 
 export const LeafContainer = styled.div`
   position: absolute;
@@ -35,8 +33,6 @@ export const SnowContainer = styled.div`
   z-index: 1;
   pointer-events: none;
 `;
-
-
 
 export const BannerContainer = styled.section<{ backgroundImage: string }>`
   position: relative;
@@ -137,7 +133,6 @@ export const BannerButton = styled.button`
   }
 `;
 
-
 export const Leaf = styled(motion.div)`
   position: absolute;
   top: -10px;
@@ -164,8 +159,6 @@ export const FlowersThemeContainer = styled.div`
   width: 100%;
   height: 250px;
 `;
-
-
 
 export const AnimatedButterfly = styled(motion.div)``;
 

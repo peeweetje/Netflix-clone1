@@ -13,7 +13,7 @@ export const AnimatedButterfly = styled.g`
   }
 `;
 
- export const AnimatedWings = styled.g`
+export const AnimatedWings = styled.g`
   transform-origin: center;
   animation: ${wingFlap} 0.5s infinite alternate;
 `;

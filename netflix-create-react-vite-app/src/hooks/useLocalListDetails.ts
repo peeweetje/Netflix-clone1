@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { type MyListItem, useMyList } from '../context/myListContext';
 import { VITE_API_KEY } from '../utils/api';
-import { MovieResult } from '../utils/types/types';
-import { useMyList, MyListItem } from '../context/myListContext';
+import type { MovieResult } from '../utils/types/types';
 
 interface UseLocalListDetailsReturn {
   localMovies: MovieResult[];
@@ -64,20 +64,22 @@ export const useLocalListDetails = (): UseLocalListDetailsReturn => {
               item
             );
             failed.push(item);
-             // Batch remove failed items and show notice
+            // Batch remove failed items and show notice
             if (failed.length > 0) {
-             failed.forEach(item => removeFromList(item));
-             const failedTitles = failed.map(item => item.title || item.name || 'Unknown Title').join(', ');
-             const sanitizedTitle = (
-               item.title ||
-               item.name ||
-               'Unknown Title'
-             ).replace(/[<>]/g, '');
-            setRemovalNotice(
-              `"${sanitizedTitle}" was removed from your list because it could not be loaded.`
-            );
-          setTimeout(() => setRemovalNotice(null), 4000);
-        }
+              failed.forEach((item) => removeFromList(item));
+              const failedTitles = failed
+                .map((item) => item.title || item.name || 'Unknown Title')
+                .join(', ');
+              const sanitizedTitle = (
+                item.title ||
+                item.name ||
+                'Unknown Title'
+              ).replace(/[<>]/g, '');
+              setRemovalNotice(
+                `"${sanitizedTitle}" was removed from your list because it could not be loaded.`
+              );
+              setTimeout(() => setRemovalNotice(null), 4000);
+            }
             continue;
           }
           const data = await res.json();

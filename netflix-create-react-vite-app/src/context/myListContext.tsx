@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import type React from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 export type MyListItem = {
   id: number;
@@ -16,7 +17,7 @@ const MyListContext = createContext<MyListContextType | undefined>(undefined);
 export const MyListProvider = ({ children }: { children: React.ReactNode }) => {
   const [myList, setMyList] = useState<MyListItem[]>(() => {
     const stored = localStorage.getItem('myList');
-    let parsed = stored ? JSON.parse(stored) : [];
+    const parsed = stored ? JSON.parse(stored) : [];
     // Filter out any null, undefined, or malformed items
     if (!Array.isArray(parsed)) return [];
     return parsed.filter(

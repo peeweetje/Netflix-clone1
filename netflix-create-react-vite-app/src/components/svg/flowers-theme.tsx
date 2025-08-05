@@ -6,26 +6,25 @@ import Flower3 from './flower3';
 export const FlowersTheme = ({ width = 300, height = 250 }) => {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
+      height={height}
       viewBox="0 0 300 250"
       width={width}
-      height={height}
+      xmlns="http://www.w3.org/2000/svg"
     >
       {/* Flower 1 */}
       <g transform="translate(10, 190)">
-        <Flower1 width="60" height="60" />
+        <Flower1 height="60" width="60" />
       </g>
 
       {/* Flower 2 */}
       <g transform="translate(40, 180)">
-        <Flower2 width="70" height="70" />
+        <Flower2 height="70" width="70" />
       </g>
 
       {/* Flower 3 */}
       <g transform="translate(75, 200)">
-        <Flower3 width="50" height="50" />
+        <Flower3 height="50" width="50" />
       </g>
     </svg>
   );
 };
-

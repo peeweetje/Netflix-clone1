@@ -1,6 +1,6 @@
 export const colours = {
   Green: '#00796B', // Dark Teal
-  Red: '#B00020',   // Dark Red
+  Red: '#B00020', // Dark Red
   Orange: '#E65100', // Dark Orange
 };
 

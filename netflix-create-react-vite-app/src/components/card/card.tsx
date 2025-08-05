@@ -1,8 +1,4 @@
-import React, {
-  useState,
-  useImperativeHandle,
-  forwardRef,
-} from 'react';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { BackCard } from './back-card';
 import {
   CardContainer,
@@ -26,48 +22,39 @@ type CardProps = {
   media_type: 'movie' | 'tv';
 };
 
-export const Card = forwardRef<CardRef, CardProps>((
-  {
-    src,
-    alt,
-    overview,
-    title,
-    vote_average,
-    id,
-    media_type,
-  },
-  ref
-) => {
-  const [isFlipped, setIsFlipped] = useState(false);
+export const Card = forwardRef<CardRef, CardProps>(
+  ({ src, alt, overview, title, vote_average, id, media_type }, ref) => {
+    const [isFlipped, setIsFlipped] = useState(false);
 
-  useImperativeHandle(ref, () => ({
-    flip: () => {
-      setIsFlipped((prev) => !prev);
-    },
-  }));
+    useImperativeHandle(ref, () => ({
+      flip: () => {
+        setIsFlipped((prev) => !prev);
+      },
+    }));
 
-  return (
-    <CardContainer
-      onMouseEnter={() => setIsFlipped(true)}
-      onMouseLeave={() => setIsFlipped(false)}
-    >
-      <MotionFlipCard
-        animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.6 }}
+    return (
+      <CardContainer
+        onMouseEnter={() => setIsFlipped(true)}
+        onMouseLeave={() => setIsFlipped(false)}
       >
-        <MotionCardFront>
-          <FrontCard alt={alt} src={src} />
-        </MotionCardFront>
-        <MotionCardBack>
-          <BackCard
-            id={id}
-            media_type={media_type}
-            overview={overview}
-            title={title}
-            vote_average={vote_average}
-          />
-        </MotionCardBack>
-      </MotionFlipCard>
-    </CardContainer>
-  );
-});
+        <MotionFlipCard
+          animate={{ rotateY: isFlipped ? 180 : 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <MotionCardFront>
+            <FrontCard alt={alt} src={src} />
+          </MotionCardFront>
+          <MotionCardBack>
+            <BackCard
+              id={id}
+              media_type={media_type}
+              overview={overview}
+              title={title}
+              vote_average={vote_average}
+            />
+          </MotionCardBack>
+        </MotionFlipCard>
+      </CardContainer>
+    );
+  }
+);

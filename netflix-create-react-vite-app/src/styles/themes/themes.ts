@@ -1,13 +1,34 @@
-import { DefaultTheme } from 'styled-components';
+import type { DefaultTheme } from 'styled-components';
 
 const baseTheme = {
   fontFamily: 'Montserrat, sans-serif',
   space: [
-    '0px', '2px', '4px', '6px', '8px', '12px', '16px', '18px', '20px',
-    '24px', '32px', '40px', '64px', '128px', '256px', '512px',
+    '0px',
+    '2px',
+    '4px',
+    '6px',
+    '8px',
+    '12px',
+    '16px',
+    '18px',
+    '20px',
+    '24px',
+    '32px',
+    '40px',
+    '64px',
+    '128px',
+    '256px',
+    '512px',
   ],
   fontSize: [
-    '0.5rem', '0.7rem', '0.8rem', '1rem', '1.25rem', '1.5rem', '2rem', '2.5rem',
+    '0.5rem',
+    '0.7rem',
+    '0.8rem',
+    '1rem',
+    '1.25rem',
+    '1.5rem',
+    '2rem',
+    '2.5rem',
   ],
   borderRadius: ['2px', '4px', '6px', '8px'],
   borderShadow: ['0 25px 100px -10px rgba(169, 154, 154, 0.54)'],
@@ -35,7 +56,6 @@ export const springTheme: DefaultTheme = {
     flowerIcon: true,
     butterflyIcon: true,
   },
- 
 };
 
 export const summerTheme: DefaultTheme = {

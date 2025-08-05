@@ -1,27 +1,29 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { wingFlap, AnimatedWings } from './butterfly.styles';
+import { AnimatedWings, wingFlap } from './butterfly.styles';
 
-
-
-
- export const Butterfly = ({ width = 50, height = 50, primaryColor = '#FFD700', secondaryColor = '#FFA500' }) => {
+export const Butterfly = ({
+  width = 50,
+  height = 50,
+  primaryColor = '#FFD700',
+  secondaryColor = '#FFA500',
+}) => {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
+      height={height}
       viewBox="0 0 100 100"
       width={width}
-      height={height}
+      xmlns="http://www.w3.org/2000/svg"
     >
       {/* Body */}
-      <ellipse cx="50" cy="50" rx="8" ry="20" fill="#654321" />
+      <ellipse cx="50" cy="50" fill="#654321" rx="8" ry="20" />
 
       {/* Head */}
-      <circle cx="50" cy="28" r="7" fill="#654321" />
+      <circle cx="50" cy="28" fill="#654321" r="7" />
 
       {/* Antennae */}
-      <line x1="45" y1="25" x2="35" y2="10" stroke="#654321" strokeWidth="2" />
-      <line x1="55" y1="25" x2="65" y2="10" stroke="#654321" strokeWidth="2" />
+      <line stroke="#654321" strokeWidth="2" x1="45" x2="35" y1="25" y2="10" />
+      <line stroke="#654321" strokeWidth="2" x1="55" x2="65" y1="25" y2="10" />
 
       {/* Wings */}
       <AnimatedWings>
@@ -37,5 +39,3 @@ import { wingFlap, AnimatedWings } from './butterfly.styles';
     </svg>
   );
 };
-
-

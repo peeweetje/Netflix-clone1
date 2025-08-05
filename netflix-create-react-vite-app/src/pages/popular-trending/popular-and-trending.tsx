@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { MovieRow } from '../../components/movie-list/movie-row';
+import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
+import { Spinner } from '../../components/spinner/spinner';
 import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { useGlobalSearch } from '../../hooks/useGlobalSearch';
 import {
   discoverShowUrl,
+  popularMoviesUrl,
   trendingMovieUrl,
   trendingShowUrl,
-  popularMoviesUrl,
 } from '../../utils/api';
 import type { MovieResult, ShowResult } from '../../utils/types/types';
-import { Spinner } from '../../components/spinner/spinner';
-import { MovieRow } from '../../components/movie-list/movie-row';
-import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
 
 const Container = styled.div`
   display: flex;
@@ -58,7 +59,7 @@ export const PopularAndTrending = () => {
     overview: show.overview,
     title: show.name,
     vote_average: show.vote_average,
-    media_type: 'tv', 
+    media_type: 'tv',
   });
 
   return (
@@ -76,24 +77,24 @@ export const PopularAndTrending = () => {
             <p>{searchError}</p>
           ) : (
             <>
-              <MovieRow title='Movies' movies={searchResultsMovies} />
+              <MovieRow movies={searchResultsMovies} title="Movies" />
               <MovieRow
-                title='Shows'
                 movies={searchResultsShows.map(mapShowToMovie)}
+                title="Shows"
               />
             </>
           )
         ) : (
           <>
-            <MovieRow title='Trending Movies' movies={trendingMovies} />
+            <MovieRow movies={trendingMovies} title="Trending Movies" />
             <MovieRow
-              title='Trending Shows'
               movies={trendingShows.map(mapShowToMovie)}
+              title="Trending Shows"
             />
-            <MovieRow title='Most Popular Movies' movies={popularMovies} />
+            <MovieRow movies={popularMovies} title="Most Popular Movies" />
             <MovieRow
-              title='Most Popular Shows'
               movies={popularShows.map(mapShowToMovie)}
+              title="Most Popular Shows"
             />
           </>
         )}

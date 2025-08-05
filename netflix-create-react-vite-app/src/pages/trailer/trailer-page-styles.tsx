@@ -30,7 +30,7 @@ export const VideoWrapper = styled.div`
   }
 `;
 
- export const GoBackButton = styled.button`
+export const GoBackButton = styled.button`
    background-color: ${(props) => props.theme.colors.primary};
    color: ${(props) => props.theme.colors.buttonText};
    border: none;

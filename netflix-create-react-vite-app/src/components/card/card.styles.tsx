@@ -1,6 +1,6 @@
-import { BackCard } from './back-card';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import { BackCard } from './back-card';
 
 export const CardContainer = styled.div`
   display: flex;

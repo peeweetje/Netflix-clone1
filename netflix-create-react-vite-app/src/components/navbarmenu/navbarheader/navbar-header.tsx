@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import type React from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useTheme } from '../../../context/themeContext';
 import { NavItems } from './nav-items';
 import {
   BrandContainer,
   BrandWrapper,
+  HamburgerButton,
   NavbarMenu,
   NavList,
   SwitchThemeButton,
-  HamburgerButton,
 } from './navbar-styles';
 import { SearchBar } from './search-bar/search-bar';
-import { useTheme } from '../../../context/themeContext';
 
-interface NavbarHeaderProps  {
+interface NavbarHeaderProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
 }
@@ -27,10 +28,10 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
   };
 
   return (
-    <NavbarMenu aria-label={t('site-navigation')} role='navigation'>
+    <NavbarMenu aria-label={t('site-navigation')} role="navigation">
       <BrandWrapper>
         <BrandContainer>
-          <NavItems aria-label={t('binge-watch')} to='/'>
+          <NavItems aria-label={t('binge-watch')} to="/">
             {t('binge-watch')}
           </NavItems>
         </BrandContainer>
@@ -39,19 +40,19 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
         </HamburgerButton>
       </BrandWrapper>
       <NavList $isOpen={isMenuOpen}>
-        <NavItems aria-label={t('home-page')} to='/'>
+        <NavItems aria-label={t('home-page')} to="/">
           {t('home-page')}
         </NavItems>
-        <NavItems aria-label={t('show-page')} to='/shows'>
+        <NavItems aria-label={t('show-page')} to="/shows">
           {t('show-page')}
         </NavItems>
-        <NavItems aria-label={t('movie-page')} to='/movies'>
+        <NavItems aria-label={t('movie-page')} to="/movies">
           {t('movie-page')}
         </NavItems>
-        <NavItems aria-label={t('popular-trending')} to='/popular-trending'>
+        <NavItems aria-label={t('popular-trending')} to="/popular-trending">
           {t('popular-trending')}
         </NavItems>
-        <NavItems aria-label={t('my-list')} to='/my-list'>
+        <NavItems aria-label={t('my-list')} to="/my-list">
           {t('my-list')}
         </NavItems>
       </NavList>
@@ -60,5 +61,3 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
     </NavbarMenu>
   );
 };
-
-

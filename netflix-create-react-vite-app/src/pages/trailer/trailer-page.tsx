@@ -1,11 +1,13 @@
-
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { movieVideosUrl, showVideosUrl } from '../../utils/api';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Spinner } from '../../components/spinner/spinner';
 import { useTheme } from '../../context/themeContext';
-import {TrailerContainer, VideoWrapper, GoBackButton} from './trailer-page-styles';
-
+import { movieVideosUrl, showVideosUrl } from '../../utils/api';
+import {
+  GoBackButton,
+  TrailerContainer,
+  VideoWrapper,
+} from './trailer-page-styles';
 
 export const TrailerPage = () => {
   const { id, media_type } = useParams<{ id: string; media_type: string }>();
@@ -17,14 +19,17 @@ export const TrailerPage = () => {
 
   useEffect(() => {
     const getTrailer = async () => {
-      if (!id || !media_type) {
+      if (!(id && media_type)) {
         setError('ID or media type not provided.');
         setLoading(false);
         return;
       }
 
       try {
-        const url = media_type === 'movie' ? movieVideosUrl(Number(id)) : showVideosUrl(Number(id));
+        const url =
+          media_type === 'movie'
+            ? movieVideosUrl(Number(id))
+            : showVideosUrl(Number(id));
         const response = await fetch(url);
         const data = await response.json();
         const videos = data.results;
@@ -34,9 +39,11 @@ export const TrailerPage = () => {
           return;
         }
 
-        const trailer = videos.find((vid: any) => vid?.type === 'Trailer' && vid?.site === 'YouTube');
+        const trailer = videos.find(
+          (vid: any) => vid?.type === 'Trailer' && vid?.site === 'YouTube'
+        );
 
-        if (!trailer || !trailer.key) {
+        if (!(trailer && trailer.key)) {
           setError('No trailer found for this movie.');
           return;
         }
@@ -76,12 +83,12 @@ export const TrailerPage = () => {
       {videoKey ? (
         <VideoWrapper>
           <iframe
-            src={`https://www.youtube.com/embed/${videoKey}?autoplay=1`}
-            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
+            frameBorder="0"
+            src={`https://www.youtube.com/embed/${videoKey}?autoplay=1`}
             title="Movie Trailer"
-          ></iframe>
+          />
         </VideoWrapper>
       ) : (
         <p>No trailer available.</p>

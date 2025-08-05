@@ -160,7 +160,6 @@ export const CastCharacter = styled.div`
   
 `;
 
-
 export const CastImageFallback = styled.div`
   width: 80px;
   height: 120px;
@@ -185,5 +184,3 @@ export const ButtonContainer = styled.div`
   gap: ${({ theme }) => theme.space[4]}; /* Spacing between buttons */
   margin-bottom: ${({ theme }) => theme.space[4]};
 `;
-
-

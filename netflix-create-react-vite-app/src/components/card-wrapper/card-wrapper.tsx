@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { CardRef } from '../card/card';
+import type { CardRef } from '../card/card';
 
 interface CardWrapperProps {
   to: string;
@@ -18,7 +18,7 @@ export const CardWrapper = ({ to, children }: CardWrapperProps) => {
   };
 
   return (
-    <Link to={to} onKeyDown={handleKeyDown}>
+    <Link onKeyDown={handleKeyDown} to={to}>
       {React.cloneElement(children, { ref: cardRef })}
     </Link>
   );

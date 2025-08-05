@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { Spinner } from '../spinner/spinner';
-import { movieVideosUrl, showVideosUrl, VITE_API_KEY, imageUrl } from '../../utils/api';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
-  StyledContainer,
-  CastSection,
-  CastList,
-  MainColumns,
-  LeftColumn,
-  RightColumn,
-  GoBackButton,
-  ButtonContainer,
-} from './details-styles';
+  imageUrl,
+  movieVideosUrl,
+  showVideosUrl,
+  VITE_API_KEY,
+} from '../../utils/api';
+import { Spinner } from '../spinner/spinner';
 import { CastMember } from './cast-member';
-import { MediaPoster } from './media-poster';
+import {
+  ButtonContainer,
+  CastList,
+  CastSection,
+  GoBackButton,
+  LeftColumn,
+  MainColumns,
+  RightColumn,
+  StyledContainer,
+} from './details-styles';
 import { MediaInfo } from './media-info';
+import { MediaPoster } from './media-poster';
 
 interface MediaDetailProps {
   type: 'movie' | 'tv';
@@ -26,7 +31,6 @@ interface MediaData {
   name?: string;
   poster_path?: string;
   tagline?: string;
- 
 }
 
 interface CastMember {
@@ -36,7 +40,6 @@ interface CastMember {
   profile_path?: string;
   character?: string;
 }
-
 
 export const MediaDetail = ({ type }: MediaDetailProps) => {
   const { id } = useParams<{ id: string }>();
@@ -76,7 +79,7 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
         const data = await response.json();
         setCast(data.cast || []);
       } catch (err) {
-         console.error('Failed to fetch cast data:', err);
+        console.error('Failed to fetch cast data:', err);
         setError('Failed to fetch cast data');
         setLoading(false);
       }
@@ -88,10 +91,15 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
     if (id) {
       const checkTrailer = async () => {
         try {
-          const url = type === 'movie' ? movieVideosUrl(Number(id)) : showVideosUrl(Number(id));
+          const url =
+            type === 'movie'
+              ? movieVideosUrl(Number(id))
+              : showVideosUrl(Number(id));
           const response = await fetch(url);
           const data = await response.json();
-          const trailer = data.results.find((vid: any) => vid.type === 'Trailer' && vid.site === 'YouTube');
+          const trailer = data.results.find(
+            (vid: any) => vid.type === 'Trailer' && vid.site === 'YouTube'
+          );
           setHasTrailer(!!trailer);
         } catch (error) {
           console.error(`Failed to fetch ${type} videos:`, error);
@@ -124,17 +132,17 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
           <GoBackButton
             onClick={() => navigate(`/trailer/${type}/${media.id}`)}
           >
-           Watch Trailer
+            Watch Trailer
           </GoBackButton>
         )}
       </ButtonContainer>
       <MainColumns>
         <LeftColumn>
           <MediaPoster
-            title={media.title || media.name}
+            imageUrl={imageUrl}
             posterPath={media.poster_path}
             tagline={media.tagline}
-            imageUrl={imageUrl}
+            title={media.title || media.name}
           />
         </LeftColumn>
         <RightColumn>
@@ -144,14 +152,14 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
               <CastList>
                 {cast.slice(0, 5).map((actor) => (
                   <CastMember
-                    key={actor.cast_id || actor.credit_id}
                     actor={actor}
+                    alt={actor.name}
+                    key={actor.cast_id || actor.credit_id}
                     src={
                       actor.profile_path
                         ? `https://image.tmdb.org/t/p/w185${actor.profile_path}`
                         : ''
                     }
-                    alt={actor.name}
                   />
                 ))}
               </CastList>

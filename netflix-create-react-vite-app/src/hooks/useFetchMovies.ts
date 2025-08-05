@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction, useEffect } from 'react';
-import { MovieResult } from '../utils/types/types';
+import { type Dispatch, type SetStateAction, useEffect } from 'react';
+import type { MovieResult } from '../utils/types/types';
 
 export const useFetchMovies = (
   url: string,

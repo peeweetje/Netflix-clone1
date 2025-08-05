@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import styled from 'styled-components';
 
 export const FlexWrapper = styled.div`
   margin-top: ${(props) => props.theme.space[10]};
@@ -9,7 +9,6 @@ export const FlexWrapper = styled.div`
   justify-content: center;
   align-items: flex-start;
 `;
-
 
 export const RowContainer = styled.section`
   position: relative;

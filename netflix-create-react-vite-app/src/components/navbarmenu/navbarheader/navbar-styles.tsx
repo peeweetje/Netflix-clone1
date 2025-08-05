@@ -105,7 +105,7 @@ export const HamburgerButton = styled.button`
 export const BrandContainer = styled.div<{ $centered?: boolean }>`
   display: flex;
   align-items: center;
-  ${(props) => !props.$centered && `margin-right: auto;`}
+  ${(props) => !props.$centered && 'margin-right: auto;'}
   font-size: ${(props) => props.theme.fontSize[5]};
   padding-left: ${(props) => props.theme.space[8]};
   list-style: none;
@@ -135,7 +135,7 @@ export const BrandContainer = styled.div<{ $centered?: boolean }>`
   }
 `;
 
- export const SwitchThemeButton = styled.button`
+export const SwitchThemeButton = styled.button`
    display:flex;
    justify-content: center;
    min-width: 120px;
@@ -151,22 +151,22 @@ export const BrandContainer = styled.div<{ $centered?: boolean }>`
    }
 
    @media (max-width: 1200px) {
-     margin:${props => props.theme.space[2]}; 
+     margin:${(props) => props.theme.space[2]}; 
      padding: 10px;
    }
 
    @media (max-width: 1024px) {
-     margin: ${props => props.theme.space[2]};
-     padding:${props => props.theme.space[4]};
+     margin: ${(props) => props.theme.space[2]};
+     padding:${(props) => props.theme.space[4]};
    }
 
    @media (max-width: 992px) {
-     margin:${props => props.theme.space[1]};
-     padding:${props => props.theme.space[3]};
+     margin:${(props) => props.theme.space[1]};
+     padding:${(props) => props.theme.space[3]};
    }
 
    @media (max-width: 768px) {
-     margin:${props => props.theme.space[2]};
-     padding: ${props => props.theme.space[2]};
+     margin:${(props) => props.theme.space[2]};
+     padding: ${(props) => props.theme.space[2]};
    }
  `;

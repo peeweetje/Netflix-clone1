@@ -1,10 +1,29 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BannerContainer, BannerOverlay, BannerTitle, BannerOverview, BannerButtons, BannerButton, BeehiveContainer } from './hero-banner.styles';
 import { useTheme } from '../../context/themeContext';
-import { winterTheme, autumnTheme, springTheme, summerTheme } from '../../styles/themes/themes';
-import { renderSnow, renderLeaves, renderFlowers, renderButterflies, renderBees } from '../../utils/seasonal-effects';
+import {
+  autumnTheme,
+  springTheme,
+  summerTheme,
+  winterTheme,
+} from '../../styles/themes/themes';
+import {
+  renderBees,
+  renderButterflies,
+  renderFlowers,
+  renderLeaves,
+  renderSnow,
+} from '../../utils/seasonal-effects';
 import { Beehive } from '../svg/beehive';
+import {
+  BannerButton,
+  BannerButtons,
+  BannerContainer,
+  BannerOverlay,
+  BannerOverview,
+  BannerTitle,
+  BeehiveContainer,
+} from './hero-banner.styles';
 
 interface HeroBannerProps {
   backgroundImage: string;
@@ -14,8 +33,7 @@ interface HeroBannerProps {
   mediaType: 'movie' | 'tv';
 }
 
-
-export const renderSeasonalEffects = (theme: any) => {
+export const renderSeasonalEffects = (theme) => {
   if (!theme) return null;
 
   switch (theme.name) {
@@ -44,7 +62,6 @@ export const renderSeasonalEffects = (theme: any) => {
   }
 };
 
-
 export const HeroBanner = ({
   backgroundImage,
   title,
@@ -60,11 +77,9 @@ export const HeroBanner = ({
     navigate(`/trailer/${mediaType}/${movieId}`);
   };
 
-  
-
   return (
     <BannerContainer backgroundImage={backgroundImage}>
-      {theme &&renderSeasonalEffects(theme)}
+      {theme && renderSeasonalEffects(theme)}
       <BannerOverlay>
         <div>
           <BannerTitle>{title}</BannerTitle>

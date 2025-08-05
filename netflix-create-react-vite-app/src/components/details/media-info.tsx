@@ -1,5 +1,9 @@
-
-import { InfoColumnsWrapper, InfoColumn, InfoText, InfoLabel } from './details-styles';
+import {
+  InfoColumn,
+  InfoColumnsWrapper,
+  InfoLabel,
+  InfoText,
+} from './details-styles';
 
 interface MovieMedia {
   status: string;
@@ -23,7 +27,6 @@ interface TVMedia {
   vote_count: number;
 }
 
-
 interface MediaInfoProps {
   media: MovieMedia | TVMedia;
   type: 'movie' | 'tv';
@@ -33,33 +36,38 @@ export const MediaInfo = ({ media, type }: MediaInfoProps) => (
   <InfoColumnsWrapper>
     <InfoColumn>
       <InfoText>
-       <InfoLabel>Status:</InfoLabel> {media.status || 'N/A'}
+        <InfoLabel>Status:</InfoLabel> {media.status || 'N/A'}
       </InfoText>
       <InfoText>
-         <InfoLabel>Original Language:</InfoLabel> {media.original_language || 'N/A'}
+        <InfoLabel>Original Language:</InfoLabel>{' '}
+        {media.original_language || 'N/A'}
       </InfoText>
       {type === 'movie' ? (
         <>
           <InfoText>
-             <InfoLabel>Release Date:</InfoLabel> {media.release_date || 'N/A'}
+            <InfoLabel>Release Date:</InfoLabel> {media.release_date || 'N/A'}
           </InfoText>
           <InfoText>
-           <InfoLabel>Runtime:</InfoLabel> {media.runtime ? `${media.runtime} min` : 'N/A'}
+            <InfoLabel>Runtime:</InfoLabel>{' '}
+            {media.runtime ? `${media.runtime} min` : 'N/A'}
           </InfoText>
         </>
       ) : (
         <>
           <InfoText>
-            <InfoLabel>First Air Date:</InfoLabel> {media.first_air_date || 'N/A'}
+            <InfoLabel>First Air Date:</InfoLabel>{' '}
+            {media.first_air_date || 'N/A'}
           </InfoText>
           <InfoText>
             <InfoLabel>Last Air Date:</InfoLabel> {media.last_air_date || 'N/A'}
           </InfoText>
           <InfoText>
-            <InfoLabel>Number of Seasons:</InfoLabel> {media.number_of_seasons || 'N/A'}
+            <InfoLabel>Number of Seasons:</InfoLabel>{' '}
+            {media.number_of_seasons || 'N/A'}
           </InfoText>
           <InfoText>
-            <InfoLabel>Number of Episodes:</InfoLabel> {media.number_of_episodes || 'N/A'}
+            <InfoLabel>Number of Episodes:</InfoLabel>{' '}
+            {media.number_of_episodes || 'N/A'}
           </InfoText>
         </>
       )}
@@ -68,10 +76,12 @@ export const MediaInfo = ({ media, type }: MediaInfoProps) => (
         {media.genres?.map((g: any) => g.name).join(', ')}
       </InfoText>
       <InfoText>
-        <InfoLabel>Rating:</InfoLabel> {media.vote_average ? media.vote_average.toFixed(1) : 'N/A'}
+        <InfoLabel>Rating:</InfoLabel>{' '}
+        {media.vote_average ? media.vote_average.toFixed(1) : 'N/A'}
       </InfoText>
       <InfoText>
-        <InfoLabel>Vote Count:</InfoLabel> {media.vote_count ? media.vote_count.toLocaleString() : 'N/A'}
+        <InfoLabel>Vote Count:</InfoLabel>{' '}
+        {media.vote_count ? media.vote_count.toLocaleString() : 'N/A'}
       </InfoText>
     </InfoColumn>
   </InfoColumnsWrapper>

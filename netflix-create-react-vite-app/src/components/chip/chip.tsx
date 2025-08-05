@@ -1,6 +1,6 @@
 import React from 'react';
-import { ChipContainer } from './chip.styles';
 import { scoreColor } from '../../utils/score-color';
+import { ChipContainer } from './chip.styles';
 
 type ChipProps = {
   score: number;

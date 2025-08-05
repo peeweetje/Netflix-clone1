@@ -1,14 +1,14 @@
 import React from 'react';
-import { Chip } from '../chip/chip';
+import { type MyListItem, useMyList } from '../../context/myListContext';
 import { scoreColor } from '../../utils/score-color';
+import { Chip } from '../chip/chip';
 import {
+  BackCardButton,
   CardBackContainer,
   OverviewContainer,
   StyledScoreContainer,
   TitleContainer,
 } from './card.styles';
-import { BackCardButton } from './card.styles';
-import { useMyList, MyListItem } from '../../context/myListContext';
 
 type BackCardProps = {
   id: number;
@@ -17,8 +17,6 @@ type BackCardProps = {
   title: string;
   vote_average: number;
 };
-
-
 
 export const BackCard = ({
   id,
@@ -30,8 +28,7 @@ export const BackCard = ({
   if (typeof id !== 'number' || !media_type) return null;
   const context = useMyList();
   if (
-    !context ||
-    !Array.isArray(context.myList) ||
+    !(context && Array.isArray(context.myList)) ||
     typeof context.addToList !== 'function'
   )
     return null;
@@ -59,13 +56,13 @@ export const BackCard = ({
 
       <StyledScoreContainer>
         <BackCardButton
+          disabled={isAdded}
+          isAdded={isAdded}
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();
             addToList({ id, media_type });
           }}
-          disabled={isAdded}
-          isAdded={isAdded}
         >
           {isAdded ? 'Added' : 'Add to List'}
         </BackCardButton>

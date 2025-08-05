@@ -1,5 +1,4 @@
-
-import { PosterContainer, PosterImage, Title, Tagline } from './details-styles';
+import { PosterContainer, PosterImage, Tagline, Title } from './details-styles';
 
 interface MediaPosterProps {
   title: string;
@@ -16,7 +15,7 @@ export const MediaPoster = ({
 }: MediaPosterProps) => (
   <PosterContainer>
     <Title>{title}</Title>
-    <PosterImage src={`${imageUrl}${posterPath}`} alt={title} />
+    <PosterImage alt={title} src={`${imageUrl}${posterPath}`} />
     <Tagline>{tagline}</Tagline>
   </PosterContainer>
 );

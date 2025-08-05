@@ -13,8 +13,6 @@ export const NavbarSearch = styled.div`
   }
 `;
 
-
-
 export const SearchContainer = styled.div`
   position: relative;
   display: flex;
@@ -24,8 +22,6 @@ export const SearchContainer = styled.div`
     margin-top: 1rem;
   }
 `;
-
-
 
 export const NavbarInput = styled.input`
   background-color: transparent;

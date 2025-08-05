@@ -1,19 +1,17 @@
+import type { CastMemberProps } from '../../utils/types/types';
 import {
   CastCard,
-  CastImage,
-  CastName,
   CastCharacter,
+  CastImage,
   CastImageFallback,
+  CastName,
 } from './details-styles';
-import { CastMemberProps } from '../../utils/types/types';
 
-
-
-export const CastMember=({ actor, src, alt }: CastMemberProps)=> {
+export const CastMember = ({ actor, src, alt }: CastMemberProps) => {
   return (
     <CastCard>
       {src && src !== '' ? (
-        <CastImage src={src} alt={alt} />
+        <CastImage alt={alt} src={src} />
       ) : (
         <CastImageFallback>N/A</CastImageFallback>
       )}
@@ -21,4 +19,4 @@ export const CastMember=({ actor, src, alt }: CastMemberProps)=> {
       <CastCharacter>{actor.character}</CastCharacter>
     </CastCard>
   );
-}
+};

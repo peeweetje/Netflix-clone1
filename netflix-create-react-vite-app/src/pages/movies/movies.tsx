@@ -1,14 +1,14 @@
-import React, { useState, useCallback } from 'react';
-import {VITE_API_KEY} from '../../utils/api';
+import type React from 'react';
+import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MovieList } from '../../components/movie-list/movie-list';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
-import { useFetchMovies } from '../../hooks/useFetchMovies';
-import { discoverMovieUrl } from '../../utils/api';
-import type { MovieResult } from '../../utils/types/types';
 import { Spinner } from '../../components/spinner/spinner';
-import { MainContainer } from '../home/home-page-styles';
+import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { useGlobalSearch } from '../../hooks/useGlobalSearch';
+import { discoverMovieUrl, VITE_API_KEY } from '../../utils/api';
+import type { MovieResult } from '../../utils/types/types';
+import { MainContainer } from '../home/home-page-styles';
 
 export const Movies = () => {
   const [results, setResults] = useState<MovieResult[]>([]);
@@ -24,7 +24,6 @@ export const Movies = () => {
     searchError,
   } = useGlobalSearch();
 
-  
   useFetchMovies(discoverMovieUrl, setResults, setLoading, setError);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {

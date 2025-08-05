@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { Card } from '../../components/card/card';
+import { CardWrapper } from '../../components/card-wrapper/card-wrapper';
+import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
 import { Spinner } from '../../components/spinner/spinner';
+import { useGlobalSearch } from '../../hooks/useGlobalSearch';
 import { imageUrl, trendingShowUrl } from '../../utils/api';
 import type { ShowResult } from '../../utils/types/types';
-import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
-import { useTranslation } from 'react-i18next';
-import { useGlobalSearch } from '../../hooks/useGlobalSearch';
-import { CardWrapper } from '../../components/card-wrapper/card-wrapper';
 
 const StyledContainer = styled.div`
   margin-top: ${(props) => props.theme.space[10]};
@@ -89,12 +89,12 @@ export const Shows = () => {
                   <CardWrapper key={show.id} to={`/shows/${show.id}`}>
                     <Card
                       alt={show.name}
+                      id={show.id}
+                      media_type="tv"
                       overview={show.overview}
                       src={`${imageUrl}${show.poster_path}`}
                       title={show.name}
                       vote_average={show.vote_average}
-                      id={show.id}
-                      media_type='tv'
                     />
                   </CardWrapper>
                 )
@@ -108,13 +108,13 @@ export const Shows = () => {
                 <CardWrapper key={show.id} to={`/shows/${show.id}`}>
                   <Card
                     alt={show.name}
+                    id={show.id}
                     key={show.id}
+                    media_type="tv"
                     overview={show.overview}
                     src={`${imageUrl}${show.poster_path}`}
                     title={show.name}
                     vote_average={show.vote_average}
-                    id={show.id}
-                    media_type='tv'
                   />
                 </CardWrapper>
               )

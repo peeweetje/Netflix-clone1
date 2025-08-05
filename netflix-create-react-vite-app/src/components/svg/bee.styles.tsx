@@ -1,5 +1,5 @@
-import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
+import styled, { keyframes } from 'styled-components';
 
 export const wingFlap = keyframes`
   0% {

@@ -8,5 +8,7 @@ export const trendingMovieUrl = `https://api.themoviedb.org/3/trending/movie/wee
 export const popularMoviesUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${VITE_API_KEY}`;
 export const topRatedMoviesUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${VITE_API_KEY}`;
 export const actionMoviesUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${VITE_API_KEY}&with_genres=28`;
-export const movieVideosUrl = (movieId: number) => `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${VITE_API_KEY}`;
-export const showVideosUrl = (showId: number) => `https://api.themoviedb.org/3/tv/${showId}/videos?api_key=${VITE_API_KEY}`;
+export const movieVideosUrl = (movieId: number) =>
+  `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${VITE_API_KEY}`;
+export const showVideosUrl = (showId: number) =>
+  `https://api.themoviedb.org/3/tv/${showId}/videos?api_key=${VITE_API_KEY}`;

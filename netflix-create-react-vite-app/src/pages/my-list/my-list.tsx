@@ -1,19 +1,19 @@
-import React from 'react';
-import { useGlobalSearch } from '../../hooks/useGlobalSearch';
-import { MovieRow } from '../../components/movie-list/movie-row';
-import type { ShowResult, MovieResult } from '../../utils/types/types';
-import {
-  MyListContainer,
-  MoviesGrid,
-  CardWrapper as StyledCardWrapper,
-  RemoveButton,
-  RemovalNotice,
-} from './my-list.styles';
-import { useMyList } from '../../context/myListContext';
-import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
+import type React from 'react';
 import { Card } from '../../components/card/card';
-import { useLocalListDetails } from '../../hooks/useLocalListDetails';
 import { CardWrapper } from '../../components/card-wrapper/card-wrapper';
+import { MovieRow } from '../../components/movie-list/movie-row';
+import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
+import { useMyList } from '../../context/myListContext';
+import { useGlobalSearch } from '../../hooks/useGlobalSearch';
+import { useLocalListDetails } from '../../hooks/useLocalListDetails';
+import type { MovieResult, ShowResult } from '../../utils/types/types';
+import {
+  MoviesGrid,
+  MyListContainer,
+  RemovalNotice,
+  RemoveButton,
+  CardWrapper as StyledCardWrapper,
+} from './my-list.styles';
 
 export const MyList = () => {
   const { myList, removeFromList } = useMyList();
@@ -40,7 +40,7 @@ export const MyList = () => {
     overview: show.overview,
     title: show.name,
     vote_average: show.vote_average,
-    media_type: 'tv', 
+    media_type: 'tv',
   });
 
   return (
@@ -54,16 +54,15 @@ export const MyList = () => {
             <p>{searchError}</p>
           ) : (
             <>
-              <MovieRow title='Movies' movies={searchResultsMovies} />
+              <MovieRow movies={searchResultsMovies} title="Movies" />
               <MovieRow
-                title='Shows'
                 movies={searchResultsShows.map(mapShowToMovie)}
+                title="Shows"
               />
             </>
           )
         ) : (
           <>
-          
             {removalNotice && <RemovalNotice>{removalNotice}</RemovalNotice>}
             {failedItems.length > 0 && (
               <div style={{ color: 'red' }}>
@@ -71,8 +70,8 @@ export const MyList = () => {
                 <ul>
                   {failedItems.map((item, idx) => (
                     <li key={idx}>
-                      {item.title || item.name || 'Unknown Title'} (ID: {item.id},
-                      Type: {item.media_type})
+                      {item.title || item.name || 'Unknown Title'} (ID:{' '}
+                      {item.id}, Type: {item.media_type})
                     </li>
                   ))}
                 </ul>
@@ -92,13 +91,14 @@ export const MyList = () => {
                   return (
                     <StyledCardWrapper key={`${movie.id}-${item.media_type}`}>
                       <CardWrapper
-                        to={`/${item.media_type === 'tv' ? 'shows' : 'movies'}/${movie.id}`}>
+                        to={`/${item.media_type === 'tv' ? 'shows' : 'movies'}/${movie.id}`}
+                      >
                         <Card
+                          alt={movie.title || movie.name}
                           id={movie.id}
                           media_type={item.media_type}
-                          src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                          alt={movie.title || movie.name}
                           overview={movie.overview}
+                          src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                           title={movie.title || movie.name}
                           vote_average={movie.vote_average}
                         />

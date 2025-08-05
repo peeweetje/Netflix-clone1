@@ -1,12 +1,12 @@
-import React from 'react';
+import type React from 'react';
 import { useTranslation } from 'react-i18next';
-import { SearchIcon } from './search-icon';
 import {
   NavbarInput,
   NavbarSearch,
   SearchContainer,
   SearchIconWrapper,
 } from './search-bar.styles';
+import { SearchIcon } from './search-icon';
 
 export type searchProps = {
   onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
