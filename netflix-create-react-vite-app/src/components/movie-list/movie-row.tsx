@@ -18,6 +18,7 @@ interface MovieRowProps {
 }
 
 const getVisibleCount = () => {
+  if (typeof window === 'undefined') return 5;
   if (window.innerWidth < 768) {
     return 2;
   } else if (window.innerWidth < 1024) {
@@ -30,7 +31,9 @@ const getVisibleCount = () => {
 export const MovieRow = ({ title, movies }: MovieRowProps) => {
   const [startIdx, setStartIdx] = useState(0);
   const [cardWidth, setCardWidth] = useState(266); // fallback default (250px + 16px gap)
-  const [visibleCount, setVisibleCount] = useState(getVisibleCount());
+  const [visibleCount, setVisibleCount] = useState(() => 
+    typeof window !== 'undefined' ? getVisibleCount() : 5
+  );
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
