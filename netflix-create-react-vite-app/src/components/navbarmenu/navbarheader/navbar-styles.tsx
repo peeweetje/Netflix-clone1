@@ -89,6 +89,7 @@ export const NavList = styled.ul<{ $centered?: boolean; $isOpen?: boolean }>`
 
 export const HamburgerButton = styled.button`
   display: none;
+
   @media (max-width: 992px) {
     display: block;
     background: none;
@@ -134,43 +135,38 @@ export const BrandContainer = styled.div<{ $centered?: boolean }>`
   }
 `;
 
- export const ToggleButton = styled.button`
-  margin-left: auto;
-  padding: 8px 16px;
-  background-color: ${(props) => props.theme.colors.primary};
-  color: ${(props) => props.theme.colors.buttonText};
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  &:hover {
-    background-color: ${(props) => props.theme.colors.primaryLight};
-  }
+ export const SwitchThemeButton = styled.button`
+   display:flex;
+   justify-content: center;
+   min-width: 120px;
+   margin-left: auto;
+   padding: ${(props) => props.theme.space[4]};
+   background-color: ${(props) => props.theme.colors.primary};
+   color: ${(props) => props.theme.colors.buttonText};
+   border: none;
+   border-radius:${(props) => props.theme.borderRadius[1]};
+   cursor: pointer;
+   &:hover {
+     background-color: ${(props) => props.theme.colors.primaryLight};
+   }
 
-  @media (max-width: 1200px) {
-    margin-left: 0;
-    margin-bottom: ${(props) => props.theme.space[2]};
-    padding: 6px 12px;
-    font-size: ${(props) => props.theme.fontSize[1]};
-  }
+   @media (max-width: 1200px) {
+     margin:${props => props.theme.space[2]}; 
+     padding: 10px;
+   }
 
-  @media (max-width: 1024px) {
-    margin-left: 0;
-    margin-bottom: ${(props) => props.theme.space[2]};
-    padding: 5px 10px;
-    font-size: ${(props) => props.theme.fontSize[0]};
-  }
+   @media (max-width: 1024px) {
+     margin: ${props => props.theme.space[2]};
+     padding:${props => props.theme.space[4]};
+   }
 
-  @media (max-width: 992px) {
-    margin-left: 0;
-    margin-bottom: ${(props) => props.theme.space[2]};
-    padding: 4px 8px;
-    font-size: ${(props) => props.theme.fontSize[0]};
-  }
+   @media (max-width: 992px) {
+     margin:${props => props.theme.space[1]};
+     padding:${props => props.theme.space[3]};
+   }
 
-  @media (max-width: 768px) {
-    margin-left: 0;
-    margin-bottom: ${(props) => props.theme.space[2]};
-    padding: 3px 6px;
-    font-size: ${(props) => props.theme.fontSize[0]};
-  }
-`;
+   @media (max-width: 768px) {
+     margin:${props => props.theme.space[2]};
+     padding: ${props => props.theme.space[2]};
+   }
+ `;

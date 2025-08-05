@@ -6,7 +6,7 @@ import {
   BrandWrapper,
   NavbarMenu,
   NavList,
-  ToggleButton,
+  SwitchThemeButton,
   HamburgerButton,
 } from './navbar-styles';
 import { SearchBar } from './search-bar/search-bar';
@@ -55,7 +55,7 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
           {t('my-list')}
         </NavItems>
       </NavList>
-      <ToggleButton onClick={toggleTheme}>Switch Theme</ToggleButton>
+      <SwitchThemeButton onClick={toggleTheme}>Switch Theme</SwitchThemeButton>
       <SearchBar onChange={onChange} value={value} />
     </NavbarMenu>
   );
