@@ -15,7 +15,6 @@ import { LeafIcon } from '../components/svg/leafs';
 import { FlowersTheme } from '../components/svg/flowers-theme';
 import { Butterfly } from '../components/svg/butterfly';
 import { Beehive } from '../components/svg/beehive';
-import { useTheme } from '../context/themeContext';
 import { Bee } from '../components/svg/bee';
 import { AnimatedBee } from '../components/svg/bee.styles';
 
@@ -38,8 +37,7 @@ export const renderSnow = () => (
   </SnowContainer>
 );
 
-export const renderLeaves = () => {
-    const { theme } = useTheme();
+export const renderLeaves = (theme) => {
     return (
         <LeafContainer>
         {Array.from({ length: 20 }).map((_, i) => (
@@ -76,13 +74,13 @@ export const renderLeaves = () => {
     );
 };
 
-export const renderFlowers = () => (
+export const renderFlowers = (theme) => (
   <FlowersThemeContainer>
     <FlowersTheme />
   </FlowersThemeContainer>
 );
 
-export const renderButterflies = () => {
+export const renderButterflies = (theme) => {
   const butterflyPositions = [
     { x: '0%', y: '20%' },
     { x: '10%', y: '30%' },

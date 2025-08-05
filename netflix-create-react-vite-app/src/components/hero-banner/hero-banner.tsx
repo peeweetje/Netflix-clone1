@@ -22,14 +22,14 @@ export const renderSeasonalEffects = (theme: any) => {
     case winterTheme.name:
       return renderSnow();
     case autumnTheme.name:
-      return theme.icons?.leafIcon ? renderLeaves() : null;
+      return theme.icons?.leafIcon ? renderLeaves(theme) : null;
     case springTheme.name:
-    return (
-      <>
-        {theme.icons?.flowerIcon && renderFlowers()}
-        {theme.icons?.butterflyIcon && renderButterflies()}
-      </>
-    );
+      return (
+        <>
+          {theme.icons?.flowerIcon && renderFlowers(theme)}
+          {theme.icons?.butterflyIcon && renderButterflies(theme)}
+        </>
+      );
     case summerTheme.name:
       return (
         <>
