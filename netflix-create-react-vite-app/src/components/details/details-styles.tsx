@@ -125,7 +125,7 @@ export const Tagline = styled.p`
   margin-right: auto;
   color: ${({ theme }) => theme.colors.primaryLight};
   @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.space[5]};
+    font-size: ${({ theme }) => theme.fontSize[2]};
   }
 `;
 
@@ -216,14 +216,14 @@ export const CastName = styled.div`
   margin-top: ${({ theme }) => theme.space[2]};
   color: ${({ theme }) => theme.colors.primaryLight};
   @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.space[5]};
+    font-size: ${({ theme }) => theme.fontSize[2]};
   }
 `;
 
 export const CastCharacter = styled.div`
   font-size: ${({ theme }) => theme.fontSize[2]};
   @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.space[5]};
+    font-size: ${({ theme }) => theme.fontSize[1]};
   }
 `;
 
