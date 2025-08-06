@@ -16,14 +16,16 @@ interface MovieRowProps {
   movies: MovieResult[];
 }
 
-const getVisibleCount = () => {
+const getVisibleMediaCount = () => {
   if (typeof window === 'undefined') return 5;
-  if (window.innerWidth < 768) {
-    return 2;
-  }
-  if (window.innerWidth < 1024) {
-    return 3;
-  }
+
+  const screenWidth = window.innerWidth;
+
+  if (screenWidth < 768) return 2;
+  if (screenWidth < 992) return 3;
+  if (screenWidth < 1024) return 3;
+  if (screenWidth < 1200) return 4;
+
   return 5;
 };
 
@@ -31,13 +33,13 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
   const [startIdx, setStartIdx] = useState(0);
   const [cardWidth, setCardWidth] = useState(266); // fallback default (250px + 16px gap)
   const [visibleCount, setVisibleCount] = useState(() =>
-    typeof window !== 'undefined' ? getVisibleCount() : 5
+    typeof window !== 'undefined' ? getVisibleMediaCount() : 5
   );
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleResize = () => {
-      setVisibleCount(getVisibleCount());
+      setVisibleCount(getVisibleMediaCount());
     };
 
     window.addEventListener('resize', handleResize);
