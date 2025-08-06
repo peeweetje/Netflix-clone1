@@ -65,10 +65,10 @@ export const ArrowButton = styled.button`
   border-radius: ${(props) => props.theme.borderRadius[1]};
   &.left {
     left: -2rem;
-  },
+  }
   &.right {
     right: -1.5rem;
-  },
+  }
   &:hover {
     background-color: ${(props) => props.theme.colors.primaryLight};
     color: ${(props) => props.theme.colors.buttonText};
