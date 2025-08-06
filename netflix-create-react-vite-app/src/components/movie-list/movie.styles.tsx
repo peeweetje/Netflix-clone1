@@ -11,11 +11,7 @@ export const FlexWrapper = styled.div`
 `;
 
 export const RowContainer = styled.section`
-  position: relative;
-
-  @media (max-width: 768px) {
-    width: 100vw;
-  }
+  position: relative; 
 `;
 
 export const RowTitle = styled.h2`
@@ -26,6 +22,15 @@ export const RowTitle = styled.h2`
 
   @media (max-width: 768px) {
     font-size: ${(props) => props.theme.fontSize[4]};
+  }
+  @media (max-width: 992px) {
+    font-size: ${(props) => props.theme.fontSize[3]};
+  }
+  @media (max-width: 1024px) {
+    font-size: ${(props) => props.theme.fontSize[3]};
+  }
+  @media (max-width: 1200px) {
+    font-size: ${(props) => props.theme.fontSize[2]};
   }
 `;
 
@@ -86,6 +91,30 @@ export const ArrowButton = styled.button`
     }
     &.right {
       right: 0rem;
+    }
+  }
+  @media (max-width: 992px) {
+    &.left {
+      left: -1rem;
+    }
+    &.right {
+      right: -1rem;
+    }
+  }
+  @media (max-width: 1024px) {
+    &.left {
+      left: -1.2rem;
+    }
+    &.right {
+      right: -1.2rem;
+    }
+  }
+   @media (max-width: 1200px) {
+    &.left {
+      left: -1.5rem;
+    }
+    &.right {
+      right: -1.5rem;
     }
   }
 `;
