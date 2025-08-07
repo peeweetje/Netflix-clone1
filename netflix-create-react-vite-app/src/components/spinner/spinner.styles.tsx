@@ -6,6 +6,7 @@ export const SpinAnimation = keyframes`
 `;
 
 export const SpinnerContainer = styled.div`
+  margin-top: ${(props) => props.theme.space[10]};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,4 +22,10 @@ export const SpinnerWrapper = styled.div`
   border-top: 4px solid transparent;
   border-radius: 50%;
   animation: ${SpinAnimation} 1s linear infinite;
+`;
+
+export const LoadingText = styled.p`
+  margin-top: ${(props) => props.theme.space[4]};
+  font-size: ${(props) => props.theme.fontSize[3]};
+  color: ${(props) => props.theme.colors.primary};
 `;
