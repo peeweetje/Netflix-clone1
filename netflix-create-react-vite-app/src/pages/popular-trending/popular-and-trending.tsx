@@ -28,8 +28,24 @@ export const PopularAndTrending = () => {
   const [trendingShows, setTrendingShows] = useState<ShowResult[]>([]);
   const [popularMovies, setPopularMovies] = useState<MovieResult[]>([]);
   const [popularShows, setPopularShows] = useState<ShowResult[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+
+  const [trendingMoviesLoading, setTrendingMoviesLoading] = useState(true);
+  const [trendingShowsLoading, setTrendingShowsLoading] = useState(true);
+  const [popularMoviesLoading, setPopularMoviesLoading] = useState(true);
+  const [popularShowsLoading, setPopularShowsLoading] = useState(true);
+
+  const [trendingMoviesError, setTrendingMoviesError] = useState<string | null>(
+    null
+  );
+  const [trendingShowsError, setTrendingShowsError] = useState<string | null>(
+    null
+  );
+  const [popularMoviesError, setPopularMoviesError] = useState<string | null>(
+    null
+  );
+  const [popularShowsError, setPopularShowsError] = useState<string | null>(
+    null
+  );
 
   const {
     searchQuery,
@@ -41,11 +57,31 @@ export const PopularAndTrending = () => {
   } = useGlobalSearch();
 
   // Fetch trending movies and shows
-  useFetchMovies(trendingMovieUrl, setTrendingMovies, setLoading, setError);
-  useFetchMovies(trendingShowUrl, setTrendingShows, setLoading, setError);
+  useFetchMovies(
+    trendingMovieUrl,
+    setTrendingMovies,
+    setTrendingMoviesLoading,
+    setTrendingMoviesError
+  );
+  useFetchMovies(
+    trendingShowUrl,
+    setTrendingShows,
+    setTrendingShowsLoading,
+    setTrendingShowsError
+  );
   // Fetch most popular movies and shows
-  useFetchMovies(popularMoviesUrl, setPopularMovies, setLoading, setError);
-  useFetchMovies(mostPopularShowsUrl, setPopularShows, setLoading, setError);
+  useFetchMovies(
+    popularMoviesUrl,
+    setPopularMovies,
+    setPopularMoviesLoading,
+    setPopularMoviesError
+  );
+  useFetchMovies(
+    mostPopularShowsUrl,
+    setPopularShows,
+    setPopularShowsLoading,
+    setPopularShowsError
+  );
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -62,15 +98,22 @@ export const PopularAndTrending = () => {
     media_type: 'tv',
   });
 
+  const isLoading =
+    trendingMoviesLoading ||
+    trendingShowsLoading ||
+    popularMoviesLoading ||
+    popularShowsLoading;
+  const error =
+    trendingMoviesError ||
+    trendingShowsError ||
+    popularMoviesError ||
+    popularShowsError;
+
   return (
     <>
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
       <Container>
-        {loading ? (
-          <Spinner />
-        ) : error ? (
-          <p>{error}</p>
-        ) : searchQuery ? (
+        {searchQuery ? (
           searchLoading ? (
             <Spinner />
           ) : searchError ? (
@@ -84,6 +127,10 @@ export const PopularAndTrending = () => {
               />
             </>
           )
+        ) : isLoading ? (
+          <Spinner />
+        ) : error ? (
+          <p>{error}</p>
         ) : (
           <>
             <MovieRow movies={trendingMovies} title="Trending Movies" />
