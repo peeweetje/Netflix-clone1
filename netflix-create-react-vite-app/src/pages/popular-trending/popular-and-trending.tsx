@@ -1,9 +1,9 @@
 import type React from 'react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { Loading } from '../../components/loading/loading';
 import { MovieRow } from '../../components/movie-list/movie-row';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
-import { Spinner } from '../../components/spinner/spinner';
 import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { useGlobalSearch } from '../../hooks/useGlobalSearch';
 import {
@@ -98,53 +98,56 @@ export const PopularAndTrending = () => {
     media_type: 'tv',
   });
 
-  const isLoading =
-    trendingMoviesLoading ||
-    trendingShowsLoading ||
-    popularMoviesLoading ||
-    popularShowsLoading;
-  const error =
-    trendingMoviesError ||
-    trendingShowsError ||
-    popularMoviesError ||
-    popularShowsError;
+  const isLoading = searchQuery
+    ? searchLoading
+    : trendingMoviesLoading ||
+      trendingShowsLoading ||
+      popularMoviesLoading ||
+      popularShowsLoading;
+
+  const error = searchQuery
+    ? searchError
+    : trendingMoviesError ||
+      trendingShowsError ||
+      popularMoviesError ||
+      popularShowsError;
+
+  const renderContent = () => {
+    if (searchQuery) {
+      return (
+        <>
+          <MovieRow movies={searchResultsMovies} title="Movies" />
+          <MovieRow
+            movies={searchResultsShows.map(mapShowToMovie)}
+            title="Shows"
+          />
+        </>
+      );
+    }
+
+    return (
+      <>
+        <MovieRow movies={trendingMovies} title="Trending Movies" />
+        <MovieRow
+          movies={trendingShows.map(mapShowToMovie)}
+          title="Trending Shows"
+        />
+        <MovieRow movies={popularMovies} title="Most Popular Movies" />
+        <MovieRow
+          movies={popularShows.map(mapShowToMovie)}
+          title="Most Popular Shows"
+        />
+      </>
+    );
+  };
 
   return (
     <>
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
       <Container>
-        {searchQuery ? (
-          searchLoading ? (
-            <Spinner />
-          ) : searchError ? (
-            <p>{searchError}</p>
-          ) : (
-            <>
-              <MovieRow movies={searchResultsMovies} title="Movies" />
-              <MovieRow
-                movies={searchResultsShows.map(mapShowToMovie)}
-                title="Shows"
-              />
-            </>
-          )
-        ) : isLoading ? (
-          <Spinner />
-        ) : error ? (
-          <p>{error}</p>
-        ) : (
-          <>
-            <MovieRow movies={trendingMovies} title="Trending Movies" />
-            <MovieRow
-              movies={trendingShows.map(mapShowToMovie)}
-              title="Trending Shows"
-            />
-            <MovieRow movies={popularMovies} title="Most Popular Movies" />
-            <MovieRow
-              movies={popularShows.map(mapShowToMovie)}
-              title="Most Popular Shows"
-            />
-          </>
-        )}
+        <Loading loading={isLoading} error={error}>
+          {renderContent()}
+        </Loading>
       </Container>
     </>
   );
