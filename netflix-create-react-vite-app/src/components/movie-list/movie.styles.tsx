@@ -20,16 +20,16 @@ export const RowTitle = styled.h2`
   margin-left: ${(props) => props.theme.space[4]};
   margin-bottom: ${(props) => props.theme.space[4]};
 
-  @media (max-width: 768px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     font-size: ${(props) => props.theme.fontSize[3]};
   }
-  @media (max-width: 992px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.md}) {
     font-size: ${(props) => props.theme.fontSize[3]};
   }
-  @media (max-width: 1024px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
     font-size: ${(props) => props.theme.fontSize[4]};
   }
-  @media (max-width: 1200px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.xl}) {
     font-size: ${(props) => props.theme.fontSize[4]};
   }
 `;
