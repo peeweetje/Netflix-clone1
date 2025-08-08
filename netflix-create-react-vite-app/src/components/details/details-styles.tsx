@@ -201,11 +201,11 @@ export const CastImage = styled.img`
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 1024px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
     width: 60px;
     height: 90px;
   }
-  @media (max-width: 768px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     width: 40px;
     height: 60px;
   }
@@ -264,7 +264,7 @@ export const ButtonContainer = styled.div`
 
   button {
     font-size: ${({ theme }) => theme.fontSize[3]};
-    @media (max-width: 768px) {
+    @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
       font-size: ${({ theme }) => theme.fontSize[1]};
       padding: 6px 10px;
     }

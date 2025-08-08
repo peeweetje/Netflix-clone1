@@ -81,7 +81,7 @@ export const SearchIconWrapper = styled.div`
   color: ${(props) => props.theme.colors.primary};
   pointer-events: none;
 
-  @media (max-width: 1200px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.xl}) {
     display: none;
   }
 `;

@@ -127,7 +127,7 @@ export const BannerButton = styled.button`
     color: ${(props) => props.theme.colors.black};
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     padding: 0.5rem 1.5rem;
     font-size: 1rem;
   }

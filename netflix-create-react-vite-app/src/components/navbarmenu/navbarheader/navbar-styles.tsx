@@ -112,23 +112,23 @@ export const BrandContainer = styled.div<{ $centered?: boolean }>`
   color: ${(props) => props.theme.colors.primaryLight};
 
 
-  @media (max-width: 1200px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.xl}) {
     font-size: ${(props) => props.theme.fontSize[4]};
     padding-left: ${(props) => props.theme.space[7]};
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
     font-size: ${(props) => props.theme.fontSize[3]};
     padding-left: ${(props) => props.theme.space[6]};
   }
 
-  @media (max-width: 992px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.md}) {
     font-size: ${(props) => props.theme.fontSize[2]};
     padding-left: ${(props) => props.theme.space[2]};
     margin-right: 0;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     font-size: ${(props) => props.theme.fontSize[1]};
     padding-left: ${(props) => props.theme.space[1]};
     margin-right: 0;
@@ -150,22 +150,22 @@ export const SwitchThemeButton = styled.button`
      background-color: ${(props) => props.theme.colors.primaryLight};
    }
 
-   @media (max-width: 1200px) {
+   @media (max-width: ${(props) => props.theme.breakpoints.xl}) {
      margin:${(props) => props.theme.space[2]}; 
      padding: 10px;
    }
 
-   @media (max-width: 1024px) {
+   @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
      margin: ${(props) => props.theme.space[2]};
      padding:${(props) => props.theme.space[4]};
    }
 
-   @media (max-width: 992px) {
+   @media (max-width: ${(props) => props.theme.breakpoints.md}) {
      margin:${(props) => props.theme.space[1]};
      padding:${(props) => props.theme.space[3]};
    }
 
-   @media (max-width: 768px) {
+   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
      margin:${(props) => props.theme.space[2]};
      padding: ${(props) => props.theme.space[2]};
    }

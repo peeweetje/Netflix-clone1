@@ -153,7 +153,7 @@ export const BackCardButton = styled.button<{ isAdded: boolean }>`
   font-size:${(props) => props.theme.fontSize[3]};
   cursor: ${({ isAdded }) => (isAdded ? 'not-allowed' : 'pointer')};
 
-  @media (max-width: 768px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     width: 100px;
     height: 30px;
     font-size: ${(props) => props.theme.fontSize[1]};
