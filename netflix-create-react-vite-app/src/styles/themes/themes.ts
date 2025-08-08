@@ -33,6 +33,12 @@ const baseTheme = {
   borderRadius: ['2px', '4px', '6px', '8px'],
   borderShadow: ['0 25px 100px -10px rgba(169, 154, 154, 0.54)'],
   lineHeight: ['1.2', '1.3', '1.4', '1.5', '1.8', '2'],
+  breakpoints: {
+    sm: '768px',
+    md: '992px',
+    lg: '1024px',
+    xl: '1200px',
+  },
 };
 
 export const springTheme: DefaultTheme = {

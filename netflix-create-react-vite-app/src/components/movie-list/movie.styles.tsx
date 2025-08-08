@@ -20,17 +20,17 @@ export const RowTitle = styled.h2`
   margin-left: ${(props) => props.theme.space[4]};
   margin-bottom: ${(props) => props.theme.space[4]};
 
-  @media (max-width: 768px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+    font-size: ${(props) => props.theme.fontSize[3]};
+  }
+  @media (max-width: ${(props) => props.theme.breakpoints.md}) {
+    font-size: ${(props) => props.theme.fontSize[3]};
+  }
+  @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
     font-size: ${(props) => props.theme.fontSize[4]};
   }
-  @media (max-width: 992px) {
-    font-size: ${(props) => props.theme.fontSize[3]};
-  }
-  @media (max-width: 1024px) {
-    font-size: ${(props) => props.theme.fontSize[3]};
-  }
-  @media (max-width: 1200px) {
-    font-size: ${(props) => props.theme.fontSize[2]};
+  @media (max-width: ${(props) => props.theme.breakpoints.xl}) {
+    font-size: ${(props) => props.theme.fontSize[4]};
   }
 `;
 
@@ -42,9 +42,11 @@ export const CardsViewport = styled.div<{ width: number }>`
   justify-content: flex-start;
 `;
 
-export const CardsWrapper = styled(motion.div)`
+export const CardsWrapper = styled(motion.div)<{ $ready?: boolean }>`
   display: flex;
   gap: ${(props) => props.theme.space[6]};
+  opacity: ${props => props.$ready ? 1 : 0};
+  transition: opacity 0.2s ease-out;
 `;
 
 export const ArrowButton = styled.button`
@@ -59,33 +61,29 @@ export const ArrowButton = styled.button`
   width: 48px;
   height: 64px;
   cursor: pointer;
-  opacity: 0; /* Default: hidden */
-  pointer-events: none; /* Default: not clickable */
-  transition: opacity 0.2s, background-color 0.2s; /* Add background-color to transition */
+  opacity: 0.3; /* Default: semi-visible */
+  transition: opacity 0.2s, background-color 0.2s;
   border-radius: ${(props) => props.theme.borderRadius[1]};
+  pointer-events: auto;
+  &.active {
+    opacity: 1; /* Fully visible when active */
+  }
+  &:hover {
+    background-color: ${(props) => props.theme.colors.primaryLight};
+    color: ${(props) => props.theme.colors.buttonText};
+    opacity: 1;
+  }
+  &:disabled {
+    opacity: 0.1; /* Faint when disabled */
+    pointer-events: none; /* Not clickable when disabled */
+  }
   &.left {
     left: -2rem;
   }
   &.right {
     right: -1.5rem;
   }
-  &:hover {
-    background-color: ${(props) => props.theme.colors.primaryLight};
-    color: ${(props) => props.theme.colors.buttonText};
-  }
-  &.active {
-    opacity: 0.3; /* Subtly visible when active */
-    pointer-events: auto; /* Clickable when active */
-    &:hover {
-      opacity: 1; /* Fully visible on hover when active */
-    }
-  }
-  &:disabled {
-    opacity: 0; /* Completely hidden when disabled */
-    pointer-events: none; /* Not clickable when disabled */
-  }
-
-  @media (max-width: 768px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     &.left {
       left: 0rem;
     }
@@ -93,7 +91,7 @@ export const ArrowButton = styled.button`
       right: 0rem;
     }
   }
-  @media (max-width: 992px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.md}) {
     &.left {
       left: -1rem;
     }
@@ -101,7 +99,7 @@ export const ArrowButton = styled.button`
       right: -1rem;
     }
   }
-  @media (max-width: 1024px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
     &.left {
       left: -1.2rem;
     }
@@ -109,7 +107,7 @@ export const ArrowButton = styled.button`
       right: -1.2rem;
     }
   }
-   @media (max-width: 1200px) {
+   @media (max-width: ${(props) => props.theme.breakpoints.xl}) {
     &.left {
       left: -1.5rem;
     }

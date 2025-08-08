@@ -5,7 +5,7 @@ export const CardContainer = styled.div`
   position: relative;
   display: inline-block;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     transform: scale(0.9);
     margin-top: 0;
   }
