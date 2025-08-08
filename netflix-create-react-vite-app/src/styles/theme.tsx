@@ -2,6 +2,7 @@ import type { DefaultTheme } from 'styled-components';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
+    name: string;
     colors: {
       grey: string;
       black: string;
@@ -21,10 +22,16 @@ declare module 'styled-components' {
     borderRadius: string[];
     boderShadow: string[];
     lineHeight: string[];
-  }
-  {
-    leafIcon: boolean;
-    flowerIcon: boolean;
-    butterflyIcon: boolean;
+    icons: {
+      leafIcon: boolean;
+      flowerIcon: boolean;
+      butterflyIcon: boolean;
+    };
+    breakpoints: {
+      sm: string;
+      md: string;
+      lg: string;
+      xl: string;
+    };
   }
 }
