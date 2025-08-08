@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 export const LeafContainer = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: ${(props) => props.theme.space[0]};
+  left: ${(props) => props.theme.space[0]};
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -14,8 +14,8 @@ export const LeafContainer = styled.div`
 
 export const ButterflyContainer = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: ${(props) => props.theme.space[0]};
+  left: ${(props) => props.theme.space[0]};
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -25,8 +25,8 @@ export const ButterflyContainer = styled.div`
 
 export const SnowContainer = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: ${(props) => props.theme.space[0]};
+  left: ${(props) => props.theme.space[0]};
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -46,7 +46,7 @@ export const BannerContainer = styled.section<{ backgroundImage: string }>`
   align-items: stretch;
   justify-content: center;
 
-  @media (max-width: 768px) {
+ @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     height: 50vh;
     min-height: 300px;
   }
@@ -65,7 +65,7 @@ export const BannerOverlay = styled.div`
   padding: 0 2vw;
   z-index: 2;
 
-  @media (max-width: 768px) {
+ @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     flex-direction: column;
     justify-content: center;
     text-align: center;
@@ -79,7 +79,7 @@ export const BannerTitle = styled.h1`
   max-width: 30vw;
   text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.7);
 
-  @media (max-width: 768px) {
+ @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     font-size: ${(props) => props.theme.fontSize[5]};
     max-width: 80vw;
   }
@@ -94,10 +94,10 @@ export const BannerOverview = styled.p`
   text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.7);
   line-height: ${(props) => props.theme.lineHeight[3]};
 
-  @media (max-width: 768px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     font-size: ${(props) => props.theme.fontSize[2]};
     max-width: 80vw;
-    margin-left: 0;
+    margin-left: ${(props) => props.theme.space[0]};
     text-align: center;
   }
 `;
@@ -107,7 +107,7 @@ export const BannerButtons = styled.div`
   gap: ${(props) => props.theme.space[7]};
   margin-top: ${(props) => props.theme.space[7]};
 
-  @media (max-width: 768px) {
+ @media (max-width: ${(prop) => prop.theme.breakpoints.sm}) {
     justify-content: center;
   }
 `;
@@ -117,8 +117,8 @@ export const BannerButton = styled.button`
   color: ${(props) => props.theme.colors.buttonText};
   border: none;
   padding: 0.7rem 2rem;
-  font-size: 1.1rem;
-  border-radius: 0.3vw;
+  font-size: ${(props) => props.theme.fontSize[3]};
+  border-radius: ${(props) => props.theme.borderRadius[1]};
   cursor: pointer;
   font-weight: 600;
   transition: background 0.2s;
@@ -128,8 +128,8 @@ export const BannerButton = styled.button`
   }
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    padding: 0.5rem 1.5rem;
-    font-size: 1rem;
+    padding: 8px 16px;
+    font-size: ${(props) => props.theme.fontSize[2]};
   }
 `;
 
@@ -144,16 +144,16 @@ export const Snow = styled(motion.div)`
   position: absolute;
   width: 5px;
   height: 5px;
-  background-color: #fff;
-  border-radius: 50%;
+  background-color: ${(props) => props.theme.colors.white};
+  border-radius: ${(props) => props.theme.borderRadius[1]};
   opacity: 0.7;
   top: -10px;
 `;
 
 export const FlowersThemeContainer = styled.div`
   position: absolute;
-  bottom: 0px;
-  left: 0px;
+  bottom: ${(props) => props.theme.space[0]};
+  left: ${(props) => props.theme.space[0]};
   z-index: 3;
   pointer-events: none;
   width: 100%;
@@ -164,8 +164,8 @@ export const AnimatedButterfly = styled(motion.div)``;
 
 export const BeesThemeContainer = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: ${(props) => props.theme.space[0]};
+  left: ${(props) => props.theme.space[0]};
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -176,7 +176,7 @@ export const BeesThemeContainer = styled.div`
 export const BeehiveContainer = styled.div`
   position: absolute;
   right: 5%;
-  top: 0;
+  top: ${(props) => props.theme.space[0]};
   width: 100px;
   height: 100px;
   z-index: 5;
