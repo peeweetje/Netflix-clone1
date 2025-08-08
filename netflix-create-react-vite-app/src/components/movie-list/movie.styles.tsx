@@ -21,16 +21,16 @@ export const RowTitle = styled.h2`
   margin-bottom: ${(props) => props.theme.space[4]};
 
   @media (max-width: 768px) {
-    font-size: ${(props) => props.theme.fontSize[4]};
+    font-size: ${(props) => props.theme.fontSize[3]};
   }
   @media (max-width: 992px) {
     font-size: ${(props) => props.theme.fontSize[3]};
   }
   @media (max-width: 1024px) {
-    font-size: ${(props) => props.theme.fontSize[3]};
+    font-size: ${(props) => props.theme.fontSize[4]};
   }
   @media (max-width: 1200px) {
-    font-size: ${(props) => props.theme.fontSize[2]};
+    font-size: ${(props) => props.theme.fontSize[4]};
   }
 `;
 
