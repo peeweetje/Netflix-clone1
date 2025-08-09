@@ -62,7 +62,7 @@ export const BannerOverlay = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2vw;
+  padding:${(props) => props.theme.space[0]} ${(props) => props.theme.space[8]};
   z-index: 2;
 
  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
@@ -128,7 +128,8 @@ export const BannerButton = styled.button`
   }
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    padding: 8px 16px;
+    padding:${(props) => props.theme.fontSize[2]} ${(props) =>
+    props.theme.fontSize[4]};
     font-size: ${(props) => props.theme.fontSize[2]};
   }
 `;

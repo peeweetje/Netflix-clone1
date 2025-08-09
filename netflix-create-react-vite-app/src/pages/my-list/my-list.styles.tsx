@@ -48,7 +48,7 @@ export const RemoveButton = styled.button`
   color: ${(props) => props.theme.colors.buttonText};
   border: none;
   border-radius: ${(props) => props.theme.borderRadius[1]};
-  padding: 8px 16px;
+  padding: ${(props) => props.theme.space[3]} ${(props) => props.theme.space[6]};
   font-size: ${(props) => props.theme.fontSize[3]};
   cursor: pointer;
   transition: background 0.2s;

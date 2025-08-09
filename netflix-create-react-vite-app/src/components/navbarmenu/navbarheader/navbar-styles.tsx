@@ -11,21 +11,20 @@ export const NavbarMenu = styled.nav`
   justify-content: center;
   align-items: center;
   position: sticky;
-  top:${(props) => props.theme.space[0]};
+  top: ${(props) => props.theme.space[0]};
   z-index: 1000;
   background-color: ${(props) => props.theme.colors.black};
   padding-top: ${(props) => props.theme.space[2]};
   padding-bottom: ${(props) => props.theme.space[2]};
 
-  @media (max-width: 992px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.md}) {
     position: relative;
     justify-content: space-between;
-    padding: ${(props) => props.theme.space[2]} ${(props) => props.theme.space[4]};
+    padding: ${(props) => props.theme.space[2]}
+      ${(props) => props.theme.space[4]};
   }
 
-  @media (max-width: 768px) {
-    justify-content: center;
-  }
+
 `;
 
 export const NavList = styled.ul<{ $centered?: boolean; $isOpen?: boolean }>`
@@ -44,44 +43,44 @@ export const NavList = styled.ul<{ $centered?: boolean; $isOpen?: boolean }>`
     font-size: ${(props) => props.theme.fontSize[4]};
     color: ${(props) => props.theme.colors.primaryLight};
 
-    @media (max-width: 1200px) {
-      font-size: ${(props) => props.theme.fontSize[3]};
-      padding: ${(props) => props.theme.space[7]};
+    @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+      font-size: ${(props) => props.theme.fontSize[0]};
+      padding: ${(props) => props.theme.space[1]};
     }
 
-    @media (max-width: 1024px) {
-      font-size: ${(props) => props.theme.fontSize[3]};
-      padding: ${(props) => props.theme.space[6]};
-    }
-
-    @media (max-width: 992px) {
+    @media (max-width: ${(props) => props.theme.breakpoints.md}) {
       font-size: ${(props) => props.theme.fontSize[2]};
       padding: ${(props) => props.theme.space[1]};
     }
 
-    @media (max-width: 768px) {
-      font-size: ${(props) => props.theme.fontSize[0]};
-      padding: ${(props) => props.theme.space[1]};
+    @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
+      font-size: ${(props) => props.theme.fontSize[3]};
+      padding: ${(props) => props.theme.space[6]};
+    }
+
+    @media (max-width: ${(props) => props.theme.breakpoints.xl}) {
+      font-size: ${(props) => props.theme.fontSize[3]};
+      padding: ${(props) => props.theme.space[7]};
     }
   }
 
   li:hover {
     text-decoration: 5px underline;
   }
- 
+
   li.active {
     text-decoration: 5px underline;
-    BackgroundColor: ${(props) => props.theme.colors.white};
+    backgroundcolor: ${(props) => props.theme.colors.white};
     color: ${(props) => props.theme.colors.white};
   }
 
-  @media (max-width: 992px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.md}) {
     display: ${(props) => (props.$isOpen ? 'flex' : 'none')};
     flex-direction: column;
     align-items: flex-start;
     position: absolute;
     top: 100%;
-    background-color:rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     padding-bottom: ${(props) => props.theme.space[4]};
     z-index: 100;
   }

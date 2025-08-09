@@ -5,11 +5,11 @@ export const NavbarSearch = styled.div`
   padding-right: ${(props) => props.theme.space[8]};
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    margin-left: 0;
+    margin-left:${props => props.theme.space[0]};
     width: 100%;
     display: flex;
     justify-content: center;
-    padding-bottom: ${(props) => props.theme.space[6]};
+    padding-bottom: ${(props) => props.theme.space[2]};
   }
 `;
 
@@ -19,7 +19,7 @@ export const SearchContainer = styled.div`
   align-items: center;
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    margin-top: 1rem;
+    margin-top: ${(props) => props.theme.space[2]};
   }
 `;
 
@@ -83,7 +83,7 @@ export const NavbarInput = styled.input`
 
 export const SearchIconWrapper = styled.div`
   position: absolute;
-  left: 10px;
+  left: ${(props) => props.theme.space[4]};
   color: ${(props) => props.theme.colors.primary};
   pointer-events: none;
 
