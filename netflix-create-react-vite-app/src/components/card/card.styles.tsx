@@ -9,7 +9,7 @@ export const CardContainer = styled.div`
   cursor: pointer;
   perspective: 1000px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     height: 280px;
   }
 `;
@@ -33,7 +33,7 @@ export const StyledImg = styled.img`
   height: 350px;
   width: 250px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     height: 250px;
     width: 150px;
   }
@@ -59,7 +59,7 @@ export const CardBackContainer = styled.div`
   color: ${(props) => props.theme.colors.buttonText};
   border-radius: ${(props) => props.theme.borderRadius[3]};
 
-  @media (max-width: 768px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     height: 250px;
     width: 150px;
   }
@@ -71,7 +71,7 @@ export const TitleContainer = styled.h1`
   margin-top: ${(props) => props.theme.space[1]};
   font-size: ${(props) => props.theme.fontSize[2]};
 
-  @media (max-width: 768px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     font-size: ${(props) => props.theme.fontSize[1]};
   }
 `;
@@ -82,7 +82,7 @@ export const OverviewContainer = styled.p`
   font-size: ${(props) => props.theme.fontSize[1]};
   line-height: ${(props) => props.theme.lineHeight[3]};
 
-  @media (max-width: 768px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     font-size: ${(props) => props.theme.fontSize[0]};
     display: -webkit-box;
     -webkit-line-clamp: 5;
@@ -113,7 +113,7 @@ export const MotionFlipCard = styled(motion.div)`
   height: 350px;
   transform-style: preserve-3d;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     width: 150px;
     height: 250px;
   }
@@ -149,7 +149,7 @@ export const BackCardButton = styled.button<{ isAdded: boolean }>`
     isAdded ? theme.colors.white : theme.colors.black};
   border: none;
   border-radius:${(props) => props.theme.borderRadius[1]};
-  padding: 6px 16px;
+  padding:${(props) => props.theme.space[3]} ${(props) => props.theme.space[6]};
   font-size:${(props) => props.theme.fontSize[3]};
   cursor: ${({ isAdded }) => (isAdded ? 'not-allowed' : 'pointer')};
 

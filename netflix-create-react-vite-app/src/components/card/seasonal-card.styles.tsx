@@ -7,6 +7,6 @@ export const CardContainer = styled.div`
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     transform: scale(0.9);
-    margin-top: 0;
+    margin-top: ${(props) => props.theme.space[0]};
   }
 `;
