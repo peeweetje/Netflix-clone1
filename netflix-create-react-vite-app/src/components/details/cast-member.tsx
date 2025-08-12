@@ -7,6 +7,7 @@ import {
   CastName,
 } from './details-styles';
 
+
 export const CastMember = ({ actor, src, alt }: CastMemberProps) => {
   return (
     <CastCard>

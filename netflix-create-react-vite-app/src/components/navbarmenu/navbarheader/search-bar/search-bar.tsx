@@ -8,10 +8,10 @@ import {
 } from './search-bar.styles';
 import { SearchIcon } from './search-icon';
 
-export type searchProps = {
-  onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
+export interface SearchProps {
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
-};
+}
 
 export const SearchBar = ({ value, onChange }: searchProps) => {
   const { t } = useTranslation();

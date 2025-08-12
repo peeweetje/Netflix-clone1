@@ -4,7 +4,7 @@ import { winterTheme } from '../../styles/themes/themes';
 import { Card } from './card';
 import { CardContainer } from './seasonal-card.styles';
 
-type SeasonalCardProps = {
+interface SeasonalCardProps {
   src: string;
   alt: string;
   overview: string;
@@ -13,7 +13,7 @@ type SeasonalCardProps = {
   id: number;
   media_type: 'movie' | 'tv';
   onClick?: () => void;
-};
+}
 
 export const SeasonalCard = (props: SeasonalCardProps) => {
   const { theme } = useTheme();

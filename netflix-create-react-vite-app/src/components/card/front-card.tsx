@@ -1,10 +1,10 @@
 import React from 'react';
 import { CardFront, StyledImg } from './card.styles';
 
-type FrontCardProps = {
+interface FrontCardProps {
   src: string;
   alt: string;
-};
+}
 
 export const FrontCard = ({ src, alt }: FrontCardProps) => {
   return (

@@ -10,13 +10,13 @@ import {
   TitleContainer,
 } from './card.styles';
 
-type BackCardProps = {
+interface BackCardProps {
   id: number;
   media_type: 'movie' | 'tv';
   overview: string;
   title: string;
   vote_average: number;
-};
+}
 
 export const BackCard = ({
   id,

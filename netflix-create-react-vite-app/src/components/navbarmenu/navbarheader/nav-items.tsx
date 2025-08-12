@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-type navItemsProps = {
+interface navItemsProps {
   to: string;
   children?: React.ReactNode;
-};
+}
 
 const StyledNavLink = styled.a`
   text-decoration: none;

@@ -2,9 +2,9 @@ import React from 'react';
 import { scoreColor } from '../../utils/score-color';
 import { ChipContainer } from './chip.styles';
 
-type ChipProps = {
+interface ChipProps {
   score: number;
-};
+}
 
 export const Chip = ({ score }: ChipProps) => {
   const roundedScore = Math.floor(score * 10) / 10;

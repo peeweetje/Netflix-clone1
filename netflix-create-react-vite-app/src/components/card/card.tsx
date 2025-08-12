@@ -8,11 +8,11 @@ import {
 } from './card.styles';
 import { FrontCard } from './front-card';
 
-export interface CardRef {
+ interface CardRef {
   flip: () => void;
 }
 
-type CardProps = {
+interface CardProps {
   src: string;
   alt: string;
   overview: string;
@@ -20,7 +20,7 @@ type CardProps = {
   vote_average: number;
   id: number;
   media_type: 'movie' | 'tv';
-};
+}
 
 export const Card = forwardRef<CardRef, CardProps>(
   ({ src, alt, overview, title, vote_average, id, media_type }, ref) => {
