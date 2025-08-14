@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   imageUrl,
   movieVideosUrl,
@@ -42,6 +43,7 @@ interface CastMember {
 }
 
 export const MediaDetail = ({ type }: MediaDetailProps) => {
+  const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [media, setMedia] = useState<MediaData | null>(null);
@@ -113,7 +115,7 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
     return (
       <div>
         <Spinner />
-        <p>Loading...</p>
+        <p>t('loading')</p>
       </div>
     );
   if (error)

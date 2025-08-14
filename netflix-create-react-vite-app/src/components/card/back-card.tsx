@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { type MyListItem, useMyList } from '../../context/myListContext';
 import { scoreColor } from '../../utils/score-color';
 import { Chip } from '../chip/chip';
@@ -25,14 +26,18 @@ export const BackCard = ({
   title,
   vote_average,
 }: BackCardProps) => {
-  if (typeof id !== 'number' || !media_type) return null;
+  const { t } = useTranslation();
   const context = useMyList();
+  const { myList, addToList } = context;
+
+  if (typeof id !== 'number' || !media_type) return null;
+
   if (
     !(context && Array.isArray(context.myList)) ||
     typeof context.addToList !== 'function'
   )
     return null;
-  const { myList, addToList } = context;
+
   const isAdded = myList.some(
     (item: MyListItem) =>
       item &&
@@ -64,7 +69,7 @@ export const BackCard = ({
             addToList({ id, media_type });
           }}
         >
-          {isAdded ? 'Added' : 'Add to List'}
+          {isAdded ? t('added') : t('add-to-list')}
         </BackCardButton>
         <Chip score={vote_average} />
       </StyledScoreContainer>
