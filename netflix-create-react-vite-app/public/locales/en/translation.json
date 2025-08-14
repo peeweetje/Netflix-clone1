@@ -10,5 +10,22 @@
   "movie-listings": "movie listings",
   "navigate-to": "navigate to {{ to }}",
   "movie-poster": "movie-poster",
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "added": "Added",
+  "add-to-list": "Add to list",
+  "less-info": "Less Info",
+  "more-info": "More Info",
+  "scroll-left": "Scroll left",
+  "scroll-right": "Scroll right",
+  "shows": "Shows",
+  "movies": "Movies",
+  "switch-theme": "Switch Theme",
+  "popular": "Popular",
+  "top-rated": "Top Rated",
+  "action-movies": "Action Movies",
+  "no-movies-in-list": "No movies in this list",
+  "empty-list": "Your list is empty",
+  "not-loaded": "Some items could not be loaded:",
+  "remove-from-list": "Remove"
+ 
 }

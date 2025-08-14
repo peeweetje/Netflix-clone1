@@ -10,5 +10,21 @@
   "movie-listings": "filmlijst",
   "navigate-to": "navigeer naar {{ to }}",
   "movie-poster": "film-poster",
-  "loading": "Laden..."
+  "loading": "Laden...",
+  "added": "Toegevoegd",
+  "add-to-list": "Toegevoegd aan lijst",
+  "less-info": "minder Informatie",
+  "more-info": "meer Informatie",
+  "scroll-left": "Scroll naar links",
+  "scroll-right": "Scroll naar rechts",
+  "shows": "Series",
+  "movies": "Films",
+  "switch-theme": "Switch Thema",
+  "popular": "Populair",
+  "top-rated": "Top Beoordeling",
+  "action-movies": "Actie Films",
+  "no-movies-in-list": "Geen films in deze lijst",
+  "not-loaded": "Sommige items konden niet worden geladen:",
+  "empty-list": "Je lijst is leeg.",
+  "remove-from-list": "Verwijderd"
 }
