@@ -1,4 +1,6 @@
 import type React from 'react';
+import { useTranslation } from 'react-i18next';
+import { Spinner } from '../../components/spinner/spinner';
 import { Card } from '../../components/card/card';
 import { CardWrapper } from '../../components/card-wrapper/card-wrapper';
 import { MovieRow } from '../../components/movie-list/movie-row';
@@ -13,9 +15,11 @@ import {
   RemovalNotice,
   RemoveButton,
   CardWrapper as StyledCardWrapper,
+  failedItemsStyle,
 } from './my-list.styles';
 
 export const MyList = () => {
+  const { t } = useTranslation();
   const { myList, removeFromList } = useMyList();
   const { localMovies, localLoading, localError, failedItems, removalNotice } =
     useLocalListDetails();
@@ -49,15 +53,15 @@ export const MyList = () => {
       <MyListContainer>
         {searchQuery ? (
           searchLoading ? (
-            <p>Loading...</p>
+            <Spinner />
           ) : searchError ? (
             <p>{searchError}</p>
           ) : (
             <>
-              <MovieRow movies={searchResultsMovies} title="Movies" />
+              <MovieRow movies={searchResultsMovies} title={t('movies')} />
               <MovieRow
                 movies={searchResultsShows.map(mapShowToMovie)}
-                title="Shows"
+                title={t('shows')}
               />
             </>
           )
@@ -65,8 +69,8 @@ export const MyList = () => {
           <>
             {removalNotice && <RemovalNotice>{removalNotice}</RemovalNotice>}
             {failedItems.length > 0 && (
-              <div style={{ color: 'red' }}>
-                <p>Some items could not be loaded:</p>
+              <failedItemsStyle>
+                <p>{t('not-loaded')}</p>
                 <ul>
                   {failedItems.map((item, idx) => (
                     <li key={idx}>
@@ -75,14 +79,16 @@ export const MyList = () => {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </failedItemsStyle>
             )}
             {localLoading ? (
-              <p>Loading...</p>
+              <Spinner />
+            ) : localMovies.length === 0 && !localError ? (
+              <p>{t('no-movies-in-list')}</p>
             ) : localError ? (
               <p>{localError}</p>
             ) : myList.length === 0 ? (
-              <p>Your list is empty.</p>
+              <p>{t(empty-list)}</p>
             ) : (
               <MoviesGrid>
                 {localMovies.map((movie) => {
@@ -91,7 +97,9 @@ export const MyList = () => {
                   return (
                     <StyledCardWrapper key={`${movie.id}-${item.media_type}`}>
                       <CardWrapper
-                        to={`/${item.media_type === 'tv' ? 'shows' : 'movies'}/${movie.id}`}
+                        to={`/${
+                          item.media_type === 'tv' ? t('shows') : t('movies')
+                        }/${movie.id}`}
                       >
                         <Card
                           alt={movie.title || movie.name}
@@ -104,7 +112,7 @@ export const MyList = () => {
                         />
                       </CardWrapper>
                       <RemoveButton onClick={() => removeFromList(item)}>
-                        Remove
+                        {t('remove-from-list')}
                       </RemoveButton>
                     </StyledCardWrapper>
                   );

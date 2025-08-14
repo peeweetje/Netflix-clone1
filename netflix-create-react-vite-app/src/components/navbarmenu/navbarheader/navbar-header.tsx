@@ -56,7 +56,7 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
           {t('my-list')}
         </NavItems>
       </NavList>
-      <SwitchThemeButton onClick={toggleTheme}>Switch Theme</SwitchThemeButton>
+      <SwitchThemeButton onClick={toggleTheme}>{t('switch-theme')}</SwitchThemeButton>
       <SearchBar onChange={onChange} value={value} />
     </NavbarMenu>
   );

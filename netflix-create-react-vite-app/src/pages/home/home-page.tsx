@@ -74,11 +74,11 @@ export const Homepage = () => {
             title={heroMovie.title}
           />
         )}
-        <MovieRow movies={popular} title={t('popular') || 'Popular'} />
-        <MovieRow movies={topRated} title={t('top-rated') || 'Top Rated'} />
+        <MovieRow movies={popular} title={t('popular')} />
+        <MovieRow movies={topRated} title={t('top-rated')} />
         <MovieRow
           movies={action}
-          title={t('action-movies') || 'Action Movies'}
+          title={t('action-movies')}
         />
       </>
     );
