@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import styled from 'styled-components';
 import { Card } from '../../components/card/card';
 import { CardWrapper } from '../../components/card-wrapper/card-wrapper';
 import { Loading } from '../../components/loading/loading';
@@ -8,14 +7,9 @@ import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-he
 import { useGlobalSearch } from '../../hooks/useGlobalSearch';
 import { imageUrl, trendingShowUrl } from '../../utils/api';
 import type { ShowResult } from '../../utils/types/types';
+import { StyledContainer } from './shows.styles';
 
-const StyledContainer = styled.div`
-  margin-top: ${(props) => props.theme.space[10]};
-  display: flex;
-  flex-wrap: wrap;
-  gap: ${({ theme }) => theme.space[9]};
-  justify-content: center;
-`;
+
 
 export const Shows = () => {
   const [shows, setShows] = useState<ShowResult[]>([]);
