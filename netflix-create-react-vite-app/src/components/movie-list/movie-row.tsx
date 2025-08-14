@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { imageUrl } from '../../utils/api';
 import type { MovieResult } from '../../utils/types/types';
 import { SeasonalCard } from '../card/seasonal-card';
@@ -30,6 +31,7 @@ const getVisibleMediaCount = () => {
 };
 
 export const MovieRow = ({ title, movies }: MovieRowProps) => {
+   const { t } = useTranslation();
   const [startIdx, setStartIdx] = useState(0);
   const [visibleCount, setVisibleCount] = useState(() =>
     typeof window !== 'undefined' ? getVisibleMediaCount() : 5
@@ -94,7 +96,7 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
     <RowContainer>
       <RowTitle>{title}</RowTitle>
       <ArrowButton
-        aria-label="Scroll left"
+        aria-label={t('scroll-left')}
         className={`arrow left${canScrollLeft ? ' active' : ''}`}
         disabled={!canScrollLeft || !ready}
         onClick={handleLeft}
@@ -114,7 +116,7 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
               <div key={movie.id} ref={idx === 0 ? cardRef : undefined}>
                 <CardWrapper
                   to={`/${
-                    movie.media_type === 'tv' ? 'shows' : 'movies'
+                    movie.media_type === 'tv' ? t('shows') : t('movies')
                   }/${movie.id}`}
                 >
                   <SeasonalCard
@@ -135,7 +137,7 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
         </CardsWrapper>
       </CardsViewport>
       <ArrowButton
-        aria-label="Scroll right"
+        aria-label= {t('scroll-right')}
         className={`arrow right${canScrollRight ? ' active' : ''}`}
         disabled={!canScrollRight || !ready}
         onClick={handleRight}

@@ -1,9 +1,14 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { LoadingText, SpinnerContainer, SpinnerWrapper } from './spinner.styles';
 
-export const Spinner = () => (
+export const Spinner = () => {
+  const { t } = useTranslation();
+
+  return (
   <SpinnerContainer>
     <SpinnerWrapper />
-    <LoadingText>Loading.....</LoadingText>
+    <LoadingText>{t('loading')}</LoadingText>
   </SpinnerContainer>
-);
+ )
+}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../../context/themeContext';
 import {
@@ -69,6 +70,7 @@ export const HeroBanner = ({
   movieId,
   mediaType,
 }: HeroBannerProps) => {
+  const { t } = useTranslation();
   const [showInfo, setShowInfo] = useState(false);
   const { theme } = useTheme();
   const navigate = useNavigate();
@@ -86,7 +88,7 @@ export const HeroBanner = ({
           <BannerButtons>
             <BannerButton onClick={handlePlayClick}>Play</BannerButton>
             <BannerButton onClick={() => setShowInfo((v) => !v)}>
-              {showInfo ? 'Less Info' : 'More Info'}
+              {showInfo ? t('less-info') : t('more-info')}
             </BannerButton>
           </BannerButtons>
         </div>
