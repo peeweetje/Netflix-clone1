@@ -26,5 +26,18 @@
   "no-movies-in-list": "Geen films in deze lijst",
   "not-loaded": "Sommige items konden niet worden geladen:",
   "empty-list": "Je lijst is leeg.",
-  "remove-from-list": "Verwijderd"
+  "remove-from-list": "Verwijderd",
+  "trending-movies": "trending films",
+  "trending-shows": "Trending Series",
+  "most-popular-shows": "meest populaire series",
+  "most-popular-movies": "meest populaire films",
+  "media-type-error": "ID of mediatype niet opgegeven.",
+  "video-not-found": "Geen video's gevonden voor deze film.",
+  "no-trailer-found": "Geen trailer gevonden voor deze film.",
+  "error-fetch-video": "Fout bij het ophalen van videogegevens:",
+  "failed-load-trailer": "Kon de trailer niet laden. Probeer het later opnieuw.",
+  "go-back-button": "Ga Terug",
+  "movie-trailer": "Film Trailer",
+  "no-trailer-available": "Geen trailer beschikbaar voor deze film.",
+  "watch-trailer": "Bekijk Trailer"
 }

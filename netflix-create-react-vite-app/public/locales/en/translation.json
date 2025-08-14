@@ -26,6 +26,18 @@
   "no-movies-in-list": "No movies in this list",
   "empty-list": "Your list is empty",
   "not-loaded": "Some items could not be loaded:",
-  "remove-from-list": "Remove"
- 
+  "remove-from-list": "Remove",
+  "trending-movies": "Trending Movies",
+  "trending-shows": "Trending Shows",
+  "most-popular-shows": "Most Popular Shows",
+  "most-popular-movies": "Most Popular Movies",
+  "media-type-error": "ID or media type not provided.",
+  "video-not-found": "No videos found for this movie.",
+  "no-trailer-found": "No trailer found for this movie.",
+  "error-fetch-video": "Failed to fetch video data:",
+  "failed-load-trailer": "Failed to load trailer. Please try again later.",
+  "go-back-button": "Go Back",
+  "movie-trailer": "Movie Trailer",
+  "no-trailer-available": "No trailer available for this movie.",
+  "watch-trailer": "Watch Trailer"
 }
