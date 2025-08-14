@@ -111,64 +111,54 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
     }
   }, [id, type]);
 
-  if (loading)
-    return (
-      <div>
-      <Loading />
-      </div>
-    );
-  if (error)
-    return (
-      <div>
-        <p>{error}</p>
-      </div>
-    );
-  if (!media) return null;
-
   return (
-    <StyledContainer>
-      <ButtonContainer>
-        <GoBackButton onClick={() => navigate(-1)}>{t('go-back')}</GoBackButton>
-        {hasTrailer && (
-          <GoBackButton
-            onClick={() => navigate(`/trailer/${type}/${media.id}`)}
-          >
-           {t('watch-trailer')}
-          </GoBackButton>
-        )}
-      </ButtonContainer>
-      <MainColumns>
-        <LeftColumn>
-          <MediaPoster
-            imageUrl={imageUrl}
-            posterPath={media.poster_path}
-            tagline={media.tagline}
-            title={media.title || media.name}
-          />
-        </LeftColumn>
-        <RightColumn>
-          {cast.length > 0 && (
-            <CastSection>
-              <h2>Cast Members</h2>
-              <CastList>
-                {cast.slice(0, 5).map((actor) => (
-                  <CastMember
-                    actor={actor}
-                    alt={actor.name}
-                    key={actor.cast_id || actor.credit_id}
-                    src={
-                      actor.profile_path
-                        ? `https://image.tmdb.org/t/p/w185${actor.profile_path}`
-                        : ''
-                    }
-                  />
-                ))}
-              </CastList>
-            </CastSection>
-          )}
-          <MediaInfo media={media} type={type} />
-        </RightColumn>
-      </MainColumns>
-    </StyledContainer>
+    <Loading loading={loading} error={error}>
+      {media && (
+        <StyledContainer>
+          <ButtonContainer>
+            <GoBackButton onClick={() => navigate(-1)}>{t('go-back')}</GoBackButton>
+            {hasTrailer && (
+              <GoBackButton
+                onClick={() => navigate(`/trailer/${type}/${media.id}`)}
+              >
+               {t('watch-trailer')}
+              </GoBackButton>
+            )}
+          </ButtonContainer>
+          <MainColumns>
+            <LeftColumn>
+              <MediaPoster
+                imageUrl={imageUrl}
+                posterPath={media.poster_path}
+                tagline={media.tagline}
+                title={media.title || media.name}
+              />
+            </LeftColumn>
+            <RightColumn>
+              {cast.length > 0 && (
+                <CastSection>
+                  <h2>Cast Members</h2>
+                  <CastList>
+                    {cast.slice(0, 5).map((actor) => (
+                      <CastMember
+                        actor={actor}
+                        alt={actor.name}
+                        key={actor.cast_id || actor.credit_id}
+                        src={
+                          actor.profile_path
+                            ? `https://image.tmdb.org/t/p/w185${actor.profile_path}`
+                            : ''
+                        }
+                      />
+                    ))}
+                  </CastList>
+                </CastSection>
+              )}
+              <MediaInfo media={media} type={type} />
+            </RightColumn>
+          </MainColumns>
+        </StyledContainer>
+      )}
+    </Loading>
   );
 };
