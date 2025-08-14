@@ -1,3 +1,4 @@
+import { Loading } from '../../components/loading/loading';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -7,7 +8,6 @@ import {
   showVideosUrl,
   VITE_API_KEY,
 } from '../../utils/api';
-import { Spinner } from '../spinner/spinner';
 import { CastMember } from './cast-member';
 import {
   ButtonContainer,
@@ -114,8 +114,7 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
   if (loading)
     return (
       <div>
-        <Spinner />
-        <p>t('loading')</p>
+      <Loading />
       </div>
     );
   if (error)
@@ -129,12 +128,12 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
   return (
     <StyledContainer>
       <ButtonContainer>
-        <GoBackButton onClick={() => navigate(-1)}>Go Back</GoBackButton>
+        <GoBackButton onClick={() => navigate(-1)}>{t('go-back')}</GoBackButton>
         {hasTrailer && (
           <GoBackButton
             onClick={() => navigate(`/trailer/${type}/${media.id}`)}
           >
-            Watch Trailer
+           {t('watch-trailer')}
           </GoBackButton>
         )}
       </ButtonContainer>

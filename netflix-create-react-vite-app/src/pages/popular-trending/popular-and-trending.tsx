@@ -1,5 +1,6 @@
 import type React from 'react';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { Loading } from '../../components/loading/loading';
 import { MovieRow } from '../../components/movie-list/movie-row';
@@ -24,6 +25,7 @@ const Container = styled.div`
 const mostPopularShowsUrl = `${discoverShowUrl}&sort_by=popularity.desc`;
 
 export const PopularAndTrending = () => {
+  const { t } = useTranslation();
   const [trendingMovies, setTrendingMovies] = useState<MovieResult[]>([]);
   const [trendingShows, setTrendingShows] = useState<ShowResult[]>([]);
   const [popularMovies, setPopularMovies] = useState<MovieResult[]>([]);
@@ -116,10 +118,10 @@ export const PopularAndTrending = () => {
     if (searchQuery) {
       return (
         <>
-          <MovieRow movies={searchResultsMovies} title="Movies" />
+          <MovieRow movies={searchResultsMovies} title={t('movies')} />
           <MovieRow
             movies={searchResultsShows.map(mapShowToMovie)}
-            title="Shows"
+            title={t('shows')}
           />
         </>
       );
@@ -127,15 +129,15 @@ export const PopularAndTrending = () => {
 
     return (
       <>
-        <MovieRow movies={trendingMovies} title="Trending Movies" />
+        <MovieRow movies={trendingMovies} title={t('trending-movies')} />
         <MovieRow
           movies={trendingShows.map(mapShowToMovie)}
-          title="Trending Shows"
+          title={t('trending-shows')}
         />
-        <MovieRow movies={popularMovies} title="Most Popular Movies" />
+        <MovieRow movies={popularMovies} title={t('most-popular-movies')} />
         <MovieRow
           movies={popularShows.map(mapShowToMovie)}
-          title="Most Popular Shows"
+          title={t('most-popular-shows')}
         />
       </>
     );
