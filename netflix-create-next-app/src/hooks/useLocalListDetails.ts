@@ -35,7 +35,7 @@ export const useLocalListDetails = (): UseLocalListDetailsReturn => {
         ['movie', 'tv'].includes(item.media_type) && 
         typeof item.id === 'number'
     );
-
+ 
     if (validList.length === 0) {
       setLocalMovies([]);
       setFailedItems(myList); // All items are invalid
@@ -89,7 +89,9 @@ export const useLocalListDetails = (): UseLocalListDetailsReturn => {
           }
           const data = await res.json();
           const movieData =
-            item.media_type === 'tv' ? { ...data, title: data.name } : data;
+            item.media_type === 'tv' 
+              ? { ...data, title: data.name, media_type: 'tv' } 
+              : { ...data, media_type: 'movie' };
           movies.push(movieData);
         }
 
