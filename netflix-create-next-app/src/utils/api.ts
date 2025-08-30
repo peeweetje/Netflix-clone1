@@ -1,0 +1,14 @@
+export const API_KEY = process.env.NEXT_PUBLIC_API_KEY || '';
+export const discoverMovieUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
+export const imageUrl = 'https://image.tmdb.org/t/p/original/';
+export const searchMovieUrl = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query`;
+export const discoverShowUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}`;
+export const trendingShowUrl = `https://api.themoviedb.org/3/trending/tv/week?api_key=${API_KEY}`;
+export const trendingMovieUrl = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`;
+export const popularMoviesUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`;
+export const topRatedMoviesUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`;
+export const actionMoviesUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=28`;
+export const movieVideosUrl = (movieId: number) =>
+  `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}`;
+export const showVideosUrl = (showId: number) =>
+  `https://api.themoviedb.org/3/tv/${showId}/videos?api_key=${API_KEY}`;
