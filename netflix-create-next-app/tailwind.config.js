@@ -8,13 +8,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        netflix: {
-          red: '#E50914',
-          black: '#000000',
-          'gray-dark': '#141414',
-          'gray-light': '#E5E5E5',
-        },
-        // Theme colors from Vite app
         primary: {
           DEFAULT: '#4CAF50', // Green (spring default)
           light: '#81C784',
