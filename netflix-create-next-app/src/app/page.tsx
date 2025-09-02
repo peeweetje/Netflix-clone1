@@ -1,6 +1,4 @@
 'use client';
-
-import type React from 'react';
 import { useState } from 'react';
 import { HeroBanner } from '../components/hero-banner/hero-banner';
 import { Loading } from '../components/loading/loading';
@@ -8,10 +6,15 @@ import { MovieRow } from '../components/movie-list/movie-row';
 import { NavbarHeader } from '../components/navbarmenu/navbarheader/navbar-header';
 import { useFetchMovies } from '../hooks/useFetchMovies';
 import { useGlobalSearch } from '../hooks/useGlobalSearch';
-import { actionMoviesUrl, imageUrl, popularMoviesUrl, topRatedMoviesUrl } from '../utils/api';
+import {
+  actionMoviesUrl,
+  imageUrl,
+  popularMoviesUrl,
+  topRatedMoviesUrl,
+} from '../utils/api';
 import type { MovieResult } from '../utils/types/types';
 
-const Home = () => {
+ const HomePage = () => {
   const [popular, setPopular] = useState<MovieResult[]>([]);
   const [topRated, setTopRated] = useState<MovieResult[]>([]);
   const [action, setAction] = useState<MovieResult[]>([]);
@@ -30,7 +33,12 @@ const Home = () => {
     searchError,
   } = useGlobalSearch();
 
-  useFetchMovies(popularMoviesUrl, setPopular, setPopularLoading, setPopularError);
+  useFetchMovies(
+    popularMoviesUrl,
+    setPopular,
+    setPopularLoading,
+    setPopularError
+  );
   useFetchMovies(
     topRatedMoviesUrl,
     setTopRated,
@@ -54,12 +62,7 @@ const Home = () => {
 
   const renderContent = () => {
     if (searchQuery) {
-      return (
-        <MovieRow
-          movies={searchResultsMovies}
-          title="Search Results"
-        />
-      );
+      return <MovieRow movies={searchResultsMovies} title='Search Results' />;
     }
 
     return (
@@ -67,15 +70,20 @@ const Home = () => {
         {heroMovie && heroMovie.backdrop_path && (
           <HeroBanner
             backgroundImage={`${imageUrl}${heroMovie.backdrop_path}`}
-            title={heroMovie.title}
-            overview={heroMovie.overview}
+            title={heroMovie.title || ''}
+            overview={heroMovie.overview || ''}
             movieId={heroMovie.id}
             mediaType={heroMovie.media_type || 'movie'}
           />
         )}
-        <MovieRow movies={popular} title="Popular" />
-        <MovieRow movies={topRated} title="Top Rated" />
-        <MovieRow movies={action} title="Action Movies" />
+        {!heroMovie?.backdrop_path && heroMovie && (
+          <div className='w-full h-64 bg-secondary flex items-center justify-center text-white text-2xl'>
+            Hero Banner - No backdrop available for "{heroMovie.title}"
+          </div>
+        )}
+        <MovieRow movies={popular} title='Popular' />
+        <MovieRow movies={topRated} title='Top Rated' />
+        <MovieRow movies={action} title='Action Movies' />
       </>
     );
   };
@@ -83,7 +91,7 @@ const Home = () => {
   return (
     <>
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
-      <main className="py-8">
+      <main className='flex flex-row justify-center flex-wrap max-w-full overflow-x-hidden'>
         <Loading loading={isLoading} error={error}>
           {renderContent()}
         </Loading>
@@ -91,5 +99,4 @@ const Home = () => {
     </>
   );
 };
-
-export default Home;
+export default HomePage;
