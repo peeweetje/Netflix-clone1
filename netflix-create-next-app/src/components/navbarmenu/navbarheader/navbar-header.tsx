@@ -20,32 +20,32 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
   };
 
   return (
-    <nav className="w-full sticky top-0 z-40 bg-black py-2 px-4">
+    <nav className="w-full sticky top-0 z-40 bg-black py-2 px-2">
       <div className="max-w-7xl mx-auto flex items-center">
         <div className="flex items-center w-full">
-          <Link href="/" className="whitespace-nowrap mr-8 text-2xl font-bold hover:!text-white transition-colors duration-200">
+          <Link href="/" className="whitespace-nowrap mr-4 text-2xl font-bold hover:!text-white transition-colors duration-200">
             BINGEWATCH
           </Link>
-          
+
           <div className="hidden md:flex flex-1 justify-center">
             <ul className="flex space-x-8">
               <li>
-                <Link href="/" className="hover:!text-white text-md font-medium transition-colors duration-200">
+                <Link href="/" className="hover:!text-white text-md  transition-colors duration-200">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/shows" className="hover:!text-white text-md font-medium transition-colors duration-200">
+                <Link href="/shows" className="hover:!text-white text-md  transition-colors duration-200">
                   Shows
                 </Link>
               </li>
               <li>
-                <Link href="/movies" className="hover:!text-white text-md font-medium transition-colors duration-200">
+                <Link href="/movies" className="hover:!text-white text-md transition-colors duration-200">
                   Movies
                 </Link>
               </li>
               <li>
-                <Link href="/popular-trending" className="hover:!text-white text-md font-medium transition-colors duration-200">
+                <Link href="/popular-trending" className="hover:!text-white text-md transition-colors duration-200">
                   Trending
                 </Link>
               </li>
@@ -57,11 +57,11 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
             </ul>
           </div>
 
-          <div className="flex items-center space-x-4 ml-auto">
+          <div className="flex items-center space-x-2 ml-auto">
             <div className="hidden md:block">
               <SearchBar onChange={onChange} value={value} />
             </div>
-            
+
             <Button
               onClick={handleHamburgerClick}
               variant="ghost"
