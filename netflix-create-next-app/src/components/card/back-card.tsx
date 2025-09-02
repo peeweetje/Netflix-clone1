@@ -41,7 +41,7 @@ export const BackCard = ({
   return (
     <div
       onClick={handleCardClick}
-      className="relative p-3 flex flex-col items-center justify-center h-[350px] w-[250px] overflow-visible bg-[#81C784] text-white rounded-lg cursor-pointer"
+      className="relative p-3 flex flex-col items-center justify-center h-[350px] w-[250px] overflow-visible bg-[#81C784] text-white rounded-lg cursor-pointer shadow-2xl shadow-white/20"
     >
       <h3 className="flex justify-center mt-0.5 mb-0.5 text-base font-bold">
         {title}

@@ -7,7 +7,7 @@ interface FrontCardProps {
 
 export const FrontCard = ({ src, alt }: FrontCardProps) => {
   return (
-    <div className="w-[250px] h-[350px] rounded-lg overflow-hidden shadow-2xl">
+    <div className="w-[250px] h-[350px] rounded-lg overflow-hidden shadow-2xl shadow-white/20">
       <img
         src={`https://image.tmdb.org/t/p/w500${src}`}
         alt={alt}
