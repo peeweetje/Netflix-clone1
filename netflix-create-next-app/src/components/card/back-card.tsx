@@ -60,7 +60,7 @@ export const BackCard = ({
           }}
           variant={isAdded ? "default" : "secondary"}
           size="lg"
-          className={`w-[140px] mx-auto mb-1 ${isAdded ? 'bg-black text-white hover:bg-black/90' : 'bg-white text-black hover:bg-gray-100'}`}
+          className={`w-[140px] mx-auto mb-4 ${isAdded ? 'bg-black text-white hover:bg-black/90' : 'bg-white text-black hover:bg-gray-100'}`}
         >
           {isAdded ? 'Added' : '+ Add'}
         </Button>

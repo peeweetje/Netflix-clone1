@@ -79,7 +79,7 @@ export const MovieRow = ({ movies, title }:MovieRowProps) => {
 
   return (
     <section className="relative mt-10">
-      <h2 className="text-primary-light text-xs ml-4 mb-4 sm:text-sm md:text-lg lg:text-xl xl:text-xl">
+      <h2 className="text-primary-light text-xs ml-4 mb-4 sm:text-sm md:text-lg lg:text-lg xl:text-lg">
         {title}
       </h2>
 
