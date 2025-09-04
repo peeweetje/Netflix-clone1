@@ -4,18 +4,80 @@
 @custom-variant dark (&:is(.dark *));
 
 
+  :root {
+    --radius: 0.5rem;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --primary: var(--primary-hue, 142) var(--primary-saturation, 71%) 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 9%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 9%;
+    --muted-foreground: 0 0% 64%;
+    --accent: 0 0% 9%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: var(--primary-hue, 142) var(--primary-saturation, 71%) 45%;
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 100%;
+    color-scheme: dark;
+  }
+
+  /* Theme colors are now handled by the theme context */
+  :root[data-theme] {
+    --primary: var(--primary-hue) var(--primary-saturation) 45%;
+    --ring: var(--primary-hue) var(--primary-saturation) 45%;
+  }
+
   body {
     margin: 0;
     padding: 0;
     font-family: 'Montserrat', sans-serif;
     background-color: #000;
-    color: #4CAF50;
+    color: #fff;
     overflow-x: hidden;
+  }
+
+  /* Ensure text is visible by default */
+  h1, h2, h3, h4, h5, h6, p, span, div, a, button {
+    color: inherit;
+  }
+
+  /* Apply theme colors to buttons and interactive elements */
+  Button, .btn {
+    background-color: hsl(var(--primary));
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  Button:hover, .btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  /* Theme-specific styles */
+  .text-primary {
+    color: hsl(var(--primary));
+  }
+
+  .bg-primary {
+    background-color: hsl(var(--primary));
   }
 
   a {
     text-decoration: none;
-    color: #4CAF50;
+    color: hsl(var(--primary));
+    transition: color 0.2s;
+  }
+
+  a:hover {
+    color: hsl(var(--primary) / 0.9);
   }
 
   ul {
@@ -97,7 +159,48 @@
     --sidebar-accent-foreground: oklch(0.205 0 0);
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.708 0 0);
-}
+    --color-primary: #4CAF50;
+    --color-primary-light: #81C784;
+    --color-primary-dark: #388E3C;
+    --color-bg: #121212;
+    --color-text: #FFFFFF;
+    --color-muted: #333333;
+    --color-muted-foreground: #BDBDBD;
+    --color-accent: #8EB3CC;
+  }
+
+  [data-theme="blue"] {
+    --color-primary: #2196F3;
+    --color-primary-light: #64B5F6;
+    --color-primary-dark: #1976D2;
+    --color-bg: #0D1B2A;
+    --color-text: #E0E1DD;
+    --color-muted: #1B263B;
+    --color-muted-foreground: #A8B2C0;
+    --color-accent: #90CAF9;
+  }
+
+  [data-theme="purple"] {
+    --color-primary: #9C27B0;
+    --color-primary-light: #BA68C8;
+    --color-primary-dark: #7B1FA2;
+    --color-bg: #1A1A27;
+    --color-text: #E1E1FF;
+    --color-muted: #2A2A3C;
+    --color-muted-foreground: #A8A8C0;
+    --color-accent: #CE93D8;
+  }
+
+  [data-theme="red"] {
+    --color-primary: #F44336;
+    --color-primary-light: #E57373;
+    --color-primary-dark: #D32F2F;
+    --color-bg: #1A1A1A;
+    --color-text: #FFEBEE;
+    --color-muted: #2D2D2D;
+    --color-muted-foreground: #BCAAA4;
+    --color-accent: #EF9A9A;
+  }
 
   .dark {
     --background: oklch(0.145 0 0);
@@ -131,13 +234,29 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
-}
+  }
 
   @layer base {
-  * {
-    @apply border-border outline-ring/50;
+    * {
+      @apply border-border;
     }
-  body {
-    @apply text-foreground;
+    
+    body {
+      @apply bg-background text-foreground transition-colors duration-200;
+      background-color: var(--color-bg);
+      color: var(--color-text);
     }
-}
+    
+    h1, h2, h3, h4, h5, h6 {
+      @apply font-bold;
+      color: var(--color-text);
+    }
+    
+    a {
+      @apply text-primary hover:text-primary-light transition-colors;
+    }
+    
+    button {
+      @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary;
+    }
+  }
