@@ -1,132 +1,9 @@
 @import 'tailwindcss';
 @config '../../tailwind.config.js';
 @plugin 'tailwindcss-animate';
-@custom-variant dark (&:is(.dark *));
 
 
-  :root {
-    --radius: 0.5rem;
-    --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
-    --primary: var(--primary-hue, 142) var(--primary-saturation, 71%) 45%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 9%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 0 0% 9%;
-    --muted-foreground: 0 0% 64%;
-    --accent: 0 0% 9%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 84% 60%;
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: var(--primary-hue, 142) var(--primary-saturation, 71%) 45%;
-    --card: 0 0% 0%;
-    --card-foreground: 0 0% 100%;
-    color-scheme: dark;
-  }
-
-  /* Theme colors are now handled by the theme context */
-  :root[data-theme] {
-    --primary: var(--primary-hue) var(--primary-saturation) 45%;
-    --ring: var(--primary-hue) var(--primary-saturation) 45%;
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Montserrat', sans-serif;
-    background-color: #000;
-    color: #fff;
-    overflow-x: hidden;
-  }
-
-  /* Ensure text is visible by default */
-  h1, h2, h3, h4, h5, h6, p, span, div, a, button {
-    color: inherit;
-  }
-
-  /* Apply theme colors to buttons and interactive elements */
-  Button, .btn {
-    background-color: hsl(var(--primary));
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: opacity 0.2s, transform 0.2s;
-  }
-
-  Button:hover, .btn:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-  }
-
-  /* Theme-specific styles */
-  .text-primary {
-    color: hsl(var(--primary));
-  }
-
-  .bg-primary {
-    background-color: hsl(var(--primary));
-  }
-
-  a {
-    text-decoration: none;
-    color: hsl(var(--primary));
-    transition: color 0.2s;
-  }
-
-  a:hover {
-    color: hsl(var(--primary) / 0.9);
-  }
-
-  ul {
-    list-style: none;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
-  @theme inline {
-    --radius-sm: calc(var(--radius) - 4px);
-    --radius-md: calc(var(--radius) - 2px);
-    --radius-lg: var(--radius);
-    --radius-xl: calc(var(--radius) + 4px);
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    --color-card: var(--card);
-    --color-card-foreground: var(--card-foreground);
-    --color-popover: var(--popover);
-    --color-popover-foreground: var(--popover-foreground);
-    --color-primary: var(--primary);
-    --color-primary-foreground: var(--primary-foreground);
-    --color-secondary: var(--secondary);
-    --color-secondary-foreground: var(--secondary-foreground);
-    --color-muted: var(--muted);
-    --color-muted-foreground: var(--muted-foreground);
-    --color-accent: var(--accent);
-    --color-accent-foreground: var(--accent-foreground);
-    --color-destructive: var(--destructive);
-    --color-border: var(--border);
-    --color-input: var(--input);
-    --color-ring: var(--ring);
-    --color-chart-1: var(--chart-1);
-    --color-chart-2: var(--chart-2);
-    --color-chart-3: var(--chart-3);
-    --color-chart-4: var(--chart-4);
-    --color-chart-5: var(--chart-5);
-    --color-sidebar: var(--sidebar);
-    --color-sidebar-foreground: var(--sidebar-foreground);
-    --color-sidebar-primary: var(--sidebar-primary);
-    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-    --color-sidebar-accent: var(--sidebar-accent);
-    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-    --color-sidebar-border: var(--sidebar-border);
-    --color-sidebar-ring: var(--sidebar-ring);
-}
-
-  :root {
+:root {
     --radius: 0.625rem;
     --background: oklch(0 0 0);
     --foreground: oklch(0.145 0 0);
@@ -169,6 +46,102 @@
     --color-accent: #8EB3CC;
   }
 
+
+
+  /* Theme colors are now handled by the theme context */
+  :root[data-theme] {
+    --primary: var(--primary-hue) var(--primary-saturation) 45%;
+    --ring: var(--primary-hue) var(--primary-saturation) 45%;
+  }
+
+    @layer base {
+    * {
+      @apply border-border;
+    }
+    
+    body {
+     margin: 0;
+     padding: 0;
+     overflow-x: hidden;
+     @apply bg-background text-foreground transition-colors duration-200;
+     background-color: var(--color-bg);
+     color: var(--color-text);
+      
+    }
+    
+     h2, h4, h5, h6 {
+      @apply font-bold;
+      color: var(--color-primary-light);
+    }
+    
+    h1,h3 {
+     color: var(--color-text);
+    }
+    
+    a {
+      @apply text-primary hover:text-primary-light transition-colors;
+    }
+    
+    button {
+      @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary;
+    }
+  }
+
+
+  /* Theme-specific styles */
+  .text-primary {
+    color: hsl(var(--primary));
+  }
+
+  .bg-primary {
+    background-color: hsl(var(--primary));
+  }
+
+  .text-themed-white {
+    color: var(--color-text);
+  }
+
+  
+
+  @theme inline {
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+}
+
+  
   [data-theme="blue"] {
     --color-primary: #2196F3;
     --color-primary-light: #64B5F6;
@@ -202,61 +175,3 @@
     --color-accent: #EF9A9A;
   }
 
-  .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.488 0.243 264.376);
-    --chart-2: oklch(0.696 0.17 162.48);
-    --chart-3: oklch(0.769 0.188 70.08);
-    --chart-4: oklch(0.627 0.265 303.9);
-    --chart-5: oklch(0.645 0.246 16.439);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
-  }
-
-  @layer base {
-    * {
-      @apply border-border;
-    }
-    
-    body {
-      @apply bg-background text-foreground transition-colors duration-200;
-      background-color: var(--color-bg);
-      color: var(--color-text);
-    }
-    
-    h1, h2, h3, h4, h5, h6 {
-      @apply font-bold;
-      color: var(--color-text);
-    }
-    
-    a {
-      @apply text-primary hover:text-primary-light transition-colors;
-    }
-    
-    button {
-      @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary;
-    }
-  }
