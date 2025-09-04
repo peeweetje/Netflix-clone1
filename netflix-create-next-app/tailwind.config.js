@@ -8,19 +8,44 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Theme colors
+        theme: {
+          green: {
+            DEFAULT: '#4CAF50',
+            light: '#81C784',
+            dark: '#388E3C',
+          },
+          blue: {
+            DEFAULT: '#2196F3',
+            light: '#64B5F6',
+            dark: '#1976D2',
+          },
+          purple: {
+            DEFAULT: '#9C27B0',
+            light: '#BA68C8',
+            dark: '#7B1FA2',
+          },
+          red: {
+            DEFAULT: '#F44336',
+            light: '#E57373',
+            dark: '#D32F2F',
+          },
+        },
+        // Default to green theme
         primary: {
-          DEFAULT: '#4CAF50', // Green (spring default)
-          light: '#81C784',
+          DEFAULT: 'var(--color-primary, #4CAF50)',
+          light: 'var(--color-primary-light, #81C784)',
+          dark: 'var(--color-primary-dark, #388E3C)',
         },
         secondary: '#333',
-        background: '#4CAF50',
-        foreground: '#000',
-        muted: '#333',
-        'muted-foreground': '#000',
-        accent: '#8EB3CC',
+        background: 'var(--color-bg, #121212)',
+        foreground: 'var(--color-text, #FFFFFF)',
+        muted: 'var(--color-muted, #333333)',
+        'muted-foreground': 'var(--color-muted-foreground, #BDBDBD)',
+        accent: 'var(--color-accent, #8EB3CC)',
         destructive: '#ff0000',
         warning: '#FFA500',
-        success: '#00FF00',
+        success: '#00C853',
         info: '#2196F3',
       },
       fontFamily: {
