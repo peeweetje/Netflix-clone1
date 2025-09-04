@@ -1,6 +1,7 @@
 import './globals.css';
 import { Poppins } from 'next/font/google';
 import { MyListProvider } from '../context/myListContext';
+import { ThemeProvider } from '@/context/theme-context';
 
 export const metadata = {
   title: 'Netflix Clone - Next.js',
@@ -26,11 +27,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
-      <body className={`${poppins.className}`}>
-        <MyListProvider>
-          <LayoutContent>{children}</LayoutContent>
-        </MyListProvider>
+    <html lang='en' suppressHydrationWarning>
+      <body className={poppins.className}>
+        <ThemeProvider>
+          <MyListProvider>
+            <LayoutContent>{children}</LayoutContent>
+          </MyListProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
