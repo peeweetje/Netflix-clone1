@@ -79,7 +79,7 @@ export const MovieRow = ({ movies, title }:MovieRowProps) => {
 
   return (
     <section className="relative mt-10">
-      <h2 className="text-primary-light text-xs ml-4 mb-4 sm:text-sm md:text-lg lg:text-lg xl:text-lg">
+      <h2 className="text-xs ml-4 mb-4 sm:text-sm md:text-lg lg:text-lg xl:text-lg !text-[hsl(var(--primary))]">
         {title}
       </h2>
 
@@ -133,7 +133,7 @@ export const MovieRow = ({ movies, title }:MovieRowProps) => {
         variant="ghost"
         size="icon"
       >
-        <ChevronRight className="!h-6 !w-6" />
+        <ChevronRight className="!h-6 !w-6 text-white" />
       </Button>
     </section>
   );

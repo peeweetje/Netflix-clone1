@@ -45,7 +45,7 @@ export const HeroBanner = ({
               <Button
                 size='lg'
                 onClick={handlePlayClick}
-                className='bg-green-700 hover:bg-green-500 flex items-center justify-center gap-3 px-8 py-6 text-lg transition-all duration-200 transform hover:scale-105'
+                className='flex items-center justify-center gap-3 px-8 py-6 text-lg transition-all duration-200 transform hover:scale-105'
               >
                 <Play className='!w-7 !h-7' />
                 <span className='text-md'>Play</span>
@@ -53,7 +53,7 @@ export const HeroBanner = ({
               <Button
                 size='lg'
                 onClick={() => setShowInfo(!showInfo)}
-                className='bg-green-700 hover:bg-green-500 flex items-center justify-center gap-3 px-8 py-6 transition-all duration-200 transform hover:scale-105'
+                className='flex items-center justify-center gap-3 px-8 py-6 transition-all duration-200 transform hover:scale-105'
               >
                 <Info className='!w-7 !h-7' />
                 <span className='text-md'>{showInfo ? 'Less Info' : 'More Info'}</span>

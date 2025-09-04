@@ -9,7 +9,7 @@ interface MovieListProps {
 
 export const MovieList = ({ movies }: { movies: MovieResult[] }) => {
   return (
-    <div className="mt-16 flex flex-wrap justify-center items-start gap-8">
+    <div className=" !text-white mt-16 flex flex-wrap justify-center items-start gap-8">
       {movies.map((movie) => (
         movie.poster_path && movie.id && (
           <div key={movie.id} className="relative">
