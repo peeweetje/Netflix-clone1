@@ -41,26 +41,30 @@ export const BackCard = ({
   return (
     <div
       onClick={handleCardClick}
-      className="relative p-3 flex flex-col items-center justify-center h-[350px] w-[250px] overflow-visible bg-[#81C784] text-white rounded-lg cursor-pointer shadow-2xl shadow-white/20"
+      className='relative p-3 flex flex-col items-center justify-center h-[350px] w-[250px] overflow-visible text-themed-white rounded-lg cursor-pointer shadow-2xl shadow-white/20 bg-primary-light'
     >
-      <h3 className="flex justify-center mt-0.5 mb-0.5 text-base font-bold">
+      <h3 className='!text-white flex justify-center mt-0.5 mb-0.5 text-base font-bold'>
         {title}
       </h3>
 
-      <p className="flex justify-center text-sm leading-relaxed mb-0 flex-1 overflow-hidden line-clamp-5">
+      <p className='flex justify-center text-sm leading-relaxed mb-0 flex-1 overflow-hidden line-clamp-5'>
         {truncatedOverview}
       </p>
 
-      <div className="flex flex-col items-center justify-end mt-auto mb-0">
+      <div className='flex flex-col items-center justify-end mt-auto mb-0'>
         <Button
           disabled={isAdded}
           onClick={(e) => {
             e.stopPropagation();
             addToList({ id, media_type });
           }}
-          variant={isAdded ? "default" : "secondary"}
-          size="lg"
-          className={`w-[140px] mx-auto mb-4 ${isAdded ? 'bg-black text-white hover:bg-black/90' : 'bg-white text-black hover:bg-gray-100'}`}
+          variant={isAdded ? 'default' : 'secondary'}
+          size='lg'
+          className={`w-[140px] mx-auto mb-4 ${
+            isAdded
+              ? 'bg-black text-white hover:bg-black/90'
+              : 'bg-white text-black hover:bg-gray-100'
+          }`}
         >
           {isAdded ? 'Added' : '+ Add'}
         </Button>
