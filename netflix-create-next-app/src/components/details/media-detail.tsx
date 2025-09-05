@@ -118,14 +118,14 @@ export const MediaDetail = ({ type, id }: MediaDetailProps) => {
       <div className="mb-10 flex gap-4">
         <Button
           onClick={() => router.back()}
-          className="bg-green-700 hover:bg-green-500 flex items-center justify-center gap-3 px-8 py-6 text-base transition-all duration-200 transform hover:scale-105"
+          className="flex items-center justify-center gap-3 px-8 py-6 text-base transition-all duration-200 transform hover:scale-105"
         >
           ← Go Back
         </Button>
         {hasTrailer && (
           <Button
             onClick={() => router.push(`/trailer/${type}/${id}`)}
-            className="bg-green-700 hover:bg-green-500 flex items-center justify-center gap-3 px-8 py-6 text-base transition-all duration-200 transform hover:scale-105"
+            className="flex items-center justify-center gap-3 px-8 py-6 text-base transition-all duration-200 transform hover:scale-105"
           >
             ▶ Watch Trailer
           </Button>

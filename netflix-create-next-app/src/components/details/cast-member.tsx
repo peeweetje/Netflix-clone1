@@ -19,7 +19,7 @@ export const CastMember= ({ actor, src, alt }: CastMemberProps) => {
       <h3 className="text-md font-bold mb-1 text-white">
         {actor.name}
       </h3>
-      <p className="text-green-400 text-md m-0">
+      <p className="text-primary-light text-md m-0">
         {actor.character}
       </p>
     </div>
