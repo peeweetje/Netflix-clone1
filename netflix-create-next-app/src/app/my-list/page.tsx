@@ -1,6 +1,5 @@
 'use client';
 
-import type React from 'react';
 import { Loading } from '../../components/loading/loading';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
 import { Trash2 } from 'lucide-react';
@@ -132,7 +131,7 @@ const MyList = () => {
   return (
     <>
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
-      <main className="flex flex-row justify-center flex-wrap max-w-full overflow-x-hidden">
+      <main className="flex flex-row justify-center flex-wrap max-w-full">
         <Loading
           loading={searchQuery ? searchLoading : localLoading}
           error={searchQuery ? searchError : localError}

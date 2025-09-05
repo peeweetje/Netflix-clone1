@@ -91,7 +91,7 @@ import type { MovieResult } from '../utils/types/types';
   return (
     <>
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
-      <main className='flex flex-row justify-center flex-wrap max-w-full overflow-x-hidden'>
+      <main className='flex flex-row justify-center flex-wrap max-w-full'>
         <Loading loading={isLoading} error={error}>
           {renderContent()}
         </Loading>

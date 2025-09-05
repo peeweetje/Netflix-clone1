@@ -85,8 +85,9 @@ const TrailerPage = ({ params }: TrailerPageProps) => {
   return (
     <div className='min-h-screen bg-background flex flex-col items-center justify-center p-8'>
       <Button
+        size='lg'
         onClick={() => router.back()}
-        className='bg-green-700 hover:bg-green-500  cursor pointer btn-primary self-start mb-8'
+        className='self-start mb-8'
       >
         ← Go Back
       </Button>

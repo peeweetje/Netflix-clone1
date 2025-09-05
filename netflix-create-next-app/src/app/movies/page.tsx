@@ -1,6 +1,5 @@
 'use client';
 
-import type React from 'react';
 import { useState } from 'react';
 import { Loading } from '../../components/loading/loading';
 import { MovieList } from '../../components/movie-list/movie-list';
@@ -43,7 +42,7 @@ const Movies = () => {
   return (
     <>
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
-      <main className='flex flex-row justify-center flex-wrap max-w-full overflow-x-hidden'>
+      <main className='flex flex-row justify-center flex-wrap max-w-full'>
         <Loading loading={isLoading} error={error}>
           {renderContent()}
         </Loading>

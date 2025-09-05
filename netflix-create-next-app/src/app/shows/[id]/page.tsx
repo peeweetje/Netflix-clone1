@@ -1,6 +1,5 @@
 'use client';
 
-import type React from 'react';
 import { use } from 'react';
 import { MediaDetail } from '../../../components/details/media-detail';
 
