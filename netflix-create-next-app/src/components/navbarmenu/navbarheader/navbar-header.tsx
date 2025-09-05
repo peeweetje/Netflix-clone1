@@ -1,6 +1,5 @@
 'use client';
 
-import type React from 'react';
 import { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
@@ -141,10 +140,9 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
                   onClick={toggleMenu}
                   variant="ghost"
                   size="icon"
-                  className="text-white hover:bg-green-500/10 hover:text-green-500"
                   aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
                 >
-                  {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                  {isMenuOpen ? <X className="!h-6 !w-6" /> : <Menu className="!h-6 !w-6" />}
                 </Button>
               </div>
             </div>
