@@ -29,7 +29,7 @@ export const HeroBanner = ({
 
   return (
     <div
-      className='relative w-full h-[75vh] min-h-[600px] bg-cover bg-center bg-fixed flex items-center'
+      className={`relative w-full h-[75vh] min-h-[600px] bg-cover bg-center bg-fixed flex items-center`}
       style={{
         backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%), url(${backgroundImage})`,
       }}
@@ -47,7 +47,7 @@ export const HeroBanner = ({
                 onClick={handlePlayClick}
                 className='flex items-center justify-center gap-3 px-8 py-6 text-lg transition-all duration-200 transform hover:scale-105'
               >
-                <Play className='!w-7 !h-7' />
+                <Play/>
                 <span className='text-md'>Play</span>
               </Button>
               <Button
@@ -55,7 +55,7 @@ export const HeroBanner = ({
                 onClick={() => setShowInfo(!showInfo)}
                 className='flex items-center justify-center gap-3 px-8 py-6 transition-all duration-200 transform hover:scale-105'
               >
-                <Info className='!w-7 !h-7' />
+                <Info/>
                 <span className='text-md'>{showInfo ? 'Less Info' : 'More Info'}</span>
               </Button>
             </div>

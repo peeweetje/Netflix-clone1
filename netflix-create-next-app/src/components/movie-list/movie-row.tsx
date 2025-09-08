@@ -92,18 +92,19 @@ export const MovieRow = ({ movies, title }:MovieRowProps) => {
         variant="ghost"
         size="icon"
       >
-        <ChevronLeft className="!h-6 !w-6" />
+        <ChevronLeft className="text-white" />
       </Button>
 
       <div
-        className="overflow-hidden mx-auto"
+        className={`overflow-hidden mx-auto`}
         style={{ width: `${viewportWidth}px` }}
       >
         <div
-          className="flex gap-6 transition-transform duration-300 ease-out"
+          className={`flex gap-6 transition-transform duration-300 ease-out ${
+            ready ? 'opacity-100' : 'opacity-0'
+          }`}
           style={{
             transform: `translateX(${x}px)`,
-            opacity: ready ? 1 : 0
           }}
         >
           {movies.map((movie) =>
@@ -133,7 +134,7 @@ export const MovieRow = ({ movies, title }:MovieRowProps) => {
         variant="ghost"
         size="icon"
       >
-        <ChevronRight className="!h-6 !w-6 text-white" />
+        <ChevronRight className="text-white" />
       </Button>
     </section>
   );

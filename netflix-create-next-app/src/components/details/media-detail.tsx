@@ -9,6 +9,7 @@ import { MediaPoster } from './media-poster';
 import { MediaInfo } from './media-info';
 import { CastMember } from './cast-member';
 import { useMyList } from '../../context/myListContext';
+import { ArrowLeft, Play } from 'lucide-react';
 import { imageUrl, API_KEY } from '../../utils/api';
 
 interface MediaDetailProps {
@@ -117,17 +118,21 @@ export const MediaDetail = ({ type, id }: MediaDetailProps) => {
       {/* Header with Buttons */}
       <div className="mb-10 flex gap-4">
         <Button
+          size="lg"
           onClick={() => router.back()}
           className="flex items-center justify-center gap-3 px-8 py-6 text-base transition-all duration-200 transform hover:scale-105"
         >
-          ← Go Back
+          <ArrowLeft />
+          Go Back
         </Button>
         {hasTrailer && (
           <Button
+            size="lg"
             onClick={() => router.push(`/trailer/${type}/${id}`)}
             className="flex items-center justify-center gap-3 px-8 py-6 text-base transition-all duration-200 transform hover:scale-105"
           >
-            ▶ Watch Trailer
+            <Play />
+            Watch Trailer
           </Button>
         )}
       </div>
