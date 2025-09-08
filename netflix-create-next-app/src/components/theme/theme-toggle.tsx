@@ -68,7 +68,7 @@ export function ThemeToggle() {
           className="gap-2 !bg-gray-900/80 !text-gray-300 hover:!bg-gray-800/90"
           aria-label="Toggle theme"
         >
-          <Palette className="!w-5 !h-5 flex-shrink-0" />
+          <Palette className="flex-shrink-0" />
           <span className="hidden md:inline">Theme</span>
           <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${currentTheme.color}`}></span>
         </Button>
@@ -80,10 +80,10 @@ export function ThemeToggle() {
             onClick={() => handleThemeChange(option.id as Theme)}
             className="focus:!bg-gray-800/80 focus:!text-white cursor-pointer"
           >
-            <span className={`w-3 h-3 rounded-full ${option.color} mr-2`}></span>
+            <span className={`w-5 h-5 rounded-full ${option.color} mr-2`}></span>
             <span className="text-white">{option.name}</span>
             {theme === option.id && (
-              <Check className="ml-auto !h-4 !w-4 text-white" />
+              <Check className="!w-5 !h-5 ml-auto text-white" />
             )}
           </DropdownMenuItem>
         ))}

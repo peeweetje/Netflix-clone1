@@ -142,7 +142,7 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
                   size="icon"
                   aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
                 >
-                  {isMenuOpen ? <X className="!h-6 !w-6" /> : <Menu className="!h-6 !w-6" />}
+                  {isMenuOpen ? <X /> : <Menu/>}
                 </Button>
               </div>
             </div>
