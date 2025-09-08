@@ -48,9 +48,6 @@ module.exports = {
         success: '#00C853',
         info: '#2196F3',
       },
-      fontFamily: {
-        sans: ['Montserrat', 'sans-serif'],
-      },
       spacing: {
         '0': '0px',
         '1': '2px',
