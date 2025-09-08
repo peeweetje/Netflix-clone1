@@ -98,8 +98,15 @@ const MyList = () => {
           if (!listItem) return null;
 
           return (
-            <div key={`${item.id}-${listItem.media_type}`} className="relative h-[420px] overflow-visible">
-              <CardWrapper to={`/${listItem.media_type === 'tv' ? 'shows' : 'movies'}/${item.id}`}>
+            <div
+              key={`${item.id}-${listItem.media_type}`}
+              className='relative h-[420px] overflow-visible'
+            >
+              <CardWrapper
+                to={`/${listItem.media_type === 'tv' ? 'shows' : 'movies'}/${
+                  item.id
+                }`}
+              >
                 <Card
                   src={item.poster_path || ''}
                   alt={item.title || item.name || ''}
@@ -108,19 +115,10 @@ const MyList = () => {
                   vote_average={item.vote_average || 0}
                   id={item.id}
                   media_type={listItem.media_type}
+                  showRemoveButton={true}
+                  onRemove={() => removeFromList(listItem)}
                 />
               </CardWrapper>
-              <button
-                className="absolute top-2 right-2 bg-red-600/80 hover:bg-red-600 text-white border-none rounded-full w-8 h-8 cursor-pointer flex items-center justify-center transition-colors z-20"
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  removeFromList(listItem);
-                }}
-                aria-label="Remove from list"
-              >
-                <Trash2 size={16} />
-              </button>
             </div>
           );
         })}

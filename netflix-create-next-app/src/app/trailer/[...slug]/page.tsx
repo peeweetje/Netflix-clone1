@@ -4,6 +4,7 @@ import { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loading } from '../../../components/loading/loading';
 import {Button } from '@/components/ui/button';
+import { ArrowLeft } from 'lucide-react';
 import { movieVideosUrl, showVideosUrl, API_KEY } from '../../../utils/api';
 
 interface TrailerPageProps {
@@ -76,6 +77,7 @@ const TrailerPage = ({ params }: TrailerPageProps) => {
       <div className='min-h-screen flex flex-col items-center justify-center bg-background text-foreground p-8'>
         <p className='mb-8 text-xl'>{error}</p>
         <Button onClick={() => router.back()} className='btn-primary cursor-pointer'>
+          <ArrowLeft className="w-4 h-4 mr-2" />
           Go Back
         </Button>
       </div>
@@ -89,7 +91,8 @@ const TrailerPage = ({ params }: TrailerPageProps) => {
         onClick={() => router.back()}
         className='self-start mb-8'
       >
-        ← Go Back
+      <ArrowLeft className="mr-2" />
+        Go Back
       </Button>
 
       {videoKey ? (
