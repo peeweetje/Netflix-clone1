@@ -1,10 +1,9 @@
 'use client';
 
-import type React from 'react';
 import { useState, useEffect } from 'react';
 import { Loading } from '../../components/loading/loading';
-import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
-import { useGlobalSearch } from '../../hooks/useGlobalSearch';
+
+import { useSearch } from '../../context/search-context';
 import { trendingShowUrl } from '../../utils/api';
 import { Card } from '../../components/card/card';
 import { CardWrapper } from '../../components/card-wrapper/card-wrapper';
@@ -21,7 +20,7 @@ const Shows = () => {
     searchResultsShows,
     searchLoading,
     searchError,
-  } = useGlobalSearch();
+  } = useSearch();
 
   useEffect(() => {
     const fetchShows = async () => {
@@ -40,10 +39,6 @@ const Shows = () => {
     };
     fetchShows();
   }, []);
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setSearchQuery(e.target.value);
-  };
 
   const isLoading = searchQuery ? searchLoading : showsLoading;
   const error = searchQuery ? searchError : showsError;
@@ -75,14 +70,11 @@ const Shows = () => {
   };
 
   return (
-    <>
-      <NavbarHeader onChange={handleSearch} value={searchQuery} />
-      <main className="flex flex-row justify-center flex-wrap max-w-full">
-        <Loading loading={isLoading} error={error}>
-          {renderContent()}
-        </Loading>
-      </main>
-    </>
+    <main className="flex flex-row justify-center flex-wrap max-w-full">
+      <Loading loading={isLoading} error={error}>
+        {renderContent()}
+      </Loading>
+    </main>
   );
 };
 

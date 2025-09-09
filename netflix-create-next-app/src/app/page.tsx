@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { HeroBanner } from '../components/hero-banner/hero-banner';
 import { Loading } from '../components/loading/loading';
 import { MovieRow } from '../components/movie-list/movie-row';
-import { NavbarHeader } from '../components/navbarmenu/navbarheader/navbar-header';
+
 import { useFetchMovies } from '../hooks/useFetchMovies';
-import { useGlobalSearch } from '../hooks/useGlobalSearch';
+import { useSearch } from '../context/search-context';
 import {
   actionMoviesUrl,
   imageUrl,
@@ -31,7 +31,7 @@ import type { MovieResult } from '../utils/types/types';
     searchResultsMovies,
     searchLoading,
     searchError,
-  } = useGlobalSearch();
+  } = useSearch();
 
   useFetchMovies(
     popularMoviesUrl,
@@ -46,10 +46,6 @@ import type { MovieResult } from '../utils/types/types';
     setTopRatedError
   );
   useFetchMovies(actionMoviesUrl, setAction, setActionLoading, setActionError);
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setSearchQuery(e.target.value);
-  };
 
   const heroMovie = popular[0] || null;
 
@@ -89,14 +85,11 @@ import type { MovieResult } from '../utils/types/types';
   };
 
   return (
-    <>
-      <NavbarHeader onChange={handleSearch} value={searchQuery} />
-      <main className='flex flex-row justify-center flex-wrap max-w-full'>
-        <Loading loading={isLoading} error={error}>
-          {renderContent()}
-        </Loading>
-      </main>
-    </>
+    <main className='flex flex-row justify-center flex-wrap max-w-full'>
+      <Loading loading={isLoading} error={error}>
+        {renderContent()}
+      </Loading>
+    </main>
   );
 };
 export default HomePage;

@@ -1,15 +1,36 @@
-import { useEffect, useState } from 'react';
+'use client';
+
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { API_KEY } from '../utils/api';
 import type { MovieResult, ShowResult } from '../utils/types/types';
 
-export function useGlobalSearch() {
+interface SearchContextType {
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+  searchResultsMovies: MovieResult[];
+  searchResultsShows: ShowResult[];
+  searchLoading: boolean;
+  searchError: string | null;
+}
+
+const SearchContext = createContext<SearchContextType | undefined>(undefined);
+
+export const useSearch = () => {
+  const context = useContext(SearchContext);
+  if (context === undefined) {
+    throw new Error('useSearch must be used within a SearchProvider');
+  }
+  return context;
+};
+
+interface SearchProviderProps {
+  children: ReactNode;
+}
+
+export const SearchProvider = ({ children }: SearchProviderProps) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResultsMovies, setSearchResultsMovies] = useState<MovieResult[]>(
-    []
-  );
-  const [searchResultsShows, setSearchResultsShows] = useState<ShowResult[]>(
-    []
-  );
+  const [searchResultsMovies, setSearchResultsMovies] = useState<MovieResult[]>([]);
+  const [searchResultsShows, setSearchResultsShows] = useState<ShowResult[]>([]);
   const [searchLoading, setSearchLoading] = useState(false);
   const [searchError, setSearchError] = useState<string | null>(null);
 
@@ -42,7 +63,7 @@ export function useGlobalSearch() {
       .finally(() => setSearchLoading(false));
   }, [searchQuery]);
 
-  return {
+  const value = {
     searchQuery,
     setSearchQuery,
     searchResultsMovies,
@@ -50,4 +71,10 @@ export function useGlobalSearch() {
     searchLoading,
     searchError,
   };
-}
+
+  return (
+    <SearchContext.Provider value={value}>
+      {children}
+    </SearchContext.Provider>
+  );
+};
