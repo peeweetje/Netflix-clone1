@@ -2,6 +2,7 @@ import './globals.css';
 import { Poppins } from 'next/font/google';
 import { MyListProvider } from '../context/myListContext';
 import { ThemeProvider } from '@/context/theme-context';
+import { AppLayout } from '../components/app-layout';
 
 export const metadata = {
   title: 'Netflix Clone - Next.js',
@@ -13,14 +14,6 @@ const poppins = Poppins({
   weight: ['400'],
 });
 
-function LayoutContent({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="min-h-screen">
-      {children}
-    </div>
-  );
-}
-
 export default function RootLayout({
   children,
 }: {
@@ -31,7 +24,7 @@ export default function RootLayout({
       <body className={poppins.className}>
         <ThemeProvider>
           <MyListProvider>
-            <LayoutContent>{children}</LayoutContent>
+            <AppLayout>{children}</AppLayout>
           </MyListProvider>
         </ThemeProvider>
       </body>

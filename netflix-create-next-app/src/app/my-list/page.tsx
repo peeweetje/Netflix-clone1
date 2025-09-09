@@ -1,9 +1,9 @@
 'use client';
 
 import { Loading } from '../../components/loading/loading';
-import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
+
 import { Trash2 } from 'lucide-react';
-import { useGlobalSearch } from '../../hooks/useGlobalSearch';
+import { useSearch } from '../../context/search-context';
 import { useMyList } from '../../context/myListContext';
 import { useLocalListDetails } from '../../hooks/useLocalListDetails';
 import { MovieRow } from '../../components/movie-list/movie-row';
@@ -22,11 +22,7 @@ const MyList = () => {
     searchResultsShows = [],
     searchLoading = false,
     searchError = null,
-  } = useGlobalSearch();
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value || '');
-  };
+  } = useSearch();
 
   const mapShowToMovie = (show: ShowResult): MovieResult & { media_type: 'tv' } => ({
     id: show.id,
@@ -127,17 +123,14 @@ const MyList = () => {
   };
 
   return (
-    <>
-      <NavbarHeader onChange={handleSearch} value={searchQuery} />
-      <main className="flex flex-row justify-center flex-wrap max-w-full">
-        <Loading
-          loading={searchQuery ? searchLoading : localLoading}
-          error={searchQuery ? searchError : localError}
-        >
-          {renderContent()}
-        </Loading>
-      </main>
-    </>
+    <main className="flex flex-row justify-center flex-wrap max-w-full">
+      <Loading
+        loading={searchQuery ? searchLoading : localLoading}
+        error={searchQuery ? searchError : localError}
+      >
+        {renderContent()}
+      </Loading>
+    </main>
   );
 };
 
