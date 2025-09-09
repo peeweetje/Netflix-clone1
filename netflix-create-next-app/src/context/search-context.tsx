@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useRef, ReactNode } from 'react';
 import { API_KEY } from '../utils/api';
 import type { MovieResult, ShowResult } from '../utils/types/types';
 
@@ -34,34 +34,97 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
   const [searchLoading, setSearchLoading] = useState(false);
   const [searchError, setSearchError] = useState<string | null>(null);
 
+  // Use useRef to persist AbortController across re-renders
+  const abortControllerRef = useRef<AbortController | null>(null);
+
   useEffect(() => {
-    if (!searchQuery) {
+    // Cancel any ongoing request when searchQuery changes
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+
+    if (!searchQuery.trim()) {
       setSearchResultsMovies([]);
       setSearchResultsShows([]);
       setSearchError(null);
       setSearchLoading(false);
       return;
     }
+
+    // Create new AbortController for this request
+    abortControllerRef.current = new AbortController();
+    const signal = abortControllerRef.current.signal;
+
     setSearchLoading(true);
     setSearchError(null);
 
     const movieUrl = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
-      searchQuery
+      searchQuery.trim()
     )}`;
     const showUrl = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${encodeURIComponent(
-      searchQuery
+      searchQuery.trim()
     )}`;
-    Promise.all([
-      fetch(movieUrl).then((res) => res.json()),
-      fetch(showUrl).then((res) => res.json()),
-    ])
+
+    // Create fetch promises with AbortController signal
+    const fetchMovies = fetch(movieUrl, { signal }).then((res) => {
+      if (!res.ok) {
+        throw new Error(`Movies API error: ${res.status}`);
+      }
+      return res.json();
+    });
+
+    const fetchShows = fetch(showUrl, { signal }).then((res) => {
+      if (!res.ok) {
+        throw new Error(`Shows API error: ${res.status}`);
+      }
+      return res.json();
+    });
+
+    Promise.all([fetchMovies, fetchShows])
       .then(([movieData, showData]) => {
-        setSearchResultsMovies(movieData.results || []);
-        setSearchResultsShows(showData.results || []);
+        // Only update state if this request wasn't aborted
+        if (!signal.aborted) {
+          setSearchResultsMovies(movieData.results || []);
+          setSearchResultsShows(showData.results || []);
+          setSearchError(null);
+        }
       })
-      .catch(() => setSearchError('Failed to fetch search results.'))
-      .finally(() => setSearchLoading(false));
+      .catch((error) => {
+        // Only handle errors if this request wasn't aborted
+        if (!signal.aborted) {
+          if (error.name === 'AbortError') {
+            // Request was cancelled, don't treat as error
+            return;
+          }
+          console.error('Search error:', error);
+          setSearchError('Failed to fetch search results. Please try again.');
+          setSearchResultsMovies([]);
+          setSearchResultsShows([]);
+        }
+      })
+      .finally(() => {
+        // Only update loading state if this request wasn't aborted
+        if (!signal.aborted) {
+          setSearchLoading(false);
+        }
+      });
+
+    // Cleanup function to abort request if component unmounts or effect runs again
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
   }, [searchQuery]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
+  }, []);
 
   const value = {
     searchQuery,
