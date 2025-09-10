@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Loading } from '../../components/loading/loading';
+import { EmptyState } from '../../components/empty-state/empty-state';
 
 import { useSearch } from '../../context/search-context';
 import { trendingShowUrl } from '../../utils/api';
@@ -48,12 +49,10 @@ const Shows = () => {
 
     if (displayShows.length === 0) {
       return (
-        <div className="flex items-center justify-center min-h-[60vh]">
-          <div className="text-center">
-            <h2 className="text-2xl font-semibold text-foreground mb-4">No shows found</h2>
-            <p className="text-muted-foreground">Try adjusting your search or browse our collection.</p>
-          </div>
-        </div>
+        <EmptyState
+          title="No shows found"
+          message="Try adjusting your search or browse our collection."
+        />
       );
     }
 

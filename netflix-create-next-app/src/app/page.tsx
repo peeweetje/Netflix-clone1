@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { HeroBanner } from '../components/hero-banner/hero-banner';
 import { Loading } from '../components/loading/loading';
 import { MovieRow } from '../components/movie-list/movie-row';
+import { EmptyState } from '../components/empty-state/empty-state';
 
 import { useFetchMovies } from '../hooks/useFetchMovies';
 import { useSearch } from '../context/search-context';
@@ -60,12 +61,10 @@ import type { MovieResult } from '../utils/types/types';
     if (searchQuery) {
       if (searchResultsMovies.length === 0) {
         return (
-          <div className="flex items-center justify-center min-h-[60vh]">
-            <div className="text-center">
-              <h2 className="text-2xl font-semibold text-foreground mb-4">No results found</h2>
-              <p className="text-muted-foreground">No results found for "{searchQuery}"</p>
-            </div>
-          </div>
+          <EmptyState
+            title="No results found"
+            message={`No results found for "${searchQuery}"`}
+          />
         );
       }
       return <MovieRow movies={searchResultsMovies} title='Search Results' />;
