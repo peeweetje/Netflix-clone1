@@ -8,45 +8,40 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Theme colors
-        theme: {
-          green: {
-            DEFAULT: '#4CAF50',
-            light: '#81C784',
-            dark: '#388E3C',
-          },
-          blue: {
-            DEFAULT: '#2196F3',
-            light: '#64B5F6',
-            dark: '#1976D2',
-          },
-          purple: {
-            DEFAULT: '#9C27B0',
-            light: '#BA68C8',
-            dark: '#7B1FA2',
-          },
-          red: {
-            DEFAULT: '#F44336',
-            light: '#E57373',
-            dark: '#D32F2F',
-          },
+        // Shadcn/ui color system using CSS variables
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        card: {
+          DEFAULT: 'var(--card)',
+          foreground: 'var(--card-foreground)',
         },
-        // Default to green theme
+        popover: {
+          DEFAULT: 'var(--popover)',
+          foreground: 'var(--popover-foreground)',
+        },
         primary: {
-          DEFAULT: 'var(--color-primary, #4CAF50)',
-          light: 'var(--color-primary-light, #81C784)',
-          dark: 'var(--color-primary-dark, #388E3C)',
+          DEFAULT: 'var(--primary)',
+          foreground: 'var(--primary-foreground)',
         },
-        secondary: '#333',
-        background: 'var(--color-bg, #121212)',
-        foreground: 'var(--color-text, #FFFFFF)',
-        muted: 'var(--color-muted, #333333)',
-        'muted-foreground': 'var(--color-muted-foreground, #BDBDBD)',
-        accent: 'var(--color-accent, #8EB3CC)',
-        destructive: '#ff0000',
-        warning: '#FFA500',
-        success: '#00C853',
-        info: '#2196F3',
+        secondary: {
+          DEFAULT: 'var(--secondary)',
+          foreground: 'var(--secondary-foreground)',
+        },
+        muted: {
+          DEFAULT: 'var(--muted)',
+          foreground: 'var(--muted-foreground)',
+        },
+        accent: {
+          DEFAULT: 'var(--accent)',
+          foreground: 'var(--accent-foreground)',
+        },
+        destructive: {
+          DEFAULT: 'var(--destructive)',
+          foreground: 'var(--destructive-foreground)',
+        },
+        border: 'var(--border)',
+        input: 'var(--input)',
+        ring: 'var(--ring)',
       },
       spacing: {
         '0': '0px',

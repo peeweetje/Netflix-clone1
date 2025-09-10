@@ -35,12 +35,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const { hue, saturation } = themes[currentTheme];
     root.style.setProperty('--primary-hue', hue);
     root.style.setProperty('--primary-saturation', saturation);
-    
-    // Force repaint to ensure styles are applied
-    document.body.style.display = 'none';
-    // eslint-disable-next-line no-unused-expressions
-    document.body.offsetHeight;
-    document.body.style.display = '';
   }, []);
 
   const setTheme = (newTheme: Theme) => {
