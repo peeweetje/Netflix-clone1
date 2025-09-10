@@ -66,7 +66,7 @@ const TrailerPage = ({ params }: TrailerPageProps) => {
 
   if (loading) {
     return (
-      <div className='min-h-screen flex items-center justify-center bg-background'>
+      <div className='h-screen flex items-center justify-center bg-background overflow-hidden'>
         <Loading loading={true} error={null} />
       </div>
     );
@@ -74,7 +74,7 @@ const TrailerPage = ({ params }: TrailerPageProps) => {
 
   if (error) {
     return (
-      <div className='min-h-screen flex flex-col items-center justify-center bg-background text-foreground p-8'>
+      <div className='h-screen flex flex-col items-center justify-center bg-background text-foreground p-8 overflow-hidden'>
         <p className='mb-8 text-xl'>{error}</p>
         <Button onClick={() => router.back()} className='btn-primary cursor-pointer'>
           <ArrowLeft className="w-4 h-4 mr-2" />
@@ -85,7 +85,7 @@ const TrailerPage = ({ params }: TrailerPageProps) => {
   }
 
   return (
-    <div className='min-h-screen bg-background flex flex-col items-center justify-center p-8'>
+    <div className='h-screen bg-background flex flex-col items-center justify-center p-8 overflow-hidden'>
       <Button
         size='lg'
         onClick={() => router.back()}

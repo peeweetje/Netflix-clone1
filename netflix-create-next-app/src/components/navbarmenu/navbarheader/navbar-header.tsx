@@ -29,7 +29,7 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
               <li>
                 <Link
                   href="/"
-                  className="block text-lg py-3 hover:text-[hsl(var(--primary))] transition-colors duration-200"
+                  className="block text-lg py-3 hover:text-primary transition-colors duration-200"
                   onClick={toggleMenu}
                 >
                   Home
@@ -38,7 +38,7 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
               <li>
                 <Link
                   href="/shows"
-                  className="block text-lg py-3 hover:text-[hsl(var(--primary))] transition-colors duration-200"
+                  className="block text-lg py-3 hover:text-primary transition-colors duration-200"
                   onClick={toggleMenu}
                 >
                   Shows
@@ -47,7 +47,7 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
               <li>
                 <Link
                   href="/movies"
-                  className="block text-lg py-3 hover:text-[hsl(var(--primary))] transition-colors duration-200"
+                  className="block text-lg py-3 hover:text-primary transition-colors duration-200"
                   onClick={toggleMenu}
                 >
                   Movies
@@ -56,7 +56,7 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
               <li>
                 <Link
                   href="/popular-trending"
-                  className="block text-lg py-3 hover:text-[hsl(var(--primary))] transition-colors duration-200"
+                  className="block text-lg py-3 hover:text-primary transition-colors duration-200"
                   onClick={toggleMenu}
                 >
                   Trending
@@ -65,7 +65,7 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
               <li>
                 <Link
                   href="/my-list"
-                  className="block text-lg py-3 hover:text-[hsl(var(--primary))] transition-colors duration-200"
+                  className="block text-lg py-3 hover:text-primary transition-colors duration-200"
                   onClick={toggleMenu}
                 >
                   My List
@@ -91,34 +91,34 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
       <nav className="w-full sticky top-0 z-50 bg-black/95 backdrop-blur-sm py-2 px-2 border-b border-gray-800">
         <div className="max-w-7xl mx-auto flex items-center">
           <div className="flex items-center w-full">
-            <Link href="/" className="whitespace-nowrap mr-4 text-2xl font-bold text-[hsl(var(--primary))] hover:opacity-90 transition-opacity duration-200">
+            <Link href="/" className="whitespace-nowrap mr-4 text-2xl font-bold text-primary hover:opacity-90 transition-opacity duration-200">
               BINGEWATCH
             </Link>
 
             <div className="hidden md:flex flex-1 justify-center">
               <ul className="flex space-x-8">
                 <li>
-                  <Link href="/" className="text-gray-300 hover:text-[hsl(var(--primary))] transition-colors duration-200">
+                  <Link href="/" className="text-gray-300 hover:text-primary transition-colors duration-200">
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link href="/shows" className="text-gray-300 hover:text-[hsl(var(--primary))] transition-colors duration-200">
+                  <Link href="/shows" className="text-gray-300 hover:text-primary transition-colors duration-200">
                     Shows
                   </Link>
                 </li>
                 <li>
-                  <Link href="/movies" className="text-gray-300 hover:text-[hsl(var(--primary))] transition-colors duration-200">
+                  <Link href="/movies" className="text-gray-300 hover:text-primary transition-colors duration-200">
                     Movies
                   </Link>
                 </li>
                 <li>
-                  <Link href="/popular-trending" className="text-gray-300 hover:text-[hsl(var(--primary))] transition-colors duration-200">
+                  <Link href="/popular-trending" className="text-gray-300 hover:text-primary transition-colors duration-200">
                     Trending
                   </Link>
                 </li>
                 <li>
-                  <Link href="/my-list" className="text-gray-300 hover:text-[hsl(var(--primary))] transition-colors duration-200">
+                  <Link href="/my-list" className="text-gray-300 hover:text-primary transition-colors duration-200">
                     My List
                   </Link>
                 </li>

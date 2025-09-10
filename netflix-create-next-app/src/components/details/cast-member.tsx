@@ -12,14 +12,14 @@ export const CastMember= ({ actor, src, alt }: CastMemberProps) => {
           className="w-28 h-42 object-cover rounded-xl mb-2"
         />
       ) : (
-        <div className="w-28 h-42 bg-border rounded-xl mb-2 flex items-center justify-center text-muted text-xs">
+        <div className="w-28 h-42 bg-border rounded-xl mb-2 flex items-center justify-center text-primary-light">
           N/A
         </div>
       )}
-      <h3 className="text-md font-bold mb-1 text-white">
+      <h3 className="text-md font-bold mb-1 text-primary">
         {actor.name}
       </h3>
-      <p className="text-primary-light text-md m-0">
+      <p className="text-white text-md m-0">
         {actor.character}
       </p>
     </div>
