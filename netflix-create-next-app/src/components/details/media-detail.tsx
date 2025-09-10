@@ -1,7 +1,7 @@
 'use client';
 
 import type React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loading } from '../loading/loading';
 import { Button } from '../ui/button';
@@ -54,60 +54,103 @@ export const MediaDetail = ({ type, id }: MediaDetailProps) => {
   const [cast, setCast] = useState<CastMember[]>([]);
   const [hasTrailer, setHasTrailer] = useState(false);
 
-  useEffect(() => {
-    const fetchMedia = async () => {
-      try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/${type}/${id}?api_key=${API_KEY}`
-        );
-        if (!response.ok) throw new Error('Network response was not ok');
-        const data = await response.json();
-        setMedia(data);
-      } catch (err) {
-        setError(`Failed to fetch ${type} details. Please try again later.`);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchMedia();
-  }, [id, type]);
+  // Use useRef to persist AbortController across re-renders
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
-    const fetchCast = async () => {
-      if (!id) return;
-      try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${API_KEY}`
-        );
-        if (!response.ok) throw new Error('Failed to fetch cast');
-        const data = await response.json();
-        setCast(data.cast || []);
-      } catch (err) {
-        console.error('Failed to fetch cast data:', err);
+    // Cancel any ongoing request when id or type changes
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+
+    if (!id) {
+      setLoading(false);
+      return;
+    }
+
+    // Create new AbortController for this request
+    abortControllerRef.current = new AbortController();
+    const signal = abortControllerRef.current.signal;
+
+    setLoading(true);
+    setError(null);
+
+    // Create all fetch promises with AbortController signal
+    const fetchMedia = fetch(
+      `https://api.themoviedb.org/3/${type}/${id}?api_key=${API_KEY}`,
+      { signal }
+    ).then((res) => {
+      if (!res.ok) throw new Error(`Media API error: ${res.status}`);
+      return res.json();
+    });
+
+    const fetchCast = fetch(
+      `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${API_KEY}`,
+      { signal }
+    ).then((res) => {
+      if (!res.ok) throw new Error(`Cast API error: ${res.status}`);
+      return res.json();
+    });
+
+    const fetchVideos = fetch(
+      `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${API_KEY}`,
+      { signal }
+    ).then((res) => {
+      if (!res.ok) throw new Error(`Videos API error: ${res.status}`);
+      return res.json();
+    });
+
+    // Execute all requests in parallel
+    Promise.all([fetchMedia, fetchCast, fetchVideos])
+      .then(([mediaData, castData, videoData]) => {
+        // Only update state if this request wasn't aborted
+        if (!signal.aborted) {
+          setMedia(mediaData);
+          setCast(castData.cast || []);
+          const trailer = videoData.results?.find(
+            (vid: VideoResult) => vid.type === 'Trailer' && vid.site === 'YouTube'
+          );
+          setHasTrailer(!!trailer);
+          setError(null);
+        }
+      })
+      .catch((error) => {
+        // Only handle errors if this request wasn't aborted
+        if (!signal.aborted) {
+          if (error.name === 'AbortError') {
+            // Request was cancelled, don't treat as error
+            return;
+          }
+          console.error('Media detail fetch error:', error);
+          setError(`Failed to fetch ${type} details. Please try again later.`);
+          setMedia(null);
+          setCast([]);
+          setHasTrailer(false);
+        }
+      })
+      .finally(() => {
+        // Only update loading state if this request wasn't aborted
+        if (!signal.aborted) {
+          setLoading(false);
+        }
+      });
+
+    // Cleanup function to abort request if component unmounts or effect runs again
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
       }
     };
-    fetchCast();
   }, [id, type]);
 
+  // Cleanup on unmount
   useEffect(() => {
-    const checkTrailer = async () => {
-      if (!id) return;
-      try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${API_KEY}`
-        );
-        if (!response.ok) throw new Error('Failed to fetch videos');
-        const data = await response.json();
-        const trailer = data.results.find(
-          (vid: VideoResult) => vid.type === 'Trailer' && vid.site === 'YouTube'
-        );
-        setHasTrailer(!!trailer);
-      } catch (error) {
-        console.error(`Failed to fetch ${type} videos:`, error);
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
       }
     };
-    checkTrailer();
-  }, [id, type]);
+  }, []);
 
   if (loading) return <Loading loading={true} error={null} />;
   if (error) return <Loading loading={false} error={error} />;
