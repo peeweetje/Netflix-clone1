@@ -68,20 +68,50 @@ const PopularAndTrending = () => {
 
   const renderContent = () => {
     if (searchQuery) {
+      const hasMovies = searchResultsMovies.length > 0;
+      const hasShows = searchResultsShows.length > 0;
+
+      if (!hasMovies && !hasShows) {
+        return (
+          <div className="flex items-center justify-center min-h-[60vh]">
+            <div className="text-center">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">No results found</h2>
+              <p className="text-muted-foreground">No results found for "{searchQuery}"</p>
+            </div>
+          </div>
+        );
+      }
+
       return (
         <>
-          <MovieRow movies={searchResultsMovies} title="Movies" />
-          <MovieRow movies={searchResultsShows.map(mapShowToMovie)} title="Shows" />
+          {hasMovies && <MovieRow movies={searchResultsMovies} title="Movies" />}
+          {hasShows && <MovieRow movies={searchResultsShows.map(mapShowToMovie)} title="Shows" />}
         </>
+      );
+    }
+
+    const hasTrendingMovies = trendingMovies.length > 0;
+    const hasTrendingShows = trendingShows.length > 0;
+    const hasPopularMovies = popularMovies.length > 0;
+    const hasPopularShows = popularShows.length > 0;
+
+    if (!hasTrendingMovies && !hasTrendingShows && !hasPopularMovies && !hasPopularShows) {
+      return (
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <h2 className="text-2xl font-semibold text-foreground mb-4">No content available</h2>
+            <p className="text-muted-foreground">Unable to load trending and popular content at this time.</p>
+          </div>
+        </div>
       );
     }
 
     return (
       <>
-        <MovieRow movies={trendingMovies} title="Trending Movies" />
-        <MovieRow movies={trendingShows.map(mapShowToMovie)} title="Trending Shows" />
-        <MovieRow movies={popularMovies} title="Most Popular Movies" />
-        <MovieRow movies={popularShows.map(mapShowToMovie)} title="Most Popular Shows" />
+        {hasTrendingMovies && <MovieRow movies={trendingMovies} title="Trending Movies" />}
+        {hasTrendingShows && <MovieRow movies={trendingShows.map(mapShowToMovie)} title="Trending Shows" />}
+        {hasPopularMovies && <MovieRow movies={popularMovies} title="Most Popular Movies" />}
+        {hasPopularShows && <MovieRow movies={popularShows.map(mapShowToMovie)} title="Most Popular Shows" />}
       </>
     );
   };

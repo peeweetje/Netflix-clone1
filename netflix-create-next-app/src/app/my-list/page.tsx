@@ -47,8 +47,11 @@ const MyList = () => {
           {filteredLocalMovies.length > 0 ? (
             <MovieRow movies={filteredLocalMovies} title="My List" />
           ) : (
-            <div className="text-center py-16">
-              <p className="text-foreground text-lg">No matching items found in your list for "{searchQuery}"</p>
+            <div className="flex items-center justify-center min-h-[60vh]">
+              <div className="text-center">
+                <h2 className="text-2xl font-semibold text-foreground mb-4">No matching items found</h2>
+                <p className="text-muted-foreground">No items in your list match "{searchQuery}"</p>
+              </div>
             </div>
           )}
           {searchResultsMovies.length > 0 && (
@@ -58,8 +61,11 @@ const MyList = () => {
             <MovieRow movies={searchResultsShows.map(mapShowToMovie)} title="Shows" />
           )}
           {searchResultsMovies.length === 0 && searchResultsShows.length === 0 && filteredLocalMovies.length === 0 && (
-            <div className="text-center py-16">
-              <p className="text-foreground text-lg">No results found for "{searchQuery}"</p>
+            <div className="flex items-center justify-center min-h-[60vh]">
+              <div className="text-center">
+                <h2 className="text-2xl font-semibold text-foreground mb-4">No results found</h2>
+                <p className="text-muted-foreground">No results found for "{searchQuery}"</p>
+              </div>
             </div>
           )}
         </>
@@ -76,13 +82,13 @@ const MyList = () => {
 
     if (localMovies.length === 0) {
       return (
-        <div className="text-center py-16">
-          <h2 className="text-foreground text-2xl mb-6">
-            Your List is Empty
-          </h2>
-          <p className="text-muted text-base max-w-md mx-auto">
-            Start adding movies and shows to your list by browsing through our collection!
-          </p>
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <h2 className="text-2xl font-semibold text-foreground mb-4">
+              Your List is Empty
+            </h2>
+            <p className="text-muted-foreground">Start adding movies and shows to your list by browsing through our collection!</p>
+          </div>
         </div>
       );
     }

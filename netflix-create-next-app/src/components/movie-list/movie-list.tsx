@@ -8,6 +8,17 @@ interface MovieListProps {
 }
 
 export const MovieList = ({ movies }: { movies: MovieResult[] }) => {
+  if (movies.length === 0) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="text-center">
+          <h2 className="text-2xl font-semibold text-foreground mb-4">No movies found</h2>
+          <p className="text-muted-foreground">Try adjusting your search or browse our collection.</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="mt-16 flex flex-wrap justify-center items-start gap-8">
       {movies.map((movie) => (
