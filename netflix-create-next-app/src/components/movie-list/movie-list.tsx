@@ -1,6 +1,7 @@
 import type { MovieResult } from '../../utils/types/types';
 import { Card } from '../card/card';
 import { CardWrapper } from '../card-wrapper/card-wrapper';
+import { EmptyState } from '../empty-state/empty-state';
 
 interface MovieListProps {
   movies: MovieResult[];
@@ -8,6 +9,15 @@ interface MovieListProps {
 }
 
 export const MovieList = ({ movies }: { movies: MovieResult[] }) => {
+  if (movies.length === 0) {
+    return (
+      <EmptyState
+        title="No movies found"
+        message="Try adjusting your search or browse our collection."
+      />
+    );
+  }
+
   return (
     <div className="mt-16 flex flex-wrap justify-center items-start gap-8">
       {movies.map((movie) => (

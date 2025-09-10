@@ -9,6 +9,7 @@ import { useLocalListDetails } from '../../hooks/useLocalListDetails';
 import { MovieRow } from '../../components/movie-list/movie-row';
 import { Card } from '../../components/card/card';
 import { CardWrapper } from '../../components/card-wrapper/card-wrapper';
+import { EmptyState } from '../../components/empty-state/empty-state';
 import type { MovieResult, ShowResult } from '../../utils/types/types';
 
 const MyList = () => {
@@ -42,25 +43,31 @@ const MyList = () => {
           (item.name || '').toLowerCase().includes(searchQuery.toLowerCase())
       );
 
+      // Check if we have any results at all
+      const hasLocalResults = filteredLocalMovies.length > 0;
+      const hasMovieResults = searchResultsMovies.length > 0;
+      const hasShowResults = searchResultsShows.length > 0;
+      const hasAnyResults = hasLocalResults || hasMovieResults || hasShowResults;
+
+      if (!hasAnyResults) {
+        return (
+          <EmptyState
+            title="No results found"
+            message={`No results found for "${searchQuery}"`}
+          />
+        );
+      }
+
       return (
         <>
-          {filteredLocalMovies.length > 0 ? (
+          {hasLocalResults && (
             <MovieRow movies={filteredLocalMovies} title="My List" />
-          ) : (
-            <div className="text-center py-16">
-              <p className="text-foreground text-lg">No matching items found in your list for "{searchQuery}"</p>
-            </div>
           )}
-          {searchResultsMovies.length > 0 && (
+          {hasMovieResults && (
             <MovieRow movies={searchResultsMovies} title="Movies" />
           )}
-          {searchResultsShows.length > 0 && (
+          {hasShowResults && (
             <MovieRow movies={searchResultsShows.map(mapShowToMovie)} title="Shows" />
-          )}
-          {searchResultsMovies.length === 0 && searchResultsShows.length === 0 && filteredLocalMovies.length === 0 && (
-            <div className="text-center py-16">
-              <p className="text-foreground text-lg">No results found for "{searchQuery}"</p>
-            </div>
           )}
         </>
       );
@@ -76,14 +83,10 @@ const MyList = () => {
 
     if (localMovies.length === 0) {
       return (
-        <div className="text-center py-16">
-          <h2 className="text-foreground text-2xl mb-6">
-            Your List is Empty
-          </h2>
-          <p className="text-muted text-base max-w-md mx-auto">
-            Start adding movies and shows to your list by browsing through our collection!
-          </p>
-        </div>
+        <EmptyState
+          title="Your List is Empty"
+          message="Start adding movies and shows to your list by browsing through our collection!"
+        />
       );
     }
 

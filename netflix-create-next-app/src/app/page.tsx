@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { HeroBanner } from '../components/hero-banner/hero-banner';
 import { Loading } from '../components/loading/loading';
 import { MovieRow } from '../components/movie-list/movie-row';
+import { EmptyState } from '../components/empty-state/empty-state';
 
 import { useFetchMovies } from '../hooks/useFetchMovies';
 import { useSearch } from '../context/search-context';
@@ -58,6 +59,14 @@ import type { MovieResult } from '../utils/types/types';
 
   const renderContent = () => {
     if (searchQuery) {
+      if (searchResultsMovies.length === 0) {
+        return (
+          <EmptyState
+            title="No results found"
+            message={`No results found for "${searchQuery}"`}
+          />
+        );
+      }
       return <MovieRow movies={searchResultsMovies} title='Search Results' />;
     }
 

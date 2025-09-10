@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Loading } from '../../components/loading/loading';
+import { EmptyState } from '../../components/empty-state/empty-state';
 
 import { useSearch } from '../../context/search-context';
 import { trendingShowUrl } from '../../utils/api';
@@ -45,6 +46,15 @@ const Shows = () => {
 
   const renderContent = () => {
     const displayShows = searchQuery ? searchResultsShows : shows;
+
+    if (displayShows.length === 0) {
+      return (
+        <EmptyState
+          title="No shows found"
+          message="Try adjusting your search or browse our collection."
+        />
+      );
+    }
 
     return (
       <div className="mt-16 flex flex-wrap justify-center items-start gap-8">
