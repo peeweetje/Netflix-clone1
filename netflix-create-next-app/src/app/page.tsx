@@ -58,6 +58,16 @@ import type { MovieResult } from '../utils/types/types';
 
   const renderContent = () => {
     if (searchQuery) {
+      if (searchResultsMovies.length === 0) {
+        return (
+          <div className="flex items-center justify-center min-h-[60vh]">
+            <div className="text-center">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">No results found</h2>
+              <p className="text-muted-foreground">No results found for "{searchQuery}"</p>
+            </div>
+          </div>
+        );
+      }
       return <MovieRow movies={searchResultsMovies} title='Search Results' />;
     }
 
