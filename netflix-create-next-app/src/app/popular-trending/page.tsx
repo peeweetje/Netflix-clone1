@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Loading } from '../../components/loading/loading';
 import { MovieRow } from '../../components/movie-list/movie-row';
-import { EmptyState } from '../../components/empty-state/empty-state';
+import { SearchableContent } from '../../components/searchable-content/searchable-content';
 
 import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { useSearch } from '../../context/search-context';
@@ -67,56 +67,39 @@ const PopularAndTrending = () => {
     ? searchError
     : trendingMoviesError || trendingShowsError || popularMoviesError || popularShowsError;
 
-  const renderContent = () => {
-    if (searchQuery) {
-      const hasMovies = searchResultsMovies.length > 0;
-      const hasShows = searchResultsShows.length > 0;
-
-      if (!hasMovies && !hasShows) {
-        return (
-          <EmptyState
-            title="No results found"
-            message={`No results found for "${searchQuery}"`}
-          />
-        );
-      }
-
-      return (
-        <>
-          {hasMovies && <MovieRow movies={searchResultsMovies} title="Movies" />}
-          {hasShows && <MovieRow movies={searchResultsShows.map(mapShowToMovie)} title="Shows" />}
-        </>
-      );
-    }
-
-    const hasTrendingMovies = trendingMovies.length > 0;
-    const hasTrendingShows = trendingShows.length > 0;
-    const hasPopularMovies = popularMovies.length > 0;
-    const hasPopularShows = popularShows.length > 0;
-
-    if (!hasTrendingMovies && !hasTrendingShows && !hasPopularMovies && !hasPopularShows) {
-      return (
-        <EmptyState
-          title="No content available"
-          message="Unable to load trending and popular content at this time."
-        />
-      );
-    }
-
-    return (
-      <>
-        {hasTrendingMovies && <MovieRow movies={trendingMovies} title="Trending Movies" />}
-        {hasTrendingShows && <MovieRow movies={trendingShows.map(mapShowToMovie)} title="Trending Shows" />}
-        {hasPopularMovies && <MovieRow movies={popularMovies} title="Most Popular Movies" />}
-        {hasPopularShows && <MovieRow movies={popularShows.map(mapShowToMovie)} title="Most Popular Shows" />}
-      </>
-    );
-  };
+  // Combine and deduplicate search results for SearchableContent
+  const combinedSearchResults = [
+    ...searchResultsMovies,
+    ...searchResultsShows.map(mapShowToMovie).filter(show =>
+      !searchResultsMovies.some(movie => movie.id === show.id)
+    )
+  ];
 
   return (
     <main className='flex flex-row justify-center flex-wrap max-w-full'>
       <Loading loading={isLoading} error={error}>
-        {renderContent()}
+        <SearchableContent
+          searchQuery={searchQuery}
+          searchResults={combinedSearchResults}
+          renderSearchResults={(results) => {
+            const movies = results.filter(item => item.media_type !== 'tv');
+            const shows = results.filter(item => item.media_type === 'tv');
+
+            return (
+              <>
+                {movies.length > 0 && <MovieRow movies={movies} title="Movies" />}
+                {shows.length > 0 && <MovieRow movies={shows} title="Shows" />}
+              </>
+            );
+          }}
+        >
+          <>
+            {trendingMovies.length > 0 && <MovieRow movies={trendingMovies} title="Trending Movies" />}
+            {trendingShows.length > 0 && <MovieRow movies={trendingShows.map(mapShowToMovie)} title="Trending Shows" />}
+            {popularMovies.length > 0 && <MovieRow movies={popularMovies} title="Most Popular Movies" />}
+            {popularShows.length > 0 && <MovieRow movies={popularShows.map(mapShowToMovie)} title="Most Popular Shows" />}
+          </>
+        </SearchableContent>
       </Loading>
     </main>
   );

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Loading } from '../../components/loading/loading';
-import { EmptyState } from '../../components/empty-state/empty-state';
+import { SearchableContent } from '../../components/searchable-content/searchable-content';
 
 import { useSearch } from '../../context/search-context';
 import { trendingShowUrl } from '../../utils/api';
@@ -44,45 +44,56 @@ const Shows = () => {
   const isLoading = searchQuery ? searchLoading : showsLoading;
   const error = searchQuery ? searchError : showsError;
 
-  const renderContent = () => {
-    const displayShows = searchQuery ? searchResultsShows : shows;
-
-    if (displayShows.length === 0) {
-      return (
-        <EmptyState
-          title="No shows found"
-          message="Try adjusting your search or browse our collection."
-        />
-      );
-    }
-
-    return (
-      <div className="mt-16 flex flex-wrap justify-center items-start gap-8">
-        {displayShows.map((show) =>
-          show.poster_path && show.id && (
-            <div key={show.id} className="relative h-[400px]">
-              <CardWrapper to={`/shows/${show.id}`}>
-                <Card
-                  src={show.poster_path}
-                  alt={show.name || ''}
-                  overview={show.overview || ''}
-                  title={show.name || ''}
-                  vote_average={show.vote_average || 0}
-                  id={show.id}
-                  media_type="tv"
-                />
-              </CardWrapper>
-            </div>
-          )
-        )}
-      </div>
-    );
-  };
-
   return (
     <main className="flex flex-row justify-center flex-wrap max-w-full">
       <Loading loading={isLoading} error={error}>
-        {renderContent()}
+        <SearchableContent
+          searchQuery={searchQuery}
+          searchResults={searchResultsShows}
+          emptyTitle="No shows found"
+          emptyMessage="Try adjusting your search or browse our collection."
+          renderSearchResults={(results) => (
+            <div className="mt-16 flex flex-wrap justify-center items-start gap-8">
+              {results.map((show) =>
+                show.poster_path && show.id && (
+                  <div key={show.id} className="relative h-[400px]">
+                    <CardWrapper to={`/shows/${show.id}`}>
+                      <Card
+                        src={show.poster_path}
+                        alt={show.name || ''}
+                        overview={show.overview || ''}
+                        title={show.name || ''}
+                        vote_average={show.vote_average || 0}
+                        id={show.id}
+                        media_type="tv"
+                      />
+                    </CardWrapper>
+                  </div>
+                )
+              )}
+            </div>
+          )}
+        >
+          <div className="mt-16 flex flex-wrap justify-center items-start gap-8">
+            {shows.map((show) =>
+              show.poster_path && show.id && (
+                <div key={show.id} className="relative h-[400px]">
+                  <CardWrapper to={`/shows/${show.id}`}>
+                    <Card
+                      src={show.poster_path}
+                      alt={show.name || ''}
+                      overview={show.overview || ''}
+                      title={show.name || ''}
+                      vote_average={show.vote_average || 0}
+                      id={show.id}
+                      media_type="tv"
+                    />
+                  </CardWrapper>
+                </div>
+              )
+            )}
+          </div>
+        </SearchableContent>
       </Loading>
     </main>
   );
