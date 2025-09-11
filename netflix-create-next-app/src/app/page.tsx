@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { HeroBanner } from '../components/hero-banner/hero-banner';
 import { Loading } from '../components/loading/loading';
 import { MovieRow } from '../components/movie-list/movie-row';
-import { EmptyState } from '../components/empty-state/empty-state';
+import { SearchableContent } from '../components/searchable-content/searchable-content';
 
 import { useFetchMovies } from '../hooks/useFetchMovies';
 import { useSearch } from '../context/search-context';
@@ -57,46 +57,36 @@ import type { MovieResult } from '../utils/types/types';
     ? searchError
     : popularError || topRatedError || actionError;
 
-  const renderContent = () => {
-    if (searchQuery) {
-      if (searchResultsMovies.length === 0) {
-        return (
-          <EmptyState
-            title="No results found"
-            message={`No results found for "${searchQuery}"`}
-          />
-        );
-      }
-      return <MovieRow movies={searchResultsMovies} title='Search Results' />;
-    }
-
-    return (
-      <>
-        {heroMovie && heroMovie.backdrop_path && (
-          <HeroBanner
-            backgroundImage={`${imageUrl}${heroMovie.backdrop_path}`}
-            title={heroMovie.title || ''}
-            overview={heroMovie.overview || ''}
-            movieId={heroMovie.id}
-            mediaType={heroMovie.media_type || 'movie'}
-          />
-        )}
-        {!heroMovie?.backdrop_path && heroMovie && (
-          <div className='w-full h-64 bg-secondary flex items-center justify-center text-white text-2xl'>
-            Hero Banner - No backdrop available for "{heroMovie.title}"
-          </div>
-        )}
-        <MovieRow movies={popular} title='Popular' />
-        <MovieRow movies={topRated} title='Top Rated' />
-        <MovieRow movies={action} title='Action Movies' />
-      </>
-    );
-  };
-
   return (
     <main className='flex flex-row justify-center flex-wrap max-w-full'>
       <Loading loading={isLoading} error={error}>
-        {renderContent()}
+        <SearchableContent
+          searchQuery={searchQuery}
+          searchResults={searchResultsMovies}
+          renderSearchResults={(results) => (
+            <MovieRow movies={results} title='Search Results' />
+          )}
+        >
+          <>
+            {heroMovie && heroMovie.backdrop_path && (
+              <HeroBanner
+                backgroundImage={`${imageUrl}${heroMovie.backdrop_path}`}
+                title={heroMovie.title || ''}
+                overview={heroMovie.overview || ''}
+                movieId={heroMovie.id}
+                mediaType={heroMovie.media_type || 'movie'}
+              />
+            )}
+            {!heroMovie?.backdrop_path && heroMovie && (
+              <div className='w-full h-64 bg-secondary flex items-center justify-center text-white text-2xl'>
+                Hero Banner - No backdrop available for "{heroMovie.title}"
+              </div>
+            )}
+            <MovieRow movies={popular} title='Popular' />
+            <MovieRow movies={topRated} title='Top Rated' />
+            <MovieRow movies={action} title='Action Movies' />
+          </>
+        </SearchableContent>
       </Loading>
     </main>
   );

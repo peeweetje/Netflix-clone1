@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Loading } from '../../components/loading/loading';
 import { MovieList } from '../../components/movie-list/movie-list';
+import { SearchableContent } from '../../components/searchable-content/searchable-content';
 
 import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { useSearch } from '../../context/search-context';
@@ -27,18 +28,18 @@ const Movies = () => {
   const isLoading = searchQuery ? searchLoading : moviesLoading;
   const error = searchQuery ? searchError : moviesError;
 
-  const renderContent = () => {
-    if (searchQuery) {
-      return <MovieList movies={searchResultsMovies} />;
-    }
-
-    return <MovieList movies={results} />;
-  };
-
   return (
     <main className='flex flex-row justify-center flex-wrap max-w-full'>
       <Loading loading={isLoading} error={error}>
-        {renderContent()}
+        <SearchableContent
+          searchQuery={searchQuery}
+          searchResults={searchResultsMovies}
+          renderSearchResults={(results) => (
+            <MovieList movies={results} />
+          )}
+        >
+          <MovieList movies={results} />
+        </SearchableContent>
       </Loading>
     </main>
   );
