@@ -4,6 +4,7 @@ import { Card } from '../../components/card/card';
 import { CardWrapper } from '../../components/card-wrapper/card-wrapper';
 import { Loading } from '../../components/loading/loading';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
+import { SearchableContent } from '../../components/searchable-content/searchable-content';
 import { useGlobalSearch } from '../../hooks/useGlobalSearch';
 import { imageUrl, trendingShowUrl } from '../../utils/api';
 import type { ShowResult } from '../../utils/types/types';
@@ -35,7 +36,7 @@ export const Shows = () => {
         const { results } = await response.json();
         setShows(results);
       } catch (err) {
-        setShowsError('Failed to fetch shows. Please try again later.');
+        setShowsError(t('failed-load-trailer'));
       } finally {
         setShowsLoading(false);
       }
@@ -50,28 +51,8 @@ export const Shows = () => {
   const isLoading = searchQuery ? searchLoading : showsLoading;
   const error = searchQuery ? searchError : showsError;
 
-  const renderContent = () => {
-    if (searchQuery) {
-      return searchResultsShows.map(
-        (show) =>
-          show.poster_path &&
-          show.id && (
-            <CardWrapper key={show.id} to={`/shows/${show.id}`}>
-              <Card
-                alt={show.name}
-                id={show.id}
-                media_type="tv"
-                overview={show.overview}
-                src={`${imageUrl}${show.poster_path}`}
-                title={show.name}
-                vote_average={show.vote_average}
-              />
-            </CardWrapper>
-          )
-      );
-    }
-
-    return shows.map(
+  const renderShows = (showsList: ShowResult[]) => {
+    return showsList.map(
       (show) =>
         show.poster_path &&
         show.id && (
@@ -79,7 +60,6 @@ export const Shows = () => {
             <Card
               alt={show.name}
               id={show.id}
-              key={show.id}
               media_type="tv"
               overview={show.overview}
               src={`${imageUrl}${show.poster_path}`}
@@ -96,7 +76,13 @@ export const Shows = () => {
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
       <StyledContainer>
         <Loading loading={isLoading} error={error}>
-          {renderContent()}
+          <SearchableContent
+            searchQuery={searchQuery}
+            searchResults={searchResultsShows}
+            renderSearchResults={(results) => renderShows(results)}
+          >
+            {renderShows(shows)}
+          </SearchableContent>
         </Loading>
       </StyledContainer>
     </>

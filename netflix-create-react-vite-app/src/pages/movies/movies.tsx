@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Loading } from '../../components/loading/loading';
 import { MovieList } from '../../components/movie-list/movie-list';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
+import { SearchableContent } from '../../components/searchable-content/searchable-content';
 import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { useGlobalSearch } from '../../hooks/useGlobalSearch';
 import { discoverMovieUrl } from '../../utils/api';
@@ -33,20 +34,20 @@ export const Movies = () => {
   const isLoading = searchQuery ? searchLoading : moviesLoading;
   const error = searchQuery ? searchError : moviesError;
 
-  const renderContent = () => {
-    if (searchQuery) {
-      return <MovieList movies={searchResultsMovies} />;
-    }
 
-    return <MovieList movies={results} />;
-  };
 
   return (
     <>
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
       <MainContainer aria-label={t('movie-listings')}>
         <Loading loading={isLoading} error={error}>
-          {renderContent()}
+          <SearchableContent
+            searchQuery={searchQuery}
+            searchResults={searchResultsMovies}
+            renderSearchResults={(results) => <MovieList movies={results} />}
+          >
+            <MovieList movies={results} />
+          </SearchableContent>
         </Loading>
       </MainContainer>
     </>

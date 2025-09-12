@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Loading } from '../../components/loading/loading';
 import { MovieRow } from '../../components/movie-list/movie-row';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
+import { SearchableContent } from '../../components/searchable-content/searchable-content';
 import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { useGlobalSearch } from '../../hooks/useGlobalSearch';
 import {
@@ -114,41 +115,43 @@ export const PopularAndTrending = () => {
       popularMoviesError ||
       popularShowsError;
 
-  const renderContent = () => {
-    if (searchQuery) {
-      return (
-        <>
-          <MovieRow movies={searchResultsMovies} title={t('movies')} />
-          <MovieRow
-            movies={searchResultsShows.map(mapShowToMovie)}
-            title={t('shows')}
-          />
-        </>
-      );
-    }
+  const renderSearchResults = () => (
+    <>
+      <MovieRow movies={searchResultsMovies} title={t('movies')} />
+      <MovieRow
+        movies={searchResultsShows.map(mapShowToMovie)}
+        title={t('shows')}
+      />
+    </>
+  );
 
-    return (
-      <>
-        <MovieRow movies={trendingMovies} title={t('trending-movies')} />
-        <MovieRow
-          movies={trendingShows.map(mapShowToMovie)}
-          title={t('trending-shows')}
-        />
-        <MovieRow movies={popularMovies} title={t('most-popular-movies')} />
-        <MovieRow
-          movies={popularShows.map(mapShowToMovie)}
-          title={t('most-popular-shows')}
-        />
-      </>
-    );
-  };
+  const renderDefaultContent = () => (
+    <>
+      <MovieRow movies={trendingMovies} title={t('trending-movies')} />
+      <MovieRow
+        movies={trendingShows.map(mapShowToMovie)}
+        title={t('trending-shows')}
+      />
+      <MovieRow movies={popularMovies} title={t('most-popular-movies')} />
+      <MovieRow
+        movies={popularShows.map(mapShowToMovie)}
+        title={t('most-popular-shows')}
+      />
+    </>
+  );
 
   return (
     <>
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
       <Container>
         <Loading loading={isLoading} error={error}>
-          {renderContent()}
+          <SearchableContent
+            searchQuery={searchQuery}
+            searchResults={[...searchResultsMovies, ...searchResultsShows]}
+            renderSearchResults={() => renderSearchResults()}
+          >
+            {renderDefaultContent()}
+          </SearchableContent>
         </Loading>
       </Container>
     </>
