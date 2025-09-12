@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Spinner } from '../../components/spinner/spinner';
 import { Card } from '../../components/card/card';
 import { CardWrapper } from '../../components/card-wrapper/card-wrapper';
+import { EmptyState } from '../../components/empty-state/empty-state';
 import { MovieRow } from '../../components/movie-list/movie-row';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
 import { useMyList } from '../../context/myListContext';
@@ -56,6 +57,11 @@ export const MyList = () => {
             <Spinner />
           ) : searchError ? (
             <p>{searchError}</p>
+          ) : searchResultsMovies.length === 0 && searchResultsShows.length === 0 ? (
+            <EmptyState
+              title={t('no-search-results')}
+              message={t('no-search-results-message', { query: searchQuery })}
+            />
           ) : (
             <>
               <MovieRow movies={searchResultsMovies} title={t('movies')} />
@@ -84,11 +90,17 @@ export const MyList = () => {
             {localLoading ? (
               <Spinner />
             ) : localMovies.length === 0 && !localError ? (
-              <p>{t('no-movies-in-list')}</p>
+              <EmptyState
+                title={t('no-movies-in-list')}
+                message={t('no-movies-in-list-message')}
+              />
             ) : localError ? (
               <p>{localError}</p>
             ) : myList.length === 0 ? (
-              <p>{t(empty-list)}</p>
+              <EmptyState
+                title={t('empty-list')}
+                message={t('empty-list-message')}
+              />
             ) : (
               <MoviesGrid>
                 {localMovies.map((movie) => {
