@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "vite",
     "test": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:report": "playwright show-report",
     "build": "tsc -b && vite build",
     "format": "ultracite format",
     "biome:fix": "biome check --write --unsafe",
@@ -27,6 +30,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.6",
+    "@playwright/test": "^1.55.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@types/react": "^19.1.6",
