@@ -3,7 +3,7 @@
 > - `React`
 > - `Vite`
 > - `Typescript`
-> - `Vitest`
+> - `Playwright`
 > - `Styled-components`
 > - `Framer-motion`
 > - `movie-database-api`
