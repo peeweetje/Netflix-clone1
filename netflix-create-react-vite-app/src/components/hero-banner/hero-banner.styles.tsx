@@ -34,14 +34,14 @@ export const SnowContainer = styled.div`
   pointer-events: none;
 `;
 
-export const BannerContainer = styled.section<{ backgroundImage: string }>`
+export const BannerContainer = styled.section<{ $backgroundImage: string }>`
   position: relative;
   width: 100%;
   height: 75vh;
   min-height: 500px;
   background-size: cover;
   background-position: center;
-  background-image: url(${(props) => props.backgroundImage});
+  background-image: url(${(props) => props.$backgroundImage});
   display: flex;
   align-items: stretch;
   justify-content: center;

@@ -80,7 +80,7 @@ export const HeroBanner = ({
   };
 
   return (
-    <BannerContainer backgroundImage={backgroundImage}>
+    <BannerContainer $backgroundImage={backgroundImage}>
       {theme && renderSeasonalEffects(theme)}
       <BannerOverlay>
         <div>

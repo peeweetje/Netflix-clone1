@@ -62,7 +62,7 @@ export const BackCard = ({
       <StyledScoreContainer>
         <BackCardButton
           disabled={isAdded}
-          isAdded={isAdded}
+          $isAdded={isAdded}
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();

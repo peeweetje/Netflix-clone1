@@ -137,21 +137,21 @@ export const MotionCardBack = styled.div`
   border-radius: ${(props) => props.theme.borderRadius[3]};
 `;
 
-export const BackCardButton = styled.button<{ isAdded: boolean }>`
+export const BackCardButton = styled.button<{ $isAdded: boolean }>`
   width: 140px;
   height: 40px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: ${(props) => props.theme.space[2]};
-  background: ${({ isAdded, theme }) =>
-    isAdded ? theme.colors.black : theme.colors.white};
-  color: ${({ isAdded, theme }) =>
-    isAdded ? theme.colors.white : theme.colors.black};
+  background: ${({ $isAdded, theme }) =>
+    $isAdded ? theme.colors.black : theme.colors.white};
+  color: ${({ $isAdded, theme }) =>
+    $isAdded ? theme.colors.white : theme.colors.black};
   border: none;
   border-radius:${(props) => props.theme.borderRadius[1]};
   padding:${(props) => props.theme.space[3]} ${(props) => props.theme.space[6]};
   font-size:${(props) => props.theme.fontSize[3]};
-  cursor: ${({ isAdded }) => (isAdded ? 'not-allowed' : 'pointer')};
+  cursor: ${({ $isAdded }) => ($isAdded ? 'not-allowed' : 'pointer')};
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     width: 100px;
