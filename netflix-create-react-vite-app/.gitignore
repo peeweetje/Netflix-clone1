@@ -11,6 +11,12 @@ node_modules
 dist
 dist-ssr
 *.local
+test-results
+playwright-report
+playwright-report copy
+playwright-report-quick
+playwright-report-stress
+playwright/.cache
 
 # Editor directories and files
 .vscode/*
