@@ -1,47 +1,24 @@
 import { test, expect } from '@playwright/test';
+import {
+  setDesktopViewport,
+  setMobileViewport,
+  gotoAndWaitForNav,
+  expectGlobalNav,
+  toggleTheme,
+  fillAndClearSearch,
+  hamburgerLocator,
+  waitContent,
+} from './utils';
 
 test.describe('My List Page', () => {
   test.beforeEach(async ({ page }) => {
-    // Set longer timeout for navigation
-    test.setTimeout(60000); // 60 seconds
-
-    // Set desktop viewport to ensure navigation is visible
-    await page.setViewportSize({ width: 1200, height: 800 });
-
-    // Add retry logic for Firefox connection issues
-    let retries = 3;
-    while (retries > 0) {
-      try {
-        await page.goto('/my-list', { waitUntil: 'domcontentloaded', timeout: 30000 });
-        // Wait for basic page structure to be attached to DOM
-        await page.waitForSelector('nav', { state: 'attached', timeout: 15000 });
-        break; // Success, exit retry loop
-      } catch (error) {
-        retries--;
-        if (retries === 0) {
-          throw error; // Re-throw if all retries failed
-        }
-        await page.waitForTimeout(1000); // Wait 1 second before retry
-      }
-    }
+    test.setTimeout(60000);
+    await setDesktopViewport(page);
+    await gotoAndWaitForNav(page, '/my-list');
   });
 
   test('displays navigation elements', async ({ page }) => {
-    // Check brand/logo
-    await expect(page.getByRole('link', { name: 'BingeWatch' })).toBeVisible();
-
-    // Check navigation menu items
-    await expect(page.getByRole('link', { name: 'homepage' })).toBeVisible();
-    await expect(page.getByRole('link', { name: 'shows' })).toBeVisible();
-    await expect(page.getByRole('link', { name: 'movies' })).toBeVisible();
-    await expect(page.getByRole('link', { name: 'popular & trending' })).toBeVisible();
-    await expect(page.getByRole('link', { name: 'my list' })).toBeVisible();
-
-    // Check search bar
-    await expect(page.getByPlaceholder('search for a title...')).toBeVisible();
-
-    // Check theme toggle button
-    await expect(page.getByRole('button', { name: 'Switch Theme' })).toBeVisible();
+    await expectGlobalNav(page);
   });
 
   test('displays empty state when no items in list', async ({ page }) => {
@@ -56,80 +33,51 @@ test.describe('My List Page', () => {
     // Reload the page to get the mocked state
     await page.reload({ waitUntil: 'domcontentloaded' });
 
-    // Wait for content to load
-    await page.waitForTimeout(2000);
+    await waitContent(page, 2000);
 
     // Check for empty state message using the actual rendered text
     await expect(page.getByText('No movies in this list')).toBeVisible();
-    await expect(page.getByText("You haven't added any movies to your list yet. Start exploring and add some movies!")).toBeVisible();
+    await expect(
+      page.getByText(
+        "You haven't added any movies to your list yet. Start exploring and add some movies!"
+      )
+    ).toBeVisible();
   });
 
   test('search functionality works', async ({ page }) => {
-    const searchInput = page.getByPlaceholder('search for a title...');
-
-    // Type in search box
-    await searchInput.fill('test search');
-    await expect(searchInput).toHaveValue('test search');
-
-    // Wait for search results or loading
-    await page.waitForTimeout(1000);
-
-    // Clear search
-    await searchInput.clear();
-    await expect(searchInput).toHaveValue('');
+    await fillAndClearSearch(page, 'test search');
   });
 
   test('navigation from my list page', async ({ page }) => {
-    // Test navigation back to home
     await page.getByRole('link', { name: 'homepage' }).click();
     await expect(page).toHaveURL('/');
-
-    // Go back to my list
-    await page.goto('/my-list');
-
-    // Test navigation to other pages
+    await gotoAndWaitForNav(page, '/my-list');
     await page.getByRole('link', { name: 'shows' }).click();
     await expect(page).toHaveURL('/shows');
-
-    // Go back to my list
-    await page.goto('/my-list');
-
+    await gotoAndWaitForNav(page, '/my-list');
     await page.getByRole('link', { name: 'movies' }).click();
     await expect(page).toHaveURL('/movies');
   });
 
   test('theme toggle works on my list page', async ({ page }) => {
-    const themeButton = page.getByRole('button', { name: 'Switch Theme' });
-
-    // Click theme toggle
-    await themeButton.click();
-
-    // Basic check that page is still functional
-    await expect(page.locator('body')).toBeVisible();
+    await toggleTheme(page);
   });
 
   test('responsive design on my list page', async ({ page }) => {
-    // Test mobile view
-    await page.setViewportSize({ width: 375, height: 667 });
-
-    // Hamburger menu should be visible on mobile
-    const hamburgerButton = page.locator('button').filter({ hasText: '☰' }).or(page.locator('[aria-label*="menu"]'));
-    await expect(hamburgerButton.or(page.locator('button:has-text("☰")')).first()).toBeVisible();
-
-    // Test desktop view
-    await page.setViewportSize({ width: 1200, height: 800 });
-
-    // Navigation should be visible on desktop
+    await setMobileViewport(page);
+    await expect(hamburgerLocator(page)).toBeVisible();
+    await setDesktopViewport(page);
     await expect(page.getByRole('link', { name: 'my list' })).toBeVisible();
   });
 
   test('displays loading state when appropriate', async ({ page }) => {
-    // Wait for initial load to complete
-    await page.waitForTimeout(3000);
+    await waitContent(page, 3000);
 
     // Check that loading spinner is not visible (page should be loaded)
     // If spinner is visible, it means there's a loading state
-    const spinner = page.locator('[data-testid="spinner"], .spinner, .loading-spinner').first();
+    const spinner = page
+      .locator('[data-testid="spinner"], .spinner, .loading-spinner')
+      .first();
 
     // The spinner might be visible during loading, but should not be permanently visible
     // This test checks that the page eventually loads
@@ -141,7 +89,7 @@ test.describe('My List Page', () => {
     await page.addInitScript(() => {
       const mockItems = [
         { id: 123, media_type: 'movie' },
-        { id: 456, media_type: 'tv' }
+        { id: 456, media_type: 'tv' },
       ];
       localStorage.setItem('myList', JSON.stringify(mockItems));
 
@@ -153,7 +101,7 @@ test.describe('My List Page', () => {
         overview: 'This is a test movie overview',
         poster_path: '/test-poster.jpg',
         vote_average: 7.5,
-        media_type: 'movie'
+        media_type: 'movie',
       };
 
       const mockShowResponse = {
@@ -163,7 +111,7 @@ test.describe('My List Page', () => {
         overview: 'This is a test TV show overview',
         poster_path: '/test-poster.jpg',
         vote_average: 8.0,
-        media_type: 'tv'
+        media_type: 'tv',
       };
 
       // Mock fetch to return our test data
@@ -172,22 +120,19 @@ test.describe('My List Page', () => {
           const isMovie = url.includes('/movie/123');
           return {
             ok: true,
-            json: async () => isMovie ? mockMovieResponse : mockShowResponse
+            json: async () => (isMovie ? mockMovieResponse : mockShowResponse),
           };
         }
         // For other requests, return empty data
         return {
           ok: true,
-          json: async () => ({ results: [] })
+          json: async () => ({ results: [] }),
         };
       };
     });
 
-    // Reload the page to get the mocked state
     await page.reload({ waitUntil: 'domcontentloaded' });
-
-    // Wait for content to load
-    await page.waitForTimeout(3000);
+    await waitContent(page, 3000);
 
     // Look for movie cards using generic selectors that should work regardless of content
     const movieCards = page.locator('h1').first(); // Look for any heading (movie/show title)
@@ -206,13 +151,13 @@ test.describe('My List Page', () => {
   });
 
   test('remove buttons work when items are present', async ({ page }) => {
-    // Wait for content to load
-    await page.waitForTimeout(2000);
+    await waitContent(page, 2000);
 
     // Look for remove buttons
-    const removeButtons = page.locator('button').filter({ hasText: 'Remove from list' }).or(
-      page.locator('[data-testid="remove-button"], [class*="remove"]')
-    );
+    const removeButtons = page
+      .locator('button')
+      .filter({ hasText: 'Remove from list' })
+      .or(page.locator('[data-testid="remove-button"], [class*="remove"]'));
 
     // If remove buttons are found, verify they are clickable
     const buttons = await removeButtons.all();
@@ -223,11 +168,12 @@ test.describe('My List Page', () => {
   });
 
   test('displays failed items section when applicable', async ({ page }) => {
-    // Wait for content to load
-    await page.waitForTimeout(2000);
+    await waitContent(page, 2000);
 
     // Look for failed items section
-    const failedItemsSection = page.locator('[data-testid="failed-items"], .failed-items, [class*="failed"]').first();
+    const failedItemsSection = page
+      .locator('[data-testid="failed-items"], .failed-items, [class*="failed"]')
+      .first();
 
     // If failed items section exists, it should be visible
     if (await failedItemsSection.isVisible()) {
@@ -236,11 +182,14 @@ test.describe('My List Page', () => {
   });
 
   test('displays removal notice when items are removed', async ({ page }) => {
-    // Wait for content to load
-    await page.waitForTimeout(2000);
+    await waitContent(page, 2000);
 
     // Look for removal notice
-    const removalNotice = page.locator('[data-testid="removal-notice"], .removal-notice, [class*="notice"]').first();
+    const removalNotice = page
+      .locator(
+        '[data-testid="removal-notice"], .removal-notice, [class*="notice"]'
+      )
+      .first();
 
     // If removal notice exists, it should be visible
     if (await removalNotice.isVisible()) {
@@ -249,11 +198,14 @@ test.describe('My List Page', () => {
   });
 
   test('movie cards are clickable and navigate correctly', async ({ page }) => {
-    // Wait for content to load
-    await page.waitForTimeout(2000);
+    await waitContent(page, 2000);
 
     // Look for clickable movie cards
-    const movieCards = page.locator('[data-testid="movie-card"], .movie-card, .card, [class*="card"]').all();
+    const movieCards = page
+      .locator(
+        '[data-testid="movie-card"], .movie-card, .card, [class*="card"]'
+      )
+      .all();
 
     const cards = await movieCards;
     if (cards.length > 0) {
@@ -268,14 +220,14 @@ test.describe('My List Page', () => {
 
   test('search results display correctly', async ({ page }) => {
     const searchInput = page.getByPlaceholder('search for a title...');
-
-    // Type in search box to trigger search
     await searchInput.fill('movie');
-    await page.waitForTimeout(1000);
+    await waitContent(page, 1000);
 
     // Check if search results are displayed
     // Look for movie rows or search results
-    const searchResults = page.locator('[data-testid="search-results"], .search-results, .movie-row').first();
+    const searchResults = page
+      .locator('[data-testid="search-results"], .search-results, .movie-row')
+      .first();
 
     // If search results are visible, verify they contain content
     if (await searchResults.isVisible()) {
@@ -284,12 +236,13 @@ test.describe('My List Page', () => {
   });
 
   test('page handles error states gracefully', async ({ page }) => {
-    // Wait for content to load
-    await page.waitForTimeout(3000);
+    await waitContent(page, 3000);
 
     // Check that the page doesn't show critical errors
     // Look for error messages
-    const errorMessages = page.locator('[data-testid="error"], .error, [class*="error"]').all();
+    const errorMessages = page
+      .locator('[data-testid="error"], .error, [class*="error"]')
+      .all();
 
     const errors = await errorMessages;
     if (errors.length > 0) {
