@@ -133,7 +133,7 @@ export const MotionCardBack = styled.div`
   height: 100%;
   backface-visibility: hidden;
   transform: rotateY(180deg);
-  z-index: 1;
+  z-index: 3 ;
   border-radius: ${(props) => props.theme.borderRadius[3]};
 `;
 
