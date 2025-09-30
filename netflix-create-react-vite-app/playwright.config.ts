@@ -30,7 +30,7 @@ export default defineConfig({
 
   /* Environment variables for tests */
   env: {
-    VITE_API_KEY: 'test-api-key',
+    VITE_API_KEY: process.env.VITE_API_KEY || 'your-tmdb-api-key-here',
   },
 
   /* Configure projects for major browsers */
