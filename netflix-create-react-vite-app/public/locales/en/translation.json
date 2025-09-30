@@ -37,12 +37,8 @@
   "most-popular-shows": "Most Popular Shows",
   "most-popular-movies": "Most Popular Movies",
   "media-type-error": "ID or media type not provided.",
-  "video-not-found": "No videos found for this movie.",
-  "no-trailer-found": "No trailer found for this movie.",
-  "error-fetch-video": "Failed to fetch video data:",
-  "failed-load-trailer": "Failed to load trailer. Please try again later.",
+  "no-trailer-found": "No media found for this trailer.",
   "go-back-button": "Go Back",
   "movie-trailer": "Movie Trailer",
-  "no-trailer-available": "No trailer available for this movie.",
   "watch-trailer": "Watch Trailer"
 }
