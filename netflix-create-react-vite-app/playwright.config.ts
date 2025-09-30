@@ -28,6 +28,11 @@ export default defineConfig({
     navigationTimeout: 30000,
   },
 
+  /* Environment variables for tests */
+  env: {
+    VITE_API_KEY: 'test-api-key',
+  },
+
   /* Configure projects for major browsers */
   projects: [
     {
