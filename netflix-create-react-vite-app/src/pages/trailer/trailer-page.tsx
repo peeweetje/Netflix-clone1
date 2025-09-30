@@ -37,7 +37,7 @@ export const TrailerPage = () => {
         const videos = data.results;
 
         if (!videos || videos.length === 0) {
-          setError(t('video-not-found'));
+          setError(t('no-trailer-found'));
           return;
         }
 
@@ -52,8 +52,8 @@ export const TrailerPage = () => {
 
         setVideoKey(trailer.key);
       } catch (err) {
-        console.error(t('error-fetch-video'), err);
-        setError(t('failed-load-trailer'));
+        console.error(t('no-trailer-found'), err);
+        setError(t('no-trailer-found'));
       } finally {
         setLoading(false);
       }
@@ -73,14 +73,14 @@ export const TrailerPage = () => {
     return (
       <TrailerContainer>
         <p>{error}</p>
-        <GoBackButton onClick={() => navigate(-1)}>{t('go-back')}</GoBackButton>
+        <GoBackButton onClick={() => navigate(-1)}>{t('go-back-button')}</GoBackButton>
       </TrailerContainer>
     );
   }
 
   return (
     <TrailerContainer>
-      <GoBackButton onClick={() => navigate(-1)}>{t('go-back')}</GoBackButton>
+      <GoBackButton onClick={() => navigate(-1)}>{t('go-back-button')}</GoBackButton>
       {videoKey ? (
         <VideoWrapper>
           <iframe
@@ -92,7 +92,7 @@ export const TrailerPage = () => {
           />
         </VideoWrapper>
       ) : (
-        <p>{t('no-trailer-available')}</p>
+        <p>{t('no-trailer-found')}</p>
       )}
     </TrailerContainer>
   );

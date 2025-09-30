@@ -116,7 +116,7 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
       {media && (
         <StyledContainer>
           <ButtonContainer>
-            <GoBackButton onClick={() => navigate(-1)}>{t('go-back')}</GoBackButton>
+            <GoBackButton onClick={() => navigate(-1)}>{t('go-back-button')}</GoBackButton>
             {hasTrailer && (
               <GoBackButton
                 onClick={() => navigate(`/trailer/${type}/${media.id}`)}
