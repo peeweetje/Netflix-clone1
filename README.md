@@ -3,6 +3,7 @@
 > - `React`
 > - `Vite`
 > - `Typescript`
+> - `Tanstack/react-query`
 > - `Playwright`
 > - `Styled-components`
 > - `Framer-motion`
