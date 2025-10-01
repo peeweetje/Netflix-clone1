@@ -15,6 +15,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/devtools-vite": "^0.3.3",
+    "@tanstack/react-devtools": "^0.7.0",
+    "@tanstack/react-query": "^5.90.2",
     "framer-motion": "12.23.22",
     "i18next": "^24.2.2",
     "i18next-browser-languagedetector": "^8.2.0",
