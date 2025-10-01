@@ -1,5 +1,6 @@
 import {
   discoverShowUrl,
+  discoverMovieUrl,
   imageUrl,
   movieVideosUrl,
   popularMoviesUrl,
