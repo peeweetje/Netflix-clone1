@@ -1,5 +1,4 @@
 import type React from 'react';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { HeroBanner } from '../../components/hero-banner/hero-banner';
 import { Loading } from '../../components/loading/loading';
@@ -13,15 +12,6 @@ import type { MovieResult } from '../../utils/types/types';
 import { MainContainer } from './home-page-styles';
 
 export const Homepage = () => {
-  const [popular, setPopular] = useState<MovieResult[]>([]);
-  const [topRated, setTopRated] = useState<MovieResult[]>([]);
-  const [action, setAction] = useState<MovieResult[]>([]);
-  const [popularLoading, setPopularLoading] = useState<boolean>(true);
-  const [topRatedLoading, setTopRatedLoading] = useState<boolean>(true);
-  const [actionLoading, setActionLoading] = useState<boolean>(true);
-  const [popularError, setPopularError] = useState<string | null>(null);
-  const [topRatedError, setTopRatedError] = useState<string | null>(null);
-  const [actionError, setActionError] = useState<string | null>(null);
   const { t } = useTranslation();
 
   const {
@@ -32,14 +22,24 @@ export const Homepage = () => {
     searchError,
   } = useGlobalSearch();
 
-  useFetchMovies(popularMoviesUrl, setPopular, setPopularLoading, setPopularError);
-  useFetchMovies(
-    topRatedMoviesUrl,
-    setTopRated,
-    setTopRatedLoading,
-    setTopRatedError
-  );
-  useFetchMovies(actionMoviesUrl, setAction, setActionLoading, setActionError);
+  // Use TanStack Query for fetching movies
+  const {
+    data: popular = [],
+    isLoading: popularLoading,
+    error: popularError,
+  } = useFetchMovies(popularMoviesUrl);
+
+  const {
+    data: topRated = [],
+    isLoading: topRatedLoading,
+    error: topRatedError,
+  } = useFetchMovies(topRatedMoviesUrl);
+
+  const {
+    data: action = [],
+    isLoading: actionLoading,
+    error: actionError,
+  } = useFetchMovies(actionMoviesUrl);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchQuery(e.target.value);

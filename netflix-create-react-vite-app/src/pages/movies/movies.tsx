@@ -1,5 +1,4 @@
 import type React from 'react';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Loading } from '../../components/loading/loading';
 import { MovieList } from '../../components/movie-list/movie-list';
@@ -12,9 +11,6 @@ import type { MovieResult } from '../../utils/types/types';
 import { MainContainer } from '../home/home-page-styles';
 
 export const Movies = () => {
-  const [results, setResults] = useState<MovieResult[]>([]);
-  const [moviesLoading, setMoviesLoading] = useState<boolean>(true);
-  const [moviesError, setMoviesError] = useState<string | null>(null);
   const { t } = useTranslation();
 
   const {
@@ -25,7 +21,12 @@ export const Movies = () => {
     searchError,
   } = useGlobalSearch();
 
-  useFetchMovies(discoverMovieUrl, setResults, setMoviesLoading, setMoviesError);
+  // Use TanStack Query for fetching movies
+  const {
+    data: results = [],
+    isLoading: moviesLoading,
+    error: moviesError,
+  } = useFetchMovies(discoverMovieUrl);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchQuery(e.target.value);
