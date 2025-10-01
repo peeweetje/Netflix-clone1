@@ -17,7 +17,7 @@ export const TrailerPage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
 
-  // Fetch videos using TanStack Query with enhanced error handling
+
   const {
     data: videos = [],
     isLoading: loading,
@@ -60,7 +60,7 @@ export const TrailerPage = () => {
     );
   }
 
-  // Enhanced error message for better user experience
+  
   const getErrorMessage = () => {
     if (error instanceof Error) {
       const message = error.message.toLowerCase();

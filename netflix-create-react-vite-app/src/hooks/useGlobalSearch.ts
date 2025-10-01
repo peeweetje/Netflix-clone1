@@ -6,7 +6,7 @@ import type { MovieResult, ShowResult } from '../utils/types/types';
 export function useGlobalSearch() {
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Use TanStack Query for search functionality with enhanced error handling
+ 
   const {
     data: searchResults,
     isLoading: searchLoading,

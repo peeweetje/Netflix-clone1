@@ -20,7 +20,7 @@ export const useFetchMovies = (url: string) => {
         }
       }
       // Retry up to 3 times for network/server errors
-      return failureCount < 3;
+      return failureCount < 4;
     },
     retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000), // Exponential backoff
   });

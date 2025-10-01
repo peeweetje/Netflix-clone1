@@ -210,7 +210,7 @@ export const movieQueries = {
 
   discover: (sortBy: string = 'popularity.desc') => ({
     queryKey: [...queryKeys.movies, 'discover', sortBy],
-    queryFn: () => fetchMovies(`${discoverShowUrl}&sort_by=${sortBy}`),
+    queryFn: () => fetchMovies(`${discoverMovieUrl}&sort_by=${sortBy}`),
   }),
 };
 
@@ -222,7 +222,7 @@ export const showQueries = {
 
   popular: () => ({
     queryKey: [...queryKeys.shows, 'popular'],
-    queryFn: () => fetchMovies(`${discoverShowUrl}&sort_by=popularity.desc`),
+    queryFn: () => fetchShows(`${discoverShowUrl}&sort_by=popularity.desc`),
   }),
 };
 

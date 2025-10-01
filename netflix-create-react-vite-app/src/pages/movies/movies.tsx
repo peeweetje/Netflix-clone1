@@ -21,7 +21,7 @@ export const Movies = () => {
     searchError,
   } = useGlobalSearch();
 
-  // Use TanStack Query for fetching movies
+
   const {
     data: results = [],
     isLoading: moviesLoading,
@@ -32,8 +32,11 @@ export const Movies = () => {
     setSearchQuery(e.target.value);
   };
 
-  const isLoading = searchQuery ? searchLoading : moviesLoading;
-  const error = searchQuery ? searchError : moviesError;
+  const isSearchActive = !!searchQuery && searchQuery.length > 2;
+  const isLoading = isSearchActive ? searchLoading : moviesLoading;
+  const errorMessage = isSearchActive
+    ? searchError?.message ?? null
+    : (moviesError as Error | null)?.message ?? null;
 
 
 
@@ -41,7 +44,7 @@ export const Movies = () => {
     <>
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
       <MainContainer aria-label={t('movie-listings')}>
-        <Loading loading={isLoading} error={error}>
+        <Loading loading={isLoading} error={errorMessage}>
           <SearchableContent
             searchQuery={searchQuery}
             searchResults={searchResultsMovies}

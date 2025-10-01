@@ -22,7 +22,7 @@ export const Homepage = () => {
     searchError,
   } = useGlobalSearch();
 
-  // Use TanStack Query for fetching movies
+ 
   const {
     data: popular = [],
     isLoading: popularLoading,

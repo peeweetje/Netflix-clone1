@@ -109,7 +109,7 @@ export const Shows = () => {
     <>
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
       <StyledContainer>
-        <Loading loading={isLoading} error={getErrorMessage()}>
+        <Loading loading={isLoading} error={error}>
           <SearchableContent
             searchQuery={searchQuery}
             searchResults={searchResultsShows}

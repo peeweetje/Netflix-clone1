@@ -60,19 +60,14 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
   const loading = mediaLoading || castLoading || videosLoading;
 
   // Enhanced error handling for multiple queries
+  // Only gate page-level error on media details
   const getErrorMessage = () => {
-    if (mediaError) {
-      return mediaError.message.includes('not found')
+    if (mediaError instanceof Error) {
+      return mediaError.message.toLowerCase().includes('not found')
         ? `${type === 'movie' ? 'Movie' : 'TV Show'} not found.`
         : `Failed to load ${type} details.`;
     }
-    if (castError) {
-      return 'Failed to load cast information.';
-    }
-    if (videosError) {
-      return 'Failed to load video information.';
-    }
-    return null; // Return null when there's no error
+    return null;
   };
 
   const error = getErrorMessage();

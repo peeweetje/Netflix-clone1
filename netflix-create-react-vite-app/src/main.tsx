@@ -23,9 +23,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <BrowserRouter>
         <MyListProvider>
           <App />
-          <ReactQueryDevtools initialIsOpen={false} />
         </MyListProvider>
       </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </React.StrictMode>
 );
