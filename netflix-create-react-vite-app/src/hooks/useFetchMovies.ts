@@ -1,28 +1,27 @@
-import { type Dispatch, type SetStateAction, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { fetchMovies } from '../utils/queries';
 import type { MovieResult } from '../utils/types/types';
 
-export const useFetchMovies = (
-  url: string,
-  setMovies: Dispatch<SetStateAction<MovieResult[]>>,
-  setLoading: Dispatch<SetStateAction<boolean>>,
-  setError: Dispatch<SetStateAction<string | null>>
-) => {
-  useEffect(() => {
-    const fetchMovies = async (): Promise<void> => {
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+export const useFetchMovies = (url: string) => {
+  return useQuery({
+    queryKey: ['movies', url],
+    queryFn: () => fetchMovies(url),
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    retry: (failureCount, error) => {
+      // Don't retry on client errors (4xx) or specific API errors
+      if (error instanceof Error) {
+        const errorMessage = error.message.toLowerCase();
+        if (
+          errorMessage.includes('unauthorized') ||
+          errorMessage.includes('not found') ||
+          errorMessage.includes('invalid response')
+        ) {
+          return false;
         }
-        const { results } = await response.json();
-        setMovies(results);
-      } catch (_error) {
-        setError('Failed to fetch movies. Please try again later.');
-      } finally {
-        setLoading(false);
       }
-    };
-
-    fetchMovies();
-  }, [url, setMovies, setLoading, setError]);
+      // Retry up to 3 times for network/server errors
+      return failureCount < 3;
+    },
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000), // Exponential backoff
+  });
 };
