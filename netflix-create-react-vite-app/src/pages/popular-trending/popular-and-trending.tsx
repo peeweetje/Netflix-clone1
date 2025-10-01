@@ -1,5 +1,4 @@
 import type React from 'react';
-import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { Loading } from '../../components/loading/loading';
@@ -27,28 +26,6 @@ const mostPopularShowsUrl = `${discoverShowUrl}&sort_by=popularity.desc`;
 
 export const PopularAndTrending = () => {
   const { t } = useTranslation();
-  const [trendingMovies, setTrendingMovies] = useState<MovieResult[]>([]);
-  const [trendingShows, setTrendingShows] = useState<ShowResult[]>([]);
-  const [popularMovies, setPopularMovies] = useState<MovieResult[]>([]);
-  const [popularShows, setPopularShows] = useState<ShowResult[]>([]);
-
-  const [trendingMoviesLoading, setTrendingMoviesLoading] = useState(true);
-  const [trendingShowsLoading, setTrendingShowsLoading] = useState(true);
-  const [popularMoviesLoading, setPopularMoviesLoading] = useState(true);
-  const [popularShowsLoading, setPopularShowsLoading] = useState(true);
-
-  const [trendingMoviesError, setTrendingMoviesError] = useState<string | null>(
-    null
-  );
-  const [trendingShowsError, setTrendingShowsError] = useState<string | null>(
-    null
-  );
-  const [popularMoviesError, setPopularMoviesError] = useState<string | null>(
-    null
-  );
-  const [popularShowsError, setPopularShowsError] = useState<string | null>(
-    null
-  );
 
   const {
     searchQuery,
@@ -59,32 +36,31 @@ export const PopularAndTrending = () => {
     searchError,
   } = useGlobalSearch();
 
-  // Fetch trending movies and shows
-  useFetchMovies(
-    trendingMovieUrl,
-    setTrendingMovies,
-    setTrendingMoviesLoading,
-    setTrendingMoviesError
-  );
-  useFetchMovies(
-    trendingShowUrl,
-    setTrendingShows,
-    setTrendingShowsLoading,
-    setTrendingShowsError
-  );
-  // Fetch most popular movies and shows
-  useFetchMovies(
-    popularMoviesUrl,
-    setPopularMovies,
-    setPopularMoviesLoading,
-    setPopularMoviesError
-  );
-  useFetchMovies(
-    mostPopularShowsUrl,
-    setPopularShows,
-    setPopularShowsLoading,
-    setPopularShowsError
-  );
+  // Fetch trending movies and shows using TanStack Query
+  const {
+    data: trendingMovies = [],
+    isLoading: trendingMoviesLoading,
+    error: trendingMoviesError,
+  } = useFetchMovies(trendingMovieUrl);
+
+  const {
+    data: trendingShows = [],
+    isLoading: trendingShowsLoading,
+    error: trendingShowsError,
+  } = useFetchMovies(trendingShowUrl);
+
+  // Fetch most popular movies and shows using TanStack Query
+  const {
+    data: popularMovies = [],
+    isLoading: popularMoviesLoading,
+    error: popularMoviesError,
+  } = useFetchMovies(popularMoviesUrl);
+
+  const {
+    data: popularShows = [],
+    isLoading: popularShowsLoading,
+    error: popularShowsError,
+  } = useFetchMovies(mostPopularShowsUrl);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
