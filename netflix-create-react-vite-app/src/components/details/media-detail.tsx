@@ -1,13 +1,10 @@
 import { Loading } from '../../components/loading/loading';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import {
-  imageUrl,
-  movieVideosUrl,
-  showVideosUrl,
-  VITE_API_KEY,
-} from '../../utils/api';
+import { useQueries } from '@tanstack/react-query';
+import { imageUrl } from '../../utils/api';
+import { mediaQueries } from '../../utils/queries';
 import { CastMember } from './cast-member';
 import {
   ButtonContainer,
@@ -46,70 +43,39 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [media, setMedia] = useState<MediaData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [cast, setCast] = useState<CastMember[]>([]);
-  const [hasTrailer, setHasTrailer] = useState(false);
 
-  useEffect(() => {
-    const fetchMedia = async () => {
-      try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/${type}/${id}?api_key=${VITE_API_KEY}`
-        );
-        if (!response.ok) throw new Error('Network response was not ok');
-        const data = await response.json();
-        setMedia(data);
-      } catch (err) {
-        setError(`Failed to fetch ${type} details. Please try again later.`);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchMedia();
-  }, [id, type]);
+  // Use TanStack Query for multiple API calls with enhanced error handling
+  const [
+    { data: media, isLoading: mediaLoading, error: mediaError },
+    { data: cast = [], isLoading: castLoading, error: castError },
+    { data: videos = [], isLoading: videosLoading, error: videosError },
+  ] = useQueries({
+    queries: [
+      mediaQueries.details(type, id || ''),
+      mediaQueries.cast(type, id || ''),
+      mediaQueries.videos(type, id || ''),
+    ],
+  });
 
-  useEffect(() => {
-    const fetchCast = async () => {
-      if (!id) return;
-      try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${VITE_API_KEY}`
-        );
-        if (!response.ok) throw new Error('Failed to fetch cast');
-        const data = await response.json();
-        setCast(data.cast || []);
-      } catch (err) {
-        console.error('Failed to fetch cast data:', err);
-        setError('Failed to fetch cast data');
-        setLoading(false);
-      }
-    };
-    fetchCast();
-  }, [id, type]);
+  const loading = mediaLoading || castLoading || videosLoading;
 
-  useEffect(() => {
-    if (id) {
-      const checkTrailer = async () => {
-        try {
-          const url =
-            type === 'movie'
-              ? movieVideosUrl(Number(id))
-              : showVideosUrl(Number(id));
-          const response = await fetch(url);
-          const data = await response.json();
-          const trailer = data.results.find(
-            (vid: any) => vid.type === 'Trailer' && vid.site === 'YouTube'
-          );
-          setHasTrailer(!!trailer);
-        } catch (error) {
-          console.error(`Failed to fetch ${type} videos:`, error);
-        }
-      };
-      checkTrailer();
+  // Enhanced error handling for multiple queries
+  // Only gate page-level error on media details
+  const getErrorMessage = () => {
+    if (mediaError instanceof Error) {
+      return mediaError.message.toLowerCase().includes('not found')
+        ? `${type === 'movie' ? 'Movie' : 'TV Show'} not found.`
+        : `Failed to load ${type} details.`;
     }
-  }, [id, type]);
+    return null;
+  };
+
+  const error = getErrorMessage();
+
+  // Check if media has trailer
+  const hasTrailer = videos.some(
+    (video: any) => video.type === 'Trailer' && video.site === 'YouTube'
+  );
 
   return (
     <Loading loading={loading} error={error}>

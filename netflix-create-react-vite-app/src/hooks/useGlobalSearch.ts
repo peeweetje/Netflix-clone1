@@ -1,53 +1,64 @@
-import { useEffect, useState } from 'react';
-import { VITE_API_KEY } from '../utils/api';
+import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { searchQueries } from '../utils/queries';
 import type { MovieResult, ShowResult } from '../utils/types/types';
 
 export function useGlobalSearch() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResultsMovies, setSearchResultsMovies] = useState<MovieResult[]>(
-    []
-  );
-  const [searchResultsShows, setSearchResultsShows] = useState<ShowResult[]>(
-    []
-  );
-  const [searchLoading, setSearchLoading] = useState(false);
-  const [searchError, setSearchError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (!searchQuery) {
-      setSearchResultsMovies([]);
-      setSearchResultsShows([]);
-      setSearchError(null);
-      setSearchLoading(false);
-      return;
-    }
-    setSearchLoading(true);
-    setSearchError(null);
-
-    const movieUrl = `https://api.themoviedb.org/3/search/movie?api_key=${VITE_API_KEY}&query=${encodeURIComponent(
-      searchQuery
-    )}`;
-    const showUrl = `https://api.themoviedb.org/3/search/tv?api_key=${VITE_API_KEY}&query=${encodeURIComponent(
-      searchQuery
-    )}`;
-    Promise.all([
-      fetch(movieUrl).then((res) => res.json()),
-      fetch(showUrl).then((res) => res.json()),
-    ])
-      .then(([movieData, showData]) => {
-        setSearchResultsMovies(movieData.results || []);
-        setSearchResultsShows(showData.results || []);
-      })
-      .catch(() => setSearchError('Failed to fetch search results.'))
-      .finally(() => setSearchLoading(false));
-  }, [searchQuery]);
+ 
+  const {
+    data: searchResults,
+    isLoading: searchLoading,
+    error: searchError,
+  } = useQuery({
+    ...searchQueries.all(searchQuery),
+    // Keep previous data while loading new search results
+    placeholderData: (previousData) => previousData,
+    // Enhanced retry logic for search
+    retry: (failureCount, error) => {
+      // Don't retry on specific search errors
+      if (error instanceof Error) {
+        const errorMessage = error.message.toLowerCase();
+        if (
+          errorMessage.includes('search service is currently unavailable') ||
+          errorMessage.includes('unauthorized') ||
+          errorMessage.includes('network error')
+        ) {
+          return false;
+        }
+      }
+      // Retry up to 2 times for other search errors
+      return failureCount < 2;
+    },
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 10000), // Max 10 seconds
+    // Transform error messages for better UX
+    meta: {
+      errorMessage: (error: Error) => {
+        const message = error.message.toLowerCase();
+        if (message.includes('network error')) {
+          return 'Search is unavailable. Please check your internet connection.';
+        }
+        if (message.includes('search service is currently unavailable')) {
+          return 'Search service is temporarily down. Please try again in a few minutes.';
+        }
+        if (message.includes('movie search is currently unavailable')) {
+          return 'Movie search is temporarily unavailable.';
+        }
+        if (message.includes('tv show search is currently unavailable')) {
+          return 'TV show search is temporarily unavailable.';
+        }
+        return 'Search failed. Please try again.';
+      },
+    },
+  });
 
   return {
     searchQuery,
     setSearchQuery,
-    searchResultsMovies,
-    searchResultsShows,
+    searchResultsMovies: searchResults?.movies || [],
+    searchResultsShows: searchResults?.shows || [],
     searchLoading,
-    searchError,
+    searchError: searchError?.message || null,
   };
 }

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { Loading } from '../../components/loading/loading';
 import { useTheme } from '../../context/themeContext';
-import { movieVideosUrl, showVideosUrl } from '../../utils/api';
+import { fetchVideos } from '../../utils/queries';
 import {
   GoBackButton,
   TrailerContainer,
@@ -14,52 +15,42 @@ export const TrailerPage = () => {
   const { t } = useTranslation();
   const { id, media_type } = useParams<{ id: string; media_type: string }>();
   const navigate = useNavigate();
-  const [videoKey, setVideoKey] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const { theme } = useTheme();
 
-  useEffect(() => {
-    const getTrailer = async () => {
-      if (!(id && media_type)) {
-        setError(t('media-type-error'));
-        setLoading(false);
-        return;
-      }
 
-      try {
-        const url =
-          media_type === 'movie'
-            ? movieVideosUrl(Number(id))
-            : showVideosUrl(Number(id));
-        const response = await fetch(url);
-        const data = await response.json();
-        const videos = data.results;
-
-        if (!videos || videos.length === 0) {
-          setError(t('no-trailer-found'));
-          return;
+  const {
+    data: videos = [],
+    isLoading: loading,
+    error,
+  } = useQuery({
+    queryKey: ['videos', media_type, id],
+    queryFn: () => fetchVideos(media_type as 'movie' | 'tv', id || ''),
+    enabled: !!(id && media_type),
+    staleTime: 1000 * 60 * 10, // 10 minutes for video data
+    retry: (failureCount, error) => {
+      // Don't retry on specific video errors
+      if (error instanceof Error) {
+        const errorMessage = error.message.toLowerCase();
+        if (
+          errorMessage.includes('videos not found') ||
+          errorMessage.includes('unauthorized') ||
+          errorMessage.includes('network error')
+        ) {
+          return false;
         }
-
-        const trailer = videos.find(
-          (vid: any) => vid?.type === 'Trailer' && vid?.site === 'YouTube'
-        );
-
-        if (!(trailer && trailer.key)) {
-          setError(t('no-trailer-found'));
-          return;
-        }
-
-        setVideoKey(trailer.key);
-      } catch (err) {
-        console.error(t('no-trailer-found'), err);
-        setError(t('no-trailer-found'));
-      } finally {
-        setLoading(false);
       }
-    };
-    getTrailer();
-  }, [id]);
+      // Retry up to 2 times for other errors
+      return failureCount < 2;
+    },
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 10000), // Max 10 seconds
+  });
+
+  // Find trailer from videos data
+  const trailer = videos.find(
+    (vid: any) => vid?.type === 'Trailer' && vid?.site === 'YouTube'
+  );
+
+  const videoKey = trailer?.key || null;
 
   if (loading) {
     return (
@@ -69,10 +60,31 @@ export const TrailerPage = () => {
     );
   }
 
+  
+  const getErrorMessage = () => {
+    if (error instanceof Error) {
+      const message = error.message.toLowerCase();
+      if (message.includes('network error')) {
+        return 'Unable to load trailer. Please check your internet connection.';
+      }
+      if (message.includes('videos not found')) {
+        return 'Trailer not available for this content.';
+      }
+      if (message.includes('unauthorized')) {
+        return 'Unable to access trailer. Please try again later.';
+      }
+      if (message.includes('server error')) {
+        return 'Server error occurred. Please try again later.';
+      }
+      return 'Failed to load trailer. Please try again.';
+    }
+    return null; // Return null when there's no error
+  };
+
   if (error) {
     return (
       <TrailerContainer>
-        <p>{error}</p>
+        <p>{getErrorMessage()}</p>
         <GoBackButton onClick={() => navigate(-1)}>{t('go-back-button')}</GoBackButton>
       </TrailerContainer>
     );
