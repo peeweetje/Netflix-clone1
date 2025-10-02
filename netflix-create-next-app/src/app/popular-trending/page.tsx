@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
 import { Loading } from '../../components/loading/loading';
 import { MovieRow } from '../../components/movie-list/movie-row';
 import { SearchableContent } from '../../components/searchable-content/searchable-content';
 
 import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { useSearch } from '../../context/search-context';
+import { useQuery } from '@tanstack/react-query';
+import { fetchMovies, fetchShows } from '../../utils/queries';
 import {
   discoverShowUrl,
   popularMoviesUrl,
@@ -16,21 +17,6 @@ import {
 import type { MovieResult, ShowResult } from '../../utils/types/types';
 
 const PopularAndTrending = () => {
-  const [trendingMovies, setTrendingMovies] = useState<MovieResult[]>([]);
-  const [trendingShows, setTrendingShows] = useState<ShowResult[]>([]);
-  const [popularMovies, setPopularMovies] = useState<MovieResult[]>([]);
-  const [popularShows, setPopularShows] = useState<ShowResult[]>([]);
-
-  const [trendingMoviesLoading, setTrendingMoviesLoading] = useState(true);
-  const [trendingShowsLoading, setTrendingShowsLoading] = useState(true);
-  const [popularMoviesLoading, setPopularMoviesLoading] = useState(true);
-  const [popularShowsLoading, setPopularShowsLoading] = useState(true);
-
-  const [trendingMoviesError, setTrendingMoviesError] = useState<string | null>(null);
-  const [trendingShowsError, setTrendingShowsError] = useState<string | null>(null);
-  const [popularMoviesError, setPopularMoviesError] = useState<string | null>(null);
-  const [popularShowsError, setPopularShowsError] = useState<string | null>(null);
-
   const {
     searchQuery,
     setSearchQuery,
@@ -40,15 +26,49 @@ const PopularAndTrending = () => {
     searchError,
   } = useSearch();
 
-  // Fetch trending movies and shows
-  useFetchMovies(trendingMovieUrl, setTrendingMovies, setTrendingMoviesLoading, setTrendingMoviesError);
-  useFetchMovies(trendingShowUrl, setTrendingShows, setTrendingShowsLoading, setTrendingShowsError);
+  // Fetch trending movies
+  const {
+    data: trendingMovies = [],
+    isLoading: trendingMoviesLoading,
+    error: trendingMoviesError,
+  } = useQuery({
+    queryKey: ['movies', 'trending'],
+    queryFn: () => fetchMovies(trendingMovieUrl),
+    staleTime: 1000 * 60 * 5,
+  });
 
-  // Fetch most popular movies and shows
-  useFetchMovies(popularMoviesUrl, setPopularMovies, setPopularMoviesLoading, setPopularMoviesError);
+  // Fetch trending shows
+  const {
+    data: trendingShows = [],
+    isLoading: trendingShowsLoading,
+    error: trendingShowsError,
+  } = useQuery({
+    queryKey: ['shows', 'trending'],
+    queryFn: () => fetchShows(),
+    staleTime: 1000 * 60 * 5,
+  });
 
-  const mostPopularShowsUrl = `${discoverShowUrl}&sort_by=popularity.desc`;
-  useFetchMovies(mostPopularShowsUrl, setPopularShows, setPopularShowsLoading, setPopularShowsError);
+  // Fetch popular movies
+  const {
+    data: popularMovies = [],
+    isLoading: popularMoviesLoading,
+    error: popularMoviesError,
+  } = useQuery({
+    queryKey: ['movies', 'popular'],
+    queryFn: () => fetchMovies(popularMoviesUrl),
+    staleTime: 1000 * 60 * 5,
+  });
+
+  // Fetch popular shows
+  const {
+    data: popularShows = [],
+    isLoading: popularShowsLoading,
+    error: popularShowsError,
+  } = useQuery({
+    queryKey: ['shows', 'popular'],
+    queryFn: () => fetchMovies(`${discoverShowUrl}&sort_by=popularity.desc`),
+    staleTime: 1000 * 60 * 5,
+  });
 
   const mapShowToMovie = (show: ShowResult): MovieResult & { media_type: 'tv' } => ({
     id: show.id,
@@ -63,9 +83,30 @@ const PopularAndTrending = () => {
     ? searchLoading
     : trendingMoviesLoading || trendingShowsLoading || popularMoviesLoading || popularShowsLoading;
 
-  const error = searchQuery
-    ? searchError
-    : trendingMoviesError || trendingShowsError || popularMoviesError || popularShowsError;
+  // More specific error handling for individual sections
+  const hasTrendingMoviesError = !!trendingMoviesError;
+  const hasTrendingShowsError = !!trendingShowsError;
+  const hasPopularMoviesError = !!popularMoviesError;
+  const hasPopularShowsError = !!popularShowsError;
+
+  const getErrorMessage = () => {
+    if (searchQuery) return searchError;
+
+    const errors = [];
+    if (hasTrendingMoviesError) errors.push('trending movies');
+    if (hasTrendingShowsError) errors.push('trending shows');
+    if (hasPopularMoviesError) errors.push('popular movies');
+    if (hasPopularShowsError) errors.push('popular shows');
+
+    if (errors.length === 0) return null;
+    if (errors.length === 1) return `Failed to load ${errors[0]}.`;
+    if (errors.length === 2) return `Failed to load ${errors[0]} and ${errors[1]}.`;
+
+    // More than 2 errors - show general message
+    return 'Some content failed to load. Please refresh the page.';
+  };
+
+  const error = getErrorMessage();
 
   // Combine and deduplicate search results for SearchableContent
   const combinedSearchResults = [
@@ -94,10 +135,48 @@ const PopularAndTrending = () => {
           }}
         >
           <>
-            {trendingMovies.length > 0 && <MovieRow movies={trendingMovies} title="Trending Movies" />}
-            {trendingShows.length > 0 && <MovieRow movies={trendingShows.map(mapShowToMovie)} title="Trending Shows" />}
-            {popularMovies.length > 0 && <MovieRow movies={popularMovies} title="Most Popular Movies" />}
-            {popularShows.length > 0 && <MovieRow movies={popularShows.map(mapShowToMovie)} title="Most Popular Shows" />}
+            {!hasTrendingMoviesError && trendingMovies.length > 0 && (
+              <MovieRow movies={trendingMovies} title="Trending Movies" />
+            )}
+            {!hasTrendingShowsError && trendingShows.length > 0 && (
+              <MovieRow movies={trendingShows.map(mapShowToMovie)} title="Trending Shows" />
+            )}
+            {!hasPopularMoviesError && popularMovies.length > 0 && (
+              <MovieRow movies={popularMovies} title="Most Popular Movies" />
+            )}
+            {!hasPopularShowsError && popularShows.length > 0 && (
+              <MovieRow movies={popularShows.map(mapShowToMovie)} title="Most Popular Shows" />
+            )}
+
+            {/* Show error indicators for failed sections */}
+            {hasTrendingMoviesError && !trendingMoviesLoading && (
+              <div className="mb-8 p-4 bg-red-900/20 border border-red-500/30 rounded-lg max-w-6xl mx-auto">
+                <p className="text-red-400 text-sm text-center">
+                  Unable to load trending movies at this time.
+                </p>
+              </div>
+            )}
+            {hasTrendingShowsError && !trendingShowsLoading && (
+              <div className="mb-8 p-4 bg-red-900/20 border border-red-500/30 rounded-lg max-w-6xl mx-auto">
+                <p className="text-red-400 text-sm text-center">
+                  Unable to load trending shows at this time.
+                </p>
+              </div>
+            )}
+            {hasPopularMoviesError && !popularMoviesLoading && (
+              <div className="mb-8 p-4 bg-red-900/20 border border-red-500/30 rounded-lg max-w-6xl mx-auto">
+                <p className="text-red-400 text-sm text-center">
+                  Unable to load popular movies at this time.
+                </p>
+              </div>
+            )}
+            {hasPopularShowsError && !popularShowsLoading && (
+              <div className="mb-8 p-4 bg-red-900/20 border border-red-500/30 rounded-lg max-w-6xl mx-auto">
+                <p className="text-red-400 text-sm text-center">
+                  Unable to load popular shows at this time.
+                </p>
+              </div>
+            )}
           </>
         </SearchableContent>
       </Loading>
