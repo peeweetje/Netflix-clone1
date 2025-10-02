@@ -1,7 +1,6 @@
 'use client';
 
 import type React from 'react';
-import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loading } from '../loading/loading';
 import { Button } from '../ui/button';
@@ -10,150 +9,61 @@ import { MediaInfo } from './media-info';
 import { CastMember } from './cast-member';
 import { useMyList } from '../../context/myListContext';
 import { ArrowLeft, Play } from 'lucide-react';
-import { imageUrl, API_KEY } from '../../utils/api';
+import { imageUrl } from '../../utils/api';
+import { useQuery } from '@tanstack/react-query';
+import { mediaQueries } from '../../utils/queries';
 
 interface MediaDetailProps {
   type: 'movie' | 'tv';
   id: string;
 }
 
-interface MediaData {
-  id: number;
-  title?: string;
-  name?: string;
-  poster_path?: string;
-  overview?: string;
-  tagline?: string;
-  release_date?: string;
-  first_air_date?: string;
-  vote_average?: number;
-  genres?: Array<{ id: number; name: string }>;
-}
-
-interface CastMember {
-  cast_id?: number;
-  credit_id: string;
-  name: string;
-  profile_path?: string;
-  character?: string;
-}
-
-interface VideoResult {
-  id: string;
-  key: string;
-  name: string;
-  site: string;
-  type: string;
-}
-
 export const MediaDetail = ({ type, id }: MediaDetailProps) => {
   const router = useRouter();
-  const [media, setMedia] = useState<MediaData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [cast, setCast] = useState<CastMember[]>([]);
-  const [hasTrailer, setHasTrailer] = useState(false);
 
-  // Use useRef to persist AbortController across re-renders
-  const abortControllerRef = useRef<AbortController | null>(null);
+  // Fetch media details
+  const {
+    data: media,
+    isLoading: mediaLoading,
+    error: mediaError,
+  } = useQuery(mediaQueries.details(type, id));
 
-  useEffect(() => {
-    // Cancel any ongoing request when id or type changes
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-    }
+  // Fetch cast
+  const {
+    data: castData,
+    isLoading: castLoading,
+    error: castError,
+  } = useQuery(mediaQueries.cast(type, id));
 
-    if (!id) {
-      setLoading(false);
-      return;
-    }
+  // Fetch videos to check for trailer
+  const {
+    data: videoData,
+    isLoading: videoLoading,
+    error: videoError,
+  } = useQuery(mediaQueries.videos(type, id));
 
-    // Create new AbortController for this request
-    abortControllerRef.current = new AbortController();
-    const signal = abortControllerRef.current.signal;
+  const cast = castData || [];
+  const hasTrailer = videoData?.some((vid: any) => vid.type === 'Trailer' && vid.site === 'YouTube') || false;
 
-    setLoading(true);
-    setError(null);
+  const isLoading = mediaLoading || castLoading || videoLoading;
+  const hasErrors = mediaError || castError || videoError;
+  const hasMediaError = !!mediaError;
+  const hasCastError = !!castError;
+  const hasVideoError = !!videoError;
 
-    // Create all fetch promises with AbortController signal
-    const fetchMedia = fetch(
-      `https://api.themoviedb.org/3/${type}/${id}?api_key=${API_KEY}`,
-      { signal }
-    ).then((res) => {
-      if (!res.ok) throw new Error(`Media API error: ${res.status}`);
-      return res.json();
-    });
+  // More specific error messages
+  const getErrorMessage = () => {
+    if (hasMediaError) return mediaError?.message || 'Failed to load media details.';
+    if (hasCastError && hasVideoError) return 'Failed to load cast and trailer information.';
+    if (hasCastError) return 'Failed to load cast information.';
+    if (hasVideoError) return 'Failed to load trailer information.';
+    return null;
+  };
 
-    const fetchCast = fetch(
-      `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${API_KEY}`,
-      { signal }
-    ).then((res) => {
-      if (!res.ok) throw new Error(`Cast API error: ${res.status}`);
-      return res.json();
-    });
+  const error = getErrorMessage();
 
-    const fetchVideos = fetch(
-      `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${API_KEY}`,
-      { signal }
-    ).then((res) => {
-      if (!res.ok) throw new Error(`Videos API error: ${res.status}`);
-      return res.json();
-    });
-
-    // Execute all requests in parallel
-    Promise.all([fetchMedia, fetchCast, fetchVideos])
-      .then(([mediaData, castData, videoData]) => {
-        // Only update state if this request wasn't aborted
-        if (!signal.aborted) {
-          setMedia(mediaData);
-          setCast(castData.cast || []);
-          const trailer = videoData.results?.find(
-            (vid: VideoResult) => vid.type === 'Trailer' && vid.site === 'YouTube'
-          );
-          setHasTrailer(!!trailer);
-          setError(null);
-        }
-      })
-      .catch((error) => {
-        // Only handle errors if this request wasn't aborted
-        if (!signal.aborted) {
-          if (error.name === 'AbortError') {
-            // Request was cancelled, don't treat as error
-            return;
-          }
-          console.error('Media detail fetch error:', error);
-          setError(`Failed to fetch ${type} details. Please try again later.`);
-          setMedia(null);
-          setCast([]);
-          setHasTrailer(false);
-        }
-      })
-      .finally(() => {
-        // Only update loading state if this request wasn't aborted
-        if (!signal.aborted) {
-          setLoading(false);
-        }
-      });
-
-    // Cleanup function to abort request if component unmounts or effect runs again
-    return () => {
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
-      }
-    };
-  }, [id, type]);
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
-      }
-    };
-  }, []);
-
-  if (loading) return <Loading loading={true} error={null} />;
-  if (error) return <Loading loading={false} error={error} />;
+  if (isLoading) return <Loading loading={true} error={null} />;
+  if (hasMediaError) return <Loading loading={false} error={error} />;
   if (!media) return null;
 
   return (
@@ -168,7 +78,7 @@ export const MediaDetail = ({ type, id }: MediaDetailProps) => {
           <ArrowLeft />
           Go Back
         </Button>
-        {hasTrailer && (
+        {hasTrailer && !hasVideoError && (
           <Button
             size="lg"
             onClick={() => router.push(`/trailer/${type}/${id}`)}
@@ -177,6 +87,15 @@ export const MediaDetail = ({ type, id }: MediaDetailProps) => {
             <Play />
             Watch Trailer
           </Button>
+        )}
+
+        {hasVideoError && !videoLoading && (
+          <div className="px-8 py-6 bg-gray-900/50 border border-gray-600/30 rounded-lg">
+            <p className="text-gray-400 text-sm flex items-center gap-2">
+              <Play className="w-4 h-4" />
+              Trailer unavailable
+            </p>
+          </div>
         )}
       </div>
 
@@ -192,7 +111,7 @@ export const MediaDetail = ({ type, id }: MediaDetailProps) => {
 
         {/* Cast Members and Media Info */}
         <div className="flex flex-col items-start">
-          {cast.length > 0 && (
+          {!hasCastError && cast.length > 0 && (
             <div className="mb-6">
               <h2 className="text-md font-bold mb-4 text-white">
                 Cast Members
@@ -215,6 +134,15 @@ export const MediaDetail = ({ type, id }: MediaDetailProps) => {
               </div>
             </div>
           )}
+
+          {hasCastError && !mediaLoading && (
+            <div className="mb-6 p-4 bg-red-900/20 border border-red-500/30 rounded-lg">
+              <p className="text-red-400 text-sm">
+                Unable to load cast information at this time.
+              </p>
+            </div>
+          )}
+
           <MediaInfo media={media} type={type} />
         </div>
       </div>
