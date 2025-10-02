@@ -3,6 +3,7 @@ import { Poppins } from 'next/font/google';
 import { MyListProvider } from '../context/myListContext';
 import { ThemeProvider } from '@/context/theme-context';
 import { AppLayout } from '../components/app-layout';
+import { Providers } from './providers';
 
 export const metadata = {
   title: 'Netflix Clone - Next.js',
@@ -12,6 +13,9 @@ export const metadata = {
 const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400'],
+  display: 'swap',
+  preload: true,
+  fallback: ['system-ui', 'arial'],
 });
 
 export default function RootLayout({
@@ -22,11 +26,13 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <body className={poppins.className}>
-        <ThemeProvider>
-          <MyListProvider>
-            <AppLayout>{children}</AppLayout>
-          </MyListProvider>
-        </ThemeProvider>
+        <Providers>
+          <ThemeProvider>
+            <MyListProvider>
+              <AppLayout>{children}</AppLayout>
+            </MyListProvider>
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );
