@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { type MyListItem, useMyList } from '../context/myListContext';
 import { API_KEY } from '../utils/api';
+import { fetchMediaDetails } from '../utils/queries';
 import type { MovieResult } from '../utils/types/types';
-
 
 interface UseLocalListDetailsReturn {
   localMovies: MovieResult[];
@@ -14,112 +14,126 @@ interface UseLocalListDetailsReturn {
 
 export const useLocalListDetails = (): UseLocalListDetailsReturn => {
   const { myList, removeFromList } = useMyList();
-  const [localMovies, setLocalMovies] = useState<MovieResult[]>([]);
-  const [localLoading, setLocalLoading] = useState<boolean>(false);
-  const [localError, setLocalError] = useState<string | null>(null);
-  const [failedItems, setFailedItems] = useState<MyListItem[]>([]);
-  const [removalNotice, setRemovalNotice] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (!myList || myList.length === 0) {
-      setLocalMovies([]);
-      setFailedItems([]);
-      return;
-    }
-
-    // Filter for valid items only
-    const validList = myList.filter(
+  // Prepare queries for each item in the list
+  const listItemQueries = myList
+    .filter(
       (item) =>
-        item && 
-        item.media_type && 
-        ['movie', 'tv'].includes(item.media_type) && 
+        item &&
+        item.media_type &&
+        ['movie', 'tv'].includes(item.media_type) &&
         typeof item.id === 'number'
-    );
- 
-    if (validList.length === 0) {
-      setLocalMovies([]);
-      setFailedItems(myList); // All items are invalid
-      return;
-    }
+    )
+    .map((item) => ({
+      ...item,
+      queryKey: ['media', item.media_type, item.id],
+    }));
 
-    const abortController = new AbortController();
+  // Create a stable query key that doesn't change unless the actual content changes
+  const queryKey = myList ?
+    ['myList', 'details', ...myList.map(item => item ? `${item.media_type}-${item.id}` : 'null').sort()] :
+    ['myList', 'details', 'empty'];
 
-    const fetchLocalMovies = async () => {
-      setLocalLoading(true);
-      setLocalError(null);
-      setFailedItems([]); // Reset failed items on each fetch
-
-      try {
-        const movies: MovieResult[] = [];
-        const failed: any[] = [];
-
-        for (const item of validList) {
-          if (abortController.signal.aborted) break;
-          const url = `https://api.themoviedb.org/3/${item.media_type}/${item.id}?api_key=${API_KEY}`
-          const res = await fetch(url, { signal: abortController.signal });
-
-          if (!res.ok) {
-            console.error('API Error:', res.status, res.statusText, 'for URL:', url);
-            console.warn(
-              'Failed to fetch:',
-              url,
-              'Status:',
-              res.status,
-              'Item:',
-              item
-            );
-            failed.push(item);
-            // Batch remove failed items and show notice
-            if (failed.length > 0) {
-              failed.forEach((item) => removeFromList(item));
-              const failedTitles = failed
-                .map((item) => item.title || item.name || 'Unknown Title')
-                .join(', ');
-              const sanitizedTitle = (
-                item.title ||
-                item.name ||
-                'Unknown Title'
-              ).replace(/[<>]/g, '');
-              setRemovalNotice(
-                `"${sanitizedTitle}" was removed from your list because it could not be loaded.`
-              );
-              setTimeout(() => setRemovalNotice(null), 4000);
-            }
-            continue;
-          }
-          const data = await res.json();
-          const movieData =
-            item.media_type === 'tv' 
-              ? { ...data, title: data.name, media_type: 'tv' } 
-              : { ...data, media_type: 'movie' };
-          movies.push(movieData);
-        }
-
-        setLocalMovies(movies);
-        setFailedItems(failed);
-      } catch (err) {
-        if (!abortController.signal.aborted) {
-          setLocalError('Failed to fetch your list. Please try again later.');
-        }
-      } finally {
-        if (!abortController.signal.aborted) {
-          setLocalLoading(false);
-        }
+  const {
+    data: queryResults = [],
+    isLoading: localLoading,
+    error: queryError,
+    isError,
+  } = useQuery({
+    queryKey,
+    queryFn: async () => {
+      if (!myList || !Array.isArray(myList) || myList.length === 0) {
+        return [];
       }
-    };
 
-    fetchLocalMovies();
+      const validList = myList.filter(
+        (item) =>
+          item &&
+          item.media_type &&
+          ['movie', 'tv'].includes(item.media_type) &&
+          typeof item.id === 'number'
+      );
 
-    return () => {
-      abortController.abort();
-    };
-  }, [myList, removeFromList]);
+
+      if (validList.length === 0) {
+        return [];
+      }
+
+      const results: MovieResult[] = [];
+      const failed: MyListItem[] = [];
+
+      // Fetch all items in parallel
+      const fetchPromises = validList.map(async (item, index) => {
+        try {
+          const data = await fetchMediaDetails(item.media_type as 'movie' | 'tv', String(item.id));
+          return {
+            ...data,
+            title: data.title || data.name || 'Unknown Title',
+            media_type: item.media_type,
+          };
+        } catch (error) {
+          console.error(`useLocalListDetails: Failed to fetch item ${index + 1}:`, item, error);
+          return null;
+        }
+      });
+
+      const fetchedData = await Promise.all(fetchPromises);
+
+      // Process results and identify failed items
+      fetchedData.forEach((data, index) => {
+        if (data) {
+          results.push(data as MovieResult);
+        } else {
+          failed.push(validList[index]);
+        }
+      });
+
+
+      // Handle failed items - only remove if we actually got data back
+      if (failed.length > 0 && results.length > 0) {
+        failed.forEach((item) => {
+          removeFromList(item);
+        });
+      }
+      return results;
+    },
+    enabled: myList !== undefined,
+    staleTime: 1000 * 60 * 10, // 10 minutes for user's list
+    retry: (failureCount, error) => {
+      // Don't retry if it's a 404 or 401 error
+      if (error?.message?.includes('404') || error?.message?.includes('401')) {
+        return false;
+      }
+      return failureCount < 2;
+    },
+    // Add error handling
+    onError: (error) => {
+      console.error('useLocalListDetails: Query error:', error);
+    },
+    // Add success handling
+    onSuccess: (data) => {
+      console.log('useLocalListDetails: Query success with data length:', data.length);
+    },
+  });
+
+  // Determine failed items (items in myList but not in results)
+  const failedItems = myList?.filter(
+    (item) =>
+      item &&
+      item.media_type &&
+      ['movie', 'tv'].includes(item.media_type) &&
+      typeof item.id === 'number' &&
+      !queryResults.some(result => result.id === item.id)
+  ) || [];
+
+  // If there's an error and we have no data, return empty results to prevent infinite loading
+  const safeResults = isError && queryResults.length === 0 ? [] : queryResults;
 
   return {
-    localMovies,
-    localLoading,
-    localError,
+    localMovies: safeResults,
+    localLoading: localLoading && !isError, // Stop loading if there's an error
+    localError: queryError?.message || null,
     failedItems,
-    removalNotice,
+    removalNotice: null, // This would need separate state management
   };
 };
