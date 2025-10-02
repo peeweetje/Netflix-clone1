@@ -9,6 +9,13 @@ const nextConfig = {
         pathname: '/t/p/**',
       },
     ],
+    unoptimized: false,
+  },
+  // Optimize font loading
+  optimizeFonts: true,
+  // Experimental features for better performance
+  experimental: {
+    optimizeCss: true,
   },
 }
 
