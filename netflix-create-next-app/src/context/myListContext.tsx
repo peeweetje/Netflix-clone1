@@ -22,17 +22,25 @@ export const MyListProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
     try {
       const stored = localStorage.getItem('myList');
-      const parsed = stored ? JSON.parse(stored) : [];
+      if (!stored) return [];
+
+      const parsed = JSON.parse(stored);
       // Filter out any null, undefined, or malformed items
-      if (!Array.isArray(parsed)) return [];
-      return parsed.filter(
+      if (!Array.isArray(parsed)) {
+        console.warn('myListContext: Stored data is not an array, resetting');
+        return [];
+      }
+
+      const filtered = parsed.filter(
         (i: any) =>
           i &&
           typeof i.id === 'number' &&
           (i.media_type === 'movie' || i.media_type === 'tv')
       );
+
+      return filtered;
     } catch (error) {
-      console.error('Error loading myList from localStorage:', error);
+      console.error('myListContext: Error loading myList from localStorage:', error);
       return [];
     }
   });

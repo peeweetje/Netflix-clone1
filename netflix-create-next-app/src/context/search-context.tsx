@@ -1,7 +1,8 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, useRef, ReactNode } from 'react';
-import { API_KEY } from '../utils/api';
+import { createContext, useContext, useState, ReactNode } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { searchMoviesAndShows } from '../utils/queries';
 import type { MovieResult, ShowResult } from '../utils/types/types';
 
 interface SearchContextType {
@@ -29,102 +30,21 @@ interface SearchProviderProps {
 
 export const SearchProvider = ({ children }: SearchProviderProps) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResultsMovies, setSearchResultsMovies] = useState<MovieResult[]>([]);
-  const [searchResultsShows, setSearchResultsShows] = useState<ShowResult[]>([]);
-  const [searchLoading, setSearchLoading] = useState(false);
-  const [searchError, setSearchError] = useState<string | null>(null);
 
-  // Use useRef to persist AbortController across re-renders
-  const abortControllerRef = useRef<AbortController | null>(null);
+  const {
+    data: searchData,
+    isLoading: searchLoading,
+    error: searchError,
+  } = useQuery({
+    queryKey: ['search', searchQuery],
+    queryFn: () => searchMoviesAndShows(searchQuery),
+    enabled: !!searchQuery.trim() && searchQuery.trim().length > 2,
+    staleTime: 1000 * 60 * 2, // 2 minutes for search results
+    retry: 1,
+  });
 
-  useEffect(() => {
-    // Cancel any ongoing request when searchQuery changes
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-    }
-
-    if (!searchQuery.trim()) {
-      setSearchResultsMovies([]);
-      setSearchResultsShows([]);
-      setSearchError(null);
-      setSearchLoading(false);
-      return;
-    }
-
-    // Create new AbortController for this request
-    abortControllerRef.current = new AbortController();
-    const signal = abortControllerRef.current.signal;
-
-    setSearchLoading(true);
-    setSearchError(null);
-
-    const movieUrl = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
-      searchQuery.trim()
-    )}`;
-    const showUrl = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${encodeURIComponent(
-      searchQuery.trim()
-    )}`;
-
-    // Create fetch promises with AbortController signal
-    const fetchMovies = fetch(movieUrl, { signal }).then((res) => {
-      if (!res.ok) {
-        throw new Error(`Movies API error: ${res.status}`);
-      }
-      return res.json();
-    });
-
-    const fetchShows = fetch(showUrl, { signal }).then((res) => {
-      if (!res.ok) {
-        throw new Error(`Shows API error: ${res.status}`);
-      }
-      return res.json();
-    });
-
-    Promise.all([fetchMovies, fetchShows])
-      .then(([movieData, showData]) => {
-        // Only update state if this request wasn't aborted
-        if (!signal.aborted) {
-          setSearchResultsMovies(movieData.results || []);
-          setSearchResultsShows(showData.results || []);
-          setSearchError(null);
-        }
-      })
-      .catch((error) => {
-        // Only handle errors if this request wasn't aborted
-        if (!signal.aborted) {
-          if (error.name === 'AbortError') {
-            // Request was cancelled, don't treat as error
-            return;
-          }
-          console.error('Search error:', error);
-          setSearchError('Failed to fetch search results. Please try again.');
-          setSearchResultsMovies([]);
-          setSearchResultsShows([]);
-        }
-      })
-      .finally(() => {
-        // Only update loading state if this request wasn't aborted
-        if (!signal.aborted) {
-          setSearchLoading(false);
-        }
-      });
-
-    // Cleanup function to abort request if component unmounts or effect runs again
-    return () => {
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
-      }
-    };
-  }, [searchQuery]);
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
-      }
-    };
-  }, []);
+  const searchResultsMovies = searchData?.movies || [];
+  const searchResultsShows = searchData?.shows || [];
 
   const value = {
     searchQuery,
@@ -132,7 +52,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
     searchResultsMovies,
     searchResultsShows,
     searchLoading,
-    searchError,
+    searchError: searchError?.message || null,
   };
 
   return (
