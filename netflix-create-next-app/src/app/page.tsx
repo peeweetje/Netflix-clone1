@@ -8,6 +8,7 @@ import { useFetchMovies } from '../hooks/useFetchMovies';
 import { useSearch } from '../context/search-context';
 import { useQuery } from '@tanstack/react-query';
 import { fetchMovies } from '../utils/queries';
+import { ErrorDisplay } from '../components/error-display/error-display';
 import {
   actionMoviesUrl,
   imageUrl,
@@ -134,24 +135,30 @@ import type { MovieResult } from '../utils/types/types';
 
             {/* Show error indicators for failed sections */}
             {hasPopularError && !popularLoading && (
-              <div className="mb-8 p-4 bg-red-900/20 border border-red-500/30 rounded-lg max-w-6xl mx-auto">
-                <p className="text-red-400 text-sm text-center">
-                  Unable to load popular movies at this time.
-                </p>
+              <div className="mb-8 max-w-6xl mx-auto">
+                <ErrorDisplay
+                  message="Unable to load popular movies at this time."
+                  type="error"
+                  className="max-w-none mx-0"
+                />
               </div>
             )}
             {hasTopRatedError && !topRatedLoading && (
-              <div className="mb-8 p-4 bg-red-900/20 border border-red-500/30 rounded-lg max-w-6xl mx-auto">
-                <p className="text-red-400 text-sm text-center">
-                  Unable to load top rated movies at this time.
-                </p>
+              <div className="mb-8 max-w-6xl mx-auto">
+                <ErrorDisplay
+                  message="Unable to load top rated movies at this time."
+                  type="error"
+                  className="max-w-none mx-0"
+                />
               </div>
             )}
             {hasActionError && !actionLoading && (
-              <div className="mb-8 p-4 bg-red-900/20 border border-red-500/30 rounded-lg max-w-6xl mx-auto">
-                <p className="text-red-400 text-sm text-center">
-                  Unable to load action movies at this time.
-                </p>
+              <div className="mb-8 max-w-6xl mx-auto">
+                <ErrorDisplay
+                  message="Unable to load action movies at this time."
+                  type="error"
+                  className="max-w-none mx-0"
+                />
               </div>
             )}
           </>

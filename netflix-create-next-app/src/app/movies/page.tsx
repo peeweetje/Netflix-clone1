@@ -6,6 +6,7 @@ import { SearchableContent } from '../../components/searchable-content/searchabl
 
 import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { useSearch } from '../../context/search-context';
+import { ErrorDisplay } from '../../components/error-display/error-display';
 import type { MovieResult } from '../../utils/types/types';
 
 const Movies = () => {
@@ -27,8 +28,7 @@ const Movies = () => {
   const isLoading = searchQuery ? searchLoading : moviesLoading;
   const error = searchQuery ? searchError : moviesError?.message || null;
 
-  // If there's an error and no data, show empty state instead of infinite loading
-  const displayResults = moviesErrorState && results.length === 0 ? [] : results;
+  // Show results if available, otherwise handle error state
 
   return (
     <main className='flex flex-row justify-center flex-wrap max-w-full'>
@@ -42,20 +42,22 @@ const Movies = () => {
             <MovieList movies={results} />
           )}
         >
-          {displayResults.length > 0 ? (
-            <MovieList movies={displayResults} />
-          ) : moviesErrorState ? (
+          {results.length > 0 ? (
+            <MovieList movies={results} />
+          ) : (
             <div className="flex items-center justify-center min-h-[60vh]">
-              <div className="text-center">
-                <h2 className="text-2xl font-semibold text-foreground mb-4">
-                  Unable to Load Movies
-                </h2>
-                <p className="text-muted-foreground">
-                  There was a problem loading the movies. Please check your internet connection and try again.
-                </p>
+              <div className="text-center max-w-md">
+                <ErrorDisplay
+                  title="Unable to Load Movies"
+                  message="There was a problem loading the movies. Please check your internet connection and try again."
+                  type="error"
+                  showRetry={true}
+                  onRetry={() => window.location.reload()}
+                  className="mb-4"
+                />
               </div>
             </div>
-          ) : null}
+          )}
         </SearchableContent>
       </Loading>
     </main>
