@@ -12,6 +12,7 @@ import { ArrowLeft, Play } from 'lucide-react';
 import { imageUrl } from '../../utils/api';
 import { useQuery } from '@tanstack/react-query';
 import { mediaQueries } from '../../utils/queries';
+import { ErrorDisplay } from '../error-display/error-display';
 
 interface MediaDetailProps {
   type: 'movie' | 'tv';
@@ -111,7 +112,7 @@ export const MediaDetail = ({ type, id }: MediaDetailProps) => {
 
         {/* Cast Members and Media Info */}
         <div className="flex flex-col items-start">
-          {!hasCastError && cast.length > 0 && (
+          {cast.length > 0 ? (
             <div className="mb-6">
               <h2 className="text-md font-bold mb-4 text-white">
                 Cast Members
@@ -133,15 +134,15 @@ export const MediaDetail = ({ type, id }: MediaDetailProps) => {
                 ))}
               </div>
             </div>
-          )}
-
-          {hasCastError && !mediaLoading && (
-            <div className="mb-6 p-4 bg-red-900/20 border border-red-500/30 rounded-lg">
-              <p className="text-red-400 text-sm">
-                Unable to load cast information at this time.
-              </p>
+          ) : !castLoading ? (
+            <div className="mb-6">
+              <ErrorDisplay
+                message={hasCastError ? "Unable to load cast information at this time." : "No cast information available."}
+                type={hasCastError ? "error" : "no-data"}
+                className="max-w-none mx-0"
+              />
             </div>
-          )}
+          ) : null}
 
           <MediaInfo media={media} type={type} />
         </div>
