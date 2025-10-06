@@ -7,6 +7,7 @@ import {Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchVideos } from '../../../utils/queries';
+import { ErrorDisplay } from '../../../components/error-display/error-display';
 
 interface TrailerPageProps {
   params: Promise<{
@@ -44,15 +45,7 @@ const TrailerPage = ({ params }: TrailerPageProps) => {
 
   // Enhanced error handling
   const hasError = !!error;
-  const hasNoTrailer = !videoKey && !loading;
-
-  const getErrorMessage = () => {
-    if (hasError) return error?.message || 'Failed to load trailer.';
-    if (hasNoTrailer) return 'No trailer found for this content.';
-    return null;
-  };
-
-  const errorMessage = getErrorMessage();
+  const hasNoTrailer = !videoKey && !loading && !hasError;
 
   if (loading) {
     return (
@@ -62,23 +55,41 @@ const TrailerPage = ({ params }: TrailerPageProps) => {
     );
   }
 
-  if (errorMessage) {
+  if (hasError) {
     return (
       <div className='h-screen flex flex-col items-center justify-center bg-background text-foreground p-8 overflow-hidden'>
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-semibold mb-4">
-            {hasError ? 'Unable to Load Trailer' : 'Trailer Not Available'}
-          </h2>
-          <p className="text-xl mb-6 text-muted-foreground">
-            {errorMessage}
+        <div className="text-center mb-8 max-w-lg">
+          <ErrorDisplay
+            title="Unable to Load Trailer"
+            message="Failed to load trailer"
+            type="error"
+            className="mb-6"
+          />
+          <p className="text-sm text-muted-foreground mb-6">
+            Please check your internet connection and try again.
           </p>
-          {hasError && (
-            <div className="p-4 bg-red-900/20 border border-red-500/30 rounded-lg max-w-md mx-auto mb-6">
-              <p className="text-red-400 text-sm">
-                Please check your internet connection and try again.
-              </p>
-            </div>
-          )}
+        </div>
+        <Button onClick={() => router.back()} className='btn-primary cursor-pointer'>
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Go Back
+        </Button>
+      </div>
+    );
+  }
+
+  if (hasNoTrailer) {
+    return (
+      <div className='h-screen flex flex-col items-center justify-center bg-background text-foreground p-8 overflow-hidden'>
+        <div className="text-center mb-8 max-w-lg">
+          <ErrorDisplay
+            title="Trailer Not Available"
+            message="No trailer found for this content."
+            type="no-data"
+            className="mb-6"
+          />
+          <p className="text-sm text-muted-foreground mb-6">
+            Trailers may be added later or might not be available for this content.
+          </p>
         </div>
         <Button onClick={() => router.back()} className='btn-primary cursor-pointer'>
           <ArrowLeft className="w-4 h-4 mr-2" />
@@ -99,30 +110,16 @@ const TrailerPage = ({ params }: TrailerPageProps) => {
         Go Back
       </Button>
 
-      {videoKey ? (
-        <div className='w-full max-w-6xl aspect-video rounded-xl overflow-hidden shadow-lg'>
-          <iframe
-            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-            allowFullScreen
-            frameBorder='0'
-            src={`https://www.youtube.com/embed/${videoKey}?autoplay=1`}
-            title='Movie Trailer'
-            className='w-full h-full'
-          />
-        </div>
-      ) : (
-        <div className="text-center">
-          <h2 className="text-2xl font-semibold mb-4">Trailer Not Available</h2>
-          <p className="text-xl text-muted-foreground mb-6">
-            This content doesn't have a trailer available at the moment.
-          </p>
-          <div className="p-4 bg-gray-900/50 border border-gray-600/30 rounded-lg max-w-md mx-auto mb-6">
-            <p className="text-gray-400 text-sm">
-              Trailers may be added later or might not be available for this content.
-            </p>
-          </div>
-        </div>
-      )}
+      <div className='w-full max-w-6xl aspect-video rounded-xl overflow-hidden shadow-lg'>
+        <iframe
+          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+          allowFullScreen
+          frameBorder='0'
+          src={`https://www.youtube.com/embed/${videoKey}?autoplay=1`}
+          title='Movie Trailer'
+          className='w-full h-full'
+        />
+      </div>
     </div>
   );
 };
