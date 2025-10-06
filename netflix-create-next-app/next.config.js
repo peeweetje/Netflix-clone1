@@ -11,8 +11,7 @@ const nextConfig = {
     ],
     unoptimized: false,
   },
-  // Optimize font loading
-  optimizeFonts: true,
+
   // Experimental features for better performance
   experimental: {
     optimizeCss: true,
