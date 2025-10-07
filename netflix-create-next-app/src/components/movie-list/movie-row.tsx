@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { MovieResult } from '../../utils/types/types';
 import { Button } from '../ui/button';
 import { Card } from '../card/card';
+import { ErrorDisplay } from '../error-display/error-display';
 
 interface MovieRowProps {
   movies: MovieResult[];
@@ -76,6 +77,24 @@ export const MovieRow = ({ movies, title }:MovieRowProps) => {
   }
 
   const viewportWidth = visibleCount * cardWidth;
+
+  // Show error state if no movies available
+  if (movies.length === 0) {
+    return (
+      <section className="relative mt-10">
+        <h2 className="text-xs ml-4 mb-4 sm:text-sm md:text-lg lg:text-lg xl:text-lg">
+          {title}
+        </h2>
+        <div className="flex justify-center items-center" style={{ width: `${viewportWidth}px`, height: '200px' }}>
+          <ErrorDisplay
+            message={`No ${title.toLowerCase()} available at this time.`}
+            type="no-data"
+            className="max-w-md"
+          />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="relative mt-10">
