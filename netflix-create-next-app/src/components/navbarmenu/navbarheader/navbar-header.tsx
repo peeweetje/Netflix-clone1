@@ -114,7 +114,7 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
                 </li>
                 <li>
                   <Link href="/popular-trending" className="text-gray-300 hover:text-primary transition-colors duration-200">
-                    Trending
+                   Popular & Trending
                   </Link>
                 </li>
                 <li>
