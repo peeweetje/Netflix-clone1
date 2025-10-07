@@ -123,44 +123,18 @@ import type { MovieResult } from '../utils/types/types';
                 Hero Banner - No backdrop available for "{heroMovie.title}"
               </div>
             )}
-            {!hasPopularError && safePopular.length > 0 && (
-              <MovieRow movies={safePopular} title='Popular' />
-            )}
-            {!hasTopRatedError && safeTopRated.length > 0 && (
-              <MovieRow movies={safeTopRated} title='Top Rated' />
-            )}
-            {!hasActionError && safeAction.length > 0 && (
-              <MovieRow movies={safeAction} title='Action Movies' />
-            )}
-
-            {/* Show error indicators for failed sections */}
-            {hasPopularError && !popularLoading && (
-              <div className="mb-8 max-w-6xl mx-auto">
-                <ErrorDisplay
-                  message="Unable to load popular movies at this time."
-                  type="error"
-                  className="max-w-none mx-0"
-                />
-              </div>
-            )}
-            {hasTopRatedError && !topRatedLoading && (
-              <div className="mb-8 max-w-6xl mx-auto">
-                <ErrorDisplay
-                  message="Unable to load top rated movies at this time."
-                  type="error"
-                  className="max-w-none mx-0"
-                />
-              </div>
-            )}
-            {hasActionError && !actionLoading && (
-              <div className="mb-8 max-w-6xl mx-auto">
-                <ErrorDisplay
-                  message="Unable to load action movies at this time."
-                  type="error"
-                  className="max-w-none mx-0"
-                />
-              </div>
-            )}
+            <MovieRow
+              movies={hasPopularError ? [] : safePopular}
+              title='Popular'
+            />
+            <MovieRow
+              movies={hasTopRatedError ? [] : safeTopRated}
+              title='Top Rated'
+            />
+            <MovieRow
+              movies={hasActionError ? [] : safeAction}
+              title='Action Movies'
+            />
           </>
         </SearchableContent>
       </Loading>
