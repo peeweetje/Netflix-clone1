@@ -14,6 +14,7 @@
 > - `React`
 > - `Next`
 > - `Typescript`
+> - `Tanstack/react-query`
 > - `Shadcn`
 > - `tailwind`
 > - `Framer-motion`
