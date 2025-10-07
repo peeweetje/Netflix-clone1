@@ -8,6 +8,7 @@ import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { useSearch } from '../../context/search-context';
 import { useQuery } from '@tanstack/react-query';
 import { fetchMovies, fetchShows } from '../../utils/queries';
+import { ErrorDisplay } from '../../components/error-display/error-display';
 import {
   discoverShowUrl,
   popularMoviesUrl,
@@ -135,48 +136,22 @@ const PopularAndTrending = () => {
           }}
         >
           <>
-            {!hasTrendingMoviesError && trendingMovies.length > 0 && (
-              <MovieRow movies={trendingMovies} title="Trending Movies" />
-            )}
-            {!hasTrendingShowsError && trendingShows.length > 0 && (
-              <MovieRow movies={trendingShows.map(mapShowToMovie)} title="Trending Shows" />
-            )}
-            {!hasPopularMoviesError && popularMovies.length > 0 && (
-              <MovieRow movies={popularMovies} title="Most Popular Movies" />
-            )}
-            {!hasPopularShowsError && popularShows.length > 0 && (
-              <MovieRow movies={popularShows.map(mapShowToMovie)} title="Most Popular Shows" />
-            )}
-
-            {/* Show error indicators for failed sections */}
-            {hasTrendingMoviesError && !trendingMoviesLoading && (
-              <div className="mb-8 p-4 bg-red-900/20 border border-red-500/30 rounded-lg max-w-6xl mx-auto">
-                <p className="text-red-400 text-sm text-center">
-                  Unable to load trending movies at this time.
-                </p>
-              </div>
-            )}
-            {hasTrendingShowsError && !trendingShowsLoading && (
-              <div className="mb-8 p-4 bg-red-900/20 border border-red-500/30 rounded-lg max-w-6xl mx-auto">
-                <p className="text-red-400 text-sm text-center">
-                  Unable to load trending shows at this time.
-                </p>
-              </div>
-            )}
-            {hasPopularMoviesError && !popularMoviesLoading && (
-              <div className="mb-8 p-4 bg-red-900/20 border border-red-500/30 rounded-lg max-w-6xl mx-auto">
-                <p className="text-red-400 text-sm text-center">
-                  Unable to load popular movies at this time.
-                </p>
-              </div>
-            )}
-            {hasPopularShowsError && !popularShowsLoading && (
-              <div className="mb-8 p-4 bg-red-900/20 border border-red-500/30 rounded-lg max-w-6xl mx-auto">
-                <p className="text-red-400 text-sm text-center">
-                  Unable to load popular shows at this time.
-                </p>
-              </div>
-            )}
+            <MovieRow
+              movies={hasTrendingMoviesError ? [] : trendingMovies}
+              title="Trending Movies"
+            />
+            <MovieRow
+              movies={hasTrendingShowsError ? [] : trendingShows.map(mapShowToMovie)}
+              title="Trending Shows"
+            />
+            <MovieRow
+              movies={hasPopularMoviesError ? [] : popularMovies}
+              title="Most Popular Movies"
+            />
+            <MovieRow
+              movies={hasPopularShowsError ? [] : popularShows.map(mapShowToMovie)}
+              title="Most Popular Shows"
+            />
           </>
         </SearchableContent>
       </Loading>
