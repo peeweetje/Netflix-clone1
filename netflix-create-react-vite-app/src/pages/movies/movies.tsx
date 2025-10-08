@@ -5,7 +5,7 @@ import { MovieList } from '../../components/movie-list/movie-list';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
 import { SearchableContent } from '../../components/searchable-content/searchable-content';
 import { useFetchMovies } from '../../hooks/useFetchMovies';
-import { useGlobalSearch } from '../../hooks/useGlobalSearch';
+import { useSearchContext } from '../../context/search-context';
 import { discoverMovieUrl } from '../../utils/api';
 import type { MovieResult } from '../../utils/types/types';
 import { MainContainer } from '../home/home-page-styles';
@@ -13,13 +13,7 @@ import { MainContainer } from '../home/home-page-styles';
 export const Movies = () => {
   const { t } = useTranslation();
 
-  const {
-    searchQuery,
-    setSearchQuery,
-    searchResultsMovies,
-    searchLoading,
-    searchError,
-  } = useGlobalSearch();
+  const { searchQuery, setSearchQuery, searchResultsMovies, searchResultsShows, searchLoading, searchError } = useSearchContext();
 
 
   const {
@@ -32,11 +26,8 @@ export const Movies = () => {
     setSearchQuery(e.target.value);
   };
 
-  const isSearchActive = !!searchQuery && searchQuery.length > 2;
-  const isLoading = isSearchActive ? searchLoading : moviesLoading;
-  const errorMessage = isSearchActive
-    ? searchError?.message ?? null
-    : (moviesError as Error | null)?.message ?? null;
+  const isLoading = searchQuery ? searchLoading : moviesLoading;
+  const errorMessage = searchQuery ? searchError : (moviesError as Error | null)?.message ?? null;
 
 
 

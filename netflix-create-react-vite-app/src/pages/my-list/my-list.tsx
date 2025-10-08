@@ -7,7 +7,7 @@ import { EmptyState } from '../../components/empty-state/empty-state';
 import { MovieRow } from '../../components/movie-list/movie-row';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
 import { useMyList } from '../../context/myListContext';
-import { useGlobalSearch } from '../../hooks/useGlobalSearch';
+import { useSearchContext } from '../../context/search-context';
 import { useLocalListDetails } from '../../hooks/useLocalListDetails';
 import type { MovieResult, ShowResult } from '../../utils/types/types';
 import {
@@ -24,14 +24,7 @@ export const MyList = () => {
   const { myList, removeFromList } = useMyList();
   const { localMovies, localLoading, localError, failedItems, removalNotice } =
     useLocalListDetails();
-  const {
-    searchQuery,
-    setSearchQuery,
-    searchResultsMovies,
-    searchResultsShows,
-    searchLoading,
-    searchError,
-  } = useGlobalSearch();
+  const { searchQuery, setSearchQuery, searchResultsMovies, searchResultsShows, searchLoading, searchError } = useSearchContext();
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);

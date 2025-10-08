@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { MediaDetail } from '../components/details/media-detail';
+import { SearchProvider } from '../context/search-context';
 import { ThemeProvider, useTheme } from '../context/themeContext';
 import { Homepage } from '../pages/home/home-page';
 import { Movies } from '../pages/movies/movies';
@@ -14,7 +15,9 @@ import { GlobalStyle } from '../styles/global';
 export const App = () => {
   return (
     <ThemeProvider>
-      <AppContent />
+      <SearchProvider>
+        <AppContent />
+      </SearchProvider>
     </ThemeProvider>
   );
 };

@@ -6,7 +6,7 @@ import { MovieRow } from '../../components/movie-list/movie-row';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
 import { SearchableContent } from '../../components/searchable-content/searchable-content';
 import { useFetchMovies } from '../../hooks/useFetchMovies';
-import { useGlobalSearch } from '../../hooks/useGlobalSearch';
+import { useSearchContext } from '../../context/search-context';
 import { actionMoviesUrl, imageUrl, popularMoviesUrl, topRatedMoviesUrl } from '../../utils/api';
 import type { MovieResult } from '../../utils/types/types';
 import { MainContainer } from './home-page-styles';
@@ -14,13 +14,7 @@ import { MainContainer } from './home-page-styles';
 export const Homepage = () => {
   const { t } = useTranslation();
 
-  const {
-    searchQuery,
-    setSearchQuery,
-    searchResultsMovies,
-    searchLoading,
-    searchError,
-  } = useGlobalSearch();
+  const { searchQuery, setSearchQuery, searchResultsMovies, searchResultsShows, searchLoading, searchError } = useSearchContext();
 
  
   const {
@@ -47,12 +41,8 @@ export const Homepage = () => {
 
   const heroMovie = popular[0] || null;
 
-  const isLoading = searchQuery
-    ? searchLoading
-    : popularLoading || topRatedLoading || actionLoading;
-  const error = searchQuery
-    ? searchError
-    : popularError || topRatedError || actionError;
+  const isLoading = searchQuery ? searchLoading : popularLoading || topRatedLoading || actionLoading;
+  const error = searchQuery ? searchError : popularError || topRatedError || actionError;
 
 
 

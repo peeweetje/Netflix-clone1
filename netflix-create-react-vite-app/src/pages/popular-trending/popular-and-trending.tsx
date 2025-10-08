@@ -6,7 +6,7 @@ import { MovieRow } from '../../components/movie-list/movie-row';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
 import { SearchableContent } from '../../components/searchable-content/searchable-content';
 import { useFetchMovies } from '../../hooks/useFetchMovies';
-import { useGlobalSearch } from '../../hooks/useGlobalSearch';
+import { useSearchContext } from '../../context/search-context';
 import {
   discoverShowUrl,
   popularMoviesUrl,
@@ -27,14 +27,7 @@ const mostPopularShowsUrl = `${discoverShowUrl}&sort_by=popularity.desc`;
 export const PopularAndTrending = () => {
   const { t } = useTranslation();
 
-  const {
-    searchQuery,
-    setSearchQuery,
-    searchResultsMovies,
-    searchResultsShows,
-    searchLoading,
-    searchError,
-  } = useGlobalSearch();
+  const { searchQuery, setSearchQuery, searchResultsMovies, searchResultsShows, searchLoading, searchError } = useSearchContext();
 
   // Fetch trending movies and shows using TanStack Query
   const {
@@ -77,29 +70,17 @@ export const PopularAndTrending = () => {
     media_type: 'tv',
   });
 
-  const isLoading = searchQuery
-    ? searchLoading
-    : trendingMoviesLoading ||
-      trendingShowsLoading ||
-      popularMoviesLoading ||
-      popularShowsLoading;
+  const isLoading = searchQuery ? searchLoading : trendingMoviesLoading ||
+    trendingShowsLoading ||
+    popularMoviesLoading ||
+    popularShowsLoading;
 
-  const error = searchQuery
-    ? searchError
-    : trendingMoviesError ||
-      trendingShowsError ||
-      popularMoviesError ||
-      popularShowsError;
+  const error = searchQuery ? searchError : trendingMoviesError ||
+    trendingShowsError ||
+    popularMoviesError ||
+    popularShowsError;
 
-  const renderSearchResults = () => (
-    <>
-      <MovieRow movies={searchResultsMovies} title={t('movies')} />
-      <MovieRow
-        movies={searchResultsShows.map(mapShowToMovie)}
-        title={t('shows')}
-      />
-    </>
-  );
+  const renderSearchResults = (results) => <MovieRow movies={results} title={t('search-results')} />;
 
   const renderDefaultContent = () => (
     <>
@@ -123,8 +104,8 @@ export const PopularAndTrending = () => {
         <Loading loading={isLoading} error={error}>
           <SearchableContent
             searchQuery={searchQuery}
-            searchResults={[...searchResultsMovies, ...searchResultsShows]}
-            renderSearchResults={() => renderSearchResults()}
+            searchResults={searchResultsMovies}
+            renderSearchResults={renderSearchResults}
           >
             {renderDefaultContent()}
           </SearchableContent>

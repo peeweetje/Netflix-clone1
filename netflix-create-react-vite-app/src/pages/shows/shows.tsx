@@ -6,7 +6,7 @@ import { CardWrapper } from '../../components/card-wrapper/card-wrapper';
 import { Loading } from '../../components/loading/loading';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
 import { SearchableContent } from '../../components/searchable-content/searchable-content';
-import { useGlobalSearch } from '../../hooks/useGlobalSearch';
+import { useSearchContext } from '../../context/search-context';
 import { imageUrl, trendingShowUrl } from '../../utils/api';
 import { fetchShows } from '../../utils/queries';
 import type { ShowResult } from '../../utils/types/types';
@@ -15,13 +15,7 @@ import { StyledContainer } from './shows.styles';
 export const Shows = () => {
   const { t } = useTranslation();
 
-  const {
-    searchQuery,
-    setSearchQuery,
-    searchResultsShows,
-    searchLoading,
-    searchError,
-  } = useGlobalSearch();
+  const { searchQuery, setSearchQuery, searchResultsMovies, searchResultsShows, searchLoading, searchError } = useSearchContext();
 
   // Fetch shows using TanStack Query with enhanced error handling
   const {
@@ -58,14 +52,10 @@ export const Shows = () => {
 
   // Enhanced error message for better user experience
   const getErrorMessage = () => {
-    const currentError = searchQuery ? searchError : showsError;
-
-    if (currentError instanceof Error) {
-      const message = currentError.message.toLowerCase();
+    if (showsError instanceof Error) {
+      const message = showsError.message.toLowerCase();
       if (message.includes('network error')) {
-        return searchQuery
-          ? 'Search is unavailable. Please check your internet connection.'
-          : 'Unable to load shows. Please check your internet connection.';
+        return 'Unable to load shows. Please check your internet connection.';
       }
       if (message.includes('shows data not found')) {
         return 'Shows data not found.';
@@ -76,14 +66,12 @@ export const Shows = () => {
       if (message.includes('server error')) {
         return 'Server error occurred. Please try again later.';
       }
-      return searchQuery
-        ? 'Search failed. Please try again.'
-        : 'Failed to load shows. Please try again.';
+      return 'Failed to load shows. Please try again.';
     }
     return null; // Return null when there's no error
   };
 
-  const error = getErrorMessage();
+  const error = searchQuery ? searchError : getErrorMessage();
 
   const renderShows = (showsList: ShowResult[]) => {
     return showsList.map(
