@@ -84,15 +84,25 @@ export const HeroBanner = ({
       {theme && renderSeasonalEffects(theme)}
       <BannerOverlay>
         <div>
-          <BannerTitle>{title}</BannerTitle>
+          <BannerTitle id="movie-title">{title}</BannerTitle>
           <BannerButtons>
-            <BannerButton onClick={handlePlayClick}>Play</BannerButton>
-            <BannerButton onClick={() => setShowInfo((v) => !v)}>
+            <BannerButton
+              onClick={handlePlayClick}
+              aria-label={`${t('watch-trailer', 'Watch Trailer')} ${t('for', 'for')} ${title}`}
+            >
+              Play
+            </BannerButton>
+            <BannerButton
+              onClick={() => setShowInfo((v) => !v)}
+              aria-expanded={showInfo}
+              aria-controls="movie-overview"
+              aria-describedby="movie-title"
+            >
               {showInfo ? t('less-info') : t('more-info')}
             </BannerButton>
           </BannerButtons>
         </div>
-        {showInfo && <BannerOverview>{overview}</BannerOverview>}
+        {showInfo && <BannerOverview id="movie-overview">{overview}</BannerOverview>}
       </BannerOverlay>
     </BannerContainer>
   );
