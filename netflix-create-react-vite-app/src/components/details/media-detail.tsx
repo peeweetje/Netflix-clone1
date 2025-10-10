@@ -80,50 +80,58 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
   return (
     <Loading loading={loading} error={error}>
       {media && (
-        <StyledContainer>
-          <ButtonContainer>
-            <GoBackButton onClick={() => navigate(-1)}>{t('go-back-button')}</GoBackButton>
-            {hasTrailer && (
+        <main>
+          <StyledContainer>
+            <ButtonContainer>
               <GoBackButton
-                onClick={() => navigate(`/trailer/${type}/${media.id}`)}
+                onClick={() => navigate(-1)}
+                aria-label={t('go-back-button')}
               >
-               {t('watch-trailer')}
+                {t('go-back-button')}
               </GoBackButton>
-            )}
-          </ButtonContainer>
-          <MainColumns>
-            <LeftColumn>
-              <MediaPoster
-                imageUrl={imageUrl}
-                posterPath={media.poster_path}
-                tagline={media.tagline}
-                title={media.title || media.name}
-              />
-            </LeftColumn>
-            <RightColumn>
-              {cast.length > 0 && (
-                <CastSection>
-                  <h2>Cast Members</h2>
-                  <CastList>
-                    {cast.slice(0, 5).map((actor) => (
-                      <CastMember
-                        actor={actor}
-                        alt={actor.name}
-                        key={actor.cast_id || actor.credit_id}
-                        src={
-                          actor.profile_path
-                            ? `https://image.tmdb.org/t/p/w185${actor.profile_path}`
-                            : ''
-                        }
-                      />
-                    ))}
-                  </CastList>
-                </CastSection>
+              {hasTrailer && (
+                <GoBackButton
+                  onClick={() => navigate(`/trailer/${type}/${media.id}`)}
+                  aria-label={t('watch-trailer')}
+                >
+                 {t('watch-trailer')}
+                </GoBackButton>
               )}
-              <MediaInfo media={media} type={type} />
-            </RightColumn>
-          </MainColumns>
-        </StyledContainer>
+            </ButtonContainer>
+            <MainColumns>
+              <LeftColumn>
+                <MediaPoster
+                  imageUrl={imageUrl}
+                  posterPath={media.poster_path}
+                  tagline={media.tagline}
+                  title={media.title || media.name}
+                />
+              </LeftColumn>
+              <RightColumn>
+                {cast.length > 0 && (
+                  <CastSection>
+                    <h2>{t('cast-members', 'Cast Members')}</h2>
+                    <CastList role="list" aria-label={t('cast-members', 'Cast Members')}>
+                      {cast.slice(0, 5).map((actor) => (
+                        <CastMember
+                          actor={actor}
+                          alt={actor.name}
+                          key={actor.cast_id || actor.credit_id}
+                          src={
+                            actor.profile_path
+                              ? `https://image.tmdb.org/t/p/w185${actor.profile_path}`
+                              : ''
+                          }
+                        />
+                      ))}
+                    </CastList>
+                  </CastSection>
+                )}
+                <MediaInfo media={media} type={type} />
+              </RightColumn>
+            </MainColumns>
+          </StyledContainer>
+        </main>
       )}
     </Loading>
   );
