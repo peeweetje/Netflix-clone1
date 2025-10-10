@@ -55,9 +55,11 @@ export const BackCard = ({
       : overview;
 
   return (
-    <CardBackContainer>
-      <TitleContainer>{title}</TitleContainer>
-      <OverviewContainer>{truncatedOverview}</OverviewContainer>
+    <CardBackContainer role="region" aria-label={`${t('movie-details', 'Movie details')} ${t('for', 'for')} ${title}`}>
+      <TitleContainer role="heading" aria-level={2}>{title}</TitleContainer>
+      <OverviewContainer aria-label={t('overview', 'Overview')}>
+        {truncatedOverview}
+      </OverviewContainer>
 
       <StyledScoreContainer>
         <BackCardButton
@@ -68,10 +70,12 @@ export const BackCard = ({
             e.preventDefault();
             addToList({ id, media_type });
           }}
+          aria-label={isAdded ? `${t('added-to-list', 'Added to list')}: ${title}` : `${t('add-to-list', 'Add to list')}: ${title}`}
+          aria-pressed={isAdded}
         >
           {isAdded ? t('added') : t('add-to-list')}
         </BackCardButton>
-        <Chip score={vote_average} />
+        <Chip score={vote_average} title={title} />
       </StyledScoreContainer>
     </CardBackContainer>
   );
