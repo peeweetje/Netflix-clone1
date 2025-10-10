@@ -35,11 +35,16 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
             {t('binge-watch')}
           </NavItems>
         </BrandContainer>
-        <HamburgerButton onClick={handleHamburgerClick}>
+        <HamburgerButton
+          onClick={handleHamburgerClick}
+          aria-expanded={isMenuOpen}
+          aria-controls="main-navigation"
+          aria-label={isMenuOpen ? t('close-menu') : t('open-menu')}
+        >
           &#9776;
         </HamburgerButton>
       </BrandWrapper>
-      <NavList $isOpen={isMenuOpen}>
+      <NavList $isOpen={isMenuOpen} id="main-navigation">
         <NavItems aria-label={t('home-page')} to="/">
           {t('home-page')}
         </NavItems>
@@ -56,7 +61,9 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
           {t('my-list')}
         </NavItems>
       </NavList>
-      <SwitchThemeButton onClick={toggleTheme}>{t('switch-theme')}</SwitchThemeButton>
+      <SwitchThemeButton onClick={toggleTheme} aria-label={t('switch-theme')}>
+        {t('switch-theme')}
+      </SwitchThemeButton>
       <SearchBar onChange={onChange} value={value} />
     </NavbarMenu>
   );

@@ -13,7 +13,7 @@ export const Loading: React.FC<LoadingProps> = ({ loading, error, children }) =>
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return <p role="alert" aria-live="assertive">{error}</p>;
   }
 
   return <>{children}</>;
