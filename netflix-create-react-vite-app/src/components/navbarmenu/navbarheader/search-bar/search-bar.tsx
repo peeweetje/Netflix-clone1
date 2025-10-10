@@ -18,7 +18,7 @@ export const SearchBar = ({ value, onChange }: searchProps) => {
   return (
     <NavbarSearch>
       <SearchContainer>
-        <SearchIconWrapper>
+        <SearchIconWrapper aria-hidden="true">
           <SearchIcon />
         </SearchIconWrapper>
         <NavbarInput
@@ -26,6 +26,7 @@ export const SearchBar = ({ value, onChange }: searchProps) => {
           placeholder={t('search-title')}
           type="search"
           value={value}
+          aria-label={t('search-title')}
         />
       </SearchContainer>
     </NavbarSearch>

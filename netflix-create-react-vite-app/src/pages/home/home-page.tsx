@@ -49,6 +49,7 @@ export const Homepage = () => {
   return (
     <>
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
+      <h1 className="sr-only">{t('binge-watch')}</h1>
       <MainContainer aria-label={t('movie-listings')}>
         <Loading loading={isLoading} error={error}>
           <SearchableContent
