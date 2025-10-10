@@ -1,3 +1,5 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { PosterContainer, PosterImage, Tagline, Title } from './details-styles';
 
 interface MediaPosterProps {
@@ -12,10 +14,17 @@ export const MediaPoster = ({
   posterPath,
   tagline,
   imageUrl,
-}: MediaPosterProps) => (
-  <PosterContainer>
-    <Title>{title}</Title>
-    <PosterImage alt={title} src={`${imageUrl}${posterPath}`} />
-    <Tagline>{tagline}</Tagline>
-  </PosterContainer>
-);
+}: MediaPosterProps) => {
+  const { t } = useTranslation();
+
+  return (
+    <PosterContainer>
+      <Title as="h1">{title}</Title>
+      <PosterImage
+        alt={t('movie-poster', { title })}
+        src={`${imageUrl}${posterPath}`}
+      />
+      <Tagline aria-label={`${t('tagline', 'Tagline')}: ${tagline}`}>{tagline}</Tagline>
+    </PosterContainer>
+  );
+};
