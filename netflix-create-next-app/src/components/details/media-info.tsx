@@ -30,8 +30,11 @@ interface MediaInfoProps {
 }
 
 export const MediaInfo = ({ media, type }: MediaInfoProps) => (
-  <div className='p-6'>
-    <div className='flex flex-col gap-4 min-w-[350px]'>
+  <section className='p-6' aria-labelledby="media-info-heading">
+    <h2 id="media-info-heading" className="text-lg font-bold mb-4 text-white">
+      {type === 'movie' ? 'Movie Information' : 'TV Show Information'}
+    </h2>
+    <div className='flex flex-col gap-4 min-w-[350px]' role="list">
       <div className='flex justify-between items-center'>
         <span className='font-bold text-white text-md'>Status:</span>
         <span className='text-white text-md'>{media.status || 'N/A'}</span>
@@ -121,5 +124,5 @@ export const MediaInfo = ({ media, type }: MediaInfoProps) => (
         </span>
       </div>
     </div>
-  </div>
+  </section>
 );
