@@ -41,11 +41,22 @@ export const Card = forwardRef<CardRef, CardProps>(
       setIsFlipped(false);
     };
 
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        setIsFlipped((prev) => !prev);
+      }
+    };
+
     return (
       <div
         className="w-full h-[380px] flex cursor-pointer [perspective:1000px]"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+        role="button"
+        aria-label={`View details for ${title}`}
       >
         <motion.div
           animate={{ rotateY: isFlipped ? 180 : 0 }}

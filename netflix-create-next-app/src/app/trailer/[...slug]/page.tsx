@@ -69,7 +69,7 @@ const TrailerPage = ({ params }: TrailerPageProps) => {
             Please check your internet connection and try again.
           </p>
         </div>
-        <Button onClick={() => router.back()} className='btn-primary cursor-pointer'>
+        <Button onClick={() => router.back()} className='btn-primary cursor-pointer' aria-label="Go back to previous page">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Go Back
         </Button>
@@ -91,7 +91,7 @@ const TrailerPage = ({ params }: TrailerPageProps) => {
             Trailers may be added later or might not be available for this content.
           </p>
         </div>
-        <Button onClick={() => router.back()} className='btn-primary cursor-pointer'>
+        <Button onClick={() => router.back()} className='btn-primary cursor-pointer' aria-label="Go back to previous page">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Go Back
         </Button>
@@ -100,11 +100,12 @@ const TrailerPage = ({ params }: TrailerPageProps) => {
   }
 
   return (
-    <div className='h-screen bg-background flex flex-col items-center justify-center p-8 overflow-hidden'>
+    <main id="main-content" className='h-screen bg-background flex flex-col items-center justify-center p-8 overflow-hidden'>
       <Button
         size='lg'
         onClick={() => router.back()}
         className='self-start mb-8'
+        aria-label="Go back to previous page"
       >
       <ArrowLeft className="mr-2" />
         Go Back
@@ -116,11 +117,11 @@ const TrailerPage = ({ params }: TrailerPageProps) => {
           allowFullScreen
           frameBorder='0'
           src={`https://www.youtube.com/embed/${videoKey}?autoplay=1`}
-          title='Movie Trailer'
+          title={`${media_type === 'movie' ? 'Movie' : 'TV Show'} Trailer`}
           className='w-full h-full'
         />
       </div>
-    </div>
+    </main>
   );
 };
 
