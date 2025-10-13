@@ -99,7 +99,7 @@ import type { MovieResult } from '../utils/types/types';
   const error = getErrorMessage();
 
   return (
-    <main className='flex flex-row justify-center flex-wrap max-w-full'>
+    <main id="main-content" className='flex flex-row justify-center flex-wrap max-w-full'>
       <Loading loading={isLoading} error={error}>
         <SearchableContent
           searchQuery={searchQuery}

@@ -54,7 +54,7 @@ const MyList = () => {
   ];
 
   return (
-    <main className="flex flex-row justify-center flex-wrap max-w-full">
+    <main id="main-content" className="flex flex-row justify-center flex-wrap max-w-full">
       <Loading
         loading={searchQuery ? searchLoading : localLoading}
         error={searchQuery ? searchError : localError}

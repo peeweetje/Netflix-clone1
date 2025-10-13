@@ -45,10 +45,9 @@ const Shows = () => {
 
   const displayError = getErrorMessage();
 
-  // Show shows if available, otherwise handle error state
 
   return (
-    <main className="flex flex-row justify-center flex-wrap max-w-full">
+    <main id="main-content" className="flex flex-row justify-center flex-wrap max-w-full">
       <Loading loading={isLoading} error={error}>
         <SearchableContent
           searchQuery={searchQuery}
