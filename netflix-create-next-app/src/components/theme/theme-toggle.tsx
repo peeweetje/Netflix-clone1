@@ -66,7 +66,7 @@ export function ThemeToggle() {
           variant="secondary"
           size="lg"
           className="gap-2 !bg-gray-900/80 !text-gray-300 hover:!bg-gray-800/90"
-          aria-label="Toggle theme"
+          aria-label="Change theme color"
         >
           <Palette className="flex-shrink-0" />
           <span className="hidden md:inline">Theme</span>

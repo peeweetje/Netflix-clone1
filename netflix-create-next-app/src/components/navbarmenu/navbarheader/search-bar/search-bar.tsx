@@ -16,6 +16,7 @@ export const SearchBar = ({ onChange, value }: SearchBarProps) => {
         placeholder="Search for movies, shows..."
         value={value}
         onChange={onChange}
+        aria-label="Search for movies and shows"
         className="h-10 w-full pl-10 pr-2 bg-black/50 border-gray-600 text-white placeholder:text-gray-400 focus-visible:ring-1 focus-visible:ring-white text-base"
       />
     </div>

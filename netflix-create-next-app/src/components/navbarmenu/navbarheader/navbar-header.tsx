@@ -88,7 +88,7 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
       )}
 
       {/* Main Navbar */}
-      <nav className="w-full sticky top-0 z-50 bg-black/95 backdrop-blur-sm py-2 px-2 border-b border-gray-800">
+      <nav id="navigation" className="w-full sticky top-0 z-50 bg-black/95 backdrop-blur-sm py-2 px-2 border-b border-gray-800">
         <div className="max-w-7xl mx-auto flex items-center">
           <div className="flex items-center w-full">
             <Link href="/" className="whitespace-nowrap mr-4 text-2xl font-bold text-primary hover:opacity-90 transition-opacity duration-200">
@@ -141,6 +141,7 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
                   variant="ghost"
                   size="icon"
                   aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+                  aria-expanded={isMenuOpen}
                 >
                   {isMenuOpen ? <X /> : <Menu/>}
                 </Button>
