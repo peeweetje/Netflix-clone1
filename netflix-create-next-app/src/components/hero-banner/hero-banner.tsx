@@ -46,6 +46,7 @@ export const HeroBanner = ({
                 size='lg'
                 onClick={handlePlayClick}
                 className='flex items-center justify-center gap-3 px-8 py-6 text-lg transition-all duration-200 transform hover:scale-105'
+                aria-label={`Play ${title}`}
               >
                 <Play/>
                 <span className='text-md'>Play</span>
@@ -54,6 +55,8 @@ export const HeroBanner = ({
                 size='lg'
                 onClick={() => setShowInfo(!showInfo)}
                 className='flex items-center justify-center gap-3 px-8 py-6 transition-all duration-200 transform hover:scale-105'
+                aria-label={showInfo ? 'Hide movie information' : 'Show movie information'}
+                aria-expanded={showInfo}
               >
                 <Info/>
                 <span className='text-md'>{showInfo ? 'Less Info' : 'More Info'}</span>
@@ -62,6 +65,7 @@ export const HeroBanner = ({
 
           <div className='min-h-[120px] transition-all duration-300 ease-in-out'>
             <p
+              id={`overview-${movieId}`}
               className={`text-white text-md md:text-lg leading-relaxed max-w-3xl mb-6 drop-shadow-lg transition-all duration-300 ease-in-out ${
                 showInfo
                   ? 'opacity-100 translate-y-0'

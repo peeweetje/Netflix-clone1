@@ -110,6 +110,7 @@ export const MovieRow = ({ movies, title }:MovieRowProps) => {
         onClick={handleLeft}
         variant="ghost"
         size="icon"
+        aria-label={`Scroll ${title} left`}
       >
         <ChevronLeft className="text-white" />
       </Button>
@@ -152,6 +153,7 @@ export const MovieRow = ({ movies, title }:MovieRowProps) => {
         onClick={handleRight}
         variant="ghost"
         size="icon"
+        aria-label={`Scroll ${title} right`}
       >
         <ChevronRight className="text-white" />
       </Button>
