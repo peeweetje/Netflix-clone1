@@ -63,8 +63,8 @@ export const MediaDetail = ({ type, id }: MediaDetailProps) => {
 
   const error = getErrorMessage();
 
-  if (isLoading) return <Loading loading={true} error={null} />;
-  if (hasMediaError) return <Loading loading={false} error={error} />;
+  if (isLoading) return <Loading loading={true} error={null}><div /></Loading>;
+  if (hasMediaError) return <Loading loading={false} error={error}><div /></Loading>;
   if (!media) return null;
 
   return (
@@ -120,7 +120,7 @@ export const MediaDetail = ({ type, id }: MediaDetailProps) => {
                 Cast Members
               </h2>
               <div className="flex gap-4 flex-wrap" role="list">
-                {cast.slice(0, 4).map((actor) => (
+                {cast.slice(0, 4).map((actor: any) => (
                   <CastMember
                     key={actor.cast_id || actor.credit_id}
                     actor={{

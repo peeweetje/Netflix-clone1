@@ -31,7 +31,7 @@ export const MovieList = ({ movies }: { movies: MovieResult[] }) => {
                 title={movie.title || movie.name || ''}
                 vote_average={movie.vote_average || 0}
                 id={movie.id}
-                media_type={movie.media_type || 'movie'}
+                media_type={(movie.media_type as 'movie' | 'tv') || 'movie'}
               />
             </CardWrapper>
           </div>

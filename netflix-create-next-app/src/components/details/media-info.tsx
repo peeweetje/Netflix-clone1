@@ -52,8 +52,8 @@ export const MediaInfo = ({ media, type }: MediaInfoProps) => (
           <div className='flex justify-between items-center'>
             <span className='font-bold text-white text-md'>Release Date:</span>
             <span className='text-white text-md'>
-              {media.release_date
-                ? new Date(media.release_date).getFullYear()
+              {(media as MovieMedia).release_date
+                ? new Date((media as MovieMedia).release_date).getFullYear()
                 : 'N/A'}
             </span>
           </div>
@@ -61,7 +61,7 @@ export const MediaInfo = ({ media, type }: MediaInfoProps) => (
           <div className='flex justify-between items-center'>
             <span className='font-bold text-white text-md'>Runtime:</span>
             <span className='text-white text-md'>
-              {media.runtime ? `${media.runtime} min` : 'N/A'}
+              {(media as MovieMedia).runtime ? `${(media as MovieMedia).runtime} min` : 'N/A'}
             </span>
           </div>
         </>
@@ -72,8 +72,8 @@ export const MediaInfo = ({ media, type }: MediaInfoProps) => (
               First Air Date:
             </span>
             <span className='text-white text-md'>
-              {media.first_air_date
-                ? new Date(media.first_air_date).getFullYear()
+              {(media as TVMedia).first_air_date
+                ? new Date((media as TVMedia).first_air_date).getFullYear()
                 : 'N/A'}
             </span>
           </div>
@@ -81,8 +81,8 @@ export const MediaInfo = ({ media, type }: MediaInfoProps) => (
           <div className='flex justify-between items-center'>
             <span className='font-bold text-white text-md'>Last Air Date:</span>
             <span className='text-white text-md'>
-              {media.last_air_date
-                ? new Date(media.last_air_date).getFullYear()
+              {(media as TVMedia).last_air_date
+                ? new Date((media as TVMedia).last_air_date).getFullYear()
                 : 'N/A'}
             </span>
           </div>
@@ -90,14 +90,14 @@ export const MediaInfo = ({ media, type }: MediaInfoProps) => (
           <div className='flex justify-between items-center'>
             <span className='font-bold text-white text-md'>Seasons:</span>
             <span className='text-white text-md'>
-              {media.number_of_seasons || 'N/A'}
+              {(media as TVMedia).number_of_seasons || 'N/A'}
             </span>
           </div>
 
           <div className='flex justify-between items-center'>
             <span className='font-bold text-white text-md'>Episodes:</span>
             <span className='text-white text-md'>
-              {media.number_of_episodes || 'N/A'}
+              {(media as TVMedia).number_of_episodes || 'N/A'}
             </span>
           </div>
         </>
