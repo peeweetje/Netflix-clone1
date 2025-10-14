@@ -53,9 +53,9 @@ export const fetchMovies = async (url: string): Promise<MovieResult[]> => {
   }
 };
 
-export const fetchShows = async (): Promise<ShowResult[]> => {
+export const fetchShows = async (url?: string): Promise<ShowResult[]> => {
   try {
-    const response = await fetch(trendingShowUrl);
+    const response = await fetch(url || trendingShowUrl);
 
     if (!response.ok) {
       if (response.status === 401) {

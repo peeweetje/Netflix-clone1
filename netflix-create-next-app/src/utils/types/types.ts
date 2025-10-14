@@ -6,6 +6,7 @@ export type MovieResult = {
   vote_average: number;
   backdrop_path?: string;
   media_type?: string;
+  name?: string;
 };
 
 export type ShowResult = {

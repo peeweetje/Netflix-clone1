@@ -1,12 +1,11 @@
 'use client';
 
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
-import { type ThemeProviderProps } from 'next-themes/dist/types';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useState } from 'react';
 
-export function Providers({ children, ...props }: ThemeProviderProps) {
+export function Providers({ children, ...props }: any) {
   const [queryClient] = useState(
     () =>
       new QueryClient({
