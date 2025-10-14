@@ -115,7 +115,7 @@ import type { MovieResult } from '../utils/types/types';
                 title={heroMovie.title || ''}
                 overview={heroMovie.overview || ''}
                 movieId={heroMovie.id}
-                mediaType={heroMovie.media_type || 'movie'}
+                mediaType={(heroMovie.media_type as 'movie' | 'tv') || 'movie'}
               />
             )}
             {!heroMovie?.backdrop_path && heroMovie && (

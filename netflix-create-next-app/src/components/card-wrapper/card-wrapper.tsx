@@ -23,7 +23,7 @@ export const CardWrapper = ({ to, children }:CardWrapperProps) => {
       href={to}
       onKeyDown={handleKeyDown}
     >
-      {React.cloneElement(children, { ref: cardRef })}
+      {React.cloneElement(children, { ref: cardRef } as any)}
     </Link>
   );
 };

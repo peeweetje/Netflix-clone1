@@ -67,7 +67,7 @@ const PopularAndTrending = () => {
     error: popularShowsError,
   } = useQuery({
     queryKey: ['shows', 'popular'],
-    queryFn: () => fetchMovies(`${discoverShowUrl}&sort_by=popularity.desc`),
+    queryFn: () => fetchShows(`${discoverShowUrl}&sort_by=popularity.desc`),
     staleTime: 1000 * 60 * 5,
   });
 

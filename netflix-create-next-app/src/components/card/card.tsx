@@ -7,7 +7,7 @@ import { FrontCard } from './front-card';
 import { BackCard } from './back-card';
 import { Trash2 } from 'lucide-react';
 
-interface CardRef {
+export interface CardRef {
   flip: () => void;
 }
 

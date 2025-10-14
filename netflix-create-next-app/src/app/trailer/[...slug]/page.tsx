@@ -50,7 +50,9 @@ const TrailerPage = ({ params }: TrailerPageProps) => {
   if (loading) {
     return (
       <div className='h-screen flex items-center justify-center bg-background overflow-hidden'>
-        <Loading loading={true} error={null} />
+        <Loading loading={true} error={null}>
+          <div />
+        </Loading>
       </div>
     );
   }
