@@ -31,8 +31,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       purple: { hue: '262', saturation: '83%' },
       red: { hue: '0', saturation: '84%' }
     };
-    
-    const { hue, saturation } = themes[currentTheme];
+
+    const themeConfig = themes[currentTheme] || themes.green;
+    const { hue, saturation } = themeConfig;
     root.style.setProperty('--primary-hue', hue);
     root.style.setProperty('--primary-saturation', saturation);
   }, []);

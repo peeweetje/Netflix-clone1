@@ -106,14 +106,6 @@ export const useLocalListDetails = (): UseLocalListDetailsReturn => {
       }
       return failureCount < 2;
     },
-    // Add error handling
-    onError: (error) => {
-      console.error('useLocalListDetails: Query error:', error);
-    },
-    // Add success handling
-    onSuccess: (data) => {
-      console.log('useLocalListDetails: Query success with data length:', data.length);
-    },
   });
 
   // Determine failed items (items in myList but not in results)
