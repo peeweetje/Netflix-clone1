@@ -2,6 +2,7 @@
 
 import type React from 'react';
 import { useRouter } from 'next/navigation';
+import { ViewTransition, Activity } from 'react';
 import { Loading } from '../loading/loading';
 import { Button } from '../ui/button';
 import { MediaPoster } from './media-poster';
@@ -13,6 +14,7 @@ import { imageUrl } from '../../utils/api';
 import { useQuery } from '@tanstack/react-query';
 import { mediaQueries } from '../../utils/queries';
 import { ErrorDisplay } from '../error-display/error-display';
+
 
 interface MediaDetailProps {
   type: 'movie' | 'tv';
@@ -68,87 +70,107 @@ export const MediaDetail = ({ type, id }: MediaDetailProps) => {
   if (!media) return null;
 
   return (
-    <main id="main-content" className="mt-0 min-h-screen flex flex-col justify-center items-center mx-auto py-4.5 text-white">
-      {/* Header with Buttons */}
-      <header className="mb-10 flex gap-4">
-        <Button
-          size="lg"
-          onClick={() => router.back()}
-          className="flex items-center justify-center gap-3 px-8 py-6 text-base transition-all duration-200 transform hover:scale-105"
-          aria-label="Go back to previous page"
-        >
-          <ArrowLeft />
-          Go Back
-        </Button>
-        {hasTrailer && !hasVideoError && (
+    <ViewTransition>
+    <main
+      id='main-content'
+      className='mt-0 min-h-screen flex flex-col justify-center items-center mx-auto py-4.5 text-white'
+      >
+        {/* Header with Buttons */}
+        <header className='mb-10 flex gap-4'>
           <Button
-            size="lg"
-            onClick={() => router.push(`/trailer/${type}/${id}`)}
-            className="flex items-center justify-center gap-3 px-8 py-6 text-base transition-all duration-200 transform hover:scale-105"
-            aria-label={`Watch trailer for ${media.title || media.name}`}
+            size='lg'
+            onClick={() => router.back()}
+            className='flex items-center justify-center gap-3 px-8 py-6 text-base transition-all duration-200 transform hover:scale-105'
+            aria-label='Go back to previous page'
           >
-            <Play />
-            Watch Trailer
+            <ArrowLeft />
+            Go Back
           </Button>
-        )}
+          <Activity mode={hasTrailer && !hasVideoError ? "visible" : "hidden"}>
+            <Button
+              size='lg'
+              onClick={() => router.push(`/trailer/${type}/${id}`)}
+              className='flex items-center justify-center gap-3 px-8 py-6 text-base transition-all duration-200 transform hover:scale-105'
+              aria-label={`Watch trailer for ${media.title || media.name}`}
+            >
+              <Play />
+              Watch Trailer
+            </Button>
+          </Activity>
 
-        {hasVideoError && !videoLoading && (
-          <div className="px-8 py-6 bg-gray-900/50 border border-gray-600/30 rounded-lg" role="status" aria-live="polite">
-            <p className="text-gray-400 text-sm flex items-center gap-2">
-              <Play className="w-4 h-4" />
-              Trailer unavailable
-            </p>
-          </div>
-        )}
-      </header>
-
-      {/* Main Content */}
-      <div className="flex flex-row gap-4 items-start">
-        {/* Poster with Title and Tagline */}
-        <MediaPoster
-          title={media.title || media.name || ''}
-          posterPath={media.poster_path || ''}
-          tagline={media.tagline || ''}
-          imageUrl={imageUrl}
-        />
-
-        {/* Cast Members and Media Info */}
-        <div className="flex flex-col items-start">
-          {cast.length > 0 ? (
-            <section className="mb-6" aria-labelledby="cast-heading">
-              <h2 id="cast-heading" className="text-md font-bold mb-4 text-white">
-                Cast Members
-              </h2>
-              <div className="flex gap-4 flex-wrap" role="list">
-                {cast.slice(0, 4).map((actor: any) => (
-                  <CastMember
-                    key={actor.cast_id || actor.credit_id}
-                    actor={{
-                      cast_id: actor.cast_id,
-                      credit_id: actor.credit_id,
-                      profile_path: actor.profile_path,
-                      name: actor.name,
-                      character: actor.character || 'Unknown'
-                    }}
-                    src={actor.profile_path ? `https://image.tmdb.org/t/p/w185${actor.profile_path}` : ''}
-                    alt={actor.name}
-                  />
-                ))}
-              </div>
-            </section>
-          ) : !castLoading ? (
-            <div className="mb-6">
-              <ErrorDisplay
-                message={hasCastError ? "Unable to load cast information at this time." : "No cast information available."}
-                type={hasCastError ? "error" : "no-data"}
-                className="max-w-none mx-0"
-              />
+          {hasVideoError && !videoLoading && (
+            <div
+              className='px-8 py-6 bg-gray-900/50 border border-gray-600/30 rounded-lg'
+              role='status'
+              aria-live='polite'
+            >
+              <p className='text-gray-400 text-sm flex items-center gap-2'>
+                <Play className='w-4 h-4' />
+                Trailer unavailable
+              </p>
             </div>
-          ) : null}
+          )}
+        </header>
 
-          <MediaInfo media={media} type={type} />
+        {/* Main Content */}
+        <div className='flex flex-row gap-4 items-start'>
+          {/* Poster with Title and Tagline */}
+          <MediaPoster
+            title={media.title || media.name || ''}
+            posterPath={media.poster_path || ''}
+            tagline={media.tagline || ''}
+            imageUrl={imageUrl}
+          />
+
+          {/* Cast Members and Media Info */}
+          <div className='flex flex-col items-start'>
+            {cast.length > 0 ? (
+              <section className='mb-6' aria-labelledby='cast-heading'>
+                <h2
+                  id='cast-heading'
+                  className='text-md font-bold mb-4 text-white'
+                >
+                  Cast Members
+                </h2>
+                <div className='flex gap-4 flex-wrap' role='list'>
+                  {cast.slice(0, 4).map((actor: any) => (
+                    <CastMember
+                      key={actor.cast_id || actor.credit_id}
+                      actor={{
+                        cast_id: actor.cast_id,
+                        credit_id: actor.credit_id,
+                        profile_path: actor.profile_path,
+                        name: actor.name,
+                        character: actor.character || 'Unknown',
+                      }}
+                      src={
+                        actor.profile_path
+                          ? `https://image.tmdb.org/t/p/w185${actor.profile_path}`
+                          : ''
+                      }
+                      alt={actor.name}
+                    />
+                  ))}
+                </div>
+              </section>
+            ) : !castLoading ? (
+              <div className='mb-6'>
+                <ErrorDisplay
+                  message={
+                    hasCastError
+                      ? 'Unable to load cast information at this time.'
+                      : 'No cast information available.'
+                  }
+                  type={hasCastError ? 'error' : 'no-data'}
+                  className='max-w-none mx-0'
+                />
+              </div>
+            ) : null}
+
+            <MediaInfo media={media} type={type} />
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </ViewTransition>
   );
 };
