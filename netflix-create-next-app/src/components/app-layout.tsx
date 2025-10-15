@@ -1,6 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import { ViewTransition } from 'react';
 import { NavbarHeader } from './navbarmenu/navbarheader/navbar-header';
 import { SearchProvider, useSearch } from '../context/search-context';
 
@@ -22,12 +23,14 @@ const AppLayoutContent = ({ children }: AppLayoutContentProps) => {
                           !pathname?.includes('/shows/');
 
   return (
-    <div className="min-h-screen bg-background">
-      {shouldShowNavbar && (
-        <NavbarHeader onChange={handleSearch} value={searchQuery} />
-      )}
-      {children}
-    </div>
+    <ViewTransition>
+      <div className="min-h-screen bg-background">
+        {shouldShowNavbar && (
+          <NavbarHeader onChange={handleSearch} value={searchQuery} />
+        )}
+        {children}
+      </div>
+    </ViewTransition>
   );
 };
 
