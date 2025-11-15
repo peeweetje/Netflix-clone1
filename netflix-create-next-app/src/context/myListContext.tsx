@@ -2,11 +2,7 @@
 
 import type React from 'react';
 import { createContext, useContext, useEffect, useState } from 'react';
-
-export type MyListItem = {
-  id: number;
-  media_type: 'movie' | 'tv';
-};
+import type { MyListItem } from '../utils/types/types';
 
 interface MyListContextType {
   myList: MyListItem[];
@@ -32,10 +28,15 @@ export const MyListProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       }
 
       const filtered = parsed.filter(
-        (i: any) =>
-          i &&
-          typeof i.id === 'number' &&
-          (i.media_type === 'movie' || i.media_type === 'tv')
+        (i: unknown): i is MyListItem => {
+          if (!i || typeof i !== 'object') return false;
+          
+          const item = i as MyListItem;
+          return (
+            typeof item.id === 'number' &&
+            (item.media_type === 'movie' || item.media_type === 'tv')
+          );
+        }
       );
 
       return filtered;

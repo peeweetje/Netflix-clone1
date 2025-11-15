@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { type MyListItem, useMyList } from '../context/myListContext';
+import { useMyList } from '../context/myListContext';
 import { API_KEY } from '../utils/api';
 import { fetchMediaDetails } from '../utils/queries';
-import type { MovieResult } from '../utils/types/types';
+import type { MovieResult, MyListItem } from '../utils/types/types';
 
 interface UseLocalListDetailsReturn {
   localMovies: MovieResult[];

@@ -4,8 +4,9 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useState } from 'react';
+import type { ProvidersProps, QueryError } from '../utils/types/types';
 
-export function Providers({ children, ...props }: any) {
+export function Providers({ children, ...props }: ProvidersProps) {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -16,8 +17,8 @@ export function Providers({ children, ...props }: any) {
             retry: (failureCount, error) => {
               // Don't retry on 4xx errors (client errors)
               if (error && typeof error === 'object' && 'status' in error) {
-                const status = (error as any).status;
-                if (status >= 400 && status < 500) {
+                const status = (error as unknown as QueryError).status;
+                if (status && status >= 400 && status < 500) {
                   return false;
                 }
               }
