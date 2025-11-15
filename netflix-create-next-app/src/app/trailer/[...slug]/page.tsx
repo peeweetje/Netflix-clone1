@@ -9,6 +9,7 @@ import { ArrowLeft } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchVideos } from '../../../utils/queries';
 import { ErrorDisplay } from '../../../components/error-display/error-display';
+import type { Video } from '../../../utils/types/types';
 
 interface TrailerPageProps {
   params: Promise<{
@@ -38,7 +39,7 @@ const TrailerPage = ({ params }: TrailerPageProps) => {
     if (!videos || videos.length === 0) return null;
 
     const trailer = videos.find(
-      (vid: any) => vid?.type === 'Trailer' && vid?.site === 'YouTube'
+      (vid: Video) => vid?.type === 'Trailer' && vid?.site === 'YouTube'
     );
 
     return trailer?.key || null;

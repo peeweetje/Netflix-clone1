@@ -7,7 +7,6 @@ import { SearchableContent } from '../../components/searchable-content/searchabl
 import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { useSearch } from '../../context/search-context';
 import { ErrorDisplay } from '../../components/error-display/error-display';
-import type { MovieResult } from '../../utils/types/types';
 
 const Movies = () => {
   const {
@@ -27,8 +26,6 @@ const Movies = () => {
 
   const isLoading = searchQuery ? searchLoading : moviesLoading;
   const error = searchQuery ? searchError : moviesError?.message || null;
-
-  // Show results if available, otherwise handle error state
 
   return (
     <main id="main-content" className='flex flex-row justify-center flex-wrap max-w-full'>

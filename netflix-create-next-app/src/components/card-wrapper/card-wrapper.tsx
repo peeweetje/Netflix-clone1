@@ -5,10 +5,10 @@ import type { CardRef } from '../card/card';
 
 interface CardWrapperProps {
   to: string;
-  children: React.ReactElement;
+  children: React.ReactElement<any>;
 }
 
-export const CardWrapper = ({ to, children }:CardWrapperProps) => {
+export const CardWrapper = ({ to, children }: CardWrapperProps) => {
   const cardRef = useRef<CardRef>(null);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -23,7 +23,7 @@ export const CardWrapper = ({ to, children }:CardWrapperProps) => {
       href={to}
       onKeyDown={handleKeyDown}
     >
-      {React.cloneElement(children, { ref: cardRef } as any)}
+      {React.cloneElement(children, { ref: cardRef })}
     </Link>
   );
 };
