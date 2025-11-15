@@ -14,6 +14,7 @@ import { imageUrl } from '../../utils/api';
 import { useQuery } from '@tanstack/react-query';
 import { mediaQueries } from '../../utils/queries';
 import { ErrorDisplay } from '../error-display/error-display';
+import type { Video, Actor } from '../../utils/types/types';
 
 
 interface MediaDetailProps {
@@ -46,7 +47,7 @@ export const MediaDetail = ({ type, id }: MediaDetailProps) => {
   } = useQuery(mediaQueries.videos(type, id));
 
   const cast = castData || [];
-  const hasTrailer = videoData?.some((vid: any) => vid.type === 'Trailer' && vid.site === 'YouTube') || false;
+  const hasTrailer = videoData?.some((vid: Video) => vid.type === 'Trailer' && vid.site === 'YouTube') || false;
 
   const isLoading = mediaLoading || castLoading || videoLoading;
   const hasErrors = mediaError || castError || videoError;
@@ -133,7 +134,7 @@ export const MediaDetail = ({ type, id }: MediaDetailProps) => {
                   Cast Members
                 </h2>
                 <div className='flex gap-4 flex-wrap' role='list'>
-                  {cast.slice(0, 4).map((actor: any) => (
+                  {cast.slice(0, 4).map((actor: Actor) => (
                     <CastMember
                       key={actor.cast_id || actor.credit_id}
                       actor={{

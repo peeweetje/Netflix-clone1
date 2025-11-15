@@ -4,50 +4,52 @@ import { EmptyState } from '../empty-state/empty-state';
 interface SearchableContentProps {
   searchQuery: string;
   searchResults: any[];
-  searchTitle?: string;
   emptyTitle?: string;
   emptyMessage?: string;
   children: ReactNode;
   renderSearchResults?: (results: any[]) => ReactNode;
 }
 
-export const SearchableContent = ({
+export function SearchableContent({
   searchQuery,
   searchResults,
-  searchTitle = 'Search Results',
   emptyTitle = 'No results found',
   emptyMessage,
   children,
   renderSearchResults
-}: SearchableContentProps) => {
-  if (searchQuery) {
-    // If no search results, show empty state
-    if (searchResults.length === 0) {
-      return (
-        <EmptyState
-          title={emptyTitle}
-          message={emptyMessage || `No results found for "${searchQuery}"`}
-        />
-      );
-    }
+}: SearchableContentProps) {
+  const isSearching = searchQuery.trim().length > 0;
+  const hasResults = searchResults.length > 0;
 
-    // If custom render function provided, use it
-    if (renderSearchResults) {
-      return <>{renderSearchResults(searchResults)}</>;
-    }
-
-    // Default rendering for simple cases
+  // If searching but no results, show empty state
+  if (isSearching && !hasResults) {
     return (
-      <div className="mt-16 flex flex-wrap justify-center items-start gap-8">
-        {searchResults.map((item, index) => (
-          <div key={item.id || index} className="relative">
-            {item}
+      <EmptyState
+        title={emptyTitle}
+        message={emptyMessage || `No results found for "${searchQuery}"`}
+      />
+    );
+  }
+
+  // If searching with results, render them
+  if (isSearching && hasResults) {
+    return (
+      <>
+        {renderSearchResults ? (
+          renderSearchResults(searchResults)
+        ) : (
+          <div className="mt-16 flex flex-wrap justify-center items-start gap-8">
+            {searchResults.map((item, index) => (
+              <div key={index} className="relative">
+                {item as ReactNode}
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        )}
+      </>
     );
   }
 
   // Not searching, show normal content
   return <>{children}</>;
-};
+}

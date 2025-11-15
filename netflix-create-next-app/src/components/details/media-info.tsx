@@ -1,13 +1,14 @@
 'use client';
 
 import type React from 'react';
+import type { Genre } from '../../utils/types/types';
 
 interface MovieMedia {
   status: string;
   original_language: string;
   release_date: string;
   runtime: number;
-  genres: Array<{ name: string }>;
+  genres: Genre[];
   vote_average: number;
   vote_count: number;
 }
@@ -19,7 +20,7 @@ interface TVMedia {
   last_air_date: string;
   number_of_seasons: number;
   number_of_episodes: number;
-  genres: Array<{ name: string }>;
+  genres: Genre[];
   vote_average: number;
   vote_count: number;
 }
@@ -106,7 +107,7 @@ export const MediaInfo = ({ media, type }: MediaInfoProps) => (
       <div className='flex justify-between items-center'>
         <span className='font-bold text-white text-md'>Genres:</span>
         <span className='text-white text-md'>
-          {media.genres?.map((g: any) => g.name).join(', ') || 'N/A'}
+          {media.genres?.map((g: Genre) => g.name).join(', ') || 'N/A'}
         </span>
       </div>
 
