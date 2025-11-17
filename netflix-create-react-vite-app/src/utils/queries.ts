@@ -9,7 +9,7 @@ import {
   trendingShowUrl,
   VITE_API_KEY,
 } from './api';
-import type { MovieResult, ShowResult } from './types/types';
+import type { MovieResult, ShowResult, MediaDetails, Actor, Video, SearchResults } from './types/types';
 
 // Query keys
 export const queryKeys = {
@@ -85,7 +85,7 @@ export const fetchShows = async (): Promise<ShowResult[]> => {
   }
 };
 
-export const fetchMediaDetails = async (type: 'movie' | 'tv', id: string) => {
+export const fetchMediaDetails = async (type: 'movie' | 'tv', id: string): Promise<MediaDetails> => {
   try {
     const response = await fetch(
       `https://api.themoviedb.org/3/${type}/${id}?api_key=${VITE_API_KEY}`
@@ -112,7 +112,7 @@ export const fetchMediaDetails = async (type: 'movie' | 'tv', id: string) => {
   }
 };
 
-export const fetchCast = async (type: 'movie' | 'tv', id: string) => {
+export const fetchCast = async (type: 'movie' | 'tv', id: string): Promise<Actor[]> => {
   try {
     const response = await fetch(
       `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${VITE_API_KEY}`
@@ -138,7 +138,7 @@ export const fetchCast = async (type: 'movie' | 'tv', id: string) => {
   }
 };
 
-export const fetchVideos = async (type: 'movie' | 'tv', id: string) => {
+export const fetchVideos = async (type: 'movie' | 'tv', id: string): Promise<Video[]> => {
   try {
     const url = type === 'movie' ? movieVideosUrl(Number(id)) : showVideosUrl(Number(id));
     const response = await fetch(url);
@@ -163,7 +163,7 @@ export const fetchVideos = async (type: 'movie' | 'tv', id: string) => {
   }
 };
 
-export const searchMoviesAndShows = async (query: string) => {
+export const searchMoviesAndShows = async (query: string): Promise<SearchResults> => {
   try {
     const [movieResponse, showResponse] = await Promise.all([
       fetch(`https://api.themoviedb.org/3/search/movie?api_key=${VITE_API_KEY}&query=${encodeURIComponent(query)}`),
