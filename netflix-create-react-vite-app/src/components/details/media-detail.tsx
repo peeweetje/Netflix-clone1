@@ -74,7 +74,7 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
 
   // Check if media has trailer
   const hasTrailer = videos.some(
-    (video: any) => video.type === 'Trailer' && video.site === 'YouTube'
+    (video) => video.type === 'Trailer' && video.site === 'YouTube'
   );
 
   return (

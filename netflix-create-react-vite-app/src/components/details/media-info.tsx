@@ -6,13 +6,14 @@ import {
   InfoLabel,
   InfoText,
 } from './details-styles';
+import type { Genre } from '../../utils/types/types';
 
 interface MovieMedia {
   status: string;
   original_language: string;
   release_date: string;
   runtime: number;
-  genres: Array<{ name: string }>;
+  genres: Genre[];
   vote_average: number;
   vote_count: number;
 }
@@ -24,7 +25,7 @@ interface TVMedia {
   last_air_date: string;
   number_of_seasons: number;
   number_of_episodes: number;
-  genres: Array<{ name: string }>;
+  genres: Genre[];
   vote_average: number;
   vote_count: number;
 }
@@ -84,7 +85,7 @@ export const MediaInfo = ({ media, type }: MediaInfoProps) => {
         )}
         <InfoText>
           <InfoLabel>{t('genres', 'Genres')}:</InfoLabel>{' '}
-          {media.genres?.map((g: any) => g.name).join(', ') || t('not-available', 'N/A')}
+          {media.genres?.map((g) => g.name).join(', ') || t('not-available', 'N/A')}
         </InfoText>
         <InfoText>
           <InfoLabel>{t('rating', 'Rating')}:</InfoLabel>{' '}
