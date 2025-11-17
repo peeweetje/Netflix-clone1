@@ -47,7 +47,7 @@ export const useLocalListDetails = (): UseLocalListDetailsReturn => {
 
       try {
         const movies: MovieResult[] = [];
-        const failed: any[] = [];
+        const failed: MyListItem[] = [];
 
         for (const item of validList) {
           if (abortController.signal.aborted) break;

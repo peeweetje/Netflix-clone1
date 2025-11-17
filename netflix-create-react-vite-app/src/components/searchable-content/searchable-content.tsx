@@ -5,15 +5,16 @@ import {
   SearchResultsContainer,
   SearchResultItem,
 } from './searchable-content.styles';
+import type { MovieResult, ShowResult } from '../../utils/types/types';
 
 interface SearchableContentProps {
   searchQuery: string;
-  searchResults: any[];
+  searchResults: (MovieResult | ShowResult)[];
   searchTitle?: string;
   emptyTitle?: string;
   emptyMessage?: string;
   children: React.ReactNode;
-  renderSearchResults?: (results: any[]) => React.ReactNode;
+  renderSearchResults?: (results: (MovieResult | ShowResult)[]) => React.ReactNode;
 }
 
 export const SearchableContent = ({

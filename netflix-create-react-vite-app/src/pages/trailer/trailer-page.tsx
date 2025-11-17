@@ -47,7 +47,7 @@ export const TrailerPage = () => {
 
   // Find trailer from videos data
   const trailer = videos.find(
-    (vid: any) => vid?.type === 'Trailer' && vid?.site === 'YouTube'
+    (vid) => vid?.type === 'Trailer' && vid?.site === 'YouTube'
   );
 
   const videoKey = trailer?.key || null;
