@@ -9,23 +9,30 @@ i18n
   .use(HttpApi)
   .init({
     supportedLngs: ['en', 'nl'],
-    lng: 'en',
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },
     detection: {
       order: [
+        'navigator',
         'querystring',
         'cookie',
         'localStorage',
         'sessionStorage',
-        'navigator',
         'htmlTag',
         'path',
         'subdomain',
       ],
-      caches: ['cookie'],
+      caches: ['localStorage', 'cookie'],
+      lookupLocalStorage: 'i18nextLng',
+      lookupCookie: 'i18nextLng',
+      convertDetectedLanguage: (lng) => {
+        // Map language variants to supported languages
+        if (lng && lng.startsWith('nl')) return 'nl';
+        if (lng && lng.startsWith('en')) return 'en';
+        return lng;
+      },
     },
     backend: {
       loadPath: '/locales/{{lng}}/translation.json',
