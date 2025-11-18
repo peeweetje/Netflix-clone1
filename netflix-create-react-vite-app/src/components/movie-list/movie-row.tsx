@@ -116,7 +116,7 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
               <div key={movie.id} ref={idx === 0 ? cardRef : undefined}>
                 <CardWrapper
                   to={`/${
-                    movie.media_type === 'tv' ? t('shows') : t('movies')
+                    movie.media_type === 'tv' ? 'shows' : 'movies'
                   }/${movie.id}`}
                 >
                   <SeasonalCard

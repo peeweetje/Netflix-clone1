@@ -103,7 +103,7 @@ export const MyList = () => {
                     <StyledCardWrapper key={`${movie.id}-${item.media_type}`}>
                       <CardWrapper
                         to={`/${
-                          item.media_type === 'tv' ? t('shows') : t('movies')
+                          item.media_type === 'tv' ? 'shows' : 'movies'
                         }/${movie.id}`}
                       >
                         <Card
