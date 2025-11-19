@@ -12,14 +12,17 @@ import {
 } from './trailer-page-styles';
 
 // Convert translated media types back to internal types
-const getInternalMediaType = (translatedType: string, language: string): 'movie' | 'tv' => {
-  const translations = {
-    en: { movie: 'movie', tv: 'tv' },
-    nl: { film: 'movie', serie: 'tv' },
+const getInternalMediaType = (translatedType: string): 'movie' | 'tv' => {
+  const allTranslations: Record<string, 'movie' | 'tv'> = {
+    // English
+    movie: 'movie',
+    tv: 'tv',
+    // Dutch
+    film: 'movie',
+    serie: 'tv',
   };
 
-  const langTranslations = translations[language as keyof typeof translations] || translations.en;
-  return langTranslations[translatedType as keyof typeof langTranslations] || 'movie';
+  return allTranslations[translatedType.toLowerCase()] || 'movie';
 };
 
 export const TrailerPage = () => {
@@ -29,7 +32,7 @@ export const TrailerPage = () => {
   const { theme } = useTheme();
 
   // Convert translated media type to internal type
-  const internalMediaType = media_type ? getInternalMediaType(media_type, i18n.language) : 'movie';
+  const internalMediaType = media_type ? getInternalMediaType(media_type) : 'movie';
 
   const {
     data: videos = [],

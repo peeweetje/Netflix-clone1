@@ -59,15 +59,9 @@ const AppContent = () => {
         <Route element={<MyList />} path="/mijn-lijst" />
         <Route element={<MediaDetail type="movie" />} path="/films/:id" />
         <Route element={<MediaDetail type="tv" />} path="/series/:id" />
-        <Route element={<TrailerPage />} path="/trailer/:media_type/:id" />
-
-        {/* Additional routes for translated trailer media types */}
-        <Route element={<TrailerPage />} path="/trailer/film/:id" />
-        <Route element={<TrailerPage />} path="/trailer/serie/:id" />
-
         {/* Redirect old translated routes to new ones */}
-        <Route path="/Films/:id" element={<LegacyFilmsRedirect />} />
-        <Route path="/Series/:id" element={<LegacySeriesRedirect />} />
+        <Route path="/Films/:id" element={<LegacyFilmsRedirect />} caseSensitive />
+        <Route path="/Series/:id" element={<LegacySeriesRedirect />} caseSensitive />
       </Routes>
     </StyledThemeProvider>
   );
