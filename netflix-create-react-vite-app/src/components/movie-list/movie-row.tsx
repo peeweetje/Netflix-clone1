@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { imageUrl } from '../../utils/api';
 import type { MovieResult } from '../../utils/types/types';
+import { useTranslatedRoutes } from '../../utils/routes';
 import { SeasonalCard } from '../card/seasonal-card';
 import { CardWrapper } from '../card-wrapper/card-wrapper';
 import {
@@ -32,6 +33,7 @@ const getVisibleMediaCount = () => {
 
 export const MovieRow = ({ title, movies }: MovieRowProps) => {
    const { t } = useTranslation();
+  const routes = useTranslatedRoutes();
   const [startIdx, setStartIdx] = useState(0);
   const [visibleCount, setVisibleCount] = useState(() =>
     typeof window !== 'undefined' ? getVisibleMediaCount() : 5
@@ -115,9 +117,11 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
             movie.poster_path ? (
               <div key={movie.id} ref={idx === 0 ? cardRef : undefined}>
                 <CardWrapper
-                  to={`/${
-                    movie.media_type === 'tv' ? 'shows' : 'movies'
-                  }/${movie.id}`}
+                  to={
+                    movie.media_type === 'tv'
+                      ? routes.getShowDetail(movie.id)
+                      : routes.getMovieDetail(movie.id)
+                  }
                 >
                   <SeasonalCard
                     alt={movie.title}
