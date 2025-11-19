@@ -11,7 +11,6 @@ import { PopularAndTrending } from '../pages/popular-trending/popular-and-trendi
 import { Shows } from '../pages/shows/shows';
 import { TrailerPage } from '../pages/trailer/trailer-page';
 import { GlobalStyle } from '../styles/global';
-import { useTranslatedRoutes } from '../utils/routes';
 
 const LegacyFilmsRedirect = () => {
   const { id } = useParams<{ id: string }>();
@@ -35,7 +34,7 @@ export const App = () => {
 
 const AppContent = () => {
   const { theme } = useTheme();
-  const routes = useTranslatedRoutes();
+
 
   return (
     <StyledThemeProvider theme={theme}>
