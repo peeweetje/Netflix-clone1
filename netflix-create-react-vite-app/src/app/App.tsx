@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { MediaDetail } from '../components/details/media-detail';
 import { SearchProvider } from '../context/search-context';
@@ -11,6 +11,7 @@ import { PopularAndTrending } from '../pages/popular-trending/popular-and-trendi
 import { Shows } from '../pages/shows/shows';
 import { TrailerPage } from '../pages/trailer/trailer-page';
 import { GlobalStyle } from '../styles/global';
+import { useTranslatedRoutes } from '../utils/routes';
 
 export const App = () => {
   return (
@@ -24,12 +25,16 @@ export const App = () => {
 
 const AppContent = () => {
   const { theme } = useTheme();
+  const routes = useTranslatedRoutes();
 
   return (
     <StyledThemeProvider theme={theme}>
       <GlobalStyle />
       <Routes>
+        {/* Home route */}
         <Route element={<Homepage />} path="/" />
+
+        {/* English routes */}
         <Route element={<Shows />} path="/shows" />
         <Route element={<Movies />} path="/movies" />
         <Route element={<PopularAndTrending />} path="/popular-trending" />
@@ -37,6 +42,23 @@ const AppContent = () => {
         <Route element={<MediaDetail type="movie" />} path="/movies/:id" />
         <Route element={<MediaDetail type="tv" />} path="/shows/:id" />
         <Route element={<TrailerPage />} path="/trailer/:media_type/:id" />
+
+        {/* Dutch routes */}
+        <Route element={<Shows />} path="/series" />
+        <Route element={<Movies />} path="/films" />
+        <Route element={<PopularAndTrending />} path="/populair-trending" />
+        <Route element={<MyList />} path="/mijn-lijst" />
+        <Route element={<MediaDetail type="movie" />} path="/films/:id" />
+        <Route element={<MediaDetail type="tv" />} path="/series/:id" />
+        <Route element={<TrailerPage />} path="/trailer/:media_type/:id" />
+
+        {/* Additional routes for translated trailer media types */}
+        <Route element={<TrailerPage />} path="/trailer/film/:id" />
+        <Route element={<TrailerPage />} path="/trailer/serie/:id" />
+
+        {/* Redirect old translated routes to new ones */}
+        <Route path="/Films/:id" element={<Navigate to="/films/:id" replace />} />
+        <Route path="/Series/:id" element={<Navigate to="/series/:id" replace />} />
       </Routes>
     </StyledThemeProvider>
   );
