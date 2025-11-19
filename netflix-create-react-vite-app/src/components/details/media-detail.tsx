@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useQueries } from '@tanstack/react-query';
 import { imageUrl } from '../../utils/api';
 import { mediaQueries } from '../../utils/queries';
+import { useTranslatedRoutes } from '../../utils/routes';
 import { CastMember } from './cast-member';
 import {
   ButtonContainer,
@@ -41,6 +42,7 @@ interface CastMember {
 
 export const MediaDetail = ({ type }: MediaDetailProps) => {
   const { t } = useTranslation();
+  const routes = useTranslatedRoutes();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
@@ -91,7 +93,7 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
               </GoBackButton>
               {hasTrailer && (
                 <GoBackButton
-                  onClick={() => navigate(`/trailer/${type}/${media.id}`)}
+                  onClick={() => navigate(routes.getTrailer(type, media.id))}
                   aria-label={t('watch-trailer')}
                 >
                  {t('watch-trailer')}

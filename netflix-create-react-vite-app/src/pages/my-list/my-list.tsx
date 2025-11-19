@@ -9,6 +9,7 @@ import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-he
 import { useMyList } from '../../context/myListContext';
 import { useSearchContext } from '../../context/search-context';
 import { useLocalListDetails } from '../../hooks/useLocalListDetails';
+import { useTranslatedRoutes } from '../../utils/routes';
 import type { MovieResult, ShowResult } from '../../utils/types/types';
 import {
   MoviesGrid,
@@ -21,6 +22,7 @@ import {
 
 export const MyList = () => {
   const { t } = useTranslation();
+  const routes = useTranslatedRoutes();
   const { myList, removeFromList } = useMyList();
   const { localMovies, localLoading, localError, failedItems, removalNotice } =
     useLocalListDetails();
@@ -102,9 +104,11 @@ export const MyList = () => {
                   return (
                     <StyledCardWrapper key={`${movie.id}-${item.media_type}`}>
                       <CardWrapper
-                        to={`/${
-                          item.media_type === 'tv' ? 'shows' : 'movies'
-                        }/${movie.id}`}
+                        to={
+                          item.media_type === 'tv'
+                            ? routes.getShowDetail(movie.id)
+                            : routes.getMovieDetail(movie.id)
+                        }
                       >
                         <Card
                           alt={movie.title || movie.name}

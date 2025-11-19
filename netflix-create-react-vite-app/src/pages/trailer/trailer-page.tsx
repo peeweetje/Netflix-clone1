@@ -11,20 +11,36 @@ import {
   VideoWrapper,
 } from './trailer-page-styles';
 
+// Convert translated media types back to internal types
+const getInternalMediaType = (translatedType: string): 'movie' | 'tv' => {
+  const allTranslations: Record<string, 'movie' | 'tv'> = {
+    // English
+    movie: 'movie',
+    tv: 'tv',
+    // Dutch
+    film: 'movie',
+    serie: 'tv',
+  };
+
+  return allTranslations[translatedType.toLowerCase()] || 'movie';
+};
+
 export const TrailerPage = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { id, media_type } = useParams<{ id: string; media_type: string }>();
   const navigate = useNavigate();
   const { theme } = useTheme();
 
+  // Convert translated media type to internal type
+  const internalMediaType = media_type ? getInternalMediaType(media_type) : 'movie';
 
   const {
     data: videos = [],
     isLoading: loading,
     error,
   } = useQuery({
-    queryKey: ['videos', media_type, id],
-    queryFn: () => fetchVideos(media_type as 'movie' | 'tv', id || ''),
+    queryKey: ['videos', internalMediaType, id],
+    queryFn: () => fetchVideos(internalMediaType, id || ''),
     enabled: !!(id && media_type),
     staleTime: 1000 * 60 * 10, // 10 minutes for video data
     retry: (failureCount, error) => {

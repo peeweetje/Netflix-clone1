@@ -2,6 +2,7 @@ import type React from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../context/themeContext';
+import { useTranslatedRoutes } from '../../../utils/routes';
 import { NavItems } from './nav-items';
 import {
   BrandContainer,
@@ -21,6 +22,7 @@ interface NavbarHeaderProps {
 export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
   const { t } = useTranslation();
   const { toggleTheme } = useTheme();
+  const routes = useTranslatedRoutes();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleHamburgerClick = () => {
@@ -48,16 +50,16 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
         <NavItems aria-label={t('home-page')} to="/">
           {t('home-page')}
         </NavItems>
-        <NavItems aria-label={t('show-page')} to="/shows">
+        <NavItems aria-label={t('show-page')} to={routes.SHOWS}>
           {t('show-page')}
         </NavItems>
-        <NavItems aria-label={t('movie-page')} to="/movies">
+        <NavItems aria-label={t('movie-page')} to={routes.MOVIES}>
           {t('movie-page')}
         </NavItems>
-        <NavItems aria-label={t('popular-trending')} to="/popular-trending">
+        <NavItems aria-label={t('popular-trending')} to={routes.POPULAR_TRENDING}>
           {t('popular-trending')}
         </NavItems>
-        <NavItems aria-label={t('my-list')} to="/my-list">
+        <NavItems aria-label={t('my-list')} to={routes.MY_LIST}>
           {t('my-list')}
         </NavItems>
       </NavList>

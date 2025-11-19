@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate, useParams } from 'react-router-dom';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { MediaDetail } from '../components/details/media-detail';
 import { SearchProvider } from '../context/search-context';
@@ -11,6 +11,16 @@ import { PopularAndTrending } from '../pages/popular-trending/popular-and-trendi
 import { Shows } from '../pages/shows/shows';
 import { TrailerPage } from '../pages/trailer/trailer-page';
 import { GlobalStyle } from '../styles/global';
+
+const LegacyFilmsRedirect = () => {
+  const { id } = useParams<{ id: string }>();
+  return <Navigate to={`/films/${id}`} replace />;
+};
+
+const LegacySeriesRedirect = () => {
+  const { id } = useParams<{ id: string }>();
+  return <Navigate to={`/series/${id}`} replace />;
+};
 
 export const App = () => {
   return (
@@ -25,11 +35,15 @@ export const App = () => {
 const AppContent = () => {
   const { theme } = useTheme();
 
+
   return (
     <StyledThemeProvider theme={theme}>
       <GlobalStyle />
       <Routes>
+        {/* Home route */}
         <Route element={<Homepage />} path="/" />
+
+        {/* English routes */}
         <Route element={<Shows />} path="/shows" />
         <Route element={<Movies />} path="/movies" />
         <Route element={<PopularAndTrending />} path="/popular-trending" />
@@ -37,6 +51,17 @@ const AppContent = () => {
         <Route element={<MediaDetail type="movie" />} path="/movies/:id" />
         <Route element={<MediaDetail type="tv" />} path="/shows/:id" />
         <Route element={<TrailerPage />} path="/trailer/:media_type/:id" />
+
+        {/* Dutch routes */}
+        <Route element={<Shows />} path="/series" />
+        <Route element={<Movies />} path="/films" />
+        <Route element={<PopularAndTrending />} path="/populair-trending" />
+        <Route element={<MyList />} path="/mijn-lijst" />
+        <Route element={<MediaDetail type="movie" />} path="/films/:id" />
+        <Route element={<MediaDetail type="tv" />} path="/series/:id" />
+        {/* Redirect old translated routes to new ones */}
+        <Route path="/Films/:id" element={<LegacyFilmsRedirect />} caseSensitive />
+        <Route path="/Series/:id" element={<LegacySeriesRedirect />} caseSensitive />
       </Routes>
     </StyledThemeProvider>
   );
