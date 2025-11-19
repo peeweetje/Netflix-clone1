@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useParams } from 'react-router-dom';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { MediaDetail } from '../components/details/media-detail';
 import { SearchProvider } from '../context/search-context';
@@ -12,6 +12,16 @@ import { Shows } from '../pages/shows/shows';
 import { TrailerPage } from '../pages/trailer/trailer-page';
 import { GlobalStyle } from '../styles/global';
 import { useTranslatedRoutes } from '../utils/routes';
+
+const LegacyFilmsRedirect = () => {
+  const { id } = useParams<{ id: string }>();
+  return <Navigate to={`/films/${id}`} replace />;
+};
+
+const LegacySeriesRedirect = () => {
+  const { id } = useParams<{ id: string }>();
+  return <Navigate to={`/series/${id}`} replace />;
+};
 
 export const App = () => {
   return (
@@ -57,8 +67,8 @@ const AppContent = () => {
         <Route element={<TrailerPage />} path="/trailer/serie/:id" />
 
         {/* Redirect old translated routes to new ones */}
-        <Route path="/Films/:id" element={<Navigate to="/films/:id" replace />} />
-        <Route path="/Series/:id" element={<Navigate to="/series/:id" replace />} />
+        <Route path="/Films/:id" element={<LegacyFilmsRedirect />} />
+        <Route path="/Series/:id" element={<LegacySeriesRedirect />} />
       </Routes>
     </StyledThemeProvider>
   );

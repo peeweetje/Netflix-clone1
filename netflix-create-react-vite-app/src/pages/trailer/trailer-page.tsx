@@ -14,8 +14,8 @@ import {
 // Convert translated media types back to internal types
 const getInternalMediaType = (translatedType: string, language: string): 'movie' | 'tv' => {
   const translations = {
-    en: { movie: 'movie', tv: 'tv', film: 'movie', serie: 'tv' },
-    nl: { movie: 'movie', tv: 'tv', film: 'movie', serie: 'tv' },
+    en: { movie: 'movie', tv: 'tv' },
+    nl: { film: 'movie', serie: 'tv' },
   };
 
   const langTranslations = translations[language as keyof typeof translations] || translations.en;
