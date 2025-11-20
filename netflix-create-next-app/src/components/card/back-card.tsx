@@ -45,7 +45,7 @@ export const BackCard = ({
         onClick={handleCardClick}
         className='relative p-3 flex flex-col items-center justify-center h-[350px] w-[250px] overflow-visible rounded-lg cursor-pointer shadow-2xl shadow-white/20 bg-primary'
       >
-        <h3 className='!text-white flex justify-center mt-0.5 mb-0.5 text-base font-bold'>
+        <h3 className='text-white! flex justify-center mt-0.5 mb-0.5 text-base font-bold'>
           {title}
         </h3>
 
