@@ -2,10 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchMovies } from '../utils/queries';
 import type { MovieResult } from '../utils/types/types';
 
-export const useFetchMovies = (url: string) => {
+export const useFetchMovies = (url: string, language: string = 'en-US') => {
   return useQuery({
-    queryKey: ['movies', url],
-    queryFn: () => fetchMovies(url),
+    queryKey: ['movies', url, language],
+    queryFn: () => fetchMovies(url, language),
     staleTime: 1000 * 60 * 5, // 5 minutes
     retry: (failureCount, error) => {
       // Don't retry on client errors (4xx) or specific API errors

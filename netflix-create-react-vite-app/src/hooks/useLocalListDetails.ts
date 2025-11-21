@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { type MyListItem, useMyList } from '../context/myListContext';
 import { VITE_API_KEY } from '../utils/api';
 import type { MovieResult } from '../utils/types/types';
@@ -12,6 +13,7 @@ interface UseLocalListDetailsReturn {
 }
 
 export const useLocalListDetails = (): UseLocalListDetailsReturn => {
+  const { i18n } = useTranslation();
   const { myList, removeFromList } = useMyList();
   const [localMovies, setLocalMovies] = useState<MovieResult[]>([]);
   const [localLoading, setLocalLoading] = useState<boolean>(false);
@@ -51,7 +53,7 @@ export const useLocalListDetails = (): UseLocalListDetailsReturn => {
 
         for (const item of validList) {
           if (abortController.signal.aborted) break;
-          const url = `https://api.themoviedb.org/3/${item.media_type}/${item.id}?api_key=${VITE_API_KEY}`;
+          const url = `https://api.themoviedb.org/3/${item.media_type}/${item.id}?api_key=${VITE_API_KEY}&language=${i18n.language}`;
           const res = await fetch(url, { signal: abortController.signal });
 
           if (!res.ok) {
@@ -106,7 +108,7 @@ export const useLocalListDetails = (): UseLocalListDetailsReturn => {
     return () => {
       abortController.abort();
     };
-  }, [myList, removeFromList]);
+  }, [myList, removeFromList, i18n.language]);
 
   return {
     localMovies,
