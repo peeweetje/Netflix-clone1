@@ -22,9 +22,10 @@ export const queryKeys = {
 } as const;
 
 // API functions
-export const fetchMovies = async (url: string): Promise<MovieResult[]> => {
+export const fetchMovies = async (url: string, language: string = 'en-US'): Promise<MovieResult[]> => {
   try {
-    const response = await fetch(url);
+    const separator = url.includes('?') ? '&' : '?';
+    const response = await fetch(`${url}${separator}language=${language}`);
 
     if (!response.ok) {
       // Provide more specific error messages based on status code
@@ -54,9 +55,9 @@ export const fetchMovies = async (url: string): Promise<MovieResult[]> => {
   }
 };
 
-export const fetchShows = async (): Promise<ShowResult[]> => {
+export const fetchShows = async (language: string = 'en-US'): Promise<ShowResult[]> => {
   try {
-    const response = await fetch(trendingShowUrl);
+    const response = await fetch(`${trendingShowUrl}&language=${language}`);
 
     if (!response.ok) {
       if (response.status === 401) {
@@ -85,10 +86,10 @@ export const fetchShows = async (): Promise<ShowResult[]> => {
   }
 };
 
-export const fetchMediaDetails = async (type: 'movie' | 'tv', id: string): Promise<MediaDetails> => {
+export const fetchMediaDetails = async (type: 'movie' | 'tv', id: string, language: string = 'en-US'): Promise<MediaDetails> => {
   try {
     const response = await fetch(
-      `https://api.themoviedb.org/3/${type}/${id}?api_key=${VITE_API_KEY}`
+      `https://api.themoviedb.org/3/${type}/${id}?api_key=${VITE_API_KEY}&language=${language}`
     );
 
     if (!response.ok) {
@@ -112,10 +113,10 @@ export const fetchMediaDetails = async (type: 'movie' | 'tv', id: string): Promi
   }
 };
 
-export const fetchCast = async (type: 'movie' | 'tv', id: string): Promise<Actor[]> => {
+export const fetchCast = async (type: 'movie' | 'tv', id: string, language: string = 'en-US'): Promise<Actor[]> => {
   try {
     const response = await fetch(
-      `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${VITE_API_KEY}`
+      `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${VITE_API_KEY}&language=${language}`
     );
 
     if (!response.ok) {
@@ -138,10 +139,10 @@ export const fetchCast = async (type: 'movie' | 'tv', id: string): Promise<Actor
   }
 };
 
-export const fetchVideos = async (type: 'movie' | 'tv', id: string): Promise<Video[]> => {
+export const fetchVideos = async (type: 'movie' | 'tv', id: string, language: string = 'en-US'): Promise<Video[]> => {
   try {
     const url = type === 'movie' ? movieVideosUrl(Number(id)) : showVideosUrl(Number(id));
-    const response = await fetch(url);
+    const response = await fetch(`${url}&language=${language}`);
 
     if (!response.ok) {
       if (response.status === 404) {
@@ -163,11 +164,11 @@ export const fetchVideos = async (type: 'movie' | 'tv', id: string): Promise<Vid
   }
 };
 
-export const searchMoviesAndShows = async (query: string): Promise<SearchResults> => {
+export const searchMoviesAndShows = async (query: string, language: string = 'en-US'): Promise<SearchResults> => {
   try {
     const [movieResponse, showResponse] = await Promise.all([
-      fetch(`https://api.themoviedb.org/3/search/movie?api_key=${VITE_API_KEY}&query=${encodeURIComponent(query)}`),
-      fetch(`https://api.themoviedb.org/3/search/tv?api_key=${VITE_API_KEY}&query=${encodeURIComponent(query)}`),
+      fetch(`https://api.themoviedb.org/3/search/movie?api_key=${VITE_API_KEY}&query=${encodeURIComponent(query)}&language=${language}`),
+      fetch(`https://api.themoviedb.org/3/search/tv?api_key=${VITE_API_KEY}&query=${encodeURIComponent(query)}&language=${language}`),
     ]);
 
     if (!movieResponse.ok || !showResponse.ok) {
@@ -199,58 +200,58 @@ export const searchMoviesAndShows = async (query: string): Promise<SearchResults
 
 // Query functions for TanStack Query
 export const movieQueries = {
-  trending: () => ({
-    queryKey: [...queryKeys.movies, 'trending'],
-    queryFn: () => fetchMovies(trendingMovieUrl),
+  trending: (language: string = 'en-US') => ({
+    queryKey: [...queryKeys.movies, 'trending', language],
+    queryFn: () => fetchMovies(trendingMovieUrl, language),
   }),
 
-  popular: () => ({
-    queryKey: [...queryKeys.movies, 'popular'],
-    queryFn: () => fetchMovies(popularMoviesUrl),
+  popular: (language: string = 'en-US') => ({
+    queryKey: [...queryKeys.movies, 'popular', language],
+    queryFn: () => fetchMovies(popularMoviesUrl, language),
   }),
 
-  discover: (sortBy: string = 'popularity.desc') => ({
-    queryKey: [...queryKeys.movies, 'discover', sortBy],
-    queryFn: () => fetchMovies(`${discoverMovieUrl}&sort_by=${sortBy}`),
+  discover: (sortBy: string = 'popularity.desc', language: string = 'en-US') => ({
+    queryKey: [...queryKeys.movies, 'discover', sortBy, language],
+    queryFn: () => fetchMovies(`${discoverMovieUrl}&sort_by=${sortBy}`, language),
   }),
 };
 
 export const showQueries = {
-  trending: () => ({
-    queryKey: [...queryKeys.shows, 'trending'],
-    queryFn: () => fetchShows(),
+  trending: (language: string = 'en-US') => ({
+    queryKey: [...queryKeys.shows, 'trending', language],
+    queryFn: () => fetchShows(language),
   }),
 
-  popular: () => ({
-    queryKey: [...queryKeys.shows, 'popular'],
-    queryFn: () => fetchShows(`${discoverShowUrl}&sort_by=popularity.desc`),
+  popular: (language: string = 'en-US') => ({
+    queryKey: [...queryKeys.shows, 'popular', language],
+    queryFn: () => fetchShows(`${discoverShowUrl}&sort_by=popularity.desc`, language),
   }),
 };
 
 export const mediaQueries = {
-  details: (type: 'movie' | 'tv', id: string) => ({
-    queryKey: [...queryKeys.media, type, id],
-    queryFn: () => fetchMediaDetails(type, id),
+  details: (type: 'movie' | 'tv', id: string, language: string = 'en-US') => ({
+    queryKey: [...queryKeys.media, type, id, language],
+    queryFn: () => fetchMediaDetails(type, id, language),
     enabled: !!id,
   }),
 
-  cast: (type: 'movie' | 'tv', id: string) => ({
-    queryKey: [...queryKeys.cast, type, id],
-    queryFn: () => fetchCast(type, id),
+  cast: (type: 'movie' | 'tv', id: string, language: string = 'en-US') => ({
+    queryKey: [...queryKeys.cast, type, id, language],
+    queryFn: () => fetchCast(type, id, language),
     enabled: !!id,
   }),
 
-  videos: (type: 'movie' | 'tv', id: string) => ({
-    queryKey: [...queryKeys.videos, type, id],
-    queryFn: () => fetchVideos(type, id),
+  videos: (type: 'movie' | 'tv', id: string, language: string = 'en-US') => ({
+    queryKey: [...queryKeys.videos, type, id, language],
+    queryFn: () => fetchVideos(type, id, language),
     enabled: !!id,
   }),
 };
 
 export const searchQueries = {
-  all: (query: string) => ({
-    queryKey: [...queryKeys.search, query],
-    queryFn: () => searchMoviesAndShows(query),
+  all: (query: string, language: string = 'en-US') => ({
+    queryKey: [...queryKeys.search, query, language],
+    queryFn: () => searchMoviesAndShows(query, language),
     enabled: !!query && query.length > 2,
     staleTime: 1000 * 60 * 2, // 2 minutes for search results
   }),
