@@ -25,7 +25,7 @@ const Container = styled.div`
 const mostPopularShowsUrl = `${discoverShowUrl}&sort_by=popularity.desc`;
 
 export const PopularAndTrending = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { searchQuery, setSearchQuery, searchResultsMovies, searchResultsShows, searchLoading, searchError } = useSearchContext();
 
@@ -34,26 +34,26 @@ export const PopularAndTrending = () => {
     data: trendingMovies = [],
     isLoading: trendingMoviesLoading,
     error: trendingMoviesError,
-  } = useFetchMovies(trendingMovieUrl);
+  } = useFetchMovies(trendingMovieUrl, i18n.language);
 
   const {
     data: trendingShows = [],
     isLoading: trendingShowsLoading,
     error: trendingShowsError,
-  } = useFetchMovies(trendingShowUrl);
+  } = useFetchMovies(trendingShowUrl, i18n.language);
 
   // Fetch most popular movies and shows using TanStack Query
   const {
     data: popularMovies = [],
     isLoading: popularMoviesLoading,
     error: popularMoviesError,
-  } = useFetchMovies(popularMoviesUrl);
+  } = useFetchMovies(popularMoviesUrl, i18n.language);
 
   const {
     data: popularShows = [],
     isLoading: popularShowsLoading,
     error: popularShowsError,
-  } = useFetchMovies(mostPopularShowsUrl);
+  } = useFetchMovies(mostPopularShowsUrl, i18n.language);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -80,7 +80,7 @@ export const PopularAndTrending = () => {
     popularMoviesError ||
     popularShowsError;
 
-  const renderSearchResults = (results) => <MovieRow movies={results} title={t('search-results')} />;
+  const renderSearchResults = (results, title) => <MovieRow movies={results} title={title} />;
 
   const renderDefaultContent = () => (
     <>

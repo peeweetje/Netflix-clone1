@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { Card } from '../../components/card/card';
 import { CardWrapper } from '../../components/card-wrapper/card-wrapper';
+import { RowTitle } from '../../components/movie-list/movie.styles';
 import { Loading } from '../../components/loading/loading';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
 import { SearchableContent } from '../../components/searchable-content/searchable-content';
@@ -13,7 +14,7 @@ import type { ShowResult } from '../../utils/types/types';
 import { StyledContainer } from './shows.styles';
 
 export const Shows = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { searchQuery, setSearchQuery, searchResultsMovies, searchResultsShows, searchLoading, searchError } = useSearchContext();
 
@@ -23,8 +24,8 @@ export const Shows = () => {
     isLoading: showsLoading,
     error: showsError,
   } = useQuery({
-    queryKey: ['shows', 'trending'],
-    queryFn: fetchShows,
+    queryKey: ['shows', 'trending', i18n.language],
+    queryFn: () => fetchShows(i18n.language),
     staleTime: 1000 * 60 * 5, // 5 minutes
     retry: (failureCount, error) => {
       // Don't retry on specific shows errors
@@ -101,7 +102,12 @@ export const Shows = () => {
           <SearchableContent
             searchQuery={searchQuery}
             searchResults={searchResultsShows}
-            renderSearchResults={(results) => renderShows(results)}
+            renderSearchResults={(results, title) => (
+              <>
+                <RowTitle>{title}</RowTitle>
+                {renderShows(results)}
+              </>
+            )}
           >
             {renderShows(shows)}
           </SearchableContent>

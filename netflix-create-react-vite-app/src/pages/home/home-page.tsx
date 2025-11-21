@@ -12,7 +12,7 @@ import type { MovieResult } from '../../utils/types/types';
 import { MainContainer } from './home-page-styles';
 
 export const Homepage = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { searchQuery, setSearchQuery, searchResultsMovies, searchResultsShows, searchLoading, searchError } = useSearchContext();
 
@@ -21,19 +21,19 @@ export const Homepage = () => {
     data: popular = [],
     isLoading: popularLoading,
     error: popularError,
-  } = useFetchMovies(popularMoviesUrl);
+  } = useFetchMovies(popularMoviesUrl, i18n.language);
 
   const {
     data: topRated = [],
     isLoading: topRatedLoading,
     error: topRatedError,
-  } = useFetchMovies(topRatedMoviesUrl);
+  } = useFetchMovies(topRatedMoviesUrl, i18n.language);
 
   const {
     data: action = [],
     isLoading: actionLoading,
     error: actionError,
-  } = useFetchMovies(actionMoviesUrl);
+  } = useFetchMovies(actionMoviesUrl, i18n.language);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchQuery(e.target.value);
@@ -55,10 +55,10 @@ export const Homepage = () => {
           <SearchableContent
             searchQuery={searchQuery}
             searchResults={searchResultsMovies}
-            renderSearchResults={(results) => (
+            renderSearchResults={(results, title) => (
               <MovieRow
                 movies={results}
-                title={t('search-results')}
+                title={title}
               />
             )}
           >
