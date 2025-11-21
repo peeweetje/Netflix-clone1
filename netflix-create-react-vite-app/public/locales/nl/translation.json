@@ -30,6 +30,7 @@
   "no-search-results": "Geen resultaten gevonden",
   "no-search-results-message": "Geen resultaten gevonden voor \"{{query}}\". Probeer een andere zoekterm.",
   "search-results": "Zoekresultaten",
+  "search-results-for": "Zoekresultaten voor \"{{query}}\"",
   "not-loaded": "Sommige items konden niet worden geladen:",
   "remove-from-list": "Verwijderd",
   "trending-movies": "trending films",

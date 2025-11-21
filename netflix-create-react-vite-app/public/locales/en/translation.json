@@ -30,6 +30,7 @@
   "no-search-results": "No results found",
   "no-search-results-message": "No results found for \"{{query}}\". Try a different search term.",
   "search-results": "Search Results",
+  "search-results-for": "Search Results for \"{{query}}\"",
   "not-loaded": "Some items could not be loaded:",
   "remove-from-list": "Remove",
   "trending-movies": "Trending Movies",
