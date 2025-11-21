@@ -14,7 +14,7 @@ interface SearchableContentProps {
   emptyTitle?: string;
   emptyMessage?: string;
   children: React.ReactNode;
-  renderSearchResults?: (results: (MovieResult | ShowResult)[]) => React.ReactNode;
+  renderSearchResults?: (results: (MovieResult | ShowResult)[], title: string) => React.ReactNode;
 }
 
 export const SearchableContent = ({
@@ -39,9 +39,11 @@ export const SearchableContent = ({
       );
     }
 
+    const title = searchTitle || t('search-results-for', { query: searchQuery });
+
     // If custom render function provided, use it
     if (renderSearchResults) {
-      return <>{renderSearchResults(searchResults)}</>;
+      return <>{renderSearchResults(searchResults, title)}</>;
     }
 
     // Default rendering for simple cases

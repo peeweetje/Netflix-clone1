@@ -1,5 +1,6 @@
 import type React from 'react';
 import { createContext, type ReactNode, useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { searchQueries } from '../utils/queries';
 import type { MovieResult, ShowResult } from '../utils/types/types';
@@ -16,6 +17,7 @@ interface SearchContextType {
 const SearchContext = createContext<SearchContextType | undefined>(undefined);
 
 export const SearchProvider = ({ children }: { children: ReactNode }) => {
+  const { i18n } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
 
   const {
@@ -23,7 +25,7 @@ export const SearchProvider = ({ children }: { children: ReactNode }) => {
     isLoading: searchLoading,
     error: searchError,
   } = useQuery({
-    ...searchQueries.all(searchQuery),
+    ...searchQueries.all(searchQuery, i18n.language),
     enabled: !!searchQuery.trim() && searchQuery.trim().length > 2,
   });
 
