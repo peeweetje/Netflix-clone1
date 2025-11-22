@@ -12,7 +12,7 @@
   "movie-poster": "film-poster",
   "loading": "Laden...",
   "added": "Toegevoegd",
-  "add-to-list": "Toegevoegd aan lijst",
+  "add-to-list": "Voeg toe",
   "less-info": "minder Informatie",
   "more-info": "meer Informatie",
   "scroll-left": "Scroll naar links",
@@ -76,5 +76,5 @@
   "about": "over",
   "movie-details": "Film details",
   "overview": "Overzicht",
-  "added-to-list": "Toegevoegd aan lijst"
+  "no-info-available": "Er is geen informatie beschikbaar"
 }

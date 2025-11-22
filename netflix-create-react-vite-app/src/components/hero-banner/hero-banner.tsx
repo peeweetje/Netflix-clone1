@@ -102,7 +102,11 @@ export const HeroBanner = ({
             </BannerButton>
           </BannerButtons>
         </div>
-        {showInfo && <BannerOverview id="movie-overview">{overview}</BannerOverview>}
+        {showInfo && (
+          <BannerOverview id="movie-overview">
+            {overview || t('no-info-available')}
+          </BannerOverview>
+        )}
       </BannerOverlay>
     </BannerContainer>
   );
