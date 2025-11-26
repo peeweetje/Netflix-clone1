@@ -10,7 +10,6 @@ import { useMyList } from '../../context/myListContext';
 import { useSearchContext } from '../../context/search-context';
 import { useLocalListDetails } from '../../hooks/useLocalListDetails';
 import { useTranslatedRoutes } from '../../utils/routes';
-import { imageUrl } from '../../utils/api';
 import type { MovieResult, ShowResult } from '../../utils/types/types';
 import {
   MoviesGrid,
@@ -116,7 +115,7 @@ export const MyList = () => {
                           id={movie.id}
                           media_type={item.media_type}
                           overview={movie.overview}
-                          src={`${imageUrl}${movie.poster_path}`}
+                          src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                           title={movie.title || movie.name}
                           vote_average={movie.vote_average}
                         />
