@@ -13,7 +13,7 @@ export const MediaPoster = ({
   tagline,
   imageUrl}: MediaPosterProps) => (
   <div className="flex flex-col items-center justify-center">
-    <h1 className="w-[450px] text-center break-words mx-auto text-white text-xl font-bold mb-4 lg:w-[300px] lg:text-lg sm:w-[200px] sm:text-base">
+    <h1 className="w-[450px] text-center wrap-break-word mx-auto text-white text-xl font-bold mb-4 lg:w-[300px] lg:text-lg sm:w-[200px] sm:text-base">
       {title}
     </h1>
     {posterPath ? (
@@ -28,7 +28,7 @@ export const MediaPoster = ({
       </div>
     )}
     {tagline && (
-      <p className="w-[450px] mt-4 text-center break-words mx-auto text-white italic text-lg lg:w-[300px] lg:text-base sm:w-[200px] sm:text-sm">
+      <p className="w-[450px] mt-4 text-center wrap-break-word mx-auto text-white italic text-lg lg:w-[300px] lg:text-base sm:w-[200px] sm:text-sm">
         "{tagline}"
       </p>
     )}

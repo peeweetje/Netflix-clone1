@@ -79,7 +79,7 @@ export const HeroBanner = ({
       </div>
 
       {/* Gradient Overlay */}
-      <div className='absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent'></div>
+      <div className='absolute bottom-0 left-0 right-0 h-24 bg-linear-to-t from-black to-transparent'></div>
     </div>
   );
 };

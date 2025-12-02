@@ -50,7 +50,7 @@ export const Card = forwardRef<CardRef, CardProps>(
 
     return (
       <div
-        className="w-full h-[380px] flex cursor-pointer [perspective:1000px]"
+        className="w-full h-[380px] flex cursor-pointer perspective-[1000px]"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onKeyDown={handleKeyDown}
@@ -61,18 +61,18 @@ export const Card = forwardRef<CardRef, CardProps>(
         <motion.div
           animate={{ rotateY: isFlipped ? 180 : 0 }}
           transition={{ duration: 0.6 }}
-          className="relative w-[250px] h-[350px] [transform-style:preserve-3d]"
+          className="relative w-[250px] h-[350px] transform-3d"
         >
           {/* Front of card */}
           <motion.div
-            className="absolute w-full h-full z-10 [backface-visibility:hidden] [transform:rotateY(0deg)]"
+            className="absolute w-full h-full z-10 backface-hidden transform-[rotateY(0deg)]"
           >
             <FrontCard src={src} alt={alt} />
           </motion.div>
 
           {/* Back of card */}
           <motion.div
-            className="absolute w-full h-full z-0 [backface-visibility:hidden] [transform:rotateY(180deg)]"
+            className="absolute w-full h-full z-0 backface-hidden transform-[rotateY(180deg)]"
           >
             <BackCard
               id={id}
@@ -96,7 +96,7 @@ export const Card = forwardRef<CardRef, CardProps>(
               }}
               aria-label='Remove from list'
             >
-              <Trash2 className='!w-5 !h-5' />
+              <Trash2 className='w-5! h-5!' />
             </button>
           )}
         </motion.div>

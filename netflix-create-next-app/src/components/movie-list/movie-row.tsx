@@ -129,7 +129,7 @@ export const MovieRow = ({ movies, title }:MovieRowProps) => {
         >
           {movies.map((movie) =>
             movie.poster_path ? (
-              <div key={movie.id} className="flex-shrink-0">
+              <div key={movie.id} className="shrink-0">
                 <Card
                   src={movie.poster_path}
                   alt={movie.title || movie.name || ''}
