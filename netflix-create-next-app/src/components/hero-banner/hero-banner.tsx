@@ -66,7 +66,7 @@ export const HeroBanner = ({
           <div className='min-h-[120px] transition-all duration-300 ease-in-out'>
             <p
               id={`overview-${movieId}`}
-              className={`text-white text-md md:text-lg leading-relaxed max-w-3xl mb-6 drop-shadow-lg transition-all duration-300 ease-in-out ${
+              className={`text-white text-md md:text-md leading-relaxed max-w-3xl mb-6 drop-shadow-lg transition-all duration-300 ease-in-out ${
                 showInfo
                   ? 'opacity-100 translate-y-0'
                   : 'opacity-0 -translate-y-2'

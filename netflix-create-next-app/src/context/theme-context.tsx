@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-type Theme = 'green' | 'blue' | 'purple' | 'red';
+type Theme = 'green' | 'blue' | 'purple' | 'red'| 'yellow';
 
 type ThemeContextType = {
   theme: Theme;
@@ -29,7 +29,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       green: { hue: '142', saturation: '71%' },
       blue: { hue: '217', saturation: '91%' },
       purple: { hue: '262', saturation: '83%' },
-      red: { hue: '0', saturation: '84%' }
+      red: { hue: '0', saturation: '84%' },
+      yellow: { hue: '48', saturation: '100%' }
     };
 
     const themeConfig = themes[currentTheme] || themes.green;
@@ -51,7 +52,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       green: { hue: '142', saturation: '71%' },
       blue: { hue: '217', saturation: '91%' },
       purple: { hue: '262', saturation: '83%' },
-      red: { hue: '0', saturation: '84%' }
+      red: { hue: '0', saturation: '84%' },
+      yellow: { hue: '48', saturation: '100%' },
     };
     
     const { hue, saturation } = themes[newTheme];
