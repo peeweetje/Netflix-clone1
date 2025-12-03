@@ -5,9 +5,7 @@
 
 :root {
   /* Theme variables - HSL based for easy manipulation */
-  --primary-hue: 142;
-  --primary-saturation: 71%;
-  --primary-lightness: 45%;
+  /* --primary variables are set dynamically by theme-context.tsx */
 
   /* Shadcn/ui color system - keeping dark theme */
   --background: hsl(222.2 84% 4.9%);
@@ -16,7 +14,8 @@
   --card-foreground: hsl(210 40% 98%);
   --popover: hsl(222.2 84% 4.9%);
   --popover-foreground: hsl(210 40% 98%);
-  --primary: hsl(var(--primary-hue) var(--primary-saturation) var(--primary-lightness));
+  --primary: hsl(147 50% 47%);
+  /* Default to Emerald 600 */
   --primary-foreground: hsl(210 40% 98%);
   --secondary: hsl(217.2 32.6% 17.5%);
   --secondary-foreground: hsl(210 40% 98%);
@@ -28,13 +27,10 @@
   --destructive-foreground: hsl(210 40% 98%);
   --border: hsl(217.2 32.6% 17.5%);
   --input: hsl(217.2 32.6% 17.5%);
-  --ring: hsl(var(--primary-hue) var(--primary-saturation) var(--primary-lightness));
+  --ring: hsl(147 50% 47%);
+  /* Default to Emerald 600 */
   --radius: 0.625rem;
 }
-
-
-
-
 
 @layer base {
   * {
@@ -48,11 +44,15 @@
     @apply bg-background text-foreground transition-colors duration-200;
   }
 
-  h2, h4, h5, h6 {
+  h2,
+  h4,
+  h5,
+  h6 {
     @apply font-bold text-primary;
   }
 
-  h1, h3 {
+  h1,
+  h3 {
     @apply text-foreground;
   }
 
@@ -64,11 +64,6 @@
     @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring;
   }
 }
-
-
-
-
-  
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -95,21 +90,4 @@
   --color-ring: var(--ring);
 }
 
-
-/* Theme overrides - only change the HSL values */
-[data-theme="blue"] {
-  --primary-hue: 217;
-  --primary-saturation: 91%;
-}
-
-[data-theme="purple"] {
-  --primary-hue: 262;
-  --primary-saturation: 83%;
-}
-
-[data-theme="red"] {
-  --primary-hue: 0;
-  --primary-saturation: 84%;
-}
-
-/* Green is the default, no override needed */
+/* Theme overrides are handled dynamically in theme-context.tsx */

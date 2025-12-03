@@ -1,3 +1,5 @@
+
+
 export type Theme = 'green' | 'blue' | 'purple' | 'red' | 'yellow';
 
 export interface ThemeConfig {
@@ -8,8 +10,7 @@ export interface ThemeConfig {
   ring: string;
   text: string;
   border: string;
-  hue: string;
-  saturation: string;
+  primaryColor: string; // Hex value from Tailwind
 }
 
 export const themeOptions: ThemeConfig[] = [
@@ -21,8 +22,7 @@ export const themeOptions: ThemeConfig[] = [
     ring: 'ring-emerald-500/20',
     text: 'text-emerald-600',
     border: 'border-emerald-500/20',
-    hue: '142',
-    saturation: '71%',
+    primaryColor: '#059669', // emerald-600
   },
   {
     id: 'blue',
@@ -32,8 +32,7 @@ export const themeOptions: ThemeConfig[] = [
     ring: 'ring-blue-500/20',
     text: 'text-blue-600',
     border: 'border-blue-500/20',
-    hue: '217',
-    saturation: '91%',
+    primaryColor: '#2563eb', // blue-600
   },
   {
     id: 'purple',
@@ -43,8 +42,7 @@ export const themeOptions: ThemeConfig[] = [
     ring: 'ring-purple-500/20',
     text: 'text-purple-600',
     border: 'border-purple-500/20',
-    hue: '262',
-    saturation: '83%',
+    primaryColor: '#9333ea', // purple-600
   },
   {
     id: 'red',
@@ -54,8 +52,7 @@ export const themeOptions: ThemeConfig[] = [
     ring: 'ring-rose-500/20',
     text: 'text-rose-600',
     border: 'border-rose-500/20',
-    hue: '0',
-    saturation: '84%',
+    primaryColor: '#e11d48', // rose-600
   },
   {
     id: 'yellow',
@@ -65,8 +62,7 @@ export const themeOptions: ThemeConfig[] = [
     ring: 'ring-yellow-500/20',
     text: 'text-yellow-600',
     border: 'border-yellow-500/20',
-    hue: '48',
-    saturation: '100%',
+    primaryColor: '#ca8a04', // yellow-600
   },
 ];
 
