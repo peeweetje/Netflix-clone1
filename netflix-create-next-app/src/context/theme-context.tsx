@@ -1,8 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-
-type Theme = 'green' | 'blue' | 'purple' | 'red'| 'yellow';
+import { Theme, getThemeConfig } from '@/lib/theme-config';
 
 type ThemeContextType = {
   theme: Theme;
@@ -17,23 +16,15 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   // Load theme from localStorage on initial render and apply to HTML element
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as Theme | null;
-    const currentTheme = savedTheme || 'green';
-    setThemeState(currentTheme);
+    const currentThemeId = savedTheme || 'green';
+    setThemeState(currentThemeId);
     
     // Apply theme to document element
     const root = document.documentElement;
-    root.setAttribute('data-theme', currentTheme);
+    root.setAttribute('data-theme', currentThemeId);
     
     // Set CSS variables based on theme
-    const themes = {
-      green: { hue: '142', saturation: '71%' },
-      blue: { hue: '217', saturation: '91%' },
-      purple: { hue: '262', saturation: '83%' },
-      red: { hue: '0', saturation: '84%' },
-      yellow: { hue: '48', saturation: '100%' }
-    };
-
-    const themeConfig = themes[currentTheme] || themes.green;
+    const themeConfig = getThemeConfig(currentThemeId);
     const { hue, saturation } = themeConfig;
     root.style.setProperty('--primary-hue', hue);
     root.style.setProperty('--primary-saturation', saturation);
@@ -48,15 +39,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     root.setAttribute('data-theme', newTheme);
     
     // Set CSS variables based on theme
-    const themes = {
-      green: { hue: '142', saturation: '71%' },
-      blue: { hue: '217', saturation: '91%' },
-      purple: { hue: '262', saturation: '83%' },
-      red: { hue: '0', saturation: '84%' },
-      yellow: { hue: '48', saturation: '100%' },
-    };
-    
-    const { hue, saturation } = themes[newTheme];
+    const themeConfig = getThemeConfig(newTheme);
+    const { hue, saturation } = themeConfig;
     root.style.setProperty('--primary-hue', hue);
     root.style.setProperty('--primary-saturation', saturation);
   };
