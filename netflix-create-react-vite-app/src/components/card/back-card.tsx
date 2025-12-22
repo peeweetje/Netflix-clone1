@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { type MyListItem, useMyList } from '../../context/myListContext';
-import { scoreColor } from '../../utils/score-color';
 import { Chip } from '../chip/chip';
 import {
   BackCardButton,
