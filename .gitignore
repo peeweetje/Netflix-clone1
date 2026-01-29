@@ -1,3 +1,5 @@
 .qodo
 #vs-code
 .vscode/
+
+/node_modules
