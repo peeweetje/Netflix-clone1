@@ -1,6 +1,4 @@
 @import 'tailwindcss';
-@config '../../tailwind.config.js';
-@plugin 'tailwindcss-animate';
 
 
 :root {
@@ -30,42 +28,8 @@
   --ring: hsl(147 50% 47%);
   /* Default to Emerald 600 */
   --radius: 0.625rem;
-}
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    @apply bg-background text-foreground transition-colors duration-200;
-  }
-
-  h2,
-  h4,
-  h5,
-  h6 {
-    @apply font-bold text-primary;
-  }
-
-  h1,
-  h3 {
-    @apply text-foreground;
-  }
-
-  a {
-    @apply text-primary hover:text-primary/80 transition-colors;
-  }
-
-  button {
-    @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring;
-  }
-}
-
-@theme inline {
+  /* Theme variables - keeping inline theme definitions */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -88,6 +52,70 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: var(--background);
+    color: var(--foreground);
+    transition: background-color 200ms, color 200ms;
+  }
+
+  h2,
+  h4,
+  h5,
+  h6 {
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  h1,
+  h3 {
+    color: var(--foreground);
+  }
+
+  a {
+    color: var(--primary);
+    transition: color 150ms ease-in-out;
+  }
+
+  a:hover {
+    color: color-mix(in oklab, var(--primary) 80%, transparent);
+  }
+
+  button {
+    outline: none;
+    outline-offset: 2px;
+  }
+
+  button:focus {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* Ensure buttons have proper background colors */
+  .bg-primary {
+    background-color: var(--primary);
+  }
+  
+  .text-primary-foreground {
+    color: var(--primary-foreground);
+  }
+  
+  .hover\:bg-primary:hover {
+    background-color: var(--primary);
+  }
+  
+  .hover\:bg-primary\/90:hover {
+    background-color: color-mix(in oklab, var(--primary) 90%, transparent);
+  }
 }
 
 /* Theme overrides are handled dynamically in theme-context.tsx */
