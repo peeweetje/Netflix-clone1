@@ -4,7 +4,7 @@ import type { CardRef } from '../card/card';
 
 interface CardWrapperProps {
   to: string;
-  children: React.ReactElement;
+  children: React.ReactElement<{ ref?: React.Ref<CardRef> }>;
 }
 
 export const CardWrapper = ({ to, children }: CardWrapperProps) => {
@@ -16,6 +16,10 @@ export const CardWrapper = ({ to, children }: CardWrapperProps) => {
       cardRef.current?.flip();
     }
   };
+
+  if (!React.isValidElement(children)) {
+    return null;
+  }
 
   return (
     <Link onKeyDown={handleKeyDown} to={to}>
