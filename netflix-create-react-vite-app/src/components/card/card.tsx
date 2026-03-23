@@ -9,7 +9,7 @@ import {
 } from './card.styles';
 import { FrontCard } from './front-card';
 
- interface CardRef {
+ export interface CardRef {
   flip: () => void;
 }
 
