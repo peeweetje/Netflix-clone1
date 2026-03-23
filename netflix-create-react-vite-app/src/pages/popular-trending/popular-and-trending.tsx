@@ -1,4 +1,4 @@
-import type React from 'react';
+import  React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { Loading } from '../../components/loading/loading';
@@ -27,7 +27,7 @@ const mostPopularShowsUrl = `${discoverShowUrl}&sort_by=popularity.desc`;
 export const PopularAndTrending = () => {
   const { t, i18n } = useTranslation();
 
-  const { searchQuery, setSearchQuery, searchResultsMovies, searchResultsShows, searchLoading, searchError } = useSearchContext();
+  const { searchQuery, setSearchQuery, searchResultsCombined, searchLoading, searchError } = useSearchContext();
 
   // Fetch trending movies and shows using TanStack Query
   const {
@@ -60,12 +60,12 @@ export const PopularAndTrending = () => {
   };
 
   const mapShowToMovie = (
-    show: ShowResult
+    show: ShowResult | MovieResult
   ): MovieResult & { media_type: 'tv' } => ({
     id: show.id,
     poster_path: show.poster_path,
     overview: show.overview,
-    title: show.name,
+    title: 'title' in show ? show.title : show.name,
     vote_average: show.vote_average,
     media_type: 'tv',
   });
@@ -75,12 +75,17 @@ export const PopularAndTrending = () => {
     popularMoviesLoading ||
     popularShowsLoading;
 
-  const error = searchQuery ? searchError : trendingMoviesError ||
-    trendingShowsError ||
-    popularMoviesError ||
-    popularShowsError;
+  const error = searchQuery
+    ? searchError
+    : (trendingMoviesError as Error | null)?.message ||
+      (trendingShowsError as Error | null)?.message ||
+      (popularMoviesError as Error | null)?.message ||
+      (popularShowsError as Error | null)?.message ||
+      null;
 
-  const renderSearchResults = (results, title) => <MovieRow movies={results} title={title} />;
+  const renderSearchResults = (results: (MovieResult & { media_type: 'movie' | 'tv' })[], title: string) => (
+    <MovieRow movies={results} title={title} />
+  );
 
   const renderDefaultContent = () => (
     <>
@@ -104,7 +109,7 @@ export const PopularAndTrending = () => {
         <Loading loading={isLoading} error={error}>
           <SearchableContent
             searchQuery={searchQuery}
-            searchResults={searchResultsMovies}
+            searchResults={searchResultsCombined}
             renderSearchResults={renderSearchResults}
           >
             {renderDefaultContent()}
