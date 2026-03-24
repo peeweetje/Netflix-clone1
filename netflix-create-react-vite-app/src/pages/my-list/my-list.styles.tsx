@@ -58,6 +58,6 @@ export const RemoveButton = styled.button`
   }
 `;
 
-export const failedItemsStyle = styled.div`
+export const FailedItemsStyle = styled.div`
   color:${(props) => props.theme.colors.red};
 `;

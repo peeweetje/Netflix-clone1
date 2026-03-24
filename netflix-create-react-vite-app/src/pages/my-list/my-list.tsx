@@ -1,4 +1,4 @@
-import type React from 'react';
+import  React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Spinner } from '../../components/spinner/spinner';
 import { Card } from '../../components/card/card';
@@ -18,7 +18,7 @@ import {
   RemovalNotice,
   RemoveButton,
   CardWrapper as StyledCardWrapper,
-  failedItemsStyle,
+  FailedItemsStyle,
 } from './my-list.styles';
 
 export const MyList = () => {
@@ -71,17 +71,16 @@ export const MyList = () => {
           <>
             {removalNotice && <RemovalNotice>{removalNotice}</RemovalNotice>}
             {failedItems.length > 0 && (
-              <failedItemsStyle>
+              <FailedItemsStyle>
                 <p>{t('not-loaded')}</p>
                 <ul>
                   {failedItems.map((item, idx) => (
                     <li key={idx}>
-                      {item.title || item.name || 'Unknown Title'} (ID:{' '}
-                      {item.id}, Type: {item.media_type})
+                      Unknown Title (ID: {item.id}, Type: {item.media_type})
                     </li>
                   ))}
                 </ul>
-              </failedItemsStyle>
+              </FailedItemsStyle>
             )}
             {localLoading ? (
               <Spinner />
@@ -112,12 +111,12 @@ export const MyList = () => {
                         }
                       >
                         <Card
-                          alt={movie.title || movie.name}
+                          alt={movie.title}
                           id={movie.id}
                           media_type={item.media_type}
                           overview={movie.overview}
                           src={`${imageUrl}${movie.poster_path}`}
-                          title={movie.title || movie.name}
+                          title={movie.title}
                           vote_average={movie.vote_average}
                         />
                       </CardWrapper>

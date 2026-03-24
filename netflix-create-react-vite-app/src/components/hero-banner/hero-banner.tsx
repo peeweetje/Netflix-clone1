@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React,  { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../../context/themeContext';
+import type { DefaultTheme } from 'styled-components';
 import {
   autumnTheme,
   springTheme,
@@ -34,7 +35,7 @@ interface HeroBannerProps {
   mediaType: 'movie' | 'tv';
 }
 
-export const renderSeasonalEffects = (theme) => {
+export const renderSeasonalEffects = (theme: DefaultTheme | null) => {
   if (!theme) return null;
 
   switch (theme.name) {

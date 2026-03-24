@@ -8,15 +8,15 @@ import { Loading } from '../../components/loading/loading';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
 import { SearchableContent } from '../../components/searchable-content/searchable-content';
 import { useSearchContext } from '../../context/search-context';
-import { imageUrl, trendingShowUrl } from '../../utils/api';
+import { imageUrl } from '../../utils/api';
 import { fetchShows } from '../../utils/queries';
 import type { ShowResult } from '../../utils/types/types';
 import { StyledContainer } from './shows.styles';
 
 export const Shows = () => {
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
 
-  const { searchQuery, setSearchQuery, searchResultsMovies, searchResultsShows, searchLoading, searchError } = useSearchContext();
+  const { searchQuery, setSearchQuery, searchResultsShows, searchLoading, searchError } = useSearchContext();
 
   // Fetch shows using TanStack Query with enhanced error handling
   const {
