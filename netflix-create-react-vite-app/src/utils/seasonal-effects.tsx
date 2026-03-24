@@ -1,8 +1,6 @@
 import React from 'react';
 import {
   AnimatedButterfly,
-  BeachballContainer,
-  BeehiveContainer,
   BeesThemeContainer,
   ButterflyContainer,
   FlowersThemeContainer,
@@ -13,7 +11,6 @@ import {
 } from '../components/hero-banner/hero-banner.styles';
 import { Bee } from '../components/svg/bee';
 import { AnimatedBee } from '../components/svg/bee.styles';
-import { Beehive } from '../components/svg/beehive';
 import { Butterfly } from '../components/svg/butterfly';
 import { FlowersTheme } from '../components/svg/flowers-theme';
 import { LeafIcon } from '../components/svg/leafs';
@@ -79,7 +76,7 @@ export const renderFlowers = (theme) => (
   </FlowersThemeContainer>
 );
 
-export const renderButterflies = (theme) => {
+export const renderButterflies = () => {
   const butterflyPositions = [
     { x: '0%', y: '20%' },
     { x: '10%', y: '30%' },

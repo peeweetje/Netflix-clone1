@@ -1,4 +1,4 @@
-import type React from 'react';
+import  React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Loading } from '../../components/loading/loading';
 import { MovieList } from '../../components/movie-list/movie-list';
@@ -8,14 +8,12 @@ import { SearchableContent } from '../../components/searchable-content/searchabl
 import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { useSearchContext } from '../../context/search-context';
 import { discoverMovieUrl } from '../../utils/api';
-import type { MovieResult } from '../../utils/types/types';
 import { MainContainer } from '../home/home-page-styles';
+import type { MovieResult } from '../../utils/types/types';
 
 export const Movies = () => {
   const { t, i18n } = useTranslation();
-
-  const { searchQuery, setSearchQuery, searchResultsMovies, searchResultsShows, searchLoading, searchError } = useSearchContext();
-
+  const { searchQuery, setSearchQuery, searchResultsMovies, searchLoading, searchError } = useSearchContext();
 
   const {
     data: results = [],
@@ -31,7 +29,6 @@ export const Movies = () => {
   const errorMessage = searchQuery ? searchError : (moviesError as Error | null)?.message ?? null;
 
 
-
   return (
     <>
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
@@ -40,7 +37,7 @@ export const Movies = () => {
           <SearchableContent
             searchQuery={searchQuery}
             searchResults={searchResultsMovies}
-            renderSearchResults={(results, title) => (
+            renderSearchResults={(results: MovieResult[], title: string) => (
               <>
                 <RowTitle>{title}</RowTitle>
                 <MovieList movies={results} />

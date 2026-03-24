@@ -1,4 +1,4 @@
-import type React from 'react';
+import  React from 'react';
 import { useTranslation } from 'react-i18next';
 import { HeroBanner } from '../../components/hero-banner/hero-banner';
 import { Loading } from '../../components/loading/loading';
@@ -8,15 +8,19 @@ import { SearchableContent } from '../../components/searchable-content/searchabl
 import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { useSearchContext } from '../../context/search-context';
 import { actionMoviesUrl, imageUrl, popularMoviesUrl, topRatedMoviesUrl } from '../../utils/api';
-import type { MovieResult } from '../../utils/types/types';
 import { MainContainer } from './home-page-styles';
+import type { MovieResult } from '../../utils/types/types';
+
+// Extend MovieResult to include optional properties for hero banner
+interface ExtendedMovieResult extends MovieResult {
+  backdrop_path?: string;
+  media_type?: string;
+}
 
 export const Homepage = () => {
   const { t, i18n } = useTranslation();
+  const { searchQuery, setSearchQuery, searchResultsCombined, searchLoading, searchError } = useSearchContext();
 
-  const { searchQuery, setSearchQuery, searchResultsMovies, searchResultsShows, searchLoading, searchError } = useSearchContext();
-
- 
   const {
     data: popular = [],
     isLoading: popularLoading,
@@ -39,10 +43,14 @@ export const Homepage = () => {
     setSearchQuery(e.target.value);
   };
 
-  const heroMovie = popular[0] || null;
+  const heroMovie = popular[0] as ExtendedMovieResult || null;
 
   const isLoading = searchQuery ? searchLoading : popularLoading || topRatedLoading || actionLoading;
-  const error = searchQuery ? searchError : popularError || topRatedError || actionError;
+  const error = searchQuery 
+    ? (searchError ? searchError.toString() : null) 
+    : (popularError ? popularError.toString() : null) 
+      || (topRatedError ? topRatedError.toString() : null) 
+      || (actionError ? actionError.toString() : null);
 
 
 
@@ -54,8 +62,8 @@ export const Homepage = () => {
         <Loading loading={isLoading} error={error}>
           <SearchableContent
             searchQuery={searchQuery}
-            searchResults={searchResultsMovies}
-            renderSearchResults={(results, title) => (
+            searchResults={searchResultsCombined}
+            renderSearchResults={(results: Array<MovieResult & { media_type: 'movie' | 'tv' }>, title: string) => (
               <MovieRow
                 movies={results}
                 title={title}
@@ -65,8 +73,8 @@ export const Homepage = () => {
             <>
               {heroMovie && (
                 <HeroBanner
-                  backgroundImage={imageUrl + heroMovie.backdrop_path}
-                  mediaType={heroMovie.media_type ? heroMovie.media_type : 'movie'}
+                  backgroundImage={imageUrl + (heroMovie.backdrop_path || '')}
+                  mediaType={(heroMovie.media_type === 'tv' ? 'tv' : 'movie')}
                   movieId={heroMovie.id}
                   overview={heroMovie.overview}
                   title={heroMovie.title}

@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Loading } from '../../components/loading/loading';
-import { useTheme } from '../../context/themeContext';
 import { fetchVideos } from '../../utils/queries';
 import {
   GoBackButton,
@@ -26,10 +25,10 @@ const getInternalMediaType = (translatedType: string): 'movie' | 'tv' => {
 };
 
 export const TrailerPage = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { id, media_type } = useParams<{ id: string; media_type: string }>();
   const navigate = useNavigate();
-  const { theme } = useTheme();
+
 
   // Convert translated media type to internal type
   const internalMediaType = media_type ? getInternalMediaType(media_type) : 'movie';
@@ -71,7 +70,7 @@ export const TrailerPage = () => {
   if (loading) {
     return (
       <TrailerContainer>
-       <Loading/>
+       <Loading loading={true} error={null} children={undefined}/>
       </TrailerContainer>
     );
   }
