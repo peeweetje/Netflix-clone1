@@ -52,12 +52,42 @@ export interface MediaDetails {
   backdrop_path: string | null;
   release_date?: string;
   first_air_date?: string;
+  last_air_date?: string;
   vote_average: number;
+  vote_count: number;
   genres: Genre[];
   runtime?: number;
   number_of_seasons?: number;
   number_of_episodes?: number;
+  status: string;
+  original_language: string;
+  tagline?: string;
 }
+
+// Union types that match what MediaInfo expects
+export type MovieMedia = {
+  status: string;
+  original_language: string;
+  release_date: string;
+  runtime: number;
+  genres: Genre[];
+  vote_average: number;
+  vote_count: number;
+};
+
+export type TVMedia = {
+  status: string;
+  original_language: string;
+  first_air_date: string;
+  last_air_date: string;
+  number_of_seasons: number;
+  number_of_episodes: number;
+  genres: Genre[];
+  vote_average: number;
+  vote_count: number;
+};
+
+export type MediaInfoData = MovieMedia | TVMedia;
 
 export interface SearchResults {
   movies: MovieResult[];
