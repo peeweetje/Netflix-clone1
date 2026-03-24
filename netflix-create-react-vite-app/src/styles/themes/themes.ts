@@ -62,6 +62,7 @@ export const springTheme: DefaultTheme = {
     flowerIcon: true,
     butterflyIcon: true,
   },
+  borderShadow: []
 };
 
 export const summerTheme: DefaultTheme = {
@@ -85,6 +86,7 @@ export const summerTheme: DefaultTheme = {
     flowerIcon: false,
     butterflyIcon: false,
   },
+  borderShadow: []
 };
 
 export const autumnTheme: DefaultTheme = {
@@ -108,6 +110,7 @@ export const autumnTheme: DefaultTheme = {
     flowerIcon: true,
     butterflyIcon: false,
   },
+  borderShadow: []
 };
 
 export const winterTheme: DefaultTheme = {
@@ -131,4 +134,5 @@ export const winterTheme: DefaultTheme = {
     flowerIcon: false,
     butterflyIcon: false,
   },
+  borderShadow: []
 };

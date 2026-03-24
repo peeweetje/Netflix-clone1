@@ -1,6 +1,9 @@
-import type { DefaultTheme } from 'styled-components';
-
 declare module 'styled-components' {
+  export function createGlobalStyle<T = {}>(
+    strings: TemplateStringsArray,
+    ...interpolations: any[]
+  ): React.ComponentType<T>;
+
   export interface DefaultTheme {
     name: string;
     colors: {
@@ -20,7 +23,7 @@ declare module 'styled-components' {
     space: string[];
     fontSize: string[];
     borderRadius: string[];
-    boderShadow: string[];
+    borderShadow: string[];
     lineHeight: string[];
     icons: {
       leafIcon: boolean;
