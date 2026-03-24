@@ -19,26 +19,38 @@ import {
 } from './details-styles';
 import { MediaInfo } from './media-info';
 import { MediaPoster } from './media-poster';
+import { MediaDetails, MovieMedia, TVMedia } from '../../utils/types/types';
 
 interface MediaDetailProps {
   type: 'movie' | 'tv';
 }
 
-interface MediaData {
-  id: number;
-  title?: string;
-  name?: string;
-  poster_path?: string;
-  tagline?: string;
-}
-
-interface CastMember {
-  cast_id?: number;
-  credit_id: string;
-  name: string;
-  profile_path?: string;
-  character?: string;
-}
+// Helper function to convert MediaDetails to the correct MediaInfo type
+const convertToMediaInfoData = (media: MediaDetails, type: 'movie' | 'tv'): MovieMedia | TVMedia => {
+  if (type === 'movie') {
+    return {
+      status: media.status,
+      original_language: media.original_language,
+      release_date: media.release_date || '',
+      runtime: media.runtime || 0,
+      genres: media.genres,
+      vote_average: media.vote_average,
+      vote_count: media.vote_count,
+    };
+  } else {
+    return {
+      status: media.status,
+      original_language: media.original_language,
+      first_air_date: media.first_air_date || '',
+      last_air_date: media.last_air_date || '',
+      number_of_seasons: media.number_of_seasons || 0,
+      number_of_episodes: media.number_of_episodes || 0,
+      genres: media.genres,
+      vote_average: media.vote_average,
+      vote_count: media.vote_count,
+    };
+  }
+};
 
 export const MediaDetail = ({ type }: MediaDetailProps) => {
   const { t } = useTranslation();
@@ -49,8 +61,8 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
   // Use TanStack Query for multiple API calls with enhanced error handling
   const [
     { data: media, isLoading: mediaLoading, error: mediaError },
-    { data: cast = [], isLoading: castLoading, error: castError },
-    { data: videos = [], isLoading: videosLoading, error: videosError },
+    { data: cast = [], isLoading: castLoading },
+    { data: videos = [], isLoading: videosLoading },
   ] = useQueries({
     queries: [
       mediaQueries.details(type, id || ''),
@@ -104,9 +116,9 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
               <LeftColumn>
                 <MediaPoster
                   imageUrl={imageUrl}
-                  posterPath={media.poster_path}
-                  tagline={media.tagline}
-                  title={media.title || media.name}
+                  posterPath={media.poster_path || ''}
+                  tagline={media.tagline || ''}
+                  title={media.title || media.name || ''}
                 />
               </LeftColumn>
               <RightColumn>
@@ -129,7 +141,7 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
                     </CastList>
                   </CastSection>
                 )}
-                <MediaInfo media={media} type={type} />
+                <MediaInfo media={convertToMediaInfoData(media, type)} type={type} />
               </RightColumn>
             </MainColumns>
           </StyledContainer>

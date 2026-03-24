@@ -56,30 +56,30 @@ export const MediaInfo = ({ media, type }: MediaInfoProps) => {
           <>
             <InfoText>
               <InfoLabel>{t('release-date', 'Release Date')}:</InfoLabel>{' '}
-              {media.release_date || t('not-available', 'N/A')}
+              {(media as MovieMedia).release_date || t('not-available', 'N/A')}
             </InfoText>
             <InfoText>
               <InfoLabel>{t('runtime', 'Runtime')}:</InfoLabel>{' '}
-              {media.runtime ? `${media.runtime} ${t('minutes', 'min')}` : t('not-available', 'N/A')}
+              {(media as MovieMedia).runtime ? `${(media as MovieMedia).runtime} ${t('minutes', 'min')}` : t('not-available', 'N/A')}
             </InfoText>
           </>
         ) : (
           <>
             <InfoText>
               <InfoLabel>{t('first-air-date', 'First Air Date')}:</InfoLabel>{' '}
-              {media.first_air_date || t('not-available', 'N/A')}
+              {(media as TVMedia).first_air_date || t('not-available', 'N/A')}
             </InfoText>
             <InfoText>
               <InfoLabel>{t('last-air-date', 'Last Air Date')}:</InfoLabel>{' '}
-              {media.last_air_date || t('not-available', 'N/A')}
+              {(media as TVMedia).last_air_date || t('not-available', 'N/A')}
             </InfoText>
             <InfoText>
               <InfoLabel>{t('number-of-seasons', 'Number of Seasons')}:</InfoLabel>{' '}
-              {media.number_of_seasons || t('not-available', 'N/A')}
+              {(media as TVMedia).number_of_seasons || t('not-available', 'N/A')}
             </InfoText>
             <InfoText>
               <InfoLabel>{t('number-of-episodes', 'Number of Episodes')}:</InfoLabel>{' '}
-              {media.number_of_episodes || t('not-available', 'N/A')}
+              {(media as TVMedia).number_of_episodes || t('not-available', 'N/A')}
             </InfoText>
           </>
         )}
