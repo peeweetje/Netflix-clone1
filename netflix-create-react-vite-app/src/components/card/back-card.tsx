@@ -64,7 +64,7 @@ export const BackCard = ({
         <BackCardButton
           disabled={isAdded}
           $isAdded={isAdded}
-          onClick={(e) => {
+          onClick={(e: { stopPropagation: () => void; preventDefault: () => void; }) => {
             e.stopPropagation();
             e.preventDefault();
             addToList({ id, media_type });

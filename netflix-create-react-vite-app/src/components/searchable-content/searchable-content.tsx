@@ -1,4 +1,4 @@
-import type React from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { EmptyState } from '../empty-state/empty-state';
 import {
@@ -7,17 +7,17 @@ import {
 } from './searchable-content.styles';
 import type { MovieResult, ShowResult } from '../../utils/types/types';
 
-interface SearchableContentProps {
+interface SearchableContentProps<T extends MovieResult | ShowResult> {
   searchQuery: string;
-  searchResults: (MovieResult | ShowResult)[];
+  searchResults: T[];
   searchTitle?: string;
   emptyTitle?: string;
   emptyMessage?: string;
   children: React.ReactNode;
-  renderSearchResults?: (results: (MovieResult | ShowResult)[], title: string) => React.ReactNode;
+  renderSearchResults?: (results: T[], title: string) => React.ReactNode;
 }
 
-export const SearchableContent = ({
+export const SearchableContent = <T extends MovieResult | ShowResult>({
   searchQuery,
   searchResults,
   searchTitle,
@@ -25,7 +25,7 @@ export const SearchableContent = ({
   emptyMessage,
   children,
   renderSearchResults
-}: SearchableContentProps) => {
+}: SearchableContentProps<T>) => {
   const { t } = useTranslation();
 
   if (searchQuery) {
@@ -51,7 +51,7 @@ export const SearchableContent = ({
       <SearchResultsContainer>
         {searchResults.map((item, index) => (
           <SearchResultItem key={item.id || index}>
-            {item}
+            {'title' in item ? item.title : item.name}
           </SearchResultItem>
         ))}
       </SearchResultsContainer>

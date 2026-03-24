@@ -1,14 +1,14 @@
 import { motion } from 'framer-motion';
-import styled from 'styled-components';
+import styled  from 'styled-components';
 
 export const CardContainer = styled.div`
   display: flex;
-  padding: ${(props) => props.theme.space[0]}; /* Remove extra padding */
+  padding: ${(props: { theme: { space: string[] } }) => props.theme.space[0]}; /* Remove extra padding */
   height: 380px;
   cursor: pointer;
   perspective: 1000px;
 
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+  @media (max-width: ${(props: { theme: { breakpoints: { sm: string } } }) => props.theme.breakpoints.sm}) {
     height: 280px;
   }
 `;
@@ -27,12 +27,12 @@ export const CardFront = styled.div`
 `;
 
 export const StyledImg = styled.img`
-  border-radius: ${(props) => props.theme.borderRadius[3]};
-  box-shadow: ${(props) => props.theme.boderShadow[0]};
+  border-radius: ${(props: { theme: { borderRadius: string[] } }) => props.theme.borderRadius[3]};
+  box-shadow: ${(props: { theme: { borderShadow: string[] } }) => props.theme.borderShadow[0]};
   height: 350px;
   width: 250px;
 
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+  @media (max-width: ${(props: { theme: { breakpoints: { sm: string } } }) => props.theme.breakpoints.sm}) {
     height: 250px;
     width: 150px;
   }
@@ -46,7 +46,7 @@ export const CardBack = styled.div`
 
 export const CardBackContainer = styled.div`
   position: relative;
-  padding: ${(props) => props.theme.space[3]};
+  padding: ${(props: { theme: { space: string[] } }) => props.theme.space[3]};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,11 +54,11 @@ export const CardBackContainer = styled.div`
   height: 350px;
   width: 250px;
   overflow: visible;
-  background: ${(props) => props.theme.colors.primaryLight};
-  color: ${(props) => props.theme.colors.buttonText};
-  border-radius: ${(props) => props.theme.borderRadius[3]};
+  background: ${(props: { theme: { colors: { primaryLight: string } } }) => props.theme.colors.primaryLight};
+  color: ${(props: { theme: { colors: { buttonText: string } } }) => props.theme.colors.buttonText};
+  border-radius: ${(props: { theme: { borderRadius: string[] } }) => props.theme.borderRadius[3]};
 
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+  @media (max-width: ${(props: { theme: { breakpoints: { sm: string } } }) => props.theme.breakpoints.sm}) {
     height: 250px;
     width: 150px;
   }
@@ -67,22 +67,22 @@ export const CardBackContainer = styled.div`
 export const TitleContainer = styled.h1`
   display: flex;
   justify-content: center;
-  margin-top: ${(props) => props.theme.space[1]};
-  font-size: ${(props) => props.theme.fontSize[2]};
+  margin-top: ${(props: { theme: { space: string[] } }) => props.theme.space[1]};
+  font-size: ${(props: { theme: { fontSize: string[] } }) => props.theme.fontSize[2]};
 
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    font-size: ${(props) => props.theme.fontSize[1]};
+  @media (max-width: ${(props: { theme: { breakpoints: { sm: string } } }) => props.theme.breakpoints.sm}) {
+    font-size: ${(props: { theme: { fontSize: string[] } }) => props.theme.fontSize[1]};
   }
 `;
 
 export const OverviewContainer = styled.p`
   display: flex;
   justify-content: center;
-  font-size: ${(props) => props.theme.fontSize[1]};
-  line-height: ${(props) => props.theme.lineHeight[3]};
+  font-size: ${(props: { theme: { fontSize: string[] } }) => props.theme.fontSize[1]};
+  line-height: ${(props: { theme: { lineHeight: string[] } }) => props.theme.lineHeight[3]};
 
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    font-size: ${(props) => props.theme.fontSize[0]};
+  @media (max-width: ${(props: { theme: { breakpoints: { sm: string } } }) => props.theme.breakpoints.sm}) {
+    font-size: ${(props: { theme: { fontSize: string[] } }) => props.theme.fontSize[0]};
     display: -webkit-box;
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
@@ -94,7 +94,7 @@ export const OverviewContainer = styled.p`
 export const ScoreContainer = styled.span<{ score: string | undefined }>`
   display: flex;
   justify-content: center;
-  color: ${(props) => props.score};
+  color: ${(props: { score: string | undefined }) => props.score};
 `;
 
 export const StyledScoreContainer = styled.div`
@@ -103,7 +103,7 @@ export const StyledScoreContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: auto;
-  margin-bottom: ${(props) => props.theme.space[0]};
+  margin-bottom: ${(props: { theme: { space: string[] } }) => props.theme.space[0]};
 `;
 
 export const MotionFlipCard = styled(motion.div)`
@@ -112,7 +112,7 @@ export const MotionFlipCard = styled(motion.div)`
   height: 350px;
   transform-style: preserve-3d;
 
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+  @media (max-width: ${(props: { theme: { breakpoints: { sm: string } } }) => props.theme.breakpoints.sm}) {
     width: 150px;
     height: 250px;
   }
@@ -133,7 +133,7 @@ export const MotionCardBack = styled.div`
   backface-visibility: hidden;
   transform: rotateY(180deg);
   z-index: 3 ;
-  border-radius: ${(props) => props.theme.borderRadius[3]};
+  border-radius: ${(props: { theme: { borderRadius: string[] } }) => props.theme.borderRadius[3]};
 `;
 
 export const BackCardButton = styled.button<{ $isAdded: boolean }>`
@@ -141,20 +141,20 @@ export const BackCardButton = styled.button<{ $isAdded: boolean }>`
   height: 40px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: ${(props) => props.theme.space[2]};
+  margin-bottom: ${(props: { theme: { space: string[] } }) => props.theme.space[2]};
   background: ${({ $isAdded, theme }) =>
     $isAdded ? theme.colors.black : theme.colors.white};
   color: ${({ $isAdded, theme }) =>
     $isAdded ? theme.colors.white : theme.colors.black};
   border: none;
-  border-radius:${(props) => props.theme.borderRadius[1]};
-  padding:${(props) => props.theme.space[3]} ${(props) => props.theme.space[6]};
-  font-size:${(props) => props.theme.fontSize[3]};
+  border-radius:${(props: { theme: { borderRadius: string[] } }) => props.theme.borderRadius[1]};
+  padding:${(props: { theme: { space: string[] } }) => props.theme.space[3]} ${(props: { theme: { space: string[] } }) => props.theme.space[6]};
+  font-size:${(props: { theme: { fontSize: string[] } }) => props.theme.fontSize[3]};
   cursor: ${({ $isAdded }) => ($isAdded ? 'not-allowed' : 'pointer')};
 
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+  @media (max-width: ${(props: { theme: { breakpoints: { sm: string } } }) => props.theme.breakpoints.sm}) {
     width: 100px;
     height: 30px;
-    font-size: ${(props) => props.theme.fontSize[1]};
+    font-size: ${(props: { theme: { fontSize: string[] } }) => props.theme.fontSize[1]};
   }
 `;
