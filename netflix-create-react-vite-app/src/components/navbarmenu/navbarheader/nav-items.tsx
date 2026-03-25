@@ -1,4 +1,4 @@
-import type React from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
