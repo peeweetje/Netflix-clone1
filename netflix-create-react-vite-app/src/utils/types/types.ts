@@ -14,6 +14,11 @@ export type ShowResult = {
   vote_average: number;
 };
 
+// Union type for media results that includes media_type
+export type MediaResult = (MovieResult | ShowResult) & {
+  media_type?: 'movie' | 'tv';
+};
+
 export interface Actor {
   cast_id?: string | number;
   credit_id?: string | number;

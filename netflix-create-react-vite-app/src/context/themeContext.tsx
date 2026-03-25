@@ -1,4 +1,4 @@
-import type React from 'react';
+import  React from 'react';
 import {
   createContext,
   type ReactNode,
@@ -36,7 +36,7 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
   );
 
   useEffect(() => {
-    let interval: NodeJS.Timeout | undefined;
+    let interval: number | undefined;
     if (isAutomatic) {
       interval = setInterval(() => {
         const newTheme = getSeason(new Date());
