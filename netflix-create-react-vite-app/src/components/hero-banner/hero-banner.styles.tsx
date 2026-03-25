@@ -73,11 +73,7 @@ export const BannerOverlay = styled.div`
 `;
 
 export const BannerTitle = styled.h1`
-  font-size: ${(props) => props.theme.fontSize[7]};
-  font-weight: bold;
-  color: ${(props) => props.theme.colors.white};
   max-width: 30vw;
-  text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.7);
 
  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     font-size: ${(props) => props.theme.fontSize[5]};
@@ -107,7 +103,7 @@ export const BannerButtons = styled.div`
   gap: ${(props) => props.theme.space[7]};
   margin-top: ${(props) => props.theme.space[7]};
 
- @media (max-width: ${(prop) => prop.theme.breakpoints.sm}) {
+ @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     justify-content: center;
   }
 `;
