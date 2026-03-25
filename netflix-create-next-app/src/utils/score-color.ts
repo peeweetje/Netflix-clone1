@@ -1,7 +1,7 @@
 export const colours = {
-  Green: 'bg-teal-700', // Dark Teal
-  Red: 'bg-red-700', // Dark Red
-  Orange: 'bg-orange-600', // Dark Orange
+  Green: 'bg-teal-700', 
+  Red: 'bg-red-700', 
+  Orange: 'bg-orange-400', 
 };
 
 export type Values<T> = T[keyof T];

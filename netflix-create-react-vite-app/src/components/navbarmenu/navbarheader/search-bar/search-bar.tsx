@@ -1,4 +1,4 @@
-import type React from 'react';
+import  React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   NavbarInput,
@@ -13,7 +13,7 @@ export interface SearchProps {
   value: string;
 }
 
-export const SearchBar = ({ value, onChange }: searchProps) => {
+export const SearchBar = ({ value, onChange }: SearchProps) => {
   const { t } = useTranslation();
   return (
     <NavbarSearch>
