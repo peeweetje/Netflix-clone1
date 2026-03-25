@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { imageUrl } from '../../utils/api';
-import type { MovieResult } from '../../utils/types/types';
+import type { MediaResult } from '../../utils/types/types';
 import { useTranslatedRoutes } from '../../utils/routes';
 import { SeasonalCard } from '../card/seasonal-card';
 import { CardWrapper } from '../card-wrapper/card-wrapper';
@@ -15,7 +15,7 @@ import {
 
 interface MovieRowProps {
   title: string;
-  movies: MovieResult[];
+  movies: MediaResult[];
 }
 
 const getVisibleMediaCount = () => {
@@ -124,14 +124,14 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
                   }
                 >
                   <SeasonalCard
-                    alt={movie.title}
+                    alt={'title' in movie ? movie.title : movie.name}
                     id={movie.id}
                     media_type={
                       movie.media_type ? movie.media_type : 'movie'
                     }
                     overview={movie.overview}
                     src={`${imageUrl}${movie.poster_path}`}
-                    title={movie.title}
+                    title={'title' in movie ? movie.title : movie.name}
                     vote_average={movie.vote_average}
                   />
                 </CardWrapper>

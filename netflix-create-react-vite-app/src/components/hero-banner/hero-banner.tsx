@@ -47,7 +47,7 @@ export const renderSeasonalEffects = (theme: DefaultTheme | null) => {
       return (
         <>
           {theme.icons?.flowerIcon && renderFlowers(theme)}
-          {theme.icons?.butterflyIcon && renderButterflies(theme)}
+          {theme.icons?.butterflyIcon && renderButterflies()}
         </>
       );
     case summerTheme.name:
