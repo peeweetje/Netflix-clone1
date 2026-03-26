@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion} from 'framer-motion';
 import styled from 'styled-components';
 
 export const FlexWrapper = styled.div`
@@ -73,9 +73,22 @@ export const ArrowButton = styled.button`
     color: ${(props) => props.theme.colors.buttonText};
     opacity: 1;
   }
+  &:focus {
+    outline: 2px solid ${(props) => props.theme.colors.white};
+    outline-offset: 2px;
+    opacity: 1;
+  }
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+  &:focus-visible {
+    outline: 2px solid ${(props) => props.theme.colors.white};
+    outline-offset: 2px;
+    opacity: 1;
+  }
   &:disabled {
     opacity: 0.1; /* Faint when disabled */
-    pointer-events: none; /* Not clickable when disabled */
+    cursor: not-allowed;
   }
   &.left {
     left: -2rem;

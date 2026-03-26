@@ -54,9 +54,23 @@ export const BackCard = ({
       : overview;
 
   return (
-    <CardBackContainer role="region" aria-label={`${t('movie-details', 'Movie details')} ${t('for', 'for')} ${title}`}>
-      <TitleContainer role="heading" aria-level={2}>{title}</TitleContainer>
-      <OverviewContainer aria-label={t('overview', 'Overview')}>
+    <CardBackContainer 
+      role="article" 
+      aria-label={`${t('movie-details', 'Movie details')}: ${title}`}
+      tabIndex={0}
+    >
+      <TitleContainer 
+        role="heading" 
+        aria-level={3}
+        id={`card-title-${id}`}
+      >
+        {title}
+      </TitleContainer>
+      <OverviewContainer 
+        aria-labelledby={`card-title-${id}`}
+        role="contentinfo"
+      >
+        <span className="sr-only">{t('overview', 'Overview')}:</span>
         {truncatedOverview}
       </OverviewContainer>
 

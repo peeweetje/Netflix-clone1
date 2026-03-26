@@ -80,6 +80,13 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, action: () => void) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      action();
+    }
+  };
+
   // Use fixed card width
   const cardWidth = 266;
   let x = -startIdx * cardWidth;
@@ -102,6 +109,7 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
         className={`arrow left${canScrollLeft ? ' active' : ''}`}
         disabled={!canScrollLeft || !ready}
         onClick={handleLeft}
+        onKeyDown={(e) => handleKeyDown(e, handleLeft)}
       >
         &#8249;
       </ArrowButton>
@@ -145,6 +153,7 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
         className={`arrow right${canScrollRight ? ' active' : ''}`}
         disabled={!canScrollRight || !ready}
         onClick={handleRight}
+        onKeyDown={(e) => handleKeyDown(e, handleRight)}
       >
         &#8250;
       </ArrowButton>
