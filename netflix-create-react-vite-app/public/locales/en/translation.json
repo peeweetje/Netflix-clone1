@@ -73,5 +73,10 @@
   "movie-details": "Movie details",
   "overview": "Overview",
   "no-info-available": "There is no information available",
-  "added-to-list": "Added to list"
+  "added-to-list": "Added to list",
+  "theme-spring": "Spring theme - green",
+  "theme-summer": "Summer theme - amber",
+  "theme-autumn": "Autumn theme - orange",
+  "theme-winter": "Winter theme - blue",
+  "theme-changed": "Theme changed to {{theme}}"
 }

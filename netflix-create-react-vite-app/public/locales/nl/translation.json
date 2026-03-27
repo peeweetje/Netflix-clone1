@@ -76,5 +76,10 @@
   "about": "over",
   "movie-details": "Film details",
   "overview": "Overzicht",
-  "no-info-available": "Er is geen informatie beschikbaar"
+  "no-info-available": "Er is geen informatie beschikbaar",
+  "theme-spring": "Lentethema - groen",
+  "theme-summer": "Zomerthema - amber",
+  "theme-autumn": "Herfstthema - oranje",
+  "theme-winter": "Winterthema - blauw",
+  "theme-changed": "Thema gewijzigd naar {{theme}}"
 }
