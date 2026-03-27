@@ -17,6 +17,7 @@ import { getSeason } from '../utils/seasons';
 
 interface ThemeContextType {
   theme: DefaultTheme;
+  themeName: string;
   toggleTheme: () => void;
 }
 
@@ -55,7 +56,7 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   return (
-    <ThemeContext.Provider value={{ theme: currentTheme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme: currentTheme, themeName: currentTheme.name, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
