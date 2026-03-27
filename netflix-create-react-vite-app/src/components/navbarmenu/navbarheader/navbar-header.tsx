@@ -1,8 +1,10 @@
 import  React from 'react';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../context/themeContext';
+import { useSearchContext } from '../../../context/search-context';
 import { useTranslatedRoutes } from '../../../utils/routes';
+import { useThemeAnnouncement } from '../../../hooks/useThemeAnnouncement';
 import { NavItems } from './nav-items';
 import {
   BrandContainer,
@@ -21,13 +23,37 @@ interface NavbarHeaderProps {
 
 export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
   const { t } = useTranslation();
-  const { toggleTheme } = useTheme();
+  const { toggleTheme, themeName } = useTheme();
+  const { searchResultsCombined, searchLoading } = useSearchContext();
   const routes = useTranslatedRoutes();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { themeAnnouncement, announceThemeChange } = useThemeAnnouncement();
+  
 
   const handleHamburgerClick = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const handleThemeToggle = useCallback((e: React.MouseEvent | React.KeyboardEvent) => {
+    // Handle both mouse clicks and keyboard events (Enter/Space)
+    if ('key' in e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+      }
+    }
+    
+    // Get the next theme name for announcement
+    const themes = ['spring', 'summer', 'autumn', 'winter'];
+    const currentIndex = themes.indexOf(themeName);
+    const nextIndex = (currentIndex + 1) % themes.length;
+    const nextTheme = themes[nextIndex];
+    
+    // Use the hook to announce theme change
+    announceThemeChange(nextTheme);
+    
+    // Trigger theme change
+    toggleTheme();
+  }, [toggleTheme, themeName, announceThemeChange]);
 
   return (
     <NavbarMenu aria-label={t('site-navigation')} role="navigation">
@@ -63,10 +89,23 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
           {t('my-list')}
         </NavItems>
       </NavList>
-      <SwitchThemeButton onClick={toggleTheme} aria-label={t('switch-theme')}>
+      <SwitchThemeButton onClick={handleThemeToggle} aria-label={t('switch-theme')}>
         {t('switch-theme')}
       </SwitchThemeButton>
-      <SearchBar onChange={onChange} value={value} />
+      <div
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="sr-only"
+      >
+        {themeAnnouncement}
+      </div>
+      <SearchBar 
+        onChange={onChange} 
+        value={value}
+        resultCount={searchResultsCombined.length}
+        isSearching={searchLoading}
+      />
     </NavbarMenu>
   );
 };
