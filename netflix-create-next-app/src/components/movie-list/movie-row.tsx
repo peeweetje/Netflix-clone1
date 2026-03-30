@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { MovieResult } from '../../utils/types/types';
 import { Button } from '../ui/button';
@@ -28,7 +28,6 @@ export const MovieRow = ({ movies, title }:MovieRowProps) => {
     typeof window !== 'undefined' ? getVisibleMediaCount() : 5
   );
   const [ready, setReady] = useState(false);
-  const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
     // Set ready after initial render
@@ -58,14 +57,12 @@ export const MovieRow = ({ movies, title }:MovieRowProps) => {
   const handleLeft = () => {
     if (canScrollLeft && ready) {
       setStartIdx(Math.max(0, startIdx - visibleCount));
-      setHasScrolled(true);
     }
   };
 
   const handleRight = () => {
     if (canScrollRight && ready) {
       setStartIdx(Math.min(lastPageStart, startIdx + visibleCount));
-      setHasScrolled(true);
     }
   };
 

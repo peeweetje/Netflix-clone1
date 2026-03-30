@@ -8,7 +8,6 @@ import { Button } from '../ui/button';
 import { MediaPoster } from './media-poster';
 import { MediaInfo } from './media-info';
 import { CastMember } from './cast-member';
-import { useMyList } from '../../context/myListContext';
 import { ArrowLeft, Play } from 'lucide-react';
 import { imageUrl } from '../../utils/api';
 import { useQuery } from '@tanstack/react-query';
@@ -50,7 +49,6 @@ export const MediaDetail = ({ type, id }: MediaDetailProps) => {
   const hasTrailer = videoData?.some((vid: Video) => vid.type === 'Trailer' && vid.site === 'YouTube') || false;
 
   const isLoading = mediaLoading || castLoading || videoLoading;
-  const hasErrors = mediaError || castError || videoError;
   const hasMediaError = !!mediaError;
   const hasCastError = !!castError;
   const hasVideoError = !!videoError;

@@ -1,6 +1,5 @@
 'use client';
 
-import type React from 'react';
 import type { Genre } from '../../utils/types/types';
 
 interface MovieMedia {
