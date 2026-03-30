@@ -3,19 +3,16 @@ import { HeroBanner } from '../components/hero-banner/hero-banner';
 import { Loading } from '../components/loading/loading';
 import { MovieRow } from '../components/movie-list/movie-row';
 import { SearchableContent } from '../components/searchable-content/searchable-content';
-
-import { useFetchMovies } from '../hooks/useFetchMovies';
 import { useSearch } from '../context/search-context';
 import { useQuery } from '@tanstack/react-query';
 import { fetchMovies } from '../utils/queries';
-import { ErrorDisplay } from '../components/error-display/error-display';
 import {
   actionMoviesUrl,
   imageUrl,
   popularMoviesUrl,
   topRatedMoviesUrl,
 } from '../utils/api';
-import type { MovieResult } from '../utils/types/types';
+
 
  const HomePage = () => {
   const {

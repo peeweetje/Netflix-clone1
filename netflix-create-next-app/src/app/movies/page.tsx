@@ -11,7 +11,6 @@ import { ErrorDisplay } from '../../components/error-display/error-display';
 const Movies = () => {
   const {
     searchQuery,
-    setSearchQuery,
     searchResultsMovies,
     searchLoading,
     searchError,
@@ -21,7 +20,6 @@ const Movies = () => {
     data: results = [],
     isLoading: moviesLoading,
     error: moviesError,
-    isError: moviesErrorState,
   } = useFetchMovies(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}`);
 
   const isLoading = searchQuery ? searchLoading : moviesLoading;
