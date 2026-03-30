@@ -8,7 +8,7 @@ interface MovieListProps {
   title?: string;
 }
 
-export const MovieList = ({ movies }: { movies: MovieResult[] }) => {
+export const MovieList = ({ movies }: MovieListProps) => {
   if (movies.length === 0) {
     return (
       <EmptyState

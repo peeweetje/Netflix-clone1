@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchMovies } from '../utils/queries';
-import type { MovieResult } from '../utils/types/types';
 
 export const useFetchMovies = (url: string) => {
   return useQuery({

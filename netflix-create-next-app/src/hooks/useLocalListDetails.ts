@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMyList } from '../context/myListContext';
-import { API_KEY } from '../utils/api';
 import { fetchMediaDetails } from '../utils/queries';
 import type { MovieResult, MyListItem } from '../utils/types/types';
 
