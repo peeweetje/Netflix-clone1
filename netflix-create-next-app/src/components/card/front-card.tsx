@@ -1,4 +1,3 @@
-import type React from 'react';
 
 interface FrontCardProps {
   src: string;

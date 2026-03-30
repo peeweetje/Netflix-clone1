@@ -1,8 +1,6 @@
 'use client';
 
 import { Loading } from '../../components/loading/loading';
-
-import { Trash2 } from 'lucide-react';
 import { useSearch } from '../../context/search-context';
 import { useMyList } from '../../context/myListContext';
 import { useLocalListDetails } from '../../hooks/useLocalListDetails';

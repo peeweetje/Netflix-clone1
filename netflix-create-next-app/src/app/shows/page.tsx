@@ -9,7 +9,7 @@ import { fetchShows } from '../../utils/queries';
 import { Card } from '../../components/card/card';
 import { CardWrapper } from '../../components/card-wrapper/card-wrapper';
 import { ErrorDisplay } from '../../components/error-display/error-display';
-import type { ShowResult } from '../../utils/types/types';
+
 
 const Shows = () => {
   const {
@@ -24,7 +24,6 @@ const Shows = () => {
     data: shows = [],
     isLoading: showsLoading,
     error: showsError,
-    isError: showsErrorState,
   } = useQuery({
     queryKey: ['shows', 'trending'],
     queryFn: () => fetchShows(),
@@ -35,16 +34,6 @@ const Shows = () => {
   const isLoading = searchQuery ? searchLoading : showsLoading;
   const hasShowsError = !!showsError;
   const error = searchQuery ? searchError : showsError?.message || null;
-
-  // More specific error messages
-  const getErrorMessage = () => {
-    if (searchQuery) return searchError;
-    if (hasShowsError) return showsError?.message || 'Failed to load shows.';
-    return null;
-  };
-
-  const displayError = getErrorMessage();
-
 
   return (
     <main id="main-content" className="flex flex-row justify-center flex-wrap max-w-full">
