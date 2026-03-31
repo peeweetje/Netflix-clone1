@@ -20,10 +20,13 @@ export const NavbarHeader = ({ onChange, value, resultCount }: NavbarHeaderProps
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const announcement = value 
-    ? resultCount !== undefined 
-      ? `${resultCount} result${resultCount !== 1 ? 's' : ''} found for "${value}"`
-      : `Searching for "${value}"`
+  const normalizedQuery = value.trim();  
+  const isSearchEligible = normalizedQuery.length > 2;
+
+  const announcement = normalizedQuery
+    ? isSearchEligible && resultCount !== undefined
+    ? `${resultCount} result${resultCount !== 1 ? 's' : ''} found for "${normalizedQuery}"`
+    : `Searching for "${normalizedQuery}"`
     : '';
 
   return (
