@@ -1,5 +1,6 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { EmptyState } from '../empty-state/empty-state';
+import { useSearch } from '../../context/search-context';
 
 interface SearchableContentProps {
   searchQuery: string;
@@ -18,8 +19,17 @@ export function SearchableContent({
   children,
   renderSearchResults
 }: SearchableContentProps) {
+  const { setDisplayedResultCount } = useSearch();
   const isSearching = searchQuery.trim().length > 0;
   const hasResults = searchResults.length > 0;
+
+  useEffect(() => {
+    if (isSearching) {
+      setDisplayedResultCount(searchResults.length);
+    } else {
+      setDisplayedResultCount(0);
+    }
+  }, [isSearching, searchResults.length, setDisplayedResultCount]);
 
   // If searching but no results, show empty state
   if (isSearching && !hasResults) {
