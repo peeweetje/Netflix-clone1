@@ -12,6 +12,8 @@ interface SearchContextType {
   searchResultsShows: ShowResult[];
   searchLoading: boolean;
   searchError: string | null;
+  displayedResultCount: number;
+  setDisplayedResultCount: (count: number) => void;
 }
 
 const SearchContext = createContext<SearchContextType | undefined>(undefined);
@@ -30,6 +32,7 @@ interface SearchProviderProps {
 
 export const SearchProvider = ({ children }: SearchProviderProps) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [displayedResultCount, setDisplayedResultCount] = useState(0);
 
   const {
     data: searchData,
@@ -53,6 +56,8 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
     searchResultsShows,
     searchLoading,
     searchError: searchError?.message || null,
+    displayedResultCount,
+    setDisplayedResultCount,
   };
 
   return (

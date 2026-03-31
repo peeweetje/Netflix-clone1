@@ -10,17 +10,37 @@ import { ThemeToggle } from '@/components/theme/theme-toggle';
 interface NavbarHeaderProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
+  resultCount?: number;
 }
 
-export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
+export const NavbarHeader = ({ onChange, value, resultCount }: NavbarHeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const normalizedQuery = value.trim();  
+  const isSearchEligible = normalizedQuery.length > 2;
+
+  const announcement = normalizedQuery
+    ? isSearchEligible && resultCount !== undefined
+    ? `${resultCount} result${resultCount !== 1 ? 's' : ''} found for "${normalizedQuery}"`
+    : `Searching for "${normalizedQuery}"`
+    : '';
+
   return (
     <>
+      {/* Single aria-live region for search announcements */}
+      <div
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="sr-only"
+      >
+        {announcement}
+      </div>
+
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
         <div className="fixed inset-0 bg-black z-40 pt-16">
@@ -74,7 +94,7 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
             </ul>
             <div className="mt-10 pt-6 border-t border-gray-800">
               <div className="mb-8">
-                <SearchBar value={value} onChange={onChange} />
+                <SearchBar value={value} onChange={onChange} resultCount={resultCount} />
               </div>
               <div>
                 <p className="text-white mb-4 text-lg font-medium">Theme</p>
@@ -127,7 +147,7 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
 
             <div className="flex items-center space-x-4 ml-auto">
               <div className="hidden md:block">
-                <SearchBar onChange={onChange} value={value} />
+                <SearchBar onChange={onChange} value={value} resultCount={resultCount} />
               </div>
 
               <div className="hidden md:block">
