@@ -20,8 +20,24 @@ export const NavbarHeader = ({ onChange, value, resultCount }: NavbarHeaderProps
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const announcement = value 
+    ? resultCount !== undefined 
+      ? `${resultCount} result${resultCount !== 1 ? 's' : ''} found for "${value}"`
+      : `Searching for "${value}"`
+    : '';
+
   return (
     <>
+      {/* Single aria-live region for search announcements */}
+      <div
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="sr-only"
+      >
+        {announcement}
+      </div>
+
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
         <div className="fixed inset-0 bg-black z-40 pt-16">
