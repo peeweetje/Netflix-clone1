@@ -10,7 +10,7 @@ interface AppLayoutContentProps {
 }
 
 const AppLayoutContent = ({ children }: AppLayoutContentProps) => {
-  const { searchQuery, setSearchQuery } = useSearch();
+  const { searchQuery, setSearchQuery, displayedResultCount } = useSearch();
   const pathname = usePathname();
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +26,7 @@ const AppLayoutContent = ({ children }: AppLayoutContentProps) => {
     <ViewTransition>
       <div className="min-h-screen bg-background">
         {shouldShowNavbar && (
-          <NavbarHeader onChange={handleSearch} value={searchQuery} />
+          <NavbarHeader onChange={handleSearch} value={searchQuery} resultCount={searchQuery ? displayedResultCount : undefined} />
         )}
         {children}
       </div>

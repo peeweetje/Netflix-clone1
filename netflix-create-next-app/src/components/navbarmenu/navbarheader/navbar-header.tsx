@@ -10,9 +10,10 @@ import { ThemeToggle } from '@/components/theme/theme-toggle';
 interface NavbarHeaderProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
+  resultCount?: number;
 }
 
-export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
+export const NavbarHeader = ({ onChange, value, resultCount }: NavbarHeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -74,7 +75,7 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
             </ul>
             <div className="mt-10 pt-6 border-t border-gray-800">
               <div className="mb-8">
-                <SearchBar value={value} onChange={onChange} />
+                <SearchBar value={value} onChange={onChange} resultCount={resultCount} />
               </div>
               <div>
                 <p className="text-white mb-4 text-lg font-medium">Theme</p>
@@ -127,7 +128,7 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
 
             <div className="flex items-center space-x-4 ml-auto">
               <div className="hidden md:block">
-                <SearchBar onChange={onChange} value={value} />
+                <SearchBar onChange={onChange} value={value} resultCount={resultCount} />
               </div>
 
               <div className="hidden md:block">
