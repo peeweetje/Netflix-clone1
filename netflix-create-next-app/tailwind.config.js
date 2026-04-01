@@ -90,6 +90,7 @@ module.exports = {
         'extra-loose': '2',
       },
       screens: {
+        'xs': '480px',
         'sm': '768px',
         'md': '992px',
         'lg': '1024px',
