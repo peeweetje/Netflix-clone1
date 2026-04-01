@@ -66,14 +66,16 @@ export const MovieRow = ({ movies, title }:MovieRowProps) => {
     }
   };
 
-  // Use fixed card width
+  // Use fixed card width for consistent layout
   const cardWidth = 266;
   let x = -startIdx * cardWidth;
   if (startIdx === lastPageStart && total > visibleCount) {
     x = -(total - visibleCount) * cardWidth;
   }
 
-  const viewportWidth = visibleCount * cardWidth;
+  // Calculate viewport width including gaps (16px gap-4 between cards)
+  const gapWidth = 8;
+  const viewportWidth = visibleCount * cardWidth + (visibleCount - 1) * gapWidth;
 
   // Show error state if no movies available
   if (movies.length === 0) {
@@ -82,7 +84,7 @@ export const MovieRow = ({ movies, title }:MovieRowProps) => {
         <h2 className="text-xs ml-4 mb-4 sm:text-sm md:text-lg lg:text-lg xl:text-lg">
           {title}
         </h2>
-        <div className="flex justify-center items-center" style={{ width: `${viewportWidth}px`, height: '200px' }}>
+        <div className="flex justify-center items-center w-full" style={{ height: '200px' }}>
           <ErrorDisplay
             message={`No ${title.toLowerCase()} available at this time.`}
             type="no-data"
@@ -117,7 +119,7 @@ export const MovieRow = ({ movies, title }:MovieRowProps) => {
         style={{ width: `${viewportWidth}px` }}
       >
         <div
-          className={`flex gap-6 transition-transform duration-300 ease-out ${
+          className={`flex gap-4 transition-transform duration-300 ease-out ${
             ready ? 'opacity-100' : 'opacity-0'
           }`}
           style={{

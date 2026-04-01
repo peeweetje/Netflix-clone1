@@ -29,7 +29,7 @@ export const HeroBanner = ({
 
   return (
     <div
-      className={`relative w-full h-[75vh] min-h-[600px] bg-cover bg-center bg-fixed flex items-center`}
+      className={`relative w-full h-screen bg-cover bg-center bg-fixed flex items-center`}
       style={{
         backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%), url(${backgroundImage})`,
       }}
