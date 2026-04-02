@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -16,10 +16,72 @@ interface NavbarHeaderMobileProps {
 
 export const NavbarHeaderMobile = ({ onChange, value, resultCount }: NavbarHeaderMobileProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const previousActiveElement = useRef<HTMLElement | null>(null);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen(prev => {
+      if (!prev) {
+        // Store focused element before opening
+        previousActiveElement.current = document.activeElement as HTMLElement;
+        // Lock background scroll
+        document.body.style.overflow = 'hidden';
+      } else {
+        // Restore scroll when closing
+        document.body.style.overflow = '';
+        // Restore focus to trigger button
+        setTimeout(() => menuButtonRef.current?.focus(), 0);
+      }
+      return !prev;
+    });
+  }, []);
+
+  // Handle Escape key to close menu
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        toggleMenu();
+      }
+      
+      // Focus trap
+      if (e.key === 'Tab' && menuRef.current) {
+        const focusableElements = menuRef.current.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        
+        if (focusableElements.length === 0) return;
+        
+        const firstElement = focusableElements[0] as HTMLElement;
+        const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+
+        if (e.shiftKey && document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        } else if (!e.shiftKey && document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    
+    // Focus first element when menu opens
+    setTimeout(() => {
+      const firstFocusable = menuRef.current?.querySelector(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      ) as HTMLElement;
+      firstFocusable?.focus();
+    }, 0);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen, toggleMenu]);
 
   const normalizedQuery = value.trim();
   const isSearchEligible = normalizedQuery.length > 2;
@@ -44,7 +106,13 @@ export const NavbarHeaderMobile = ({ onChange, value, resultCount }: NavbarHeade
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-black z-40 pt-16">
+        <div 
+          ref={menuRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Main navigation menu"
+          className="fixed inset-0 bg-black z-40 pt-16"
+        >
           <div className="p-6">
             <NavbarItems
               variant="vertical"
@@ -78,11 +146,13 @@ export const NavbarHeaderMobile = ({ onChange, value, resultCount }: NavbarHeade
 
             <div className="flex items-center ml-auto">
               <Button
+                ref={menuButtonRef}
                 onClick={toggleMenu}
                 variant="ghost"
                 size="icon"
                 aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
                 aria-expanded={isMenuOpen}
+                aria-haspopup="dialog"
               >
                 {isMenuOpen ? <X /> : <Menu />}
               </Button>

@@ -20,7 +20,7 @@ export const NavbarHeader = ({ onChange, value, resultCount }: NavbarHeaderProps
           <Link href="/" className="whitespace-nowrap mr-12 text-2xl font-bold text-primary hover:opacity-90 transition-opacity duration-200">
             BINGEWATCH
           </Link>
-          <div className="flex-1 justify-center">
+          <div className="flex-1 flex justify-center">
             <NavbarItems />
           </div>
           <div className="flex items-center space-x-4 ml-auto">
