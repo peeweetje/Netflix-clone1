@@ -120,7 +120,7 @@ export const NavbarHeaderMobile = ({ onChange, value, resultCount }: NavbarHeade
             />
             <div className="mt-10 pt-6 border-t border-gray-800">
               <div className="mb-8">
-                <SearchBar value={value} onChange={onChange} resultCount={resultCount} />
+                <SearchBar value={value} onChange={onChange} resultCount={resultCount} id="search-mobile" />
               </div>
               <div>
                 <p className="text-white mb-4 text-lg font-medium">Theme</p>

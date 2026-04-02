@@ -25,7 +25,7 @@ export const NavbarHeader = ({ onChange, value, resultCount }: NavbarHeaderProps
           </div>
           <div className="flex items-center space-x-4 ml-auto">
             <div>
-              <SearchBar onChange={onChange} value={value} resultCount={resultCount} />
+              <SearchBar onChange={onChange} value={value} resultCount={resultCount} id="search-desktop" />
             </div>
 
             <div>
