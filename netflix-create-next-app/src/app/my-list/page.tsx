@@ -16,7 +16,6 @@ const MyList = () => {
 
   const {
     searchQuery = '',
-    setSearchQuery,
     searchResultsMovies = [],
     searchResultsShows = [],
     searchLoading = false,

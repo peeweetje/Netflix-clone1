@@ -5,14 +5,15 @@ interface SearchBarProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
   resultCount?: number;
+  id?: string;
 }
 
-export const SearchBar = ({ onChange, value, resultCount }: SearchBarProps) => {
+export const SearchBar = ({ onChange, value, id = "search" }: SearchBarProps) => {
   return (
     <div className="relative w-64">
       <Search className="absolute left-3 top-1/2 h-6 w-6 -translate-y-1/2 text-muted-foreground" />
       <Input
-        id="search"
+        id={id}
         type="search"
         placeholder="Search for movies, shows..."
         value={value}
