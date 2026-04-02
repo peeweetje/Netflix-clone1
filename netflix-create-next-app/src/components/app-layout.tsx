@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { ViewTransition } from 'react';
 import { NavbarHeader } from './navbarmenu/navbarheader/navbar-header';
+import { NavbarHeaderMobile } from './navbarmenu/navbarheader/navbar-header-mobile';
 import { SearchProvider, useSearch } from '../context/search-context';
 
 interface AppLayoutContentProps {
@@ -26,7 +27,10 @@ const AppLayoutContent = ({ children }: AppLayoutContentProps) => {
     <ViewTransition>
       <div className="min-h-screen bg-background">
         {shouldShowNavbar && (
-          <NavbarHeader onChange={handleSearch} value={searchQuery} resultCount={searchQuery ? displayedResultCount : undefined} />
+          <>
+            <NavbarHeader onChange={handleSearch} value={searchQuery} resultCount={searchQuery ? displayedResultCount : undefined} />
+            <NavbarHeaderMobile onChange={handleSearch} value={searchQuery} resultCount={searchQuery ? displayedResultCount : undefined} />
+          </>
         )}
         {children}
       </div>
