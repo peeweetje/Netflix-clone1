@@ -109,7 +109,7 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
         className={`arrow left${canScrollLeft ? ' active' : ''}`}
         disabled={!canScrollLeft || !ready}
         onClick={handleLeft}
-        onKeyDown={(e) => handleKeyDown(e, handleLeft)}
+        onKeyDown={(e: React.KeyboardEvent<HTMLButtonElement>) => handleKeyDown(e, handleLeft)}
       >
         &#8249;
       </ArrowButton>
@@ -153,7 +153,7 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
         className={`arrow right${canScrollRight ? ' active' : ''}`}
         disabled={!canScrollRight || !ready}
         onClick={handleRight}
-        onKeyDown={(e) => handleKeyDown(e, handleRight)}
+        onKeyDown={(e: React.KeyboardEvent<HTMLButtonElement>) => handleKeyDown(e, handleRight)}
       >
         &#8250;
       </ArrowButton>
