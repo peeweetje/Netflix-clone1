@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { MovieResult } from '../../utils/types/types';
-import { Button } from '../ui/button';
+import { ScrollButton } from './scroll-button';
 import { Card } from '../card/card';
 import { ErrorDisplay } from '../error-display/error-display';
 
@@ -101,18 +100,13 @@ export const MovieRow = ({ movies, title }:MovieRowProps) => {
         {title}
       </h2>
 
-      <Button
-        className={`absolute top-1/2 -translate-y-1/2 z-20 bg-black/60 border-none text-primary w-11 h-11 cursor-pointer opacity-30 transition-all rounded-sm pointer-events-auto left-0 hover:bg-primary-light hover:text-white disabled:opacity-0 disabled:pointer-events-none ${
-          canScrollLeft ? 'active opacity-100' : ''
-        }`}
-        disabled={!canScrollLeft || !ready}
+      <ScrollButton
+        direction="left"
+        canScroll={canScrollLeft}
+        ready={ready}
         onClick={handleLeft}
-        variant="ghost"
-        size="icon"
-        aria-label={`Scroll ${title} left`}
-      >
-        <ChevronLeft className="text-white" />
-      </Button>
+        title={title}
+      />
 
       <div
         className={`overflow-hidden mx-auto`}
@@ -144,18 +138,13 @@ export const MovieRow = ({ movies, title }:MovieRowProps) => {
         </div>
       </div>
 
-      <Button
-        className={`absolute top-1/2 -translate-y-1/2 z-20 bg-black/60 border-none text-primary w-11 h-11 cursor-pointer opacity-30 transition-all rounded-sm pointer-events-auto right-0 hover:bg-primary-light hover:text-white disabled:opacity-0 disabled:pointer-events-none ${
-          canScrollRight ? 'active opacity-100' : ''
-        }`}
-        disabled={!canScrollRight || !ready}
+      <ScrollButton
+        direction="right"
+        canScroll={canScrollRight}
+        ready={ready}
         onClick={handleRight}
-        variant="ghost"
-        size="icon"
-        aria-label={`Scroll ${title} right`}
-      >
-        <ChevronRight className="text-white" />
-      </Button>
+        title={title}
+      />
     </section>
   );
 };
