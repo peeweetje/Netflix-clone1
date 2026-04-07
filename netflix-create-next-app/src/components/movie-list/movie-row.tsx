@@ -83,7 +83,7 @@ export const MovieRow = ({ movies, title }:MovieRowProps) => {
         <h2 className="text-xs ml-4 mb-4 sm:text-sm md:text-lg lg:text-lg xl:text-lg">
           {title}
         </h2>
-        <div className="flex justify-center items-center w-full" style={{ height: '200px' }}>
+        <div className="flex justify-center items-center w-full h-[200px]">
           <ErrorDisplay
             message={`No ${title.toLowerCase()} available at this time.`}
             type="no-data"
