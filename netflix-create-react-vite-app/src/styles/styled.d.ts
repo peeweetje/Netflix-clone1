@@ -1,9 +1,6 @@
-declare module 'styled-components' {
-  export function createGlobalStyle<T = {}>(
-    strings: TemplateStringsArray,
-    ...interpolations: any[]
-  ): React.ComponentType<T>;
+import 'styled-components';
 
+declare module 'styled-components' {
   export interface DefaultTheme {
     name: string;
     colors: {
