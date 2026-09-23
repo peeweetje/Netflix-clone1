@@ -25,7 +25,7 @@ export const Shows = () => {
     error: showsError,
   } = useQuery({
     queryKey: ['shows', 'trending', i18n.language],
-    queryFn: () => fetchShows(i18n.language),
+    queryFn: () => fetchShows(undefined, i18n.language),
     staleTime: 1000 * 60 * 5, // 5 minutes
     retry: (failureCount, error) => {
       // Don't retry on specific shows errors

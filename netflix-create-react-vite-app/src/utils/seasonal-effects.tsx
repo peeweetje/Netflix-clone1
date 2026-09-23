@@ -1,3 +1,4 @@
+import type { DefaultTheme } from 'styled-components';
 import React from 'react';
 import {
   AnimatedButterfly,
@@ -33,7 +34,7 @@ export const renderSnow = () => (
   </SnowContainer>
 );
 
-export const renderLeaves = (theme) => {
+export const renderLeaves = (theme: DefaultTheme) => {
   return (
     <LeafContainer>
       {Array.from({ length: 20 }).map((_, i) => (
@@ -70,7 +71,7 @@ export const renderLeaves = (theme) => {
   );
 };
 
-export const renderFlowers = (theme) => (
+export const renderFlowers = (_theme: DefaultTheme) => (
   <FlowersThemeContainer>
     <FlowersTheme />
   </FlowersThemeContainer>
@@ -139,7 +140,7 @@ export const renderBees = () => {
 
   return (
     <BeesThemeContainer>
-      {beePositions.map((pos, i) => {
+      {beePositions.map((_pos, i) => {
         const delay = Math.random() * 5;
         const duration = Math.random() * 18 + 12;
 

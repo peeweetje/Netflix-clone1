@@ -1,21 +1,17 @@
-import { createGlobalStyle, DefaultTheme } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
- export interface ThemeProps {
-    theme: DefaultTheme;
-}
-
-export const GlobalStyle = createGlobalStyle<ThemeProps>`
+export const GlobalStyle = createGlobalStyle`
     body {
-        margin: ${(props: ThemeProps) => props.theme.space[0]};
-        padding: ${(props: ThemeProps) => props.theme.space[0]};
-        font-family: ${(props: ThemeProps) => props.theme.fontFamily};
-        background-color: ${(props: ThemeProps) => props.theme.colors.black};
-        color: ${(props: ThemeProps) => props.theme.colors.white};
+        margin: ${({ theme }) => theme.space[0]};
+        padding: ${({ theme }) => theme.space[0]};
+        font-family: ${({ theme }) => theme.fontFamily};
+        background-color: ${({ theme }) => theme.colors.black};
+        color: ${({ theme }) => theme.colors.white};
         overflow-x: hidden;
     }
     a {
         text-decoration: none;
-        color: ${(props: ThemeProps) => props.theme.colors.primary};
+        color: ${({ theme }) => theme.colors.primary};
     }
     ul {
         list-style: none;
