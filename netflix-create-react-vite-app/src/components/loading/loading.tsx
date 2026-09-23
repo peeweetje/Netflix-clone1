@@ -1,13 +1,13 @@
-import type React from 'react';
+import React, { type ReactNode } from 'react';
 import { Spinner } from '../spinner/spinner';
 
 interface LoadingProps {
   loading: boolean;
   error: string | null;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-export const Loading: React.FC<LoadingProps> = ({ loading, error, children }) => {
+export const Loading = ({ loading, error, children }: LoadingProps) => {
   if (loading) {
     return <Spinner />;
   }

@@ -1,7 +1,12 @@
 import React from 'react';
 import { Bee } from './bee';
 
-export const BeesTheme = ({ width = 300, height = 250 }) => {
+interface SvgSizeProps {
+  width?: string | number;
+  height?: string | number;
+}
+
+export const BeesTheme = ({ width = 300, height = 250 }: SvgSizeProps) => {
   return (
     <svg
       height={height}

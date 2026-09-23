@@ -1,13 +1,19 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
-import { AnimatedWings, wingFlap } from './butterfly.styles';
+import { AnimatedWings } from './butterfly.styles';
+
+interface ButterflyProps {
+  width?: string | number;
+  height?: string | number;
+  primaryColor?: string;
+  secondaryColor?: string;
+}
 
 export const Butterfly = ({
   width = 50,
   height = 50,
   primaryColor = '#FFD700',
   secondaryColor = '#FFA500',
-}) => {
+}: ButterflyProps) => {
   return (
     <svg
       height={height}

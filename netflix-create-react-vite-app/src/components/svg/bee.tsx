@@ -1,7 +1,12 @@
 import React from 'react';
 import { AnimatedWings } from './bee.styles';
 
-export const Bee = ({ width = 30, height = 30 }) => {
+interface BeeProps {
+  width?: string | number;
+  height?: string | number;
+}
+
+export const Bee = ({ width = 30, height = 30 }: BeeProps) => {
   return (
     <svg
       height={height}

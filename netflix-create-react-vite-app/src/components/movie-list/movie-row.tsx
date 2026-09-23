@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import type { Transition } from 'framer-motion';
 import { imageUrl } from '../../utils/api';
 import type { MediaResult } from '../../utils/types/types';
 import { useTranslatedRoutes } from '../../utils/routes';
@@ -97,7 +98,7 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
   const viewportWidth = visibleCount * cardWidth;
 
   // Use optimized transitions for smooth animations
-  const transition = hasScrolled
+  const transition: Transition = hasScrolled
     ? { type: 'spring', stiffness: 300, damping: 30, mass: 0.8 }
     : { type: 'tween', duration: 0.2, ease: 'easeOut' };
 
