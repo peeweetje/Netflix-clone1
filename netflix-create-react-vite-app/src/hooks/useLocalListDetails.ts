@@ -68,15 +68,8 @@ export const useLocalListDetails = (): UseLocalListDetailsReturn => {
             failed.push(item);
             // Batch remove failed items and show notice
             if (failed.length > 0) {
-              failed.forEach((item) => removeFromList(item));
-              const failedTitles = failed
-                .map((item) => item.title || item.name || 'Unknown Title')
-                .join(', ');
-              const sanitizedTitle = (
-                item.title ||
-                item.name ||
-                'Unknown Title'
-              ).replace(/[<>]/g, '');
+              failed.forEach((failedItem) => removeFromList(failedItem));
+              const sanitizedTitle = 'Unknown Title';
               setRemovalNotice(
                 `"${sanitizedTitle}" was removed from your list because it could not be loaded.`
               );

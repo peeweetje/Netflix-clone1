@@ -1,9 +1,8 @@
 import {
-  discoverShowUrl,
   discoverMovieUrl,
-  imageUrl,
-  movieVideosUrl,
+  discoverShowUrl,
   popularMoviesUrl,
+  movieVideosUrl,
   showVideosUrl,
   trendingMovieUrl,
   trendingShowUrl,
@@ -55,9 +54,9 @@ export const fetchMovies = async (url: string, language: string = 'en-US'): Prom
   }
 };
 
-export const fetchShows = async (language: string = 'en-US'): Promise<ShowResult[]> => {
+export const fetchShows = async (url?: string, language: string = 'en-US'): Promise<ShowResult[]> => {
   try {
-    const response = await fetch(`${trendingShowUrl}&language=${language}`);
+    const response = await fetch(`${url ?? trendingShowUrl}&language=${language}`);
 
     if (!response.ok) {
       if (response.status === 401) {
@@ -219,7 +218,7 @@ export const movieQueries = {
 export const showQueries = {
   trending: (language: string = 'en-US') => ({
     queryKey: [...queryKeys.shows, 'trending', language],
-    queryFn: () => fetchShows(language),
+    queryFn: () => fetchShows(undefined, language),
   }),
 
   popular: (language: string = 'en-US') => ({

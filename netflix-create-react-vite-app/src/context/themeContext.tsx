@@ -1,5 +1,4 @@
-import  React from 'react';
-import {
+import React, {
   createContext,
   type ReactNode,
   useContext,
@@ -25,11 +24,9 @@ const themes = [springTheme, summerTheme, autumnTheme, winterTheme];
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [isAutomatic, setIsAutomatic] = useState(true);
-  const [currentTheme, setCurrentTheme] = useState<DefaultTheme>(
+  const [currentTheme, setCurrentTheme] = useState<DefaultTheme>(() =>
     getSeason(new Date())
   );
   const [themeIndex, setThemeIndex] = useState(
