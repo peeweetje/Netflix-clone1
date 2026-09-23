@@ -3,7 +3,12 @@ import Flower1 from './flower1';
 import Flower2 from './flower2';
 import Flower3 from './flower3';
 
-export const FlowersTheme = ({ width = 300, height = 250 }) => {
+interface FlowersThemeProps {
+  width?: string | number;
+  height?: string | number;
+}
+
+export const FlowersTheme = ({ width = 300, height = 250 }: FlowersThemeProps) => {
   return (
     <svg
       height={height}

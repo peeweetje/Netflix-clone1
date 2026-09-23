@@ -1,6 +1,11 @@
 import React from 'react';
 
-const Flower2 = ({ width = 100, height = 100 }) => {
+interface FlowerProps {
+  width?: string | number;
+  height?: string | number;
+}
+
+const Flower2 = ({ width = 100, height = 100 }: FlowerProps) => {
   return (
     <svg
       height={height}

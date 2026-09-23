@@ -1,16 +1,16 @@
-import type React from 'react';
+import React from 'react';
 
 interface LeafIconProps {
-  width?: string;
-  height?: string;
+  width?: string | number;
+  height?: string | number;
   color?: string;
 }
 
-export const LeafIcon: React.FC<LeafIconProps> = ({
+export const LeafIcon = ({
   width = '24',
   height = '24',
   color = 'currentColor',
-}) => (
+}: LeafIconProps) => (
   <svg
     fill="none"
     height={height}
