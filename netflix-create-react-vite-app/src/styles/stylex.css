@@ -1,0 +1,46 @@
+:root {
+  --theme-primary: #4caf50;
+  --theme-primary-light: #81c784;
+  --theme-button-text: #fff;
+  --theme-white: #fff;
+  --theme-black: #000;
+  --theme-orange: #ffa500;
+  --theme-red: #f00;
+  font-family: Montserrat, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: var(--theme-black);
+  color: var(--theme-white);
+  font-family: Montserrat, sans-serif;
+}
+
+a {
+  color: var(--theme-primary);
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
