@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes, Navigate, useParams } from 'react-router-dom';
-import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { MediaDetail } from '../components/details/media-detail';
 import { SearchProvider } from '../context/search-context';
 import { ThemeProvider, useTheme } from '../context/themeContext';
@@ -10,7 +9,6 @@ import { MyList } from '../pages/my-list/my-list';
 import { PopularAndTrending } from '../pages/popular-trending/popular-and-trending';
 import { Shows } from '../pages/shows/shows';
 import { TrailerPage } from '../pages/trailer/trailer-page';
-import { GlobalStyle } from '../styles/global';
 
 const LegacyFilmsRedirect = () => {
   const { id } = useParams<{ id: string }>();
@@ -34,11 +32,18 @@ export const App = () => {
 
 const AppContent = () => {
   const { theme } = useTheme();
-
+  const themeVariables = {
+    '--theme-primary': theme.colors.primary,
+    '--theme-primary-light': theme.colors.primaryLight,
+    '--theme-button-text': theme.colors.buttonText,
+    '--theme-white': theme.colors.white,
+    '--theme-black': theme.colors.black,
+    '--theme-orange': theme.colors.orange,
+    '--theme-red': theme.colors.red,
+  } as React.CSSProperties;
 
   return (
-    <StyledThemeProvider theme={theme}>
-      <GlobalStyle />
+      <div style={themeVariables}>
       <Routes>
         {/* Home route */}
         <Route element={<Homepage />} path="/" />
@@ -63,6 +68,6 @@ const AppContent = () => {
         <Route path="/Films/:id" element={<LegacyFilmsRedirect />} caseSensitive />
         <Route path="/Series/:id" element={<LegacySeriesRedirect />} caseSensitive />
       </Routes>
-    </StyledThemeProvider>
+      </div>
   );
 };
