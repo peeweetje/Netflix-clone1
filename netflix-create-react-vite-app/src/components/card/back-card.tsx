@@ -1,14 +1,9 @@
 import React from 'react';
+import * as stylex from '@stylexjs/stylex';
 import { useTranslation } from 'react-i18next';
 import { type MyListItem, useMyList } from '../../context/myListContext';
 import { Chip } from '../chip/chip';
-import {
-  BackCardButton,
-  CardBackContainer,
-  OverviewContainer,
-  StyledScoreContainer,
-  TitleContainer,
-} from './card.styles';
+import { cardStyles } from './card.styles';
 
 interface BackCardProps {
   id: number;
@@ -54,30 +49,30 @@ export const BackCard = ({
       : overview;
 
   return (
-    <CardBackContainer 
+    <div {...stylex.props(cardStyles.backContainer)}
       role="article" 
       aria-label={`${t('movie-details', 'Movie details')}: ${title}`}
       tabIndex={0}
     >
-      <TitleContainer 
+      <h1 {...stylex.props(cardStyles.title)}
         role="heading" 
         aria-level={3}
         id={`card-title-${id}`}
       >
         {title}
-      </TitleContainer>
-      <OverviewContainer 
+      </h1>
+      <p {...stylex.props(cardStyles.overview)}
         aria-labelledby={`card-title-${id}`}
         role="contentinfo"
       >
         <span className="sr-only">{t('overview', 'Overview')}:</span>
         {truncatedOverview}
-      </OverviewContainer>
+      </p>
 
-      <StyledScoreContainer>
-        <BackCardButton
+      <div {...stylex.props(cardStyles.scoreContainer)}>
+        <button
+          {...stylex.props(cardStyles.addButton, isAdded && cardStyles.addedButton)}
           disabled={isAdded}
-          $isAdded={isAdded}
           onClick={(e: { stopPropagation: () => void; preventDefault: () => void; }) => {
             e.stopPropagation();
             e.preventDefault();
@@ -87,9 +82,9 @@ export const BackCard = ({
           aria-pressed={isAdded}
         >
           {isAdded ? t('added') : t('add-to-list')}
-        </BackCardButton>
+        </button>
         <Chip score={vote_average} title={title} />
-      </StyledScoreContainer>
-    </CardBackContainer>
+      </div>
+    </div>
   );
 };
