@@ -1,5 +1,6 @@
 import React from 'react';
-import { CardContainer } from './seasonal-card.styles';
+import * as stylex from '@stylexjs/stylex';
+import { seasonalCardStyles } from './seasonal-card.styles';
 import { Card } from './card';
 
 interface SeasonalCardProps {
@@ -16,8 +17,8 @@ interface SeasonalCardProps {
 export const SeasonalCard = (props: SeasonalCardProps) => {
 
   return (
-    <CardContainer>
+    <div {...stylex.props(seasonalCardStyles.container)}>
       <Card {...props} />
-    </CardContainer>
+    </div>
   );
 };
