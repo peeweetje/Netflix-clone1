@@ -1,12 +1,10 @@
-import styled from 'styled-components';
+import * as stylex from '@stylexjs/stylex';
 
-export const CardContainer = styled.div`
-  margin-top: ${(props: { theme: { space: string[] } }) => props.theme.space[6]};
-  position: relative;
-  display: inline-block;
-
-  @media (max-width: ${(props: { theme: { breakpoints: { sm: string } } }) => props.theme.breakpoints.sm}) {
-    transform: scale(0.9);
-    margin-top: ${(props: { theme: { space: string[] } }) => props.theme.space[0]};
-  }
-`;
+export const seasonalCardStyles = stylex.create({
+  container: {
+    display: 'inline-block',
+    marginTop: 16,
+    position: 'relative',
+    '@media (max-width: 767px)': { marginTop: 0, transform: 'scale(0.9)' },
+  },
+});
