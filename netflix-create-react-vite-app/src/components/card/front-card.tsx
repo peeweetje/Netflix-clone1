@@ -1,5 +1,6 @@
 import React from 'react';
-import { CardFront, StyledImg } from './card.styles';
+import * as stylex from '@stylexjs/stylex';
+import { cardStyles } from './card.styles';
 
 interface FrontCardProps {
   src: string;
@@ -8,8 +9,8 @@ interface FrontCardProps {
 
 export const FrontCard = ({ src, alt }: FrontCardProps) => {
   return (
-    <CardFront>
-      <StyledImg alt={alt} src={src} />
-    </CardFront>
+    <div {...stylex.props(cardStyles.front)}>
+      <img {...stylex.props(cardStyles.image)} alt={alt} src={src} />
+    </div>
   );
 };
