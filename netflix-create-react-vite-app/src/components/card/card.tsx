@@ -1,13 +1,10 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import * as stylex from '@stylexjs/stylex';
 import { BackCard } from './back-card';
-import {
-  CardContainer,
-  MotionCardBack,
-  MotionCardFront,
-  MotionFlipCard,
-} from './card.styles';
+import { cardStyles } from './card.styles';
 import { FrontCard } from './front-card';
+import { motion } from 'framer-motion';
 
  export interface CardRef {
   flip: () => void;
@@ -42,7 +39,8 @@ export const Card = forwardRef<CardRef, CardProps>(
     };
 
     return (
-      <CardContainer
+      <div
+        {...stylex.props(cardStyles.container)}
         onMouseEnter={() => setIsFlipped(true)}
         onMouseLeave={() => setIsFlipped(false)}
         onFocus={() => setIsFlipped(true)}
@@ -52,14 +50,15 @@ export const Card = forwardRef<CardRef, CardProps>(
         role="button"
         aria-label={`${t('view-details-for')} ${title}`}
       >
-        <MotionFlipCard
+        <motion.div
+          {...stylex.props(cardStyles.flipCard)}
           animate={{ rotateY: isFlipped ? 180 : 0 }}
           transition={{ duration: 0.6 }}
         >
-          <MotionCardFront>
+          <div {...stylex.props(cardStyles.front)}>
             <FrontCard alt={alt} src={src} />
-          </MotionCardFront>
-          <MotionCardBack>
+          </div>
+          <div {...stylex.props(cardStyles.back)}>
             <BackCard
               id={id}
               media_type={media_type}
@@ -67,9 +66,9 @@ export const Card = forwardRef<CardRef, CardProps>(
               title={title}
               vote_average={vote_average}
             />
-          </MotionCardBack>
-        </MotionFlipCard>
-      </CardContainer>
+          </div>
+        </motion.div>
+      </div>
     );
   }
 );
