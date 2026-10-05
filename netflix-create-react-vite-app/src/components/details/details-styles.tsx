@@ -1,285 +1,171 @@
-import styled from 'styled-components';
+import * as stylex from '@stylexjs/stylex';
 
-export const GoBackButton = styled.button`
-  background: ${(props) => props.theme.colors.primaryLight};
-  color: ${(props) => props.theme.colors.buttonText};
-  border: none;
-  border-radius: ${(props) => props.theme.borderRadius[1]};
-  padding:${(props) => props.theme.space[3]} ${(props) => props.theme.space[6]};
-  font-size: ${(props) => props.theme.fontSize[3]};
-  cursor: pointer;
-  transition: background 0.2s;
-  margin-bottom: ${(props) => props.theme.space[4]};
-  &:hover {
-    background: ${(props) => props.theme.colors.primary};
-    color: ${(props) => props.theme.colors.buttonText};
-  }
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    font-size: ${(props) => props.theme.fontSize[1]};
-    padding: ${(props) => props.theme.space[3]} 10px;
-  }
-`;
-
-export const StyledContainer = styled.div`
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: ${({ theme }) => theme.space[0]} auto;
-  padding: ${({ theme }) => theme.space[7]};
-
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    padding: ${({ theme }) => theme.space[2]};
-  }
-
-  @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
-    padding: ${({ theme }) => theme.space[4]};
-  }
-`;
-
-export const PosterImage = styled.img`
-  margin-top: ${({ theme }) => theme.space[4]};
-  width: 300px;
-  border-radius: ${({ theme }) => theme.borderRadius[2]};
-
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    width: 140px;
-  }
-
-  @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
-    width: 220px;
-  }
-`;
-
-export const DetailFlex = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: ${({ theme }) => theme.space[4]};
-`;
-
-export const InfoColumnsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    width: 100%;
-    align-items: center;
-  }
-`;
-
-export const InfoColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  flex: 1;
-  min-width: 0;
-  line-height: ${({ theme }) => theme.lineHeight[3]};
-  padding: ${({ theme }) => theme.space[3]};
-
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    padding: ${({ theme }) => theme.space[1]};
-    font-size: ${({ theme }) => theme.fontSize[2]};
-  }
-
-  @media (max-width: ${(props) => props.theme.breakpoints.md}) {
-    padding: ${({ theme }) => theme.space[2]};
-  }
-`;
-
-export const InfoText = styled.p`
-  margin:${({ theme }) => theme.space[1]} ;
-  font-size: ${({ theme }) => theme.fontSize[3]};
-`;
-
-export const InfoLabel = styled.span`
-  font-weight: bold;
-  margin-right:${({ theme }) => theme.space[1]};
-`;
-
-export const CastSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: ${({ theme }) => theme.space[6]};
-`;
-
-export const CastList = styled.div`
-  display: flex;
-  gap: ${({ theme }) => theme.space[6]};
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: ${({ theme }) => theme.space[6]};
-`;
-
-export const ImageColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-export const Tagline = styled.p`
-  width: 300px;
-  margin-top: ${({ theme }) => theme.space[3]};
-  text-align: center;
-  word-break: break-word;
-  margin-left: auto;
-  margin-right: auto;
-  color: ${({ theme }) => theme.colors.primaryLight};
-
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    font-size: ${({ theme }) => theme.fontSize[2]};
-  }
-`;
-
-export const MainColumns = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: ${({ theme }) => theme.space[4]};
-  align-items: flex-start;
-
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    flex-direction: column;
-    align-items: center;
-    gap: ${({ theme }) => theme.space[2]};
-  }
-
-  @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
-    gap: ${({ theme }) => theme.space[2]};
-  }
-`;
-
-export const LeftColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-export const RightColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  flex: 1;
-`;
-
-export const Title = styled.h2`
-  width: 300px;
-  align-items: center;
-  word-break: break-word;
-  text-align: center;
-  margin: ${({ theme }) => theme.space[3]} auto;
-  color: ${({ theme }) => theme.colors.primaryLight};
-  font-size: ${({ theme }) => theme.fontSize[5]};
-
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    width: 140px;
-    font-size: ${({ theme }) => theme.fontSize[3]};
-  }
-
-  @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
-    width: 220px;
-    font-size: ${({ theme }) => theme.fontSize[4]};
-  }
-`;
-
-export const CastCard = styled.div`
-  text-align: center;
-  width: 120px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    width: 60px;
-  }
-
-  @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
-    width: 90px;
-  }
-`;
-
-export const CastImage = styled.img`
-  width: 80px;
-  height: 120px;
-  border-radius: ${({ theme }) => theme.borderRadius[2]};
-  object-fit: cover;
-  background: ${({ theme }) => theme.colors.buttonText};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
-    width: 60px;
-    height: 90px;
-  }
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    width: 40px;
-    height: 60px;
-  }
-`;
-
-export const CastName = styled.div`
-  font-weight: bold;
-  margin-top: ${({ theme }) => theme.space[2]};
-  color: ${({ theme }) => theme.colors.primaryLight};
-
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    font-size: ${({ theme }) => theme.fontSize[2]};
-  }
-`;
-
-export const CastCharacter = styled.div`
-  font-size: ${({ theme }) => theme.fontSize[2]};
-
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    font-size: ${({ theme }) => theme.fontSize[1]};
-  }
-`;
-
-export const CastImageFallback = styled.div`
-  width: 80px;
-  height: 120px;
-  border-radius: ${({ theme }) => theme.borderRadius[2]};
-  background: ${({ theme }) => theme.colors.white};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${({ theme }) => theme.colors.primary};
-  font-size: ${({ theme }) => theme.fontSize[2]};
-
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    width: 40px;
-    height: 60px;
-    font-size: ${({ theme }) => theme.fontSize[0]};
-  }
-
-  @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
-    width: 60px;
-    height: 90px;
-    font-size: ${({ theme }) => theme.fontSize[1]};
-  }
-`;
-
-export const PosterContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content:center;
-`;
-
-export const ButtonContainer = styled.div`
-  display: flex;
-  gap: ${({ theme }) => theme.space[4]}; /* Spacing between buttons */
-  margin-bottom: ${({ theme }) => theme.space[4]};
-
-  button {
-    font-size: ${({ theme }) => theme.fontSize[3]};
-
-    @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-      font-size: ${({ theme }) => theme.fontSize[1]};
-      padding:${({ theme }) => theme.space[3]} ${(props) => props.theme.space[6]};
-    }
-  }
-`;
+export const detailsStyles = stylex.create({
+  backButton: {
+    backgroundColor: 'var(--theme-primary-light, #81c784)',
+    borderColor: 'var(--theme-primary, #4caf50)',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderRadius: 4,
+    color: 'var(--theme-button-text, #fff)',
+    cursor: 'pointer',
+    fontSize: '1rem',
+    marginBottom: 8,
+    paddingBlock: 6,
+    paddingInline: 16,
+    transition: 'background 0.2s',
+    ':hover': { backgroundColor: 'var(--theme-primary, #4caf50)' },
+    '@media (max-width: 767px)': {
+      fontSize: '0.7rem',
+      paddingInline: 10,
+    },
+  },
+  container: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    marginInline: 'auto',
+    minHeight: '100vh',
+    padding: 18,
+    '@media (max-width: 1024px)': { padding: 8 },
+    '@media (max-width: 767px)': { padding: 4 },
+  },
+  posterImage: {
+    borderRadius: 6,
+    marginTop: 8,
+    width: 300,
+    '@media (max-width: 1024px)': { width: 220 },
+    '@media (max-width: 767px)': { width: 140 },
+  },
+  detailFlex: {
+    alignItems: 'center',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    marginBottom: 8,
+  },
+  infoColumnsWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    '@media (max-width: 767px)': { alignItems: 'center', width: '100%' },
+  },
+  infoColumn: {
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    lineHeight: 1.5,
+    minWidth: 0,
+    padding: 6,
+    '@media (max-width: 992px)': { padding: 4 },
+    '@media (max-width: 767px)': { fontSize: '0.8rem', padding: 2 },
+  },
+  infoText: { fontSize: '1rem', margin: 2 },
+  infoLabel: { fontWeight: 'bold', marginRight: 2 },
+  castSection: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    marginBottom: 16,
+  },
+  castList: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: 16,
+    justifyContent: 'center',
+    marginBottom: 16,
+  },
+  imageColumn: { alignItems: 'center', display: 'flex', flexDirection: 'column' },
+  tagline: {
+    color: 'var(--theme-primary-light, #81c784)',
+    marginInline: 'auto',
+    marginTop: 6,
+    textAlign: 'center',
+    width: 300,
+    wordBreak: 'break-word',
+    '@media (max-width: 767px)': { fontSize: '0.8rem' },
+  },
+  mainColumns: {
+    alignItems: 'flex-start',
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 8,
+    '@media (max-width: 1024px)': { gap: 4 },
+    '@media (max-width: 767px)': {
+      alignItems: 'center',
+      flexDirection: 'column',
+      gap: 4,
+    },
+  },
+  leftColumn: { alignItems: 'center', display: 'flex', flexDirection: 'column' },
+  rightColumn: {
+    alignItems: 'flex-start',
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
+  },
+  title: {
+    alignItems: 'center',
+    color: 'var(--theme-primary-light, #81c784)',
+    fontSize: '1.5rem',
+    marginBlock: 6,
+    marginInline: 'auto',
+    textAlign: 'center',
+    width: 300,
+    wordBreak: 'break-word',
+    '@media (max-width: 1024px)': { fontSize: '1.25rem', width: 220 },
+    '@media (max-width: 767px)': { fontSize: '1rem', width: 140 },
+  },
+  castCard: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    textAlign: 'center',
+    width: 120,
+    '@media (max-width: 1024px)': { width: 90 },
+    '@media (max-width: 767px)': { width: 60 },
+  },
+  castImage: {
+    alignItems: 'center',
+    backgroundColor: 'var(--theme-button-text, #fff)',
+    borderRadius: 6,
+    display: 'flex',
+    height: 120,
+    justifyContent: 'center',
+    objectFit: 'cover',
+    width: 80,
+    '@media (max-width: 1024px)': { height: 90, width: 60 },
+    '@media (max-width: 767px)': { height: 60, width: 40 },
+  },
+  castName: {
+    color: 'var(--theme-primary-light, #81c784)',
+    fontWeight: 'bold',
+    marginTop: 4,
+    '@media (max-width: 767px)': { fontSize: '0.8rem' },
+  },
+  castCharacter: {
+    fontSize: '0.8rem',
+    '@media (max-width: 767px)': { fontSize: '0.7rem' },
+  },
+  castImageFallback: {
+    alignItems: 'center',
+    backgroundColor: 'var(--theme-white, #fff)',
+    borderRadius: 6,
+    color: 'var(--theme-primary, #4caf50)',
+    display: 'flex',
+    fontSize: '0.8rem',
+    height: 120,
+    justifyContent: 'center',
+    width: 80,
+    '@media (max-width: 1024px)': { fontSize: '0.7rem', height: 90, width: 60 },
+    '@media (max-width: 767px)': { fontSize: '0.5rem', height: 60, width: 40 },
+  },
+  posterContainer: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  buttonContainer: { display: 'flex', gap: 8, marginBottom: 8 },
+});
