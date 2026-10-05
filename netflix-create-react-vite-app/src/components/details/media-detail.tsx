@@ -1,5 +1,6 @@
 import { Loading } from '../../components/loading/loading';
 import React from 'react';
+import * as stylex from '@stylexjs/stylex';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useQueries } from '@tanstack/react-query';
@@ -7,16 +8,7 @@ import { imageUrl } from '../../utils/api';
 import { mediaQueries } from '../../utils/queries';
 import { useTranslatedRoutes } from '../../utils/routes';
 import { CastMember } from './cast-member';
-import {
-  ButtonContainer,
-  CastList,
-  CastSection,
-  GoBackButton,
-  LeftColumn,
-  MainColumns,
-  RightColumn,
-  StyledContainer,
-} from './details-styles';
+import { detailsStyles } from './details-styles';
 import { MediaInfo } from './media-info';
 import { MediaPoster } from './media-poster';
 import { MediaDetails, MovieMedia, TVMedia } from '../../utils/types/types';
@@ -95,37 +87,37 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
     <Loading loading={loading} error={error}>
       {media && (
         <main>
-          <StyledContainer>
-            <ButtonContainer>
-              <GoBackButton
+          <div {...stylex.props(detailsStyles.container)}>
+            <div {...stylex.props(detailsStyles.buttonContainer)}>
+              <button {...stylex.props(detailsStyles.backButton)}
                 onClick={() => navigate(-1)}
                 aria-label={t('go-back-button')}
               >
                 {t('go-back-button')}
-              </GoBackButton>
+              </button>
               {hasTrailer && (
-                <GoBackButton
+                <button {...stylex.props(detailsStyles.backButton)}
                   onClick={() => navigate(routes.getTrailer(type, media.id))}
                   aria-label={t('watch-trailer')}
                 >
                  {t('watch-trailer')}
-                </GoBackButton>
+                </button>
               )}
-            </ButtonContainer>
-            <MainColumns>
-              <LeftColumn>
+            </div>
+            <div {...stylex.props(detailsStyles.mainColumns)}>
+              <div {...stylex.props(detailsStyles.leftColumn)}>
                 <MediaPoster
                   imageUrl={imageUrl}
                   posterPath={media.poster_path || ''}
                   tagline={media.tagline || ''}
                   title={media.title || media.name || ''}
                 />
-              </LeftColumn>
-              <RightColumn>
+              </div>
+              <div {...stylex.props(detailsStyles.rightColumn)}>
                 {cast.length > 0 && (
-                  <CastSection>
+                  <section {...stylex.props(detailsStyles.castSection)}>
                     <h2>{t('cast-members', 'Cast Members')}</h2>
-                    <CastList role="list" aria-label={t('cast-members', 'Cast Members')}>
+                    <div {...stylex.props(detailsStyles.castList)} role="list" aria-label={t('cast-members', 'Cast Members')}>
                       {cast.slice(0, 5).map((actor) => (
                         <CastMember
                           actor={actor}
@@ -138,13 +130,13 @@ export const MediaDetail = ({ type }: MediaDetailProps) => {
                           }
                         />
                       ))}
-                    </CastList>
-                  </CastSection>
+                    </div>
+                  </section>
                 )}
                 <MediaInfo media={convertToMediaInfoData(media, type)} type={type} />
-              </RightColumn>
-            </MainColumns>
-          </StyledContainer>
+              </div>
+            </div>
+          </div>
         </main>
       )}
     </Loading>
