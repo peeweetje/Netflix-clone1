@@ -1,7 +1,8 @@
 import React from 'react';
+import * as stylex from '@stylexjs/stylex';
 import { useTranslation } from 'react-i18next';
 import { scoreColor } from '../../utils/score-color';
-import { ChipContainer } from './chip.styles';
+import { chipStyles } from './chip.styles';
 
 interface ChipProps {
   score: number;
@@ -14,12 +15,13 @@ export const Chip = ({ score, title }: ChipProps) => {
   const color = scoreColor(score);
 
   return (
-    <ChipContainer
-      color={color}
+    <div
+      {...stylex.props(chipStyles.container)}
+      style={{ '--chip-color': color } as React.CSSProperties}
       aria-label={`${t('rating', 'Rating')}: ${roundedScore} ${t('out-of-10', 'out of 10')}${title ? ` ${t('for', 'for')} ${title}` : ''}`}
       title={`${t('rating', 'Rating')}: ${roundedScore}/10`}
     >
       {roundedScore}
-    </ChipContainer>
+    </div>
   );
 };
