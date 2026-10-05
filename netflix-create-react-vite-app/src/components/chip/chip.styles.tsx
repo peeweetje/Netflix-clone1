@@ -1,17 +1,18 @@
-import styled from 'styled-components';
+import * as stylex from '@stylexjs/stylex';
 
-export const ChipContainer = styled.div<{
-  color: string | undefined;
-}>`
-  display: inline-block;
-  padding: 2px 6px;
-  border-radius:${(props) => props.theme.borderRadius[1]};
-  font-size: ${(props) => props.theme.fontSize[2]};
-  background-color: ${(props) => props.color};
-  color:${(props) => props.theme.colors.white};
- 
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    font-size: ${(props) => props.theme.fontSize[0]};
-    padding: 1px 4px;
-  }
-`;
+export const chipStyles = stylex.create({
+  container: {
+    backgroundColor: 'var(--chip-color)',
+    borderRadius: 4,
+    color: 'var(--theme-white, #fff)',
+    display: 'inline-block',
+    fontSize: '0.8rem',
+    paddingBlock: 2,
+    paddingInline: 6,
+    '@media (max-width: 767px)': {
+      fontSize: '0.5rem',
+      paddingBlock: 1,
+      paddingInline: 4,
+    },
+  },
+});
