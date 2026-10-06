@@ -1,6 +1,7 @@
 import React from 'react';
+import * as stylex from '@stylexjs/stylex';
 import { useTranslation } from 'react-i18next';
-import { PosterContainer, PosterImage, Tagline, Title } from './details-styles';
+import { detailsStyles } from './details-styles';
 
 interface MediaPosterProps {
   title: string;
@@ -18,13 +19,13 @@ export const MediaPoster = ({
   const { t } = useTranslation();
 
   return (
-    <PosterContainer>
-      <Title as="h1">{title}</Title>
-      <PosterImage
+    <div {...stylex.props(detailsStyles.posterContainer)}>
+      <h1 {...stylex.props(detailsStyles.title)}>{title}</h1>
+      <img {...stylex.props(detailsStyles.posterImage)}
         alt={t('movie-poster', { title })}
         src={`${imageUrl}${posterPath}`}
       />
-      <Tagline aria-label={`${t('tagline', 'Tagline')}: ${tagline}`}>{tagline}</Tagline>
-    </PosterContainer>
+      <p {...stylex.props(detailsStyles.tagline)} aria-label={`${t('tagline', 'Tagline')}: ${tagline}`}>{tagline}</p>
+    </div>
   );
 };
