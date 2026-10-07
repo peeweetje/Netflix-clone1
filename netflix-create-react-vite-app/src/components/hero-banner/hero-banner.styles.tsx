@@ -1,180 +1,77 @@
-import { motion } from 'framer-motion';
-import styled from 'styled-components';
+import * as stylex from '@stylexjs/stylex';
 
-export const LeafContainer = styled.div`
-  position: absolute;
-  top: ${(props) => props.theme.space[0]};
-  left: ${(props) => props.theme.space[0]};
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 1;
-  pointer-events: none;
-`;
-
-export const ButterflyContainer = styled.div`
-  position: absolute;
-  top: ${(props) => props.theme.space[0]};
-  left: ${(props) => props.theme.space[0]};
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 3;
-  pointer-events: none;
-`;
-
-export const SnowContainer = styled.div`
-  position: absolute;
-  top: ${(props) => props.theme.space[0]};
-  left: ${(props) => props.theme.space[0]};
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 1;
-  pointer-events: none;
-`;
-
-export const BannerContainer = styled.section<{ $backgroundImage: string }>`
-  position: relative;
-  width: 100%;
-  height: 75vh;
-  min-height: 500px;
-  background-size: cover;
-  background-position: center;
-  background-image: url(${(props) => props.$backgroundImage});
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-
- @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    height: 50vh;
-    min-height: 300px;
-  }
-`;
-
-export const BannerOverlay = styled.div`
-  position: absolute;
-  top: ${(props) => props.theme.space[0]};
-  left: ${(props) => props.theme.space[0]};
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding:${(props) => props.theme.space[0]} ${(props) => props.theme.space[8]};
-  z-index: 2;
-
- @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-  }
-`;
-
-export const BannerTitle = styled.h1`
-  max-width: 30vw;
-
- @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    font-size: ${(props) => props.theme.fontSize[5]};
-    max-width: 80vw;
-  }
-`;
-
-export const BannerOverview = styled.p`
-  font-size: ${(props) => props.theme.fontSize[3]};
-  color: ${(props) => props.theme.colors.white};
-  max-width: 32vw;
-  margin-left: ${(props) => props.theme.space[2]};
-  text-align: right;
-  text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.7);
-  line-height: ${(props) => props.theme.lineHeight[3]};
-
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    font-size: ${(props) => props.theme.fontSize[2]};
-    max-width: 80vw;
-    margin-left: ${(props) => props.theme.space[0]};
-    text-align: center;
-  }
-`;
-
-export const BannerButtons = styled.div`
-  display: flex;
-  gap: ${(props) => props.theme.space[7]};
-  margin-top: ${(props) => props.theme.space[7]};
-
- @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    justify-content: center;
-  }
-`;
-
-export const BannerButton = styled.button`
-  background: ${(props) => props.theme.colors.primary};
-  color: ${(props) => props.theme.colors.buttonText};
-  border: none;
-  padding: 0.7rem 2rem;
-  font-size: ${(props) => props.theme.fontSize[3]};
-  border-radius: ${(props) => props.theme.borderRadius[1]};
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.2s;
-  &:hover {
-    background: ${(props) => props.theme.colors.primaryLight};
-    color: ${(props) => props.theme.colors.black};
-  }
-
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    padding:${(props) => props.theme.fontSize[2]} ${(props) =>
-    props.theme.fontSize[4]};
-    font-size: ${(props) => props.theme.fontSize[2]};
-  }
-`;
-
-export const Leaf = styled(motion.div)`
-  position: absolute;
-  top: -10px;
-  width: 20px;
-  height: 20px;
-`;
-
-export const Snow = styled(motion.div)`
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  background-color: ${(props) => props.theme.colors.white};
-  border-radius: ${(props) => props.theme.borderRadius[1]};
-  opacity: 0.7;
-  top: -10px;
-`;
-
-export const FlowersThemeContainer = styled.div`
-  position: absolute;
-  bottom: ${(props) => props.theme.space[0]};
-  left: ${(props) => props.theme.space[0]};
-  z-index: 3;
-  pointer-events: none;
-  width: 100%;
-  height: 250px;
-`;
-
-export const AnimatedButterfly = styled(motion.div)``;
-
-export const BeesThemeContainer = styled.div`
-  position: absolute;
-  top: ${(props) => props.theme.space[0]};
-  left: ${(props) => props.theme.space[0]};
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 4;
-  pointer-events: none;
-`;
-
-export const BeehiveContainer = styled.div`
-  position: absolute;
-  right: 5%;
-  top: ${(props) => props.theme.space[0]};
-  width: 100px;
-  height: 100px;
-  z-index: 5;
-`;
+export const heroStyles = stylex.create({
+  leafContainer: {
+    height: '100%', left: 0, overflow: 'hidden', pointerEvents: 'none',
+    position: 'absolute', top: 0, width: '100%', zIndex: 1,
+  },
+  butterflyContainer: {
+    height: '100%', left: 0, overflow: 'hidden', pointerEvents: 'none',
+    position: 'absolute', top: 0, width: '100%', zIndex: 3,
+  },
+  snowContainer: {
+    height: '100%', left: 0, overflow: 'hidden', pointerEvents: 'none',
+    position: 'absolute', top: 0, width: '100%', zIndex: 1,
+  },
+  banner: {
+    alignItems: 'stretch', backgroundImage: 'var(--banner-image)',
+    backgroundPosition: 'center', backgroundSize: 'cover', display: 'flex',
+    height: '75vh', justifyContent: 'center', minHeight: 500,
+    position: 'relative', width: '100%',
+    '@media (max-width: 767px)': { height: '50vh', minHeight: 300 },
+  },
+  overlay: {
+    alignItems: 'center', display: 'flex', flexDirection: 'row', height: '100%',
+    justifyContent: 'space-between', left: 0, paddingInline: 20,
+    position: 'absolute', top: 0, width: '100%', zIndex: 2,
+    '@media (max-width: 767px)': {
+      flexDirection: 'column', justifyContent: 'center', textAlign: 'center',
+    },
+  },
+  title: {
+    maxWidth: '30vw',
+    '@media (max-width: 767px)': { fontSize: '1.5rem', maxWidth: '80vw' },
+  },
+  overview: {
+    color: 'var(--theme-white, #fff)', fontSize: '1rem', lineHeight: 1.5,
+    marginLeft: 4, maxWidth: '32vw', textAlign: 'right',
+    textShadow: '2px 2px 12px rgba(0, 0, 0, 0.7)',
+    '@media (max-width: 767px)': {
+      fontSize: '0.8rem', marginLeft: 0, maxWidth: '80vw', textAlign: 'center',
+    },
+  },
+  buttons: {
+    display: 'flex', gap: 18, marginTop: 18,
+    '@media (max-width: 767px)': { justifyContent: 'center' },
+  },
+  button: {
+    backgroundColor: 'var(--theme-primary, #4caf50)',
+    borderColor: 'var(--theme-primary-light, #81c784)',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderRadius: 4, color: 'var(--theme-button-text, #fff)', cursor: 'pointer',
+    fontSize: '1rem', fontWeight: 600, padding: '0.7rem 2rem',
+    transition: 'background 0.2s',
+    ':hover': {
+      backgroundColor: 'var(--theme-primary-light, #81c784)',
+      color: 'var(--theme-black, #000)',
+    },
+    '@media (max-width: 767px)': { fontSize: '0.8rem', padding: '0.8rem 1.25rem' },
+  },
+  leaf: { height: 20, position: 'absolute', top: -10, width: 20 },
+  snow: {
+    backgroundColor: 'var(--theme-white, #fff)', borderRadius: 4, height: 5,
+    opacity: 0.7, position: 'absolute', top: -10, width: 5,
+  },
+  flowersContainer: {
+    bottom: 0, height: 250, left: 0, pointerEvents: 'none', position: 'absolute',
+    width: '100%', zIndex: 3,
+  },
+  beesContainer: {
+    height: '100%', left: 0, overflow: 'hidden', pointerEvents: 'none',
+    position: 'absolute', top: 0, width: '100%', zIndex: 4,
+  },
+  beehiveContainer: {
+    height: 100, position: 'absolute', right: '5%', top: 0, width: 100, zIndex: 5,
+  },
+});
