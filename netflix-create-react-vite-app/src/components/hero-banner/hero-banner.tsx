@@ -1,8 +1,9 @@
 import React,  { useState } from 'react';
+import * as stylex from '@stylexjs/stylex';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../../context/themeContext';
-import type { DefaultTheme } from 'styled-components';
+import type { AppTheme } from '../../styles/themes/theme.types';
 import {
   autumnTheme,
   springTheme,
@@ -17,15 +18,7 @@ import {
   renderSnow,
 } from '../../utils/seasonal-effects';
 import { Beehive } from '../svg/beehive';
-import {
-  BannerButton,
-  BannerButtons,
-  BannerContainer,
-  BannerOverlay,
-  BannerOverview,
-  BannerTitle,
-  BeehiveContainer,
-} from './hero-banner.styles';
+import { heroStyles } from './hero-banner.styles';
 
 interface HeroBannerProps {
   backgroundImage: string;
@@ -35,7 +28,7 @@ interface HeroBannerProps {
   mediaType: 'movie' | 'tv';
 }
 
-export const renderSeasonalEffects = (theme: DefaultTheme | null) => {
+export const renderSeasonalEffects = (theme: AppTheme | null) => {
   if (!theme) return null;
 
   switch (theme.name) {
@@ -54,9 +47,9 @@ export const renderSeasonalEffects = (theme: DefaultTheme | null) => {
       return (
         <>
           {renderBees()}
-          <BeehiveContainer>
+          <div {...stylex.props(heroStyles.beehiveContainer)}>
             <Beehive />
-          </BeehiveContainer>
+          </div>
         </>
       );
     default:
@@ -81,34 +74,37 @@ export const HeroBanner = ({
   };
 
   return (
-    <BannerContainer $backgroundImage={backgroundImage}>
+    <section
+      {...stylex.props(heroStyles.banner)}
+      style={{ '--banner-image': `url(${backgroundImage})` } as React.CSSProperties}
+    >
       {theme && renderSeasonalEffects(theme)}
-      <BannerOverlay>
+      <div {...stylex.props(heroStyles.overlay)}>
         <div>
-          <BannerTitle id="movie-title">{title}</BannerTitle>
-          <BannerButtons>
-            <BannerButton
+          <h1 {...stylex.props(heroStyles.title)} id="movie-title">{title}</h1>
+          <div {...stylex.props(heroStyles.buttons)}>
+            <button {...stylex.props(heroStyles.button)}
               onClick={handlePlayClick}
               aria-label={`${t('watch-trailer', 'Watch Trailer')} ${t('for', 'for')} ${title}`}
             >
               Play
-            </BannerButton>
-            <BannerButton
+            </button>
+            <button {...stylex.props(heroStyles.button)}
               onClick={() => setShowInfo((v) => !v)}
               aria-expanded={showInfo}
               aria-controls="movie-overview"
               aria-describedby="movie-title"
             >
               {showInfo ? t('less-info') : t('more-info')}
-            </BannerButton>
-          </BannerButtons>
+            </button>
+          </div>
         </div>
         {showInfo && (
-          <BannerOverview id="movie-overview">
+          <p {...stylex.props(heroStyles.overview)} id="movie-overview">
             {overview || t('no-info-available')}
-          </BannerOverview>
+          </p>
         )}
-      </BannerOverlay>
-    </BannerContainer>
+      </div>
+    </section>
   );
 };
