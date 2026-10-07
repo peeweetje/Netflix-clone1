@@ -1,10 +1,6 @@
 import  React from 'react';
-import {
-  EmptyStateContainer,
-  EmptyStateContent,
-  EmptyStateTitle,
-  EmptyStateMessage,
-} from './empty-state.styles';
+import * as stylex from '@stylexjs/stylex';
+import { emptyStateStyles } from './empty-state.styles';
 
 interface EmptyStateProps {
   title: string;
@@ -13,16 +9,19 @@ interface EmptyStateProps {
 }
 
 export const EmptyState = ({ title, message, className }: EmptyStateProps) => {
+  const containerProps = stylex.props(emptyStateStyles.container);
+
   return (
-    <EmptyStateContainer
-      className={className}
+    <div
+      {...containerProps}
+      className={[containerProps.className, className].filter(Boolean).join(' ')}
       role="status"
       aria-live="polite"
     >
-      <EmptyStateContent>
-        <EmptyStateTitle>{title}</EmptyStateTitle>
-        <EmptyStateMessage>{message}</EmptyStateMessage>
-      </EmptyStateContent>
-    </EmptyStateContainer>
+      <div {...stylex.props(emptyStateStyles.content)}>
+        <h2 {...stylex.props(emptyStateStyles.title)}>{title}</h2>
+        <p {...stylex.props(emptyStateStyles.message)}>{message}</p>
+      </div>
+    </div>
   );
 };
