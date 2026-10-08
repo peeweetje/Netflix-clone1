@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import * as stylex from '@stylexjs/stylex';
+import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import type { Transition } from 'framer-motion';
 import { imageUrl } from '../../utils/api';
@@ -6,13 +8,7 @@ import type { MediaResult } from '../../utils/types/types';
 import { useTranslatedRoutes } from '../../utils/routes';
 import { SeasonalCard } from '../card/seasonal-card';
 import { CardWrapper } from '../card-wrapper/card-wrapper';
-import {
-  ArrowButton,
-  CardsViewport,
-  CardsWrapper,
-  RowContainer,
-  RowTitle,
-} from './movie.styles';
+import { movieStyles } from './movie.styles';
 
 interface MovieRowProps {
   title: string;
@@ -103,24 +99,24 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
     : { type: 'tween', duration: 0.2, ease: 'easeOut' };
 
   return (
-    <RowContainer>
-      <RowTitle>{title}</RowTitle>
-      <ArrowButton
+    <section {...stylex.props(movieStyles.rowContainer)}>
+      <h2 {...stylex.props(movieStyles.rowTitle)}>{title}</h2>
+      <button
+        {...stylex.props(movieStyles.arrow, movieStyles.arrowLeft, canScrollLeft && movieStyles.arrowActive)}
         aria-label={t('scroll-left')}
-        className={`arrow left${canScrollLeft ? ' active' : ''}`}
         disabled={!canScrollLeft || !ready}
         onClick={handleLeft}
         onKeyDown={(e: React.KeyboardEvent<HTMLButtonElement>) => handleKeyDown(e, handleLeft)}
       >
         &#8249;
-      </ArrowButton>
-      <CardsViewport width={viewportWidth}>
-        <CardsWrapper
+      </button>
+      <div {...stylex.props(movieStyles.cardsViewport)} style={{ width: viewportWidth }}>
+        <motion.div
+          {...stylex.props(movieStyles.cardsWrapper, ready && movieStyles.cardsReady)}
           key={cardWidth}
           initial={{ x: 0 }}
           animate={{ x }}
           transition={transition}
-          $ready={ready}
         >
           {movies.map((movie, idx) =>
             movie.poster_path ? (
@@ -147,17 +143,17 @@ export const MovieRow = ({ title, movies }: MovieRowProps) => {
               </div>
             ) : null
           )}
-        </CardsWrapper>
-      </CardsViewport>
-      <ArrowButton
+        </motion.div>
+      </div>
+      <button
+        {...stylex.props(movieStyles.arrow, movieStyles.arrowRight, canScrollRight && movieStyles.arrowActive)}
         aria-label= {t('scroll-right')}
-        className={`arrow right${canScrollRight ? ' active' : ''}`}
         disabled={!canScrollRight || !ready}
         onClick={handleRight}
         onKeyDown={(e: React.KeyboardEvent<HTMLButtonElement>) => handleKeyDown(e, handleRight)}
       >
         &#8250;
-      </ArrowButton>
-    </RowContainer>
+      </button>
+    </section>
   );
 };
