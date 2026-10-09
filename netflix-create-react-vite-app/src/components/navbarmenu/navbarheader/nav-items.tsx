@@ -1,22 +1,22 @@
 import React from 'react';
+import * as stylex from '@stylexjs/stylex';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import { navbarStyles } from './navbar-styles';
 
 interface navItemsProps {
   to: string;
   children?: React.ReactNode;
+  highlightActive?: boolean;
 }
 
-const StyledNavLink = styled.a`
-  text-decoration: none;
-  color: inherit;
-`;
-
-export const NavItems = ({ children, to }: navItemsProps) => {
+export const NavItems = ({ children, to, highlightActive = true }: navItemsProps) => {
   const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
+  const isActive =
+    highlightActive &&
+    (location.pathname === to || location.pathname === `/${to.replace(/^\//, '')}`);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     if (
@@ -34,16 +34,11 @@ export const NavItems = ({ children, to }: navItemsProps) => {
   return (
     <li
       aria-label={t('navigate-to', { to })}
-      className={
-        location.pathname === to ||
-        location.pathname === `/${to.replace(/^\//, '')}`
-          ? 'active'
-          : ''
-      }
+      {...stylex.props(navbarStyles.navItem, isActive && navbarStyles.navItemActive)}
     >
-      <StyledNavLink href={to} onClick={handleClick}>
+      <a {...stylex.props(navbarStyles.link)} href={to} onClick={handleClick}>
         {children}
-      </StyledNavLink>
+      </a>
     </li>
   );
 };
