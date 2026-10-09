@@ -1,171 +1,105 @@
-import styled from 'styled-components';
+import * as stylex from '@stylexjs/stylex';
 
-export const BrandWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-export const NavbarMenu = styled.nav`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  position: sticky;
-  top: ${(props) => props.theme.space[0]};
-  z-index: 1000;
-  background-color: ${(props) => props.theme.colors.black};
-  padding-top: ${(props) => props.theme.space[2]};
-  padding-bottom: ${(props) => props.theme.space[2]};
-
-  @media (max-width: ${(props) => props.theme.breakpoints.md}) {
-    position: relative;
-    justify-content: space-between;
-    padding: ${(props) => props.theme.space[2]}
-      ${(props) => props.theme.space[4]};
-  }
-
-
-`;
-
-export const NavList = styled.ul<{ $centered?: boolean; $isOpen?: boolean }>`
-  display: flex;
-  justify-content: center;
-  ${(props) =>
-    props.$centered &&
-    `
-      margin-left: auto;
-      margin-right: auto;
-    `}
-
-  li {
-    padding: ${(props) => props.theme.space[8]};
-    white-space: nowrap;
-    font-size: ${(props) => props.theme.fontSize[4]};
-    color: ${(props) => props.theme.colors.primaryLight};
-
-    @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-      font-size: ${(props) => props.theme.fontSize[0]};
-      padding: ${(props) => props.theme.space[1]};
-    }
-
-    @media (max-width: ${(props) => props.theme.breakpoints.md}) {
-      font-size: ${(props) => props.theme.fontSize[2]};
-      padding: ${(props) => props.theme.space[1]};
-    }
-
-    @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
-      font-size: ${(props) => props.theme.fontSize[3]};
-      padding: ${(props) => props.theme.space[6]};
-    }
-
-    @media (max-width: ${(props) => props.theme.breakpoints.xl}) {
-      font-size: ${(props) => props.theme.fontSize[3]};
-      padding: ${(props) => props.theme.space[7]};
-    }
-  }
-
-  li:hover {
-    text-decoration: 5px underline;
-  }
-
-  li.active {
-    text-decoration: 5px underline;
-    backgroundcolor: ${(props) => props.theme.colors.white};
-    color: ${(props) => props.theme.colors.white};
-  }
-
-  @media (max-width: ${(props) => props.theme.breakpoints.md}) {
-    display: ${(props) => (props.$isOpen ? 'flex' : 'none')};
-    flex-direction: column;
-    align-items: flex-start;
-    position: absolute;
-    top: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding-bottom: ${(props) => props.theme.space[4]};
-    z-index: 100;
-  }
-`;
-
-export const HamburgerButton = styled.button`
-  display: none;
-
-  @media (max-width: ${(props) => props.theme.breakpoints.md}) {
-    display: block;
-    background: none;
-    border: none;
-    color: ${(props) => props.theme.colors.primaryLight};
-    font-size: ${(props) => props.theme.fontSize[5]};
-    cursor: pointer;
-    margin-left: auto;
-    padding-right: ${(props) => props.theme.space[4]};
-  }
-`;
-
-export const BrandContainer = styled.div<{ $centered?: boolean }>`
-  display: flex;
-  align-items: center;
-  ${(props) => !props.$centered && 'margin-right: auto;'}
-  font-size: ${(props) => props.theme.fontSize[5]};
-  padding-left: ${(props) => props.theme.space[8]};
-  list-style: none;
-  color: ${(props) => props.theme.colors.primaryLight};
-
-
-  @media (max-width: ${(props) => props.theme.breakpoints.xl}) {
-    font-size: ${(props) => props.theme.fontSize[4]};
-    padding-left: ${(props) => props.theme.space[7]};
-  }
-
-  @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
-    font-size: ${(props) => props.theme.fontSize[3]};
-    padding-left: ${(props) => props.theme.space[6]};
-  }
-
-  @media (max-width: ${(props) => props.theme.breakpoints.md}) {
-    font-size: ${(props) => props.theme.fontSize[2]};
-    padding-left: ${(props) => props.theme.space[2]};
-    margin-right: ${(props) => props.theme.space[0]};
-  }
-
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-    font-size: ${(props) => props.theme.fontSize[1]};
-    padding-left: ${(props) => props.theme.space[1]};
-    margin-right: ${(props) => props.theme.space[0]};
-  }
-`;
-
-export const SwitchThemeButton = styled.button`
-   display:flex;
-   justify-content: center;
-   min-width: 120px;
-   margin-left: auto;
-   padding: ${(props) => props.theme.space[4]};
-   background-color: ${(props) => props.theme.colors.primary};
-   color: ${(props) => props.theme.colors.buttonText};
-   border: none;
-   border-radius:${(props) => props.theme.borderRadius[1]};
-   cursor: pointer;
-   &:hover {
-     background-color: ${(props) => props.theme.colors.primaryLight};
-   }
-
-   @media (max-width: ${(props) => props.theme.breakpoints.xl}) {
-     margin:${(props) => props.theme.space[2]}; 
-     padding: ${(props) => props.theme.space[4]};
-   }
-
-   @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
-     margin: ${(props) => props.theme.space[2]};
-     padding:${(props) => props.theme.space[4]};
-   }
-
-   @media (max-width: ${(props) => props.theme.breakpoints.md}) {
-     margin:${(props) => props.theme.space[1]};
-     padding:${(props) => props.theme.space[3]};
-   }
-
-   @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
-     margin:${(props) => props.theme.space[2]};
-     padding: ${(props) => props.theme.space[2]};
-   }
- `;
+export const navbarStyles = stylex.create({
+  brandWrapper: { alignItems: 'center', display: 'flex' },
+  navbar: {
+    alignItems: 'center',
+    backgroundColor: 'var(--theme-black, #000)',
+    display: 'flex',
+    justifyContent: 'center',
+    paddingBlock: 4,
+    position: 'sticky',
+    top: 0,
+    width: '100%',
+    zIndex: 1000,
+    '@media (max-width: 992px)': {
+      justifyContent: 'space-between',
+      padding: 4,
+      position: 'relative',
+    },
+  },
+  navList: {
+    display: 'flex',
+    justifyContent: 'center',
+    listStyle: 'none',
+    margin: 0,
+    padding: 0,
+    '@media (max-width: 992px)': {
+      alignItems: 'flex-start',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      display: 'none',
+      flexDirection: 'column',
+      paddingBottom: 8,
+      position: 'absolute',
+      top: '100%',
+      zIndex: 100,
+    },
+  },
+  navListOpen: { '@media (max-width: 992px)': { display: 'flex' } },
+  navItem: {
+    color: 'var(--theme-primary-light, #81c784)',
+    fontSize: '1.25rem',
+    padding: 20,
+    whiteSpace: 'nowrap',
+    '@media (max-width: 1200px)': { fontSize: '1rem', padding: 18 },
+    '@media (max-width: 1024px)': { fontSize: '1rem', padding: 16 },
+    '@media (max-width: 992px)': { fontSize: '0.8rem', padding: 2 },
+    '@media (max-width: 767px)': { fontSize: '0.5rem', padding: 2 },
+    ':hover': {
+      textDecorationLine: 'underline',
+      textDecorationThickness: '5px',
+    },
+  },
+  navItemActive: {
+    color: 'var(--theme-white, #fff)',
+    textDecorationLine: 'underline',
+    textDecorationThickness: '5px',
+  },
+  link: { color: 'inherit', textDecoration: 'none' },
+  hamburger: {
+    display: 'none',
+    '@media (max-width: 992px)': {
+      backgroundColor: 'transparent',
+      borderColor: 'var(--theme-primary-light, #81c784)',
+      borderStyle: 'solid',
+      borderWidth: 1,
+      color: 'var(--theme-primary-light, #81c784)',
+      cursor: 'pointer',
+      display: 'block',
+      fontSize: '1.5rem',
+      marginLeft: 'auto',
+      paddingRight: 8,
+    },
+  },
+  brand: {
+    alignItems: 'center',
+    color: 'var(--theme-primary-light, #81c784)',
+    display: 'flex',
+    fontSize: '1.5rem',
+    listStyle: 'none',
+    marginRight: 'auto',
+    paddingLeft: 20,
+    '@media (max-width: 1200px)': { fontSize: '1.25rem', paddingLeft: 18 },
+    '@media (max-width: 1024px)': { fontSize: '1rem', paddingLeft: 16 },
+    '@media (max-width: 992px)': { fontSize: '0.8rem', marginRight: 0, paddingLeft: 4 },
+    '@media (max-width: 767px)': { fontSize: '0.7rem', paddingLeft: 2 },
+  },
+  themeButton: {
+    backgroundColor: 'var(--theme-primary, #4caf50)',
+    borderColor: 'var(--theme-primary-light, #81c784)',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderRadius: 4,
+    color: 'var(--theme-button-text, #fff)',
+    cursor: 'pointer',
+    display: 'flex',
+    justifyContent: 'center',
+    marginLeft: 'auto',
+    minWidth: 120,
+    padding: 8,
+    ':hover': { backgroundColor: 'var(--theme-primary-light, #81c784)' },
+    '@media (max-width: 1200px)': { margin: 4 },
+    '@media (max-width: 992px)': { margin: 2, padding: 6 },
+    '@media (max-width: 767px)': { margin: 4, padding: 4 },
+  },
+});
