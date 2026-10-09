@@ -1,4 +1,5 @@
 import  React from 'react';
+import * as stylex from '@stylexjs/stylex';
 import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../context/themeContext';
@@ -6,14 +7,7 @@ import { useSearchContext } from '../../../context/search-context';
 import { useTranslatedRoutes } from '../../../utils/routes';
 import { useThemeAnnouncement } from '../../../hooks/useThemeAnnouncement';
 import { NavItems } from './nav-items';
-import {
-  BrandContainer,
-  BrandWrapper,
-  HamburgerButton,
-  NavbarMenu,
-  NavList,
-  SwitchThemeButton,
-} from './navbar-styles';
+import { navbarStyles } from './navbar-styles';
 import { SearchBar } from './search-bar/search-bar';
 
 interface NavbarHeaderProps {
@@ -56,23 +50,23 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
   }, [toggleTheme, themeName, announceThemeChange]);
 
   return (
-    <NavbarMenu aria-label={t('site-navigation')} role="navigation">
-      <BrandWrapper>
-        <BrandContainer>
-          <NavItems aria-label={t('binge-watch')} to="/">
+    <nav {...stylex.props(navbarStyles.navbar)} aria-label={t('site-navigation')} role="navigation">
+      <div {...stylex.props(navbarStyles.brandWrapper)}>
+        <div {...stylex.props(navbarStyles.brand)}>
+          <NavItems aria-label={t('binge-watch')} highlightActive={false} to="/">
             {t('binge-watch')}
           </NavItems>
-        </BrandContainer>
-        <HamburgerButton
+        </div>
+        <button {...stylex.props(navbarStyles.hamburger)}
           onClick={handleHamburgerClick}
           aria-expanded={isMenuOpen}
           aria-controls="main-navigation"
           aria-label={isMenuOpen ? t('close-menu') : t('open-menu')}
         >
           &#9776;
-        </HamburgerButton>
-      </BrandWrapper>
-      <NavList $isOpen={isMenuOpen} id="main-navigation">
+        </button>
+      </div>
+      <ul {...stylex.props(navbarStyles.navList, isMenuOpen && navbarStyles.navListOpen)} id="main-navigation">
         <NavItems aria-label={t('home-page')} to="/">
           {t('home-page')}
         </NavItems>
@@ -88,10 +82,10 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
         <NavItems aria-label={t('my-list')} to={routes.MY_LIST}>
           {t('my-list')}
         </NavItems>
-      </NavList>
-      <SwitchThemeButton onClick={handleThemeToggle} aria-label={t('switch-theme')}>
+      </ul>
+      <button {...stylex.props(navbarStyles.themeButton)} onClick={handleThemeToggle} aria-label={t('switch-theme')}>
         {t('switch-theme')}
-      </SwitchThemeButton>
+      </button>
       <div
         role="status"
         aria-live="polite"
@@ -106,6 +100,6 @@ export const NavbarHeader = ({ onChange, value }: NavbarHeaderProps) => {
         resultCount={searchResultsCombined.length}
         isSearching={searchLoading}
       />
-    </NavbarMenu>
+    </nav>
   );
 };
