@@ -1,10 +1,8 @@
 import React from 'react';
+import * as stylex from '@stylexjs/stylex';
 import { useTranslation } from 'react-i18next';
 import { EmptyState } from '../empty-state/empty-state';
-import {
-  SearchResultsContainer,
-  SearchResultItem,
-} from './searchable-content.styles';
+import { searchStyles } from './searchable-content.styles';
 import type { MovieResult, ShowResult } from '../../utils/types/types';
 
 interface SearchableContentProps<T extends MovieResult | ShowResult> {
@@ -48,13 +46,13 @@ export const SearchableContent = <T extends MovieResult | ShowResult>({
 
     // Default rendering for simple cases
     return (
-      <SearchResultsContainer>
+      <div {...stylex.props(searchStyles.results)}>
         {searchResults.map((item, index) => (
-          <SearchResultItem key={item.id || index}>
+          <div {...stylex.props(searchStyles.result)} key={item.id || index}>
             {'title' in item ? item.title : item.name}
-          </SearchResultItem>
+          </div>
         ))}
-      </SearchResultsContainer>
+      </div>
     );
   }
 
