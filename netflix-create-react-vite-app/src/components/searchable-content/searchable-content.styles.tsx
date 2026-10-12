@@ -1,14 +1,13 @@
-import styled from 'styled-components';
+import * as stylex from '@stylexjs/stylex';
 
-export const SearchResultsContainer = styled.div`
-  margin-top: 4rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 2rem;
-`;
-
-export const SearchResultItem = styled.div`
-  position: relative;
-`;
+export const searchStyles = stylex.create({
+  results: {
+    alignItems: 'flex-start',
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: 32,
+    justifyContent: 'center',
+    marginTop: 64,
+  },
+  result: { position: 'relative' },
+});
