@@ -1,11 +1,7 @@
 import  React from 'react';
+import * as stylex from '@stylexjs/stylex';
 import { useTranslation } from 'react-i18next';
-import {
-  NavbarInput,
-  NavbarSearch,
-  SearchContainer,
-  SearchIconWrapper,
-} from './search-bar.styles';
+import { searchBarStyles } from './search-bar.styles';
 import { SearchIcon } from './search-icon';
 
 export interface SearchProps {
@@ -39,12 +35,12 @@ export const SearchBar = ({ value, onChange, searchStatus, resultCount, isSearch
   const ariaLiveText = getAriaLiveText();
 
   return (
-    <NavbarSearch role="search">
-      <SearchContainer>
-        <SearchIconWrapper aria-hidden="true">
+    <div {...stylex.props(searchBarStyles.search)} role="search">
+      <div {...stylex.props(searchBarStyles.container)}>
+        <div {...stylex.props(searchBarStyles.icon)} aria-hidden="true">
           <SearchIcon />
-        </SearchIconWrapper>
-        <NavbarInput
+        </div>
+        <input {...stylex.props(searchBarStyles.input)}
           onChange={onChange}
           placeholder={t('search-title')}
           type="search"
@@ -63,7 +59,7 @@ export const SearchBar = ({ value, onChange, searchStatus, resultCount, isSearch
             {ariaLiveText}
           </div>
         )}
-      </SearchContainer>
-    </NavbarSearch>
+      </div>
+    </div>
   );
 };
