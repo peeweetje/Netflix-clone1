@@ -1,4 +1,4 @@
-import type { DefaultTheme } from 'styled-components';
+import type { AppTheme } from './theme.types';
 
 const baseTheme = {
   fontFamily: 'Montserrat, sans-serif',
@@ -41,7 +41,7 @@ const baseTheme = {
   },
 };
 
-export const springTheme: DefaultTheme = {
+export const springTheme: AppTheme = {
   name: 'spring',
   ...baseTheme,
   colors: {
@@ -65,7 +65,7 @@ export const springTheme: DefaultTheme = {
   borderShadow: []
 };
 
-export const summerTheme: DefaultTheme = {
+export const summerTheme: AppTheme = {
   name: 'summer',
   ...baseTheme,
   colors: {
@@ -89,7 +89,7 @@ export const summerTheme: DefaultTheme = {
   borderShadow: []
 };
 
-export const autumnTheme: DefaultTheme = {
+export const autumnTheme: AppTheme = {
   name: 'autumn',
   ...baseTheme,
   colors: {
@@ -113,7 +113,7 @@ export const autumnTheme: DefaultTheme = {
   borderShadow: []
 };
 
-export const winterTheme: DefaultTheme = {
+export const winterTheme: AppTheme = {
   name: 'winter',
   ...baseTheme,
   colors: {
