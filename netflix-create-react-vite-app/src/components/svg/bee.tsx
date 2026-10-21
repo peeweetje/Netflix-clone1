@@ -1,5 +1,6 @@
 import React from 'react';
-import { AnimatedWings } from './bee.styles';
+import * as stylex from '@stylexjs/stylex';
+import { beeStyles } from './bee.styles';
 
 interface BeeProps {
   width?: string | number;
@@ -27,7 +28,7 @@ export const Bee = ({ width = 30, height = 30 }: BeeProps) => {
       <line stroke="#444" strokeWidth="2" x1="55" x2="65" y1="20" y2="10" />
 
       {/* Wings */}
-      <AnimatedWings>
+      <g {...stylex.props(beeStyles.wings)}>
         {/* Top Left */}
         <path
           d="M50 40 Q20 20 10 40 Q20 60 50 50 Z"
@@ -38,7 +39,7 @@ export const Bee = ({ width = 30, height = 30 }: BeeProps) => {
           d="M50 40 Q80 20 90 40 Q80 60 50 50 Z"
           fill="rgba(255, 255, 255, 0.7)"
         />
-      </AnimatedWings>
+      </g>
       {/* Stinger */}
       <polygon fill="#444" points="50,75 45,85 55,85" />
     </svg>
