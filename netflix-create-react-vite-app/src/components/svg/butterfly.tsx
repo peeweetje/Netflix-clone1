@@ -1,5 +1,6 @@
 import React from 'react';
-import { AnimatedWings } from './butterfly.styles';
+import * as stylex from '@stylexjs/stylex';
+import { butterflyStyles } from './butterfly.styles';
 
 interface ButterflyProps {
   width?: string | number;
@@ -32,7 +33,7 @@ export const Butterfly = ({
       <line stroke="#654321" strokeWidth="2" x1="55" x2="65" y1="25" y2="10" />
 
       {/* Wings */}
-      <AnimatedWings>
+      <g {...stylex.props(butterflyStyles.wings)}>
         {/* Top Left */}
         <path d="M50 40 Q20 20 10 40 Q20 60 50 50 Z" fill={primaryColor} />
         {/* Top Right */}
@@ -41,7 +42,7 @@ export const Butterfly = ({
         <path d="M50 50 Q20 80 10 60 Q20 40 50 50 Z" fill={secondaryColor} />
         {/* Bottom Right */}
         <path d="M50 50 Q80 80 90 60 Q80 40 50 50 Z" fill={secondaryColor} />
-      </AnimatedWings>
+      </g>
     </svg>
   );
 };
