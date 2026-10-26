@@ -1,4 +1,5 @@
 import  React from 'react';
+import * as stylex from '@stylexjs/stylex';
 import { useTranslation } from 'react-i18next';
 import { HeroBanner } from '../../components/hero-banner/hero-banner';
 import { Loading } from '../../components/loading/loading';
@@ -8,7 +9,7 @@ import { SearchableContent } from '../../components/searchable-content/searchabl
 import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { useSearchContext } from '../../context/search-context';
 import { actionMoviesUrl, imageUrl, popularMoviesUrl, topRatedMoviesUrl } from '../../utils/api';
-import { MainContainer } from './home-page-styles';
+import { homeStyles } from './home-page-styles';
 import type { MovieResult } from '../../utils/types/types';
 
 // Extend MovieResult to include optional properties for hero banner
@@ -58,7 +59,7 @@ export const Homepage = () => {
     <>
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
       <h1 className="sr-only">{t('binge-watch')}</h1>
-      <MainContainer aria-label={t('movie-listings')}>
+      <main {...stylex.props(homeStyles.mainContainer)} aria-label={t('movie-listings')}>
         <Loading loading={isLoading} error={error}>
           <SearchableContent
             searchQuery={searchQuery}
@@ -89,7 +90,7 @@ export const Homepage = () => {
             </>
           </SearchableContent>
         </Loading>
-      </MainContainer>
+      </main>
     </>
   );
 };
