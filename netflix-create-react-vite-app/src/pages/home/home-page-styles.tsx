@@ -1,10 +1,12 @@
-import styled from 'styled-components';
+import * as stylex from '@stylexjs/stylex';
 
-export const MainContainer = styled.main`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 100%;
-  overflow-x: hidden;
-`;
+export const homeStyles = stylex.create({
+  mainContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    maxWidth: '100%',
+    overflowX: 'hidden',
+  },
+});
