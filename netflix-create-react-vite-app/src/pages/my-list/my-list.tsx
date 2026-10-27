@@ -1,4 +1,5 @@
 import  React from 'react';
+import * as stylex from '@stylexjs/stylex';
 import { useTranslation } from 'react-i18next';
 import { Spinner } from '../../components/spinner/spinner';
 import { Card } from '../../components/card/card';
@@ -12,14 +13,7 @@ import { useLocalListDetails } from '../../hooks/useLocalListDetails';
 import { useTranslatedRoutes } from '../../utils/routes';
 import type { MovieResult, ShowResult } from '../../utils/types/types';
 import { imageUrl } from '../../utils/api';
-import {
-  MoviesGrid,
-  MyListContainer,
-  RemovalNotice,
-  RemoveButton,
-  CardWrapper as StyledCardWrapper,
-  FailedItemsStyle,
-} from './my-list.styles';
+import { myListStyles } from './my-list.styles';
 
 export const MyList = () => {
   const { t } = useTranslation();
@@ -47,7 +41,7 @@ export const MyList = () => {
   return (
     <>
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
-      <MyListContainer>
+      <div {...stylex.props(myListStyles.container)}>
         {searchQuery ? (
           searchLoading ? (
             <Spinner />
@@ -69,9 +63,9 @@ export const MyList = () => {
           )
         ) : (
           <>
-            {removalNotice && <RemovalNotice>{removalNotice}</RemovalNotice>}
+            {removalNotice && <div {...stylex.props(myListStyles.removalNotice)}>{removalNotice}</div>}
             {failedItems.length > 0 && (
-              <FailedItemsStyle>
+              <div {...stylex.props(myListStyles.failedItems)}>
                 <p>{t('not-loaded')}</p>
                 <ul>
                   {failedItems.map((item, idx) => (
@@ -80,7 +74,7 @@ export const MyList = () => {
                     </li>
                   ))}
                 </ul>
-              </FailedItemsStyle>
+              </div>
             )}
             {localLoading ? (
               <Spinner />
@@ -97,12 +91,12 @@ export const MyList = () => {
                 message={t('empty-list-message')}
               />
             ) : (
-              <MoviesGrid>
+              <div {...stylex.props(myListStyles.moviesGrid)}>
                 {localMovies.map((movie) => {
                   const item = myList.find((m) => m.id === movie.id);
                   if (!item) return null;
                   return (
-                    <StyledCardWrapper key={`${movie.id}-${item.media_type}`}>
+                    <div {...stylex.props(myListStyles.cardWrapper)} key={`${movie.id}-${item.media_type}`}>
                       <CardWrapper
                         to={
                           item.media_type === 'tv'
@@ -120,17 +114,17 @@ export const MyList = () => {
                           vote_average={movie.vote_average}
                         />
                       </CardWrapper>
-                      <RemoveButton onClick={() => removeFromList(item)}>
+                      <button {...stylex.props(myListStyles.removeButton)} onClick={() => removeFromList(item)}>
                         {t('remove-from-list')}
-                      </RemoveButton>
-                    </StyledCardWrapper>
+                      </button>
+                    </div>
                   );
                 })}
-              </MoviesGrid>
+              </div>
             )}
           </>
         )}
-      </MyListContainer>
+      </div>
     </>
   );
 };
