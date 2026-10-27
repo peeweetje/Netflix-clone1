@@ -1,63 +1,41 @@
-import styled from 'styled-components';
+import * as stylex from '@stylexjs/stylex';
 
-export const CardWrapper = styled.div`
-  position: relative;
-`;
-
-export const MyListContainer = styled.div`
-  margin-top: ${(props) => props.theme.space[10]};
-  display: flex;
-  flex-wrap: wrap;
-  gap: ${(props) => props.theme.space[8]};
-  justify-content: center;
-  align-items: flex-start;
-`;
-
-export const MoviesGrid = styled.div`
-  display: flex;
-  gap: ${({ theme }) => theme.space[9]};
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: ${({ theme }) => theme.space[10]};
-`;
-
-export const MovieCard = styled.div`
-  border-radius: ${({ theme }) => theme.borderRadius[2]};
-`;
-
-export const MoviePoster = styled.img`
-  width: 100%;
-  border-radius: ${({ theme }) => theme.borderRadius[3]};
-`;
-
-export const MovieTitle = styled.h3`
-  font-size: ${({ theme }) => theme.fontSize[4]};
-  margin: 0 0 10px 0;
-  font-weight: 500;
-`;
-
-export const RemovalNotice = styled.div`
-  color: ${({ theme }) => theme.colors.orange};
-  margin-bottom: ${({ theme }) => theme.space[6]};
-`;
-
-export const RemoveButton = styled.button`
-  width: 100%;
-  height: 40px;
-  background: ${(props) => props.theme.colors.primary};
-  color: ${(props) => props.theme.colors.buttonText};
-  border: none;
-  border-radius: ${(props) => props.theme.borderRadius[1]};
-  padding: ${(props) => props.theme.space[3]} ${(props) => props.theme.space[6]};
-  font-size: ${(props) => props.theme.fontSize[3]};
-  cursor: pointer;
-  transition: background 0.2s;
-  &:hover {
-    background: ${(props) => props.theme.colors.primaryLight};
-   
-  }
-`;
-
-export const FailedItemsStyle = styled.div`
-  color:${(props) => props.theme.colors.red};
-`;
+export const myListStyles = stylex.create({
+  cardWrapper: { position: 'relative' },
+  container: {
+    alignItems: 'flex-start',
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: 20,
+    justifyContent: 'center',
+    marginTop: 32,
+  },
+  moviesGrid: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: 24,
+    justifyContent: 'center',
+    marginBottom: 32,
+  },
+  movieCard: { borderRadius: 6 },
+  moviePoster: { borderRadius: 8, width: '100%' },
+  movieTitle: { fontSize: '1.25rem', fontWeight: 500, margin: '0 0 10px' },
+  removalNotice: { color: 'var(--theme-orange, #ffa500)', marginBottom: 16 },
+  removeButton: {
+    backgroundColor: 'var(--theme-primary, #4caf50)',
+    borderColor: 'var(--theme-primary-light, #81c784)',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderRadius: 4,
+    color: 'var(--theme-button-text, #fff)',
+    cursor: 'pointer',
+    fontSize: '1rem',
+    height: 40,
+    paddingBlock: 6,
+    paddingInline: 16,
+    transition: 'background 0.2s',
+    width: '100%',
+    ':hover': { backgroundColor: 'var(--theme-primary-light, #81c784)' },
+  },
+  failedItems: { color: 'var(--theme-red, #f00)' },
+});
