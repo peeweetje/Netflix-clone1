@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import type { DefaultTheme } from 'styled-components';
+import type { AppTheme } from '../styles/themes/theme.types';
 import {
   autumnTheme,
   springTheme,
@@ -15,7 +15,7 @@ import {
 import { getSeason } from '../utils/seasons';
 
 interface ThemeContextType {
-  theme: DefaultTheme;
+  theme: AppTheme;
   themeName: string;
   toggleTheme: () => void;
 }
@@ -26,7 +26,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [isAutomatic, setIsAutomatic] = useState(true);
-  const [currentTheme, setCurrentTheme] = useState<DefaultTheme>(() =>
+  const [currentTheme, setCurrentTheme] = useState<AppTheme>(() =>
     getSeason(new Date())
   );
   const [themeIndex, setThemeIndex] = useState(
