@@ -1,14 +1,15 @@
 import  React from 'react';
+import * as stylex from '@stylexjs/stylex';
 import { useTranslation } from 'react-i18next';
 import { Loading } from '../../components/loading/loading';
 import { MovieList } from '../../components/movie-list/movie-list';
-import { RowTitle } from '../../components/movie-list/movie.styles';
+import { movieStyles } from '../../components/movie-list/movie.styles';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
 import { SearchableContent } from '../../components/searchable-content/searchable-content';
 import { useFetchMovies } from '../../hooks/useFetchMovies';
 import { useSearchContext } from '../../context/search-context';
 import { discoverMovieUrl } from '../../utils/api';
-import { MainContainer } from '../home/home-page-styles';
+import { homeStyles } from '../home/home-page-styles';
 import type { MovieResult } from '../../utils/types/types';
 
 export const Movies = () => {
@@ -32,14 +33,14 @@ export const Movies = () => {
   return (
     <>
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
-      <MainContainer aria-label={t('movie-listings')}>
+      <main {...stylex.props(homeStyles.mainContainer)} aria-label={t('movie-listings')}>
         <Loading loading={isLoading} error={errorMessage}>
           <SearchableContent
             searchQuery={searchQuery}
             searchResults={searchResultsMovies}
             renderSearchResults={(results: MovieResult[], title: string) => (
               <>
-                <RowTitle>{title}</RowTitle>
+                <h2 {...stylex.props(movieStyles.rowTitle)}>{title}</h2>
                 <MovieList movies={results} />
               </>
             )}
@@ -47,7 +48,7 @@ export const Movies = () => {
             <MovieList movies={results} />
           </SearchableContent>
         </Loading>
-      </MainContainer>
+      </main>
     </>
   );
 };
