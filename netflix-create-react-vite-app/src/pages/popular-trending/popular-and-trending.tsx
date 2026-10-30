@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import styled from 'styled-components';
+import * as stylex from '@stylexjs/stylex';
 import { Loading } from '../../components/loading/loading';
 import { MovieRow } from '../../components/movie-list/movie-row';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
@@ -15,12 +15,14 @@ import {
 } from '../../utils/api';
 import type { MovieResult, ShowResult } from '../../utils/types/types';
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-`;
+const styles = stylex.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+});
 
 const mostPopularShowsUrl = `${discoverShowUrl}&sort_by=popularity.desc`;
 
@@ -105,7 +107,7 @@ export const PopularAndTrending = () => {
   return (
     <>
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
-      <Container>
+      <div {...stylex.props(styles.container)}>
         <Loading loading={isLoading} error={error}>
           <SearchableContent
             searchQuery={searchQuery}
@@ -115,7 +117,7 @@ export const PopularAndTrending = () => {
             {renderDefaultContent()}
           </SearchableContent>
         </Loading>
-      </Container>
+      </div>
     </>
   );
 };
