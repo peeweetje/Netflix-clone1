@@ -1,9 +1,11 @@
-import  styled  from 'styled-components';
+import * as stylex from '@stylexjs/stylex';
 
-export const StyledContainer = styled.div`
-  margin-top: ${(props) => props.theme.space[10]};
-  gap: ${({ theme }) => theme.space[9]};
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
+export const showsStyles = stylex.create({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: 24,
+    justifyContent: 'center',
+    marginTop: 32,
+  },
+});
