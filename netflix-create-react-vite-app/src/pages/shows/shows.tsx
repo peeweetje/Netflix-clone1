@@ -1,9 +1,10 @@
 import React from 'react';
+import * as stylex from '@stylexjs/stylex';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { Card } from '../../components/card/card';
 import { CardWrapper } from '../../components/card-wrapper/card-wrapper';
-import { RowTitle } from '../../components/movie-list/movie.styles';
+import { movieStyles } from '../../components/movie-list/movie.styles';
 import { Loading } from '../../components/loading/loading';
 import { NavbarHeader } from '../../components/navbarmenu/navbarheader/navbar-header';
 import { SearchableContent } from '../../components/searchable-content/searchable-content';
@@ -11,7 +12,7 @@ import { useSearchContext } from '../../context/search-context';
 import { imageUrl } from '../../utils/api';
 import { fetchShows } from '../../utils/queries';
 import type { ShowResult } from '../../utils/types/types';
-import { StyledContainer } from './shows.styles';
+import { showsStyles } from './shows.styles';
 
 export const Shows = () => {
   const {  i18n } = useTranslation();
@@ -97,14 +98,14 @@ export const Shows = () => {
   return (
     <>
       <NavbarHeader onChange={handleSearch} value={searchQuery} />
-      <StyledContainer>
+      <div {...stylex.props(showsStyles.container)}>
         <Loading loading={isLoading} error={error}>
           <SearchableContent
             searchQuery={searchQuery}
             searchResults={searchResultsShows}
             renderSearchResults={(results, title) => (
               <>
-                <RowTitle>{title}</RowTitle>
+                <h2 {...stylex.props(movieStyles.rowTitle)}>{title}</h2>
                 {renderShows(results)}
               </>
             )}
@@ -112,7 +113,7 @@ export const Shows = () => {
             {renderShows(shows)}
           </SearchableContent>
         </Loading>
-      </StyledContainer>
+      </div>
     </>
   );
 };
