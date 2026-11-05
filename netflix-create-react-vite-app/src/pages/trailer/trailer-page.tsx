@@ -1,14 +1,11 @@
 import React from 'react';
+import * as stylex from '@stylexjs/stylex';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Loading } from '../../components/loading/loading';
 import { fetchVideos } from '../../utils/queries';
-import {
-  GoBackButton,
-  TrailerContainer,
-  VideoWrapper,
-} from './trailer-page-styles';
+import { trailerStyles } from './trailer-page-styles';
 
 // Convert translated media types back to internal types
 const getInternalMediaType = (translatedType: string): 'movie' | 'tv' => {
@@ -69,9 +66,9 @@ export const TrailerPage = () => {
 
   if (loading) {
     return (
-      <TrailerContainer>
+      <div {...stylex.props(trailerStyles.container)}>
        <Loading loading={true} error={null} children={undefined}/>
-      </TrailerContainer>
+      </div>
     );
   }
 
@@ -98,29 +95,30 @@ export const TrailerPage = () => {
 
   if (error) {
     return (
-      <TrailerContainer>
+      <div {...stylex.props(trailerStyles.container)}>
         <p>{getErrorMessage()}</p>
-        <GoBackButton onClick={() => navigate(-1)}>{t('go-back-button')}</GoBackButton>
-      </TrailerContainer>
+        <button {...stylex.props(trailerStyles.backButton)} onClick={() => navigate(-1)}>{t('go-back-button')}</button>
+      </div>
     );
   }
 
   return (
-    <TrailerContainer>
-      <GoBackButton onClick={() => navigate(-1)}>{t('go-back-button')}</GoBackButton>
+    <div {...stylex.props(trailerStyles.container)}>
+      <button {...stylex.props(trailerStyles.backButton)} onClick={() => navigate(-1)}>{t('go-back-button')}</button>
       {videoKey ? (
-        <VideoWrapper>
+        <div {...stylex.props(trailerStyles.videoWrapper)}>
           <iframe
+            {...stylex.props(trailerStyles.iframe)}
             allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
             allowFullScreen
             frameBorder='0'
             src={`https://www.youtube.com/embed/${videoKey}?autoplay=1`}
             title={t('movie-trailer')}
           />
-        </VideoWrapper>
+        </div>
       ) : (
         <p>{t('no-trailer-found')}</p>
       )}
-    </TrailerContainer>
+    </div>
   );
 };
