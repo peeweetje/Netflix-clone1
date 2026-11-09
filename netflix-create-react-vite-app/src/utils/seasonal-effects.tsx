@@ -1,25 +1,18 @@
-import type { DefaultTheme } from 'styled-components';
 import React from 'react';
-import {
-  AnimatedButterfly,
-  BeesThemeContainer,
-  ButterflyContainer,
-  FlowersThemeContainer,
-  Leaf,
-  LeafContainer,
-  Snow,
-  SnowContainer,
-} from '../components/hero-banner/hero-banner.styles';
+import * as stylex from '@stylexjs/stylex';
+import { motion } from 'framer-motion';
+import type { AppTheme } from '../styles/themes/theme.types';
+import { heroStyles } from '../components/hero-banner/hero-banner.styles';
 import { Bee } from '../components/svg/bee';
-import { AnimatedBee } from '../components/svg/bee.styles';
 import { Butterfly } from '../components/svg/butterfly';
 import { FlowersTheme } from '../components/svg/flowers-theme';
 import { LeafIcon } from '../components/svg/leafs';
 
 export const renderSnow = () => (
-  <SnowContainer>
+  <div {...stylex.props(heroStyles.snowContainer)}>
     {Array.from({ length: 50 }).map((_, i) => (
-      <Snow
+      <motion.div
+        {...stylex.props(heroStyles.snow)}
         animate={{ y: '100vh', rotate: 360 }}
         initial={{ y: '-100vh', x: `${Math.random() * 100}vw`, opacity: 1 }}
         key={i}
@@ -31,14 +24,15 @@ export const renderSnow = () => (
         }}
       />
     ))}
-  </SnowContainer>
+  </div>
 );
 
-export const renderLeaves = (theme: DefaultTheme) => {
+export const renderLeaves = (theme: AppTheme) => {
   return (
-    <LeafContainer>
+    <div {...stylex.props(heroStyles.leafContainer)}>
       {Array.from({ length: 20 }).map((_, i) => (
-        <Leaf
+        <motion.div
+          {...stylex.props(heroStyles.leaf)}
           animate={{
             y: '100vh',
             x: `${Math.random() * 200 - 100}vw`,
@@ -65,16 +59,16 @@ export const renderLeaves = (theme: DefaultTheme) => {
             height="20"
             width="20"
           />
-        </Leaf>
+        </motion.div>
       ))}
-    </LeafContainer>
+    </div>
   );
 };
 
-export const renderFlowers = (_theme: DefaultTheme) => (
-  <FlowersThemeContainer>
+export const renderFlowers = (_theme: AppTheme) => (
+  <div {...stylex.props(heroStyles.flowersContainer)}>
     <FlowersTheme />
-  </FlowersThemeContainer>
+  </div>
 );
 
 export const renderButterflies = () => {
@@ -85,13 +79,13 @@ export const renderButterflies = () => {
   ];
 
   return (
-    <ButterflyContainer>
+    <div {...stylex.props(heroStyles.butterflyContainer)}>
       {butterflyPositions.slice(0, 3).map((pos, i) => {
         const delay = Math.random() * 5;
         const duration = Math.random() * 10 + 10;
 
         return (
-          <AnimatedButterfly
+          <motion.div
             animate={{
               x: [
                 `${Number.parseFloat(pos.x)}%`,
@@ -118,10 +112,10 @@ export const renderButterflies = () => {
               primaryColor={['#9370DB', '#3CB371', '#FFD700'][i]}
               secondaryColor={['#8A2BE2', '#2E8B57', '#FFA500'][i]}
             />
-          </AnimatedButterfly>
+          </motion.div>
         );
       })}
-    </ButterflyContainer>
+    </div>
   );
 };
 
@@ -139,13 +133,13 @@ export const renderBees = () => {
   const beehiveEntranceY = '12%'; // Adjusted Y for beehive entrance
 
   return (
-    <BeesThemeContainer>
+    <div {...stylex.props(heroStyles.beesContainer)}>
       {beePositions.map((_pos, i) => {
         const delay = Math.random() * 5;
         const duration = Math.random() * 18 + 12;
 
         return (
-          <AnimatedBee
+          <motion.div
             animate={{
               x: [
                 beehiveEntranceX,
@@ -176,9 +170,9 @@ export const renderBees = () => {
             }}
           >
             <Bee />
-          </AnimatedBee>
+          </motion.div>
         );
       })}
-    </BeesThemeContainer>
+    </div>
   );
 };
