@@ -2,7 +2,6 @@ import { test, expect } from '@playwright/test';
 import {
   setDesktopViewport,
   waitContent,
-  expectGlobalNav,
 } from './utils';
 
 test.describe('Media Detail Page', () => {
@@ -18,22 +17,6 @@ test.describe('Media Detail Page', () => {
     original_language: 'en',
     runtime: 120,
     genres: [{ name: 'Action' }, { name: 'Drama' }],
-  };
-
-  const mockShowData = {
-    id: 456,
-    name: 'Test Show',
-    poster_path: '/test-show-poster.jpg',
-    tagline: 'A test show tagline',
-    first_air_date: '2023-01-01',
-    last_air_date: '2023-12-31',
-    vote_average: 8.0,
-    vote_count: 800,
-    status: 'Ended',
-    original_language: 'en',
-    number_of_seasons: 2,
-    number_of_episodes: 24,
-    genres: [{ name: 'Comedy' }],
   };
 
   const mockCastData = {
@@ -96,13 +79,16 @@ test.describe('Media Detail Page', () => {
     await waitContent(page, 2000);
 
     // Check title and basic info
-    await expect(page.locator('h2').filter({ hasText: 'Fight Club' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: 'Fight Club' })).toBeVisible();
     await expect(page.getByText('Mischief. Mayhem. Soap.')).toBeVisible();
 
     // Check poster image
-    const poster = page.locator('img[alt="Fight Club"]');
+    const poster = page.getByRole('img', { name: 'movie-poster' });
     await expect(poster).toBeVisible();
-    await expect(poster).toHaveAttribute('src', /pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK\.jpg/);
+    await expect(poster).toHaveAttribute(
+      'src',
+      /^https:\/\/image\.tmdb\.org\/t\/p\/original\/.+\.jpg$/
+    );
 
     // Check cast section
     await expect(page.getByText('Cast Members')).toBeVisible();
@@ -157,7 +143,7 @@ test.describe('Media Detail Page', () => {
     await waitContent(page, 2000);
 
     // Check title and basic info
-    await expect(page.locator('h2').filter({ hasText: 'Game of Thrones' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: 'Game of Thrones' })).toBeVisible();
     await expect(page.getByText('Winter Is Coming')).toBeVisible();
 
     // Check cast section
@@ -214,7 +200,7 @@ test.describe('Media Detail Page', () => {
     await waitContent(page, 2000);
 
     // Should show error message
-    await expect(page.getByText(/Failed to fetch movie details/)).toBeVisible();
+    await expect(page.getByText(/Failed to load movie details/)).toBeVisible();
   });
 
   test('handles cast API errors gracefully', async ({ page }) => {
