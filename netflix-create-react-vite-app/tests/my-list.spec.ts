@@ -115,20 +115,29 @@ test.describe('My List Page', () => {
       };
 
       // Mock fetch to return our test data
-      global.fetch = async (url) => {
-        if (url.includes('/movie/123') || url.includes('/tv/456')) {
-          const isMovie = url.includes('/movie/123');
-          return {
-            ok: true,
-            json: async () => (isMovie ? mockMovieResponse : mockShowResponse),
-          };
+      globalThis.fetch = (async (
+        input: RequestInfo | URL,
+        _init?: RequestInit
+      ): Promise<Response> => {
+        const urlString =
+          typeof input === 'string'
+            ? input
+            : input instanceof URL
+              ? input.toString()
+              : input.url;
+        if (urlString.includes('/movie/123') || urlString.includes('/tv/456')) {
+          const isMovie = urlString.includes('/movie/123');
+          return new Response(
+            JSON.stringify(isMovie ? mockMovieResponse : mockShowResponse),
+            { status: 200, headers: { 'Content-Type': 'application/json' } }
+          );
         }
         // For other requests, return empty data
-        return {
-          ok: true,
-          json: async () => ({ results: [] }),
-        };
-      };
+        return new Response(JSON.stringify({ results: [] }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }) as typeof fetch;
     });
 
     await page.reload({ waitUntil: 'domcontentloaded' });
