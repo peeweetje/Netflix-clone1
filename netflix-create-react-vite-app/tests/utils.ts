@@ -61,7 +61,9 @@ export async function gotoAndWaitForNav(page: Page, path: string) {
 }
 
 export async function expectGlobalNav(page: Page) {
-  await expect(page.getByRole('link', { name: 'BingeWatch' })).toBeVisible();
+  const brandLink = page.getByRole('link', { name: 'BingeWatch' });
+  await expect(brandLink).toBeVisible();
+  await expect(brandLink.locator('..')).toHaveCSS('text-decoration-line', 'none');
   await expect(page.getByRole('link', { name: 'homepage' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'shows' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'movies' })).toBeVisible();
@@ -73,12 +75,58 @@ export async function expectGlobalNav(page: Page) {
   await expect(
     page.getByRole('button', { name: 'Switch Theme' })
   ).toBeVisible();
+  const activeNavItem = page.locator('nav ul > li').first();
+  await expect(activeNavItem).toHaveCSS('font-size', '16px');
+  await expect(activeNavItem).toHaveCSS('text-decoration-thickness', '5px');
+  const searchInput = page.getByPlaceholder('search for a title...');
+  await searchInput.focus();
+  const borderColor = await searchInput.evaluate((input) =>
+    getComputedStyle(input).borderColor
+  );
+  const themeRoot = page
+    .locator('#root > div')
+    .filter({ has: page.getByRole('navigation') })
+    .first();
+  const themeAccent = await themeRoot.evaluate((root) => {
+    const probe = document.createElement('span');
+    probe.style.color = 'var(--theme-primary)';
+    root.append(probe);
+    const resolvedColor = getComputedStyle(probe).color;
+    probe.remove();
+    return resolvedColor;
+  });
+  expect(borderColor).toBe(themeAccent);
 }
 
 export async function toggleTheme(page: Page) {
   const themeButton = page.getByRole('button', { name: 'Switch Theme' });
+  const themeRoot = page
+    .locator('#root > div')
+    .filter({ has: page.getByRole('navigation') })
+    .first();
+  const previousColor = await themeRoot.evaluate((element) =>
+    getComputedStyle(element).getPropertyValue('--theme-primary-light').trim()
+  );
   await themeButton.click();
-  await expect(page.locator('body')).toBeVisible();
+  await expect
+    .poll(() =>
+      themeRoot.evaluate((element) =>
+        getComputedStyle(element).getPropertyValue('--theme-primary-light').trim()
+      )
+    )
+    .not.toBe(previousColor);
+  const buttonBorder = await themeButton.evaluate((button) =>
+    getComputedStyle(button).borderColor
+  );
+  const currentAccent = await themeRoot.evaluate((root) => {
+    const probe = document.createElement('span');
+    probe.style.color = 'var(--theme-primary-light)';
+    root.append(probe);
+    const resolvedColor = getComputedStyle(probe).color;
+    probe.remove();
+    return resolvedColor;
+  });
+  expect(buttonBorder).toBe(currentAccent);
 }
 
 export async function fillAndClearSearch(page: Page, text: string) {
@@ -123,16 +171,20 @@ export async function cleanupTestState(page: Page) {
 
       try {
         // Reset any form inputs
-        const inputs = document.querySelectorAll('input, textarea');
-        inputs.forEach(input => {
-          if (input.type !== 'submit' && input.type !== 'button') {
+        const inputs = document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
+          'input, textarea'
+        );
+        inputs.forEach((input) => {
+          if (!(input instanceof HTMLInputElement) || (input.type !== 'submit' && input.type !== 'button')) {
             input.value = '';
           }
         });
 
         // Clear any search queries or filters
-        const searchInputs = document.querySelectorAll('[placeholder*="search"], [placeholder*="filter"]');
-        searchInputs.forEach(input => {
+        const searchInputs = document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
+          'input[placeholder*="search"], input[placeholder*="filter"], textarea[placeholder*="search"], textarea[placeholder*="filter"]'
+        );
+        searchInputs.forEach((input) => {
           input.value = '';
         });
       } catch (e) {
