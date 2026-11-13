@@ -126,7 +126,7 @@ The app will start at `http://localhost:3000` (or another port if 3000 is in use
 - `TypeScript`
 - `TanStack/react-query`
 - `Playwright`
-- `Styled-components`
+- `StyleX`
 - `Framer-motion`
 - `TMDB API`
 
